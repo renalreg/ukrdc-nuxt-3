@@ -19,17 +19,16 @@
       <BaseButtonMini colour="red-outline" @click="clear()"> Clear </BaseButtonMini>
     </div>
     <div v-show="showCustom" class="flex h-8 w-full flex-1">
-      <v-date-picker
+      <VDatePicker
         class="w-full"
-        :value="value"
-        :model-config="modelConfig"
+        :model-value="modelValue"
+        @update:modelValue="onInput"
         :is24hr="true"
         :popover="{ visibility: 'hidden', placement: 'bottom' }"
         :step="1"
         mode="dateTime"
         color="indigo"
         is-range
-        v-on="$listeners"
       >
         <template #default="{ inputValue, inputEvents, showPopover }">
           <div class="flex h-full flex-row items-center justify-start" @click="showPopover">
@@ -68,7 +67,7 @@
             </div>
           </div>
         </template>
-      </v-date-picker>
+      </VDatePicker>
     </div>
   </div>
 </template>
@@ -78,35 +77,23 @@
 import BaseButtonMini from "~/components/base/BaseButtonMini.vue";
 import { type DateRange, nowString } from "~/helpers/dateUtils";
 
+interface DatePickerRange {
+  start: Date | null;
+  end: Date | null;
+}
+
+
 export default defineComponent({
   components: {
     BaseButtonMini,
   },
-  model: {
-    prop: "value",
-    event: "input",
-  },
   props: {
-    value: {
+    modelValue: {
       type: Object as () => DateRange,
       required: false,
       default: () => ({
         start: nowString(-365),
         end: nowString(),
-      }),
-    },
-    modelConfig: {
-      type: Object,
-      required: false,
-      default: () => ({
-        start: {
-          type: "string",
-          mask: "iso",
-        },
-        end: {
-          type: "string",
-          mask: "iso",
-        },
       }),
     },
   },
@@ -118,15 +105,15 @@ export default defineComponent({
 
     function clear(): void {
       showCustom.value = false;
-      emit("input", { start: null, end: null });
+      emit("update:modelValue", { start: null, end: null });
     }
 
     const lastNDays = computed((): number | null => {
       if (showCustom.value) {
         return null;
       }
-      if (props.value.start && props.value.end) {
-        return Math.round((Date.parse(props.value.end) - Date.parse(props.value.start)) / (1000 * 3600 * 24));
+      if (props.modelValue.start && props.modelValue.end) {
+        return Math.round((Date.parse(props.modelValue.end) - Date.parse(props.modelValue.start)) / (1000 * 3600 * 24));
       }
       return null;
     });
@@ -134,10 +121,18 @@ export default defineComponent({
     function setLastNDays(daysAgo: number): void {
       showCustom.value = false;
       const newRange: DateRange = { start: nowString(-daysAgo), end: nowString(0) };
-      emit("input", newRange);
+      emit("update:modelValue", newRange);
     }
 
-    return { showCustom, textBoxClasses, lastNDays, setLastNDays, clear };
+    function onInput(value: DatePickerRange ) {
+      const emitValue = {
+        start: value.start?.toISOString(),
+        end: value.end?.toISOString()
+      }
+      emit("update:modelValue", emitValue);
+    }
+
+    return { showCustom, textBoxClasses, lastNDays, setLastNDays, clear, onInput };
   },
 });
 </script>
@@ -147,3 +142,4 @@ export default defineComponent({
   background-image: none;
 }
 </style>
+
