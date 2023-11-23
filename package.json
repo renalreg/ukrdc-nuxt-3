@@ -12,6 +12,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@tailwindcss/forms": "^0.5.7",
+    "@types/luxon": "^3.3.5",
     "@types/plotly.js-dist-min": "^2.3.4",
     "autoprefixer": "^10.4.16",
     "nuxt": "^3.8.2",
