@@ -55,8 +55,9 @@ export default defineComponent({
     const { hasPermission } = usePermissions();
 
     // Head
-    const { title } = useMeta();
-    title.value = `Record ${route.params.id}`;
+    useHead({
+      title: `Record ${route.params.id}`
+    });
 
     // Navigation
 

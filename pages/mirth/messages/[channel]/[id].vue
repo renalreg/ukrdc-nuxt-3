@@ -29,9 +29,9 @@ export default defineComponent({
     const { mirthApi } = useApi();
 
     // Head
-
-    const { title } = useMeta();
-    title.value = `Mirth message ${route.params.id}`;
+    useHead({
+      title: `Mirth message ${route.params.id}`
+    });
 
     // Data refs
     const message = ref<ChannelMessageModel>();

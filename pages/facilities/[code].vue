@@ -42,8 +42,9 @@ export default defineComponent({
     const { facilitiesApi } = useApi();
 
     // Head
-    const { title } = useMeta();
-    title.value = `${route.params.code}`;
+    useHead({
+      title: `${route.params.code}`
+    });
 
     // URL parameters
     const code = computed(() => route.params.code);

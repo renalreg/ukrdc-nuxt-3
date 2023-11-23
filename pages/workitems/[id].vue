@@ -369,8 +369,9 @@ export default defineComponent({
     const { workItemsApi } = useApi();
 
     // Head
-    const { title } = useMeta();
-    title.value = `Work Item ${route.params.id}`;
+    useHead({
+      title: `Work Item ${route.params.id}`
+    });
 
     // Work item record data
     const record = ref<WorkItemExtendedSchema>();

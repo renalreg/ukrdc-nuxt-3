@@ -48,8 +48,9 @@ export default defineComponent({
     const { hasPermission } = usePermissions();
 
     // Head
-    const { title } = useMeta();
-    title.value = `Record ${route.params.pid}`;
+    useHead({
+      title: `Record ${route.params.pid}`
+    });
 
     // Data refs
 

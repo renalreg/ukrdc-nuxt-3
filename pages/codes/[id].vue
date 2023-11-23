@@ -109,8 +109,9 @@ export default defineComponent({
     const { codesApi } = useApi();
 
     // Head
-    const { title } = useMeta();
-    title.value = `Code ${route.params.id}`;
+    useHead({
+      title: `Code ${route.params.id}`
+    });
 
     // Data refs
 

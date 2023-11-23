@@ -35,9 +35,9 @@ export default defineComponent({
     const { sensitiveNumbers } = useSensitive();
 
     // Head
-
-    const { title } = useMeta();
-    title.value = `Message ${route.params.id}`;
+    useHead({
+      title: `Message ${route.params.id}`
+    });
 
     // Data refs
 
