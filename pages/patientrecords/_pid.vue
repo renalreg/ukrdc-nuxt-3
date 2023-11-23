@@ -49,7 +49,7 @@ export default defineComponent({
 
     // Head
     const { title } = useMeta();
-    title.value = `Record ${route.value.params.pid}`;
+    title.value = `Record ${route.params.pid}`;
 
     // Data refs
 
@@ -61,7 +61,7 @@ export default defineComponent({
       // Fetch patient record
       patientRecordsApi
         .getPatient({
-          pid: route.value.params.pid,
+          pid: route.params.pid,
         })
         .then((response) => {
           record.value = response.data;
@@ -74,10 +74,10 @@ export default defineComponent({
 
     // PID Switcher UI
 
-    const selectedPid = ref(route.value.params.pid);
+    const selectedPid = ref(route.params.pid);
 
     watch(selectedPid, (value: string) => {
-      router.push({ name: route.value.name!, params: { pid: value } });
+      router.push({ name: route.name!, params: { pid: value } });
     });
 
     // Dynamic UI elements
@@ -95,20 +95,20 @@ export default defineComponent({
     const tabs = [
       {
         name: "Overview",
-        href: `/patientrecords/${route.value.params.pid}`,
+        href: `/patientrecords/${route.params.pid}`,
       },
       {
         name: "Medical Record",
-        href: `/patientrecords/${route.value.params.pid}/medical`,
+        href: `/patientrecords/${route.params.pid}/medical`,
         hasChildren: true,
       },
       {
         name: "Data Files",
-        href: `/patientrecords/${route.value.params.pid}/messages`,
+        href: `/patientrecords/${route.params.pid}/messages`,
       },
       ...insertIf(hasPermission("ukrdc:audit:records:read"), {
         name: "Audit",
-        href: `/patientrecords/${route.value.params.pid}/audit`,
+        href: `/patientrecords/${route.params.pid}/audit`,
       }),
     ] as TabItem[];
 

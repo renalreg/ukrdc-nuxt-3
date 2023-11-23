@@ -56,26 +56,26 @@ export default defineComponent({
 
     // Head
     const { title } = useMeta();
-    title.value = `Record ${route.value.params.id}`;
+    title.value = `Record ${route.params.id}`;
 
     // Navigation
 
     const tabs = [
       {
         name: "Overview",
-        href: `/masterrecords/${route.value.params.id}`,
+        href: `/masterrecords/${route.params.id}`,
       },
       ...insertIf(hasPermission("ukrdc:messages:read"), {
         name: "Data Files",
-        href: `/masterrecords/${route.value.params.id}/messages`,
+        href: `/masterrecords/${route.params.id}/messages`,
       }),
       {
         name: "Link Records",
-        href: `/masterrecords/${route.value.params.id}/linkrecords`,
+        href: `/masterrecords/${route.params.id}/linkrecords`,
       },
       {
         name: "Issues",
-        href: `/masterrecords/${route.value.params.id}/issues`,
+        href: `/masterrecords/${route.params.id}/issues`,
       },
     ] as TabItem[];
 
@@ -89,7 +89,7 @@ export default defineComponent({
     function fetchRecord() {
       masterRecordsApi
         .getMasterRecord({
-          recordId: Number(route.value.params.id),
+          recordId: Number(route.params.id),
         })
         .then((response) => {
           record.value = response.data;
@@ -98,7 +98,7 @@ export default defineComponent({
       // Get basic record statistics
       masterRecordsApi
         .getMasterRecordStatistics({
-          recordId: Number(route.value.params.id),
+          recordId: Number(route.params.id),
         })
         .then((response) => {
           stats.value = response.data;

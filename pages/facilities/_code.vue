@@ -43,10 +43,10 @@ export default defineComponent({
 
     // Head
     const { title } = useMeta();
-    title.value = `${route.value.params.code}`;
+    title.value = `${route.params.code}`;
 
     // URL parameters
-    const code = computed(() => route.value.params.code);
+    const code = computed(() => route.params.code);
 
     // Navigation
 
@@ -54,20 +54,20 @@ export default defineComponent({
       return [
         {
           name: "Overview",
-          href: `/facilities/${route.value.params.code}`,
+          href: `/facilities/${route.params.code}`,
         },
         {
           name: "Errors",
-          href: `/facilities/${route.value.params.code}/errors`,
+          href: `/facilities/${route.params.code}/errors`,
         },
         ...insertIf(showStats.value, {
           name: "Statistics",
-          href: `/facilities/${route.value.params.code}/statistics`,
+          href: `/facilities/${route.params.code}/statistics`,
           hasChildren: true,
         }),
         ...insertIf(hasPermission("ukrdc:reports:read"), {
           name: "Reports",
-          href: `/facilities/${route.value.params.code}/reports`,
+          href: `/facilities/${route.params.code}/reports`,
           hasChildren: true,
         }),
       ];

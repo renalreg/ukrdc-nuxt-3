@@ -18,7 +18,7 @@ class NuxtOktaAuth extends OktaAuth {
       this.options.restoreOriginalUri = async (_oktaAuth, originalUri) => {
         // If a router is available, provide a default implementation
         if (this.router && originalUri) {
-          // Our originalUri will always be a router path (i.e. route.value.fullPath),
+          // Our originalUri will always be a router path (i.e. route.fullPath),
           // so we can pass it straight through to the router without any further modifications.
           this.router.replace({ path: originalUri });
         }

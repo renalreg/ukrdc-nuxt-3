@@ -37,7 +37,7 @@ export default defineComponent({
     // Head
 
     const { title } = useMeta();
-    title.value = `Message ${route.value.params.id}`;
+    title.value = `Message ${route.params.id}`;
 
     // Data refs
 
@@ -55,7 +55,7 @@ export default defineComponent({
     onMounted(() => {
       messagesApi
         .getMessage({
-          messageId: Number(route.value.params.id),
+          messageId: Number(route.params.id),
         })
         .then((response) => {
           message.value = response.data;

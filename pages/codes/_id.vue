@@ -110,7 +110,7 @@ export default defineComponent({
 
     // Head
     const { title } = useMeta();
-    title.value = `Code ${route.value.params.id}`;
+    title.value = `Code ${route.params.id}`;
 
     // Data refs
 
@@ -123,8 +123,8 @@ export default defineComponent({
 
       codesApi
         .getCodeDetails({
-          code: route.value.params.id.split(".")[1],
-          codingStandard: route.value.params.id.split(".")[0],
+          code: route.params.id.split(".")[1],
+          codingStandard: route.params.id.split(".")[0],
         })
         .then((response) => {
           code.value = response.data;
@@ -136,7 +136,7 @@ export default defineComponent({
     });
 
     watch(
-      () => route.value.params.id, // Watch the computed (reactive) value of params.id
+      () => route.params.id, // Watch the computed (reactive) value of params.id
       () => {
         getCode();
       },

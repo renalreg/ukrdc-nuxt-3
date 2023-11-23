@@ -370,7 +370,7 @@ export default defineComponent({
 
     // Head
     const { title } = useMeta();
-    title.value = `Work Item ${route.value.params.id}`;
+    title.value = `Work Item ${route.params.id}`;
 
     // Work item record data
     const record = ref<WorkItemExtendedSchema>();
@@ -408,7 +408,7 @@ export default defineComponent({
     function updateRelatedMessages() {
       workItemsApi
         .getWorkitemMessages({
-          workitemId: Number(route.value.params.id),
+          workitemId: Number(route.params.id),
         })
         .then((response) => {
           messages.value = response.data.items;
@@ -421,7 +421,7 @@ export default defineComponent({
     function getWorkItem() {
       workItemsApi
         .getWorkitem({
-          workitemId: Number(route.value.params.id),
+          workitemId: Number(route.params.id),
         })
         .then((response) => {
           record.value = response.data;
@@ -430,7 +430,7 @@ export default defineComponent({
 
       workItemsApi
         .getWorkitemCollection({
-          workitemId: Number(route.value.params.id),
+          workitemId: Number(route.params.id),
         })
         .then((response) => {
           workItemCollection.value = response.data;
@@ -461,7 +461,7 @@ export default defineComponent({
         record.value?.destination.masterRecord?.nationalidType === "UKRDC" &&
         record.value?.incoming?.masterRecords?.length !== undefined &&
         record.value?.incoming?.masterRecords?.length <= 0 &&
-        route.value.query.justMerged === "true"
+        route.query.justMerged === "true"
       ) {
         closeMessageOverride.value =
           "It looks like the incoming Master Record for this Work Item has been merged. Close the Work Item?";
@@ -520,7 +520,7 @@ export default defineComponent({
     function updateWorkItem() {
       workItemsApi
         .putWorkitemUpdate({
-          workitemId: Number(route.value.params.id),
+          workitemId: Number(route.params.id),
           updateWorkItemRequest: {
             comment: customComment.value,
             status: statusToSet(),
@@ -559,7 +559,7 @@ export default defineComponent({
     function handleCloseWorkItem() {
       workItemsApi
         .postWorkitemClose({
-          workitemId: Number(route.value.params.id),
+          workitemId: Number(route.params.id),
           closeWorkItemRequest: {
             comment: customComment.value,
           },

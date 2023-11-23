@@ -132,7 +132,7 @@ export default defineComponent({
       patientRecordsApi
         .getPatientDocument({
           pid: props.record.pid,
-          documentId: route.value.params.docid,
+          documentId: route.params.docid,
         })
         .then((response) => {
           patientDocument.value = response.data;
@@ -147,7 +147,7 @@ export default defineComponent({
         .getPatientDocumentDownload(
           {
             pid: props.record.pid,
-            documentId: route.value.params.docid,
+            documentId: route.params.docid,
           },
           {
             method: "GET",

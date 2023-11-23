@@ -224,7 +224,7 @@ export default defineComponent({
     // Edit merge functions
 
     function switchRecords() {
-      const newQuery = Object.assign({}, route.value.query);
+      const newQuery = Object.assign({}, route.query);
       newQuery.superseded = [supersedingId.value];
       newQuery.superseding = [supersededId.value];
       router.push({
@@ -237,7 +237,7 @@ export default defineComponent({
       superseding.value = undefined;
       superseded.value = undefined;
       searchingFor.value = undefined;
-      const newQuery = Object.assign({}, route.value.query);
+      const newQuery = Object.assign({}, route.query);
       newQuery.superseded = [null];
       newQuery.superseding = [null];
       router.push({

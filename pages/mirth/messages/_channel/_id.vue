@@ -31,7 +31,7 @@ export default defineComponent({
     // Head
 
     const { title } = useMeta();
-    title.value = `Mirth message ${route.value.params.id}`;
+    title.value = `Mirth message ${route.params.id}`;
 
     // Data refs
     const message = ref<ChannelMessageModel>();
@@ -40,8 +40,8 @@ export default defineComponent({
     onMounted(() => {
       mirthApi
         .getMirthChannelMessage({
-          channelId: route.value.params.channel,
-          messageId: route.value.params.id,
+          channelId: route.params.channel,
+          messageId: route.params.id,
         })
         .then((response) => {
           message.value = response.data;

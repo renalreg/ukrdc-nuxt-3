@@ -46,18 +46,18 @@ export default defineComponent({
     const tabs = [
       {
         name: "Demographics",
-        href: `/facilities/${route.value.params.code}/statistics/demographics`,
+        href: `/facilities/${route.params.code}/statistics/demographics`,
       },
       {
         name: "KRT",
-        href: `/facilities/${route.value.params.code}/statistics/krt`,
+        href: `/facilities/${route.params.code}/statistics/krt`,
       },
     ];
 
     onMounted(() => {
       // Default to demographics stats
-      if (route.path === `/facilities/${route.value.params.code}/statistics`) {
-        router.push(`/facilities/${route.value.params.code}/statistics/demographics`);
+      if (route.path === `/facilities/${route.params.code}/statistics`) {
+        router.push(`/facilities/${route.params.code}/statistics/demographics`);
       }
     });
 

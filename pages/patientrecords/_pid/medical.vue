@@ -61,42 +61,42 @@ export default defineComponent({
     const tabs = [
       {
         name: "Results",
-        href: `/patientrecords/${route.value.params.pid}/medical/results`,
+        href: `/patientrecords/${route.params.pid}/medical/results`,
       },
       {
         name: "Observations",
-        href: `/patientrecords/${route.value.params.pid}/medical/observations`,
+        href: `/patientrecords/${route.params.pid}/medical/observations`,
       },
       {
         name: "Diagnoses",
-        href: `/patientrecords/${route.value.params.pid}/medical/diagnoses`,
+        href: `/patientrecords/${route.params.pid}/medical/diagnoses`,
       },
       {
         name: "Medications",
-        href: `/patientrecords/${route.value.params.pid}/medical/medications`,
+        href: `/patientrecords/${route.params.pid}/medical/medications`,
       },
       {
         name: "Treatments",
-        href: `/patientrecords/${route.value.params.pid}/medical/treatments`,
+        href: `/patientrecords/${route.params.pid}/medical/treatments`,
       },
       {
         name: "Dialysis",
-        href: `/patientrecords/${route.value.params.pid}/medical/dialysis`,
+        href: `/patientrecords/${route.params.pid}/medical/dialysis`,
       },
       {
         name: "Documents",
-        href: `/patientrecords/${route.value.params.pid}/medical/documents`,
+        href: `/patientrecords/${route.params.pid}/medical/documents`,
       },
       {
         name: "Surveys",
-        href: `/patientrecords/${route.value.params.pid}/medical/surveys`,
+        href: `/patientrecords/${route.params.pid}/medical/surveys`,
       },
     ] as TabItem[];
 
     onMounted(() => {
       // Default to first child tab
-      if (route.path === `/patientrecords/${route.value.params.pid}/medical`) {
-        router.push(`/patientrecords/${route.value.params.pid}/medical/results`);
+      if (route.path === `/patientrecords/${route.params.pid}/medical`) {
+        router.push(`/patientrecords/${route.params.pid}/medical/results`);
       }
     });
 

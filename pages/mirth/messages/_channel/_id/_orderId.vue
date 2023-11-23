@@ -109,7 +109,7 @@ export default defineComponent({
 
     // Data refs
     const connectorMessage = computed(() => {
-      const orderId = parseInt(route.value.params.orderId);
+      const orderId = parseInt(route.params.orderId);
       return props.message.connectorMessages[orderId] as ConnectorMessageModel;
     });
     const formatconnectorMessage = ref(true);

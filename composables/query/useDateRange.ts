@@ -14,8 +14,8 @@ export default function () {
     return computed({
       get: () => {
         return {
-          start: singleQuery(route.value.query.since) || defaultStart,
-          end: singleQuery(route.value.query.until) || defaultEnd,
+          start: singleQuery(route.query.since) || defaultStart,
+          end: singleQuery(route.query.until) || defaultEnd,
         };
       },
       set(newRange: DateRange) {
@@ -23,7 +23,7 @@ export default function () {
           return;
         }
 
-        const newQuery = Object.assign({}, route.value.query, {
+        const newQuery = Object.assign({}, route.query, {
           since: newRange.start,
           until: newRange.end,
         });
