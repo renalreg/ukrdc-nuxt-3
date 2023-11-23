@@ -3,6 +3,7 @@ Utility functions to simplify interacting with a reactive Okta Auth state.
 */
 
 import { type AuthState, type JWTObject, type JWTPayload } from "@okta/okta-auth-js";
+import { useAuth } from '@okta/okta-vue';
 
 export declare type UKRDCClaims = JWTPayload & {
   "org.ukrdc.permissions": string[];
@@ -13,7 +14,7 @@ export interface UKRDCJWTObject extends JWTObject {
 }
 
 export default function () {
-  const { $okta } = useNuxtApp();
+  const $okta = useAuth();
   const authState = ref<AuthState | null>($okta.authStateManager.getAuthState());
 
   // When auth state changes, update authState.value

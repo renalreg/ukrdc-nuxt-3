@@ -15,6 +15,9 @@ import {
   WorkItemsApi,
 } from "@ukkidney/ukrdc-axios-ts";
 import axios from "axios";
+import { useAuth } from '@okta/okta-vue';
+
+// TODO: Fix auth handling
 
 interface PydanticError {
   loc: string[];
@@ -32,7 +35,8 @@ function decodePydanticErrors(errors: PydanticError[]) {
 }
 
 export default function () {
-  const { $okta, $toast, error } = useNuxtApp();
+  const { $toast, error } = useNuxtApp();
+  const $okta = useAuth();
 
   const runtimeConfig = useRuntimeConfig()
 
@@ -49,7 +53,7 @@ export default function () {
   apiInstance.interceptors.request.use(async (config) => {
     // If auth has expired, reauthenticate before proceeding with the API request
     if (!$okta.isAuthenticated) {
-      await $okta.signInAuto();
+      await $okta.signInWithRedirect();
     }
 
     // Add the authorization header to each request

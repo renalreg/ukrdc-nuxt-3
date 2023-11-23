@@ -91,7 +91,9 @@
 
       <!-- Main page content -->
       <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none" tabindex="0">
-        <Nuxt class="mx-auto max-w-7xl px-4 py-6 sm:px-6 md:px-8" />
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 md:px-8" >
+          <slot />
+        </div>
       </main>
     </div>
   </div>
@@ -104,16 +106,19 @@ import ProfileBadge from "~/components/ProfileBadge.vue";
 import Sidebar from "~/components/Sidebar.vue";
 import useSensitive from "~/composables/useSensitive";
 
+useHead({
+  meta: [
+    { name: 'description', content: 'My amazing site.' }
+  ],
+})
+
 export default defineComponent({
   components: {
     Sidebar,
     ProfileBadge,
   },
   setup() {
-    const { base } = useNuxtApp();
-    const { link } = useMeta();
     const { sensitiveCssFilter } = useSensitive();
-    link.value = [{ rel: "icon", type: "image/x-icon", href: `${base || "/"}favicon.ico` }];
 
     const sbOpen = ref(false);
 

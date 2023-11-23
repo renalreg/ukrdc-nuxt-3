@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {
-    enabled: true
+    enabled: true,
   },
 
   // Disable SSR, and build as an SPA
@@ -13,32 +13,23 @@ export default defineNuxtConfig({
   app: {
     baseURL: "/app",
     buildAssetsDir: "/app/_nuxt/",
-  },
-
-  // Global page headers: https://go.nuxtjs.dev/config-head
-  head: {
-    title: "UKRDC Web Client",
-    htmlAttrs: {
-      lang: "en",
+    // Global page headers: https://go.nuxtjs.dev/config-head
+    head: {
+      title: "UKRDC Web Client",
+      link: [{ rel: "icon", type: "image/x-icon", href: "/app/favicon.ico" }],
+      htmlAttrs: {
+        lang: "en",
+      },
+      meta: [
+        {
+          charset: "utf-8",
+        },
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1",
+        },
+      ],
     },
-    meta: [
-      {
-        charset: "utf-8",
-      },
-      {
-        name: "viewport",
-        content: "width=device-width, initial-scale=1",
-      },
-      {
-        hid: "description",
-        name: "description",
-        content: "",
-      },
-    ],
-  },
-
-  server: {
-    host: process.env.HOST || "localhost",
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -56,7 +47,9 @@ export default defineNuxtConfig({
   components: false,
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["~/modules/okta-auth/index"],
+  modules: [
+    //  "~/modules/okta-auth/index"
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -80,28 +73,20 @@ export default defineNuxtConfig({
     githubSha: process.env.GITHUB_SHA || "Not Available",
   },
 
-  // Okta JS config
-  okta: {
-    defaultProtectRoutes: true,
-    redirectUri: "/login",
-    postLogoutRedirectUri: "/login",
-    responseType: "code",
-    pkce: true,
-    scopes: ["openid", "profile", "email", "offline_access"],
-  },
-
   // Runtime configuration variables
   runtimeConfig: {
     public: {
       // Demo mode with redacted data
-      demoMode: process.env.DEMO_MODE || false,
+      demoMode: process.env.DEMO_MODE,
       // Custom UKRDC API config
       api: {
         host: process.env.API_HOST || "",
         protocol: process.env.API_PROTOCOL || "https",
       },
       // Okta domain
-      manageAccountUrl: process.env.MANAGE_ACCOUNT_URL || "https://renalregistry.okta.com/app/UserHome",
+      manageAccountUrl:
+        process.env.MANAGE_ACCOUNT_URL ||
+        "https://renalregistry.okta.com/app/UserHome",
       // Deployment environment
       deploymentEnv: process.env.DEPLOYMENT_ENV || "development",
       // Okta JS runtime config
@@ -109,7 +94,6 @@ export default defineNuxtConfig({
         issuer: process.env.OAUTH_ISSUER,
         clientId: process.env.APP_CLIENT_ID,
       },
-    }
+    },
   },
-
-})
+});
