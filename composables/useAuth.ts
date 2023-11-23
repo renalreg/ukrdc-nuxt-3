@@ -51,10 +51,21 @@ export default function () {
     return authState.value?.isAuthenticated || false;
   });
 
+  // Signin and out functions
+  async function signInAuto() {
+    return await $okta.signInWithRedirect();
+  }
+
+  async function signOutAuto() {
+    return await $okta.signOut();
+  }
+
   return {
     authState,
     idToken,
     accessToken,
     isAuthenticated,
+    signInAuto,
+    signOutAuto
   };
 }

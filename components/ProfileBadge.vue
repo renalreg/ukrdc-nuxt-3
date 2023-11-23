@@ -50,13 +50,13 @@
       :show="showMenu"
     >
       <BaseMenuItem to="/profile"> Profile and Settings </BaseMenuItem>
-      <BaseMenuItem :href="$config.manageAccountUrl" target="blank"> Manage Account </BaseMenuItem>
+      <BaseMenuItem :href="manageAccountUrl" target="blank"> Manage Account </BaseMenuItem>
       <BaseMenuDivider />
       <BaseMenuItem to="/system"> Support </BaseMenuItem>
       <BaseMenuDivider />
       <BaseMenuItem to="/tasks"> Background Tasks </BaseMenuItem>
       <BaseMenuDivider />
-      <BaseMenuItem @click="$okta.signOutAuto()"> Logout </BaseMenuItem>
+      <BaseMenuItem @click="signOutAuto()"> Logout </BaseMenuItem>
     </BaseMenu>
   </div>
 </template>
@@ -89,7 +89,9 @@ export default defineComponent({
     },
   },
   setup() {
-    const { idToken, isAuthenticated } = useAuth();
+    const runtimeConfig = useRuntimeConfig()
+
+    const { idToken, isAuthenticated, signOutAuto } = useAuth();
 
     // Menu
     const showMenu = ref(false);
@@ -105,11 +107,15 @@ export default defineComponent({
       return "Signed Out";
     });
 
+    const manageAccountUrl = runtimeConfig.public.manageAccountUrl
+
     return {
       isAuthenticated,
       displayName,
       showMenu,
+      manageAccountUrl,
       closeMenu,
+      signOutAuto
     };
   },
 });

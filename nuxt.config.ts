@@ -76,6 +76,8 @@ export default defineNuxtConfig({
   // Runtime configuration variables
   runtimeConfig: {
     public: {
+      // Deployment environment
+      deploymentEnv: process.env.DEPLOYMENT_ENV || "development",
       // Demo mode with redacted data
       demoMode: process.env.DEMO_MODE,
       // Custom UKRDC API config
@@ -86,9 +88,7 @@ export default defineNuxtConfig({
       // Okta domain
       manageAccountUrl:
         process.env.MANAGE_ACCOUNT_URL ||
-        "https://renalregistry.okta.com/app/UserHome",
-      // Deployment environment
-      deploymentEnv: process.env.DEPLOYMENT_ENV || "development",
+        "https://sso.ukkidney.org/app/UserHome",
       // Okta JS runtime config
       okta: {
         issuer: process.env.OAUTH_ISSUER,

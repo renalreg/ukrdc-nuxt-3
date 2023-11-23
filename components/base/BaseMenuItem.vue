@@ -12,7 +12,6 @@
     v-else-if="to"
     v-slot="{ navigate }"
     v-tooltip="{ content: tooltip, delay: { show: 250, hide: 0 } }"
-    custom
     :to="to"
   >
     <span
