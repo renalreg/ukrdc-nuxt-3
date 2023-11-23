@@ -1,0 +1,37 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@tailwindcss/forms": "^0.5.7",
+    "@types/plotly.js-dist-min": "^2.3.4",
+    "autoprefixer": "^10.4.16",
+    "nuxt": "^3.8.2",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "vue": "^3.3.8",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@okta/okta-auth-js": "^7.4.3",
+    "@popperjs/core": "^2.11.8",
+    "@ukkidney/ukrdc-axios-ts": "^4.3.3",
+    "dompurify": "^3.0.6",
+    "floating-vue": "^2.0.0-beta.24",
+    "luxon": "^3.4.4",
+    "marked": "^10.0.0",
+    "plotly.js-dist-min": "^2.27.1",
+    "url-join": "^5.0.0",
+    "v-calendar": "^3.1.2",
+    "vue3-click-away": "^1.2.4",
+    "xml-formatter": "^3.6.0"
+  }
+}
