@@ -2,20 +2,16 @@
   <input
     ref="textBoxEl"
     class="block rounded-md border border-gray-300 bg-white py-2 placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-    :value="value"
-    @input="onInput"
+    :value="modelValue"
+    v-on:input="onInput"
   />
 </template>
 
 <script lang="ts">
 
 export default defineComponent({
-  model: {
-    prop: "value",
-    event: "input",
-  },
   props: {
-    value: {
+    modelValue: {
       default: "",
       type: String,
     },
@@ -25,7 +21,10 @@ export default defineComponent({
       default: false,
     },
   },
-  setup(props, { emit }) {
+  emits: [
+    'update:modelValue'
+  ],
+  setup(props, {emit}) {
     const textBoxEl = ref<HTMLFormElement>();
 
     onMounted(() => {
@@ -34,8 +33,9 @@ export default defineComponent({
       }
     });
 
-    function onInput() {
-      emit("input", textBoxEl.value?.value);
+    function onInput(event: Event) {
+      const value = ((event.target) as HTMLInputElement).value
+      emit("update:modelValue", value);
     }
 
     return { textBoxEl, onInput };

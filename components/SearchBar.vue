@@ -26,8 +26,8 @@
               class="w-full pl-10"
               placeholder="Search"
               type="search"
-              :value="value"
-              v-on="$listeners"
+              :modelValue="modelValue"
+              v-on:update:modelValue="$emit('update:modelValue', $event)"
             />
           </form>
         </div>
@@ -51,7 +51,7 @@ export default defineComponent({
     BaseTextBox,
   },
   props: {
-    value: {
+    modelValue: {
       type: String,
       default: "",
     },
@@ -66,5 +66,9 @@ export default defineComponent({
       default: true,
     },
   },
+  emits: [
+    'update:modelValue',
+    'submit'
+  ]
 });
 </script>
