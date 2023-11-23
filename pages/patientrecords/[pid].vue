@@ -19,7 +19,7 @@
 
     <div class="mb-6"><BaseTabsNavigation :tabs="tabs" /></div>
 
-    <NuxtChild v-if="record" :record="record" />
+    <NuxtPage v-if="record" :record="record" />
   </div>
 </template>
 

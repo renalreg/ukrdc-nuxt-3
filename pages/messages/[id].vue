@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <NuxtChild v-if="message" :message="message" />
+    <NuxtPage v-if="message" :message="message" />
   </div>
 </template>
 

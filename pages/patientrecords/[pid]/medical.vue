@@ -11,7 +11,7 @@
       </BaseAlertWarning>
     </NuxtLink>
     <BaseTabsNavigation id="medical-tabs" class="mb-6" :tabs="tabs" :mini="true" :eager-to-collapse="true" />
-    <NuxtChild v-if="record" :record="record" />
+    <NuxtPage v-if="record" :record="record" />
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   <div>
     <BaseTabsNavigation id="stats-tabs" class="mb-6" :tabs="tabs" :mini="true" />
 
-    <NuxtChild v-if="facility && extracts" :facility="facility" :extracts="extracts" />
+    <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" />
 
     <BaseAlertInfo>
       <div class="text-blue-700">

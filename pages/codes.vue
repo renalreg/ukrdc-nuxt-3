@@ -75,7 +75,7 @@
           >Back to List</BaseButton
         >
         <BaseCard class="pt-4" :class="$route.params.id ? 'block' : 'hidden lg:block'">
-          <NuxtChild />
+          <NuxtPage />
         </BaseCard>
       </div>
     </div>

@@ -14,7 +14,7 @@
 
     <div class="mb-6"><BaseTabsNavigation :tabs="tabs" /></div>
 
-    <NuxtChild v-if="facility && extracts" :facility="facility" :extracts="extracts" />
+    <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" />
   </div>
 </template>
 

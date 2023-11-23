@@ -26,7 +26,7 @@
 
     <div class="mb-6"><BaseTabsNavigation :tabs="tabs" /></div>
 
-    <NuxtChild v-if="record" :record="record" :stats="stats" />
+    <NuxtPage v-if="record" :record="record" :stats="stats" />
   </div>
 </template>
 

@@ -8,7 +8,7 @@
     <!-- Header card -->
     <MirthMessageCard class="mb-6" :message="message" />
 
-    <NuxtChild v-if="message" :message="message" />
+    <NuxtPage v-if="message" :message="message" />
   </div>
 </template>
 
