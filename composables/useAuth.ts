@@ -60,6 +60,13 @@ export default function () {
     return await $okta.signOut();
   }
 
+  // Convenience functions
+  async function getUser() {
+    if (isAuthenticated.value) {
+      return await $okta.getUser();
+    }
+  }
+
   return {
     $okta,
     authState,
@@ -67,6 +74,7 @@ export default function () {
     accessToken,
     isAuthenticated,
     signInAuto,
-    signOutAuto
+    signOutAuto,
+    getUser
   };
 }

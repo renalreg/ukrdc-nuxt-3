@@ -17,8 +17,6 @@ import {
 import axios from "axios";
 import useAuth from './useAuth';
 
-// TODO: Fix auth handling
-
 interface PydanticError {
   loc: string[];
   msg: string;
@@ -35,7 +33,7 @@ function decodePydanticErrors(errors: PydanticError[]) {
 }
 
 export default function () {
-  const { $toast, error } = useNuxtApp();
+  const { $toast } = useNuxtApp();
   const { $okta }= useAuth();
 
   const runtimeConfig = useRuntimeConfig()
@@ -94,17 +92,15 @@ export default function () {
       // We're assuming here that the API server will log the related error, and so logging
       // here just leads to duplicate messages.
       if (e.response?.status === 0 || e.response?.status === 500) {
-        error({ statusCode: 500, message: "An internal error occured. Our developers have been notified." });
-        // Return early
-        throw e;
+        showError({ fatal: true, statusCode: 500, message: "An internal error occured. Our developers have been notified." });
+        throw e
       }
 
       // Build message and redirect to 422 without propagating
       if (e.response?.status === 422) {
         const msg = decodePydanticErrors(e.response.data.detail);
-        error({ statusCode: 422, message: msg });
-        // Return early
-        throw e;
+        showError({ fatal: true, statusCode: 422, message: msg });
+        throw e
       }
 
       // All other error status codes

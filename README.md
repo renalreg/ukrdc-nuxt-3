@@ -6,7 +6,7 @@
 
 - [ ] Fix post logout URL
 - [ ] Fix API auth handler
-- [ ] Fix profile attributes (getUser, see profile page)
+- [x] Fix profile attributes (getUser, see profile page)
 
 ### Components
 
@@ -27,7 +27,7 @@
 
 ### Popover/alerts
 
-- [ ] Fix alert style/size
+- [x] Fix alert style/size
 
 ### System
 

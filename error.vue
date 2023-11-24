@@ -1,22 +1,24 @@
 <template>
-  <div class="flex h-full flex-col items-center justify-center">
-    <div class="block items-center justify-center sm:flex">
-      <h1 class="sm:mr-8">{{ error.statusCode || "Error" }}</h1>
-      <div class="sm:border-l sm:pl-8">
-        <h1 class="whitespace-pre">{{ errorTitle }}</h1>
-        <div v-if="error.message">
-          <p>{{ error.message }}</p>
+  <NuxtLayout>
+    <div class="flex h-full flex-col items-center justify-center">
+      <div class="block items-center justify-center sm:flex">
+        <h1 class="sm:mr-8">{{ error.statusCode || "Error" }}</h1>
+        <div class="sm:border-l sm:pl-8">
+          <h2 class="whitespace-pre">{{ errorTitle }}</h2>
+          <div v-if="error.message">
+            <p>{{ error.message }}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </NuxtLayout>
 </template>
 
 <script lang="ts">
-import { type NuxtError } from '#app';
+import { type NuxtError } from "#app";
 
 export default defineComponent({
-  layout: "error",
+  layout: "default",
   props: {
     error: {
       type: Object as () => NuxtError,
@@ -54,7 +56,10 @@ export default defineComponent({
     };
 
     const errorTitle = computed(() => {
-      if (props.error.statusCode && props.error.statusCode in friendlyErrorStatus) {
+      if (
+        props.error.statusCode &&
+        props.error.statusCode in friendlyErrorStatus
+      ) {
         return friendlyErrorStatus[props.error.statusCode] || "Error";
       }
       return "An unknown error occured";
@@ -65,7 +70,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 h1 {
   @apply text-6xl font-bold text-indigo-600;
 }
