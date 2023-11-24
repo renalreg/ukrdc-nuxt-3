@@ -4,7 +4,7 @@
   <div :class="[sticky ? 'sticky top-4 z-50' : '']">
     <div :class="[eagerToCollapse ? 'lg:hidden' : 'sm:hidden']">
       <label for="tabs" class="sr-only">Select a tab</label>
-      <BaseSelect id="tabs" ref="selectEl" name="tabs" :value="value" @change="setValue">
+      <BaseSelect id="tabs" ref="selectEl" name="tabs" :value="modelValue" @change="setValue">
         <option v-for="tab in tabs" :key="tab.value">{{ tab.name }}</option>
       </BaseSelect>
     </div>
@@ -38,16 +38,13 @@ import { type ModelTabItem } from "~/interfaces/tabs";
 
 export default defineComponent({
   components: { BaseSelect },
-  model: {
-    prop: "value",
-    event: "input",
-  },
+
   props: {
     tabs: {
       type: Array as () => ModelTabItem[],
       required: true,
     },
-    value: {
+    modelValue: {
       type: [String, Number],
       required: false,
       default: "",
@@ -72,11 +69,11 @@ export default defineComponent({
     const selectEl = ref<HTMLFormElement>();
 
     function tabIsActive(tab: ModelTabItem) {
-      return props.value === tab.value;
+      return props.modelValue === tab.value;
     }
 
     function setValue(value: any) {
-      emit("input", value);
+      emit("update:modelValue", value);
     }
 
     return { selectEl, tabIsActive, setValue };
