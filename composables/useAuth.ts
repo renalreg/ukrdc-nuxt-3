@@ -61,6 +61,7 @@ export default function () {
   }
 
   return {
+    $okta,
     authState,
     idToken,
     accessToken,

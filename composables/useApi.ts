@@ -15,7 +15,7 @@ import {
   WorkItemsApi,
 } from "@ukkidney/ukrdc-axios-ts";
 import axios from "axios";
-import { useAuth } from '@okta/okta-vue';
+import useAuth from './useAuth';
 
 // TODO: Fix auth handling
 
@@ -36,7 +36,7 @@ function decodePydanticErrors(errors: PydanticError[]) {
 
 export default function () {
   const { $toast, error } = useNuxtApp();
-  const $okta = useAuth();
+  const { $okta }= useAuth();
 
   const runtimeConfig = useRuntimeConfig()
 
