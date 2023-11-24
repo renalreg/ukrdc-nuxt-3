@@ -4,7 +4,7 @@
     <button
       type="button"
       class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-      :class="{ 'bg-green-400': value }"
+      :class="{ 'bg-green-400': modelValue }"
       aria-pressed="false"
       aria-labelledby="toggle-label"
       @click="toggle()"
@@ -14,7 +14,7 @@
       <span
         aria-hidden="true"
         class="pointer-events-none inline-block h-5 w-5 translate-x-0 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
-        :class="{ 'translate-x-5': value }"
+        :class="{ 'translate-x-5': modelValue }"
       ></span>
     </button>
     <span v-if="label" id="toggle-label">
@@ -27,17 +27,13 @@
 
 
 export default defineComponent({
-  model: {
-    prop: "value",
-    event: "input",
-  },
   props: {
     label: {
       type: String,
       required: false,
       default: null,
     },
-    value: {
+    modelValue: {
       type: Boolean,
       required: false,
       default: false,
@@ -50,7 +46,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     function toggle() {
-      emit("input", !props.value);
+      emit("update:modelValue", !props.modelValue);
     }
 
     return { toggle };
