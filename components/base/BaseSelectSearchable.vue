@@ -22,10 +22,10 @@
         @keydown.enter.prevent="open"
       >
         <div class="flex-grow truncate">
-          <span v-if="value && labelFor(value)" class="line-clamp-1 truncate">
-            {{ labelFor(value) }}
+          <span v-if="modelValue && labelFor(modelValue)" class="line-clamp-1 truncate">
+            {{ labelFor(modelValue) }}
           </span>
-          <span v-else-if="value" class="line-clamp-1 truncate">{{ value }}</span>
+          <span v-else-if="modelValue" class="line-clamp-1 truncate">{{ modelValue }}</span>
           <span v-else class="text-grey-dark line-clamp-1 truncate text-base">{{ hint }}</span>
         </div>
 
@@ -99,7 +99,7 @@ export default defineComponent({
     BaseBlackout,
   },
   props: {
-    value: {
+    modelValue: {
       type: String,
       required: false,
       default: null,
@@ -134,7 +134,9 @@ export default defineComponent({
       default: false,
     },
   },
-
+  emits: [
+    "update:modelValue"
+  ],
   setup(props, { emit }) {
     const search = ref("");
     const isOpen = ref(false);
@@ -177,7 +179,7 @@ export default defineComponent({
 
     function commitSelection() {
       close();
-      emit("input", filteredOptions.value[highlightedIndex.value]);
+      emit("update:modelValue", filteredOptions.value[highlightedIndex.value]);
     }
 
     function select(index: number) {
@@ -187,7 +189,7 @@ export default defineComponent({
 
     function clear() {
       highlightedIndex.value = 0;
-      emit("input", null);
+      emit("update:modelValue", null);
       close();
     }
 
