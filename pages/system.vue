@@ -84,16 +84,17 @@ export default defineComponent({
     BaseCardDescriptionItem,
   },
   setup() {
-    const { $config, $toast } = useNuxtApp();
+    const { $toast } = useNuxtApp();
     const { systemInfoApi } = useApi();
+    const runtimeConfig = useRuntimeConfig()
 
     // Data refs
 
     const serverInfo = ref<SystemInfoSchema>();
     const clientInfo = ref({
-      deploymentEnv: $config.deploymentEnv,
-      githubRef: process.env.githubRef,
-      githubSha: process.env.githubSha,
+      deploymentEnv: runtimeConfig.public.deploymentEnv,
+      githubRef: runtimeConfig.public.git.githubRef,
+      githubSha: runtimeConfig.public.git.githubSha,
     });
 
     // Data fetching

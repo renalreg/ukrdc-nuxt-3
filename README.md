@@ -2,10 +2,14 @@
 
 - [ ] Re-implement sentry (https://www.lichter.io/articles/nuxt3-sentry-recipe/?ref=github-sentry-support-issue)
 
+### System
+
+- [ ] Fix system configuration/support variables (replace all $config instances with useRuntimeConfig())
+
 ### Auth
 
 - [ ] Fix post logout URL
-- [ ] Fix API auth handler
+- [x] Fix API auth handler
 - [x] Fix profile attributes (getUser, see profile page)
 
 ### Components
@@ -29,9 +33,6 @@
 
 - [x] Fix alert style/size
 
-### System
-
-- [ ] Fix system configuration/support variables
 
 ### Deployment
 

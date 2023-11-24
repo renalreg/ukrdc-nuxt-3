@@ -66,16 +66,14 @@ export default defineNuxtConfig({
     },
   },
 
-  // Build-time variables. These are resolved during the build process,
-  // and can be accessed via `process.env.VAR_NAME` in the code.
-  env: {
-    githubRef: process.env.GITHUB_REF || "Not Available",
-    githubSha: process.env.GITHUB_SHA || "Not Available",
-  },
-
   // Runtime configuration variables
   runtimeConfig: {
+    // We don't use SSR, so all runtime config needs to be public to be useful to us
     public: {
+      git: {
+        githubRef: process.env.GITHUB_REF || "Not Available",
+        githubSha: process.env.GITHUB_SHA || "Not Available",
+      },
       // Deployment environment
       deploymentEnv: process.env.DEPLOYMENT_ENV || "development",
       // Demo mode with redacted data
