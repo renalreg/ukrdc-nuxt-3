@@ -14,6 +14,7 @@
 - [ ] Fix collapse sections (e.g. advanced search settings)
 - [ ] Fix toggle tabs (e.g. Work Item status selector)
 - [ ] Fix checkbox models (e.g. data files status filter)
+- [ ] (Eventually) fix https://github.com/nathanreyes/v-calendar/issues/1415
 
 ### Model
 
@@ -36,3 +37,7 @@
 
 - [ ] Add docker image using new deployment method (https://github.com/renalreg/ukrdc-nuxt/blob/9c393c79ae8f840c5c6a8ef38857c0172aa1f172/start.sh and https://github.com/renalreg/ukrdc-nuxt/blob/9c393c79ae8f840c5c6a8ef38857c0172aa1f172/Dockerfile)
 - [ ] Add back github actions
+
+### Nice-to-have new stuff
+
+- [ ] Something to add separating commas to big numbers
