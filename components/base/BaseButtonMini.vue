@@ -75,6 +75,7 @@ export default defineComponent({
       default: null,
     },
   },
+  emits: ['click']
 });
 </script>
 

@@ -20,5 +20,8 @@ export default defineComponent({
       default: true,
     },
   },
+  emits: [
+    "toggle"
+  ],
 });
 </script>

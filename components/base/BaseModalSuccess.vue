@@ -86,7 +86,9 @@ export default defineComponent({
       default: false,
     },
   },
-
+  emits: [
+    "confirm"
+  ],
   setup(_, { emit }) {
     const successModal = ref<ModalInterface>();
 

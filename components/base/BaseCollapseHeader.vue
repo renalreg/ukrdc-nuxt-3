@@ -34,6 +34,9 @@ export default defineComponent({
       required: false,
     },
   },
+  emits: [
+    "update:modelValue"
+  ],
   setup(props, { emit }) {
     function toggle(): void {
       emit("update:modelValue", !props.modelValue);

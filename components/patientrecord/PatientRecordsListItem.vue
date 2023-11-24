@@ -174,6 +174,9 @@ export default defineComponent({
       default: false,
     },
   },
+  emits: [
+    "deleted"
+  ],
   setup(props) {
     const showDetail = ref(false);
 

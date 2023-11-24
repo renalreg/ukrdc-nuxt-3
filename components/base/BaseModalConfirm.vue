@@ -81,7 +81,10 @@ export default defineComponent({
       default: null,
     },
   },
-
+  emits: [
+    "confirm",
+    "cancel"
+  ],
   setup(props, { emit }) {
     const confirmModal = ref<ModalInterface>();
 

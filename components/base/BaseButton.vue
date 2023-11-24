@@ -83,9 +83,7 @@ export default {
       default: false,
     },
   },
-  emits: [
-    'click'
-  ]
+  emits: ['click']
 };
 </script>
 

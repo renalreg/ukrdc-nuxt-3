@@ -3,3 +3,8 @@
     <slot />
   </p>
 </template>
+<script>
+export default {
+  emits: ['click']
+};
+</script>

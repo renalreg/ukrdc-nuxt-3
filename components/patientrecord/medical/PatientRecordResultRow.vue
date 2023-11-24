@@ -59,6 +59,9 @@ export default defineComponent({
       required: true,
     },
   },
+  emits: [
+    "delete"
+  ],
   setup() {
     return { formatDate };
   },

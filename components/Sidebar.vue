@@ -99,7 +99,9 @@ export default defineComponent({
       default: true,
     },
   },
-
+  emits: [
+    'toggle'
+  ],
   setup() {
     const { hasPermission, availableFacilities, firstFacility, hasMultipleFacilities } = usePermissions();
 

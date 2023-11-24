@@ -47,7 +47,9 @@ export default defineComponent({
       default: "Item",
     },
   },
-
+  emits: [
+    "update:modelValue"
+  ],
   setup(props, { emit }) {
     function next(): void {
       emit("update:modelValue", props.modelValue + 1);

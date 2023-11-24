@@ -249,7 +249,11 @@ export default defineComponent({
       required: true,
     },
   },
-
+  emits: [
+    "cancel",
+    "confirm",
+    "deleted"
+  ],
   setup(props, { emit }) {
     const { $toast } = useNuxtApp();
     const { visible, show, hide, toggle } = useModal();

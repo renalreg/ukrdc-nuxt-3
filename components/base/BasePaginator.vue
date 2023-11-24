@@ -70,7 +70,11 @@ export default defineComponent({
       default: true,
     },
   },
-
+  emits: [
+    "next",
+    "prev",
+    "jump"
+  ],
   setup(props, { emit }) {
     function pagination(current: number, total: number): Pages {
       if (total <= 1) {

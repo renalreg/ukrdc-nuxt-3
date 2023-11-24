@@ -157,6 +157,9 @@ export default defineComponent({
       required: false,
     },
   },
+  emits: [
+    'select'
+  ],
   setup(props) {
     const { facilitiesApi } = useApi();
 

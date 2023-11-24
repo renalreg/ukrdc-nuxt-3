@@ -81,6 +81,9 @@ export default defineComponent({
       default: false,
     },
   },
+  emits: [
+    "refresh"
+  ],
   setup(props, { emit }) {
     const { $toast } = useNuxtApp();
     const { hasPermission } = usePermissions();

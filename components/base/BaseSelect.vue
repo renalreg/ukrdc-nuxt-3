@@ -17,5 +17,8 @@ export default {
       default: undefined,
     },
   },
+  emits: [
+    "update:modelValue"
+  ],
 };
 </script>

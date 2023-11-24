@@ -48,6 +48,9 @@ export default defineComponent({
       default: "white",
     },
   },
+  emits: [
+    "update:modelValue"
+  ],
   setup(props, { emit }) {
     const model = computed({
       get: () => props.modelValue,

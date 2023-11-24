@@ -34,7 +34,9 @@ export default defineComponent({
       default: false,
     },
   },
-
+  emits: [
+    "update:modelValue"
+  ],
   setup(props, { emit }) {
     const textAreaEl = ref<HTMLTextAreaElement>();
 

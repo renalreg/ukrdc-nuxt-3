@@ -97,6 +97,9 @@ export default defineComponent({
       }),
     },
   },
+  emits: [
+    "update:modelValue"
+  ],
   setup(props, { emit }) {
     const showCustom = ref(false);
 

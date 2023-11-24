@@ -77,6 +77,9 @@ export default defineComponent({
       default: false,
     },
   },
+  emits: [
+    "deleted"
+  ],
   setup(props) {
     const { $toast } = useNuxtApp();
     const { hasPermission } = usePermissions();

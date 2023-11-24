@@ -70,6 +70,9 @@ export default defineComponent({
       default: () => [],
     },
   },
+  emits: [
+    'select'
+  ],
   setup(props) {
     const { page, total, size } = usePagination();
     const { searchQueryIsPopulated, searchboxString, searchSubmit, searchTermArray } = useRecordSearch();
