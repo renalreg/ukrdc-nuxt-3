@@ -25,7 +25,7 @@
             { 'tab-inactive-primary': !tabIsActive(tab) && !mini },
           ]"
           :aria-current="tabIsActive(tab) ? 'page' : undefined"
-          @click="$emit('input', tab)"
+          @click="$emit('change', tab)"
         >
           {{ tab.name }}
         </NuxtLink>
@@ -68,6 +68,9 @@ export default defineComponent({
       default: false,
     },
   },
+  emits: [
+    "change"
+  ],
   setup(props, { emit }) {
     const router = useRouter();
     const route = useRoute();
@@ -95,7 +98,7 @@ export default defineComponent({
 
     function switchTab(href: string) {
       router.push({ path: href });
-      emit("input", href);
+      emit("change", href);
     }
 
     return { selectEl, selectedHref, tabIsActive, switchTab };
