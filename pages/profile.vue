@@ -50,7 +50,7 @@
             class="rounded-md border border-gray-300 bg-white px-3 py-2 text-center font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >Manage Account</a
           >
-          <BaseButton @click="$okta.signOutAuto()"> Sign out </BaseButton>
+          <BaseButton @click="signOutAuto()"> Sign out </BaseButton>
         </div>
       </div>
       <div class="mb-4">
@@ -81,16 +81,15 @@ export default defineComponent({
     BaseSkeleText,
   },
   setup() {
-    const { $okta } = useNuxtApp();
     const { getPermissions } = usePermissions();
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, signOutAuto, getUser } = useAuth();
 
     // User info
     const user = ref();
 
     onMounted(async () => {
       if (isAuthenticated.value) {
-        user.value = await $okta.getUser();
+        user.value = await getUser();
       }
     });
 
@@ -113,6 +112,7 @@ export default defineComponent({
       isAuthenticated,
       perms,
       classesForPermissions,
+      signOutAuto
     };
   },
   head: {
