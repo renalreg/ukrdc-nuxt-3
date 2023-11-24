@@ -7,7 +7,7 @@ E.g. used in the Filter by Patient Number component in Data Files
   <input
     ref="textBoxEl"
     class="block h-8 rounded-md border border-gray-300 bg-white px-2 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-    :value="value"
+    :value="modelValue"
     @input="onInput"
   />
 </template>
@@ -16,16 +16,31 @@ E.g. used in the Filter by Patient Number component in Data Files
 
 export default defineComponent({
   props: {
-    value: {
+    modelValue: {
       default: "",
       type: String,
     },
+    focus: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
-  setup(_, { emit }) {
+  emits: [
+    'update:modelValue'
+  ],
+  setup(props, { emit }) {
     const textBoxEl = ref<HTMLFormElement>();
 
-    function onInput() {
-      emit("input", textBoxEl.value?.value);
+    onMounted(() => {
+      if (props.focus) {
+        textBoxEl.value?.focus();
+      }
+    });
+
+    function onInput(event: Event) {
+      const value = ((event.target) as HTMLInputElement).value
+      emit("update:modelValue", value);
     }
 
     return { textBoxEl, onInput };
