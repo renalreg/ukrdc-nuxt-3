@@ -1,8 +1,8 @@
 <template>
   <select
-    :value="value"
+    :value="modelValue"
     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-    @input="$emit('change', $event.target.value)"
+    @input="$emit('update:modelValue', $event.target.value)"
   >
     <slot />
   </select>
@@ -10,12 +10,8 @@
 
 <script>
 export default {
-  model: {
-    prop: "value",
-    event: "change",
-  },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number, Boolean],
       required: false,
       default: undefined,
