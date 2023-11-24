@@ -2,14 +2,14 @@
   <div>
     <textarea
       ref="textAreaEl"
-      :value="value"
+      :value="modelValue"
       :maxLength="maxLength"
       class="sm: mb-4 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
       @input="onInput"
     ></textarea>
     <div v-if="maxLength">
-      <h5 :class="[value && value.length >= maxLength ? 'text-red-600' : '']">
-        {{ value ? value.length : 0 }}/{{ maxLength }}
+      <h5 :class="[modelValue && modelValue.length >= maxLength ? 'text-red-600' : '']">
+        {{ modelValue ? modelValue.length : 0 }}/{{ maxLength }}
       </h5>
     </div>
   </div>
@@ -18,12 +18,8 @@
 <script lang="ts">
 
 export default defineComponent({
-  model: {
-    prop: "value",
-    event: "input",
-  },
   props: {
-    value: {
+    modelValue: {
       default: "",
       type: String,
     },
@@ -32,13 +28,25 @@ export default defineComponent({
       default: undefined,
       required: false,
     },
+    focus: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
 
-  setup(_, { emit }) {
+  setup(props, { emit }) {
     const textAreaEl = ref<HTMLTextAreaElement>();
 
-    function onInput() {
-      emit("input", textAreaEl.value?.value);
+    onMounted(() => {
+      if (props.focus) {
+        textAreaEl.value?.focus();
+      }
+    });
+
+    function onInput(event: Event) {
+      const value = ((event.target) as HTMLInputElement).value
+      emit("update:modelValue", value);
     }
 
     return { textAreaEl, onInput };
