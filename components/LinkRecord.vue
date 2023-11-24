@@ -89,7 +89,6 @@ export default defineComponent({
             title: "Success",
             message: "Record unlink request sent successfully",
             timeout: 10,
-            classTimeout: "bg-green-600",
           });
           router.push({ path: `/masterrecords/${response.data.masterRecord.id}` });
         })

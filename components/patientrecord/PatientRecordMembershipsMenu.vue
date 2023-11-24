@@ -139,7 +139,6 @@ export default defineComponent({
             title: "Error creating PKB membership",
             message: error.response.data.detail,
             timeout: 10,
-            classTimeout: "bg-red-600",
           });
         })
         .finally(() => {
@@ -149,7 +148,6 @@ export default defineComponent({
             title: "Creating Membership",
             message: "This might take a few seconds",
             timeout: 5,
-            classTimeout: "bg-blue-600",
           });
           emit("refresh");
           closeMenu();

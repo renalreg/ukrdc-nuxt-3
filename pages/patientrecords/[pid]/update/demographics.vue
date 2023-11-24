@@ -397,7 +397,6 @@ export default defineComponent({
             title: "Success",
             message: "Record demographics updated successfully",
             timeout: 10,
-            classTimeout: "bg-green-600",
           });
           router.push(`/patientrecords/${props.record.pid}`);
         })
@@ -407,7 +406,6 @@ export default defineComponent({
             title: "Error",
             message: "Failed to update record demographics",
             timeout: 10,
-            classTimeout: "bg-red-600",
           });
           throw error;
         });

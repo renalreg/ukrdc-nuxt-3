@@ -106,7 +106,6 @@ export default defineComponent({
             title: "Success",
             message: "PID copied to clipboard",
             timeout: 5,
-            classTimeout: "bg-green-600",
           });
         })
         .finally(() => {
@@ -126,7 +125,6 @@ export default defineComponent({
         title: "Sync Started",
         message: "This may take a few minutes depending on the size of the record.",
         timeout: 10,
-        classTimeout: "hidden",
       });
     }
 
@@ -137,7 +135,6 @@ export default defineComponent({
         title: "Sync Failed",
         message: e.message,
         timeout: 10,
-        classTimeout: "bg-red-600",
       });
     }
 

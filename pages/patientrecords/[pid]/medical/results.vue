@@ -217,7 +217,6 @@ export default defineComponent({
               title: "Success",
               message: "Result Item deleted",
               timeout: 10,
-              classTimeout: "bg-green-600",
             });
             fetchResults();
             itemToDelete.value = null;
@@ -239,7 +238,6 @@ export default defineComponent({
               title: "Success",
               message: "Lab Order deleted",
               timeout: 10,
-              classTimeout: "bg-green-600",
             });
             selectedOrderId.value = null;
             fetchResults();

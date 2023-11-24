@@ -44,7 +44,7 @@ export const toastProgrammatic = {
   },
 };
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin((_) => {
   // Create a div to hold created toasts
   const toasts = document.createElement("div");
   containerClasses.forEach((c) => toasts.classList.add(c));

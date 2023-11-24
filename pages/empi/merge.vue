@@ -283,7 +283,6 @@ export default defineComponent({
               title: "Success",
               message: "Record merge request sent successfully",
               timeout: 10,
-              classTimeout: "bg-green-600",
             });
             clearMerge();
             if (callbackPath.value) {

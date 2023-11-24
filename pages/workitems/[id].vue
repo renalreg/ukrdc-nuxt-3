@@ -533,7 +533,6 @@ export default defineComponent({
             title: "Success",
             message: "Work item updated. Reloading...",
             timeout: 5,
-            classTimeout: "bg-green-600",
           });
         })
         .catch((error) => {
@@ -542,7 +541,6 @@ export default defineComponent({
             title: "Error",
             message: error.response.data.detail,
             timeout: 10,
-            classTimeout: "bg-red-600",
           });
           throw error;
         })
@@ -570,7 +568,6 @@ export default defineComponent({
             type: "success",
             title: "Success",
             message: "Work Item closed. Reloading...",
-            classTimeout: "bg-green-600",
           });
         })
         .catch((error) => {
@@ -579,7 +576,6 @@ export default defineComponent({
             title: "Error",
             message: error.response.data.detail,
             timeout: 10,
-            classTimeout: "bg-red-600",
           });
           throw error;
         })

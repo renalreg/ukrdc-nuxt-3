@@ -1,5 +1,5 @@
 <template>
-  <div ref="toastRootElement" class="w-full max-w-sm">
+  <div ref="toastRootElement" class="w-96">
     <transition
       enter-active-class="transform ease-out duration-300 transition"
       enter-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
@@ -181,7 +181,7 @@ export default defineComponent({
     progress: {
       type: Boolean,
       required: false,
-      default: true,
+      default: false,
     },
     icon: {
       type: String,

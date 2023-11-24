@@ -124,7 +124,6 @@ export default defineComponent({
           title: "Success",
           message: "Configuration Report copied to clipboard",
           timeout: 5,
-          classTimeout: "bg-green-600",
         });
       });
     }

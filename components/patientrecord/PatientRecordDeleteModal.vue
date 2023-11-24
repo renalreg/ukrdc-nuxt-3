@@ -320,7 +320,6 @@ export default defineComponent({
               title: "Success",
               message: "Record deleted",
               timeout: 5,
-              classTimeout: "bg-green-600",
             });
           })
           .catch((error) => {
