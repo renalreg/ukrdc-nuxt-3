@@ -10,14 +10,14 @@
 <script lang="ts">
 
 import BaseSkeleDiv from "~/components/base/BaseSkeleDiv.vue";
-import useTimer from "~/composables/useTimer";
+import useInterval from "~/composables/useInterval";
 
 export default defineComponent({
   components: {
     BaseSkeleDiv,
   },
   setup() {
-    const { timeSinceMount } = useTimer();
+    const { timeSinceMount } = useInterval();
 
     const loadingText = computed<string>(() => {
       if (timeSinceMount.value >= 30) {
