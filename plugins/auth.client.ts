@@ -16,8 +16,12 @@ export default defineNuxtPlugin((nuxtApp) => {
     pkce: true,
   })
 
+  // Set up router navigation guard
   const router = useRouter();
   router.beforeEach(navigationGuard)
+
+  // Enable background service for token refresh
+  oktaAuth.start()
 
   nuxtApp.vueApp.use(OktaVue, { oktaAuth });
 })

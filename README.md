@@ -9,7 +9,7 @@
 ### Auth
 
 - [x] Fix post logout URL
-- [ ] Re-enable auth background service
+- [x] Re-enable auth background service
 - [x] Fix API auth handler
 - [x] Fix profile attributes (getUser, see profile page)
 
