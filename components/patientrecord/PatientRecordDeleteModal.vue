@@ -169,7 +169,7 @@
                     </ul>
                   </div>
                 </div>
-                <BaseCheckbox
+                <UCheckbox 
                   v-if="(previewResponse && !previewErrorMessage) || deleteInProgress"
                   v-model="confirmChecked"
                   :disabled="!previewResponse"
@@ -210,7 +210,6 @@ import {
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseBlackout from "~/components/base/BaseBlackout.vue";
-import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import ModalTransition from "~/components/transition/ModalTransition.vue";
 import useApi from "~/composables/useApi";
@@ -236,7 +235,6 @@ interface DeletePIDResponseSchema {
 export default defineComponent({
   components: {
     BaseLoadingIndicator,
-    BaseCheckbox,
     BaseBlackout,
     ModalTransition,
   },

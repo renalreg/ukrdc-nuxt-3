@@ -15,7 +15,7 @@
       </div>
 
       <!-- Allow setting as WIP if not already closed -->
-      <BaseCheckbox
+      <UCheckbox
         v-if="record && record.status !== 3"
         v-model="isWIP"
         label="Mark as work-in-progress (WIP)"
@@ -394,7 +394,6 @@ import {
   type WorkItemSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import BaseItemPaginator from "~/components/base/BaseItemPaginator.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
@@ -429,7 +428,6 @@ export default defineComponent({
     BaseItemPaginator,
     BaseTable,
     BaseModal,
-    BaseCheckbox,
     BasePaginator,
     IconCheckCircle,
     IconArrowTopRightOnSquare,

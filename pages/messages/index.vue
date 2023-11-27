@@ -17,12 +17,7 @@
       <div class="flex flex-col gap-2 lg:flex-row">
         <BaseCollapseHeader v-model="advancedOpen" class="flex-grow" label="More Options"></BaseCollapseHeader>
 
-        <div class="mr-8 flex items-center gap-4">
-          <BaseCheckbox v-model="statuses" label="Stored" value="STORED" />
-          <BaseCheckbox v-model="statuses" label="Received" value="RECEIVED" />
-          <BaseCheckbox v-model="statuses" label="Error" value="ERROR" />
-          <BaseCheckbox v-model="statuses" label="Resolved" value="RESOLVED" />
-        </div>
+        <USelectMenu v-model="statuses" :options="['STORED', 'RECEIVED', 'ERROR', 'RESOLVED']" multiple placeholder="Select status" />
 
         <form v-show="!nationalId" class="flex" @submit.prevent="nationalId = nationalIdSearchString.trim()">
           <UButtonGroup size="sm" orientation="horizontal">
@@ -94,7 +89,6 @@
 <script lang="ts">
 import { type MessageSchema, OrderBy } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
@@ -117,7 +111,6 @@ export default defineComponent({
   components: {
     BaseSkeleListItem,
     BasePaginator,
-    BaseCheckbox,
     BaseDateRange,
     BaseSelectSearchable,
     BaseCollapseHeader,
