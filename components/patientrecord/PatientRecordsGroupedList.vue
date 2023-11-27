@@ -118,9 +118,7 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: [
-    "refresh"
-  ],
+  emits: ["refresh"],
   setup(props) {
     const { hasPermission } = usePermissions();
 

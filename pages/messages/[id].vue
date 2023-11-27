@@ -32,7 +32,7 @@ export default defineComponent({
 
     // Head
     useHead({
-      title: `Message ${route.params.id}`
+      title: `Message ${route.params.id}`,
     });
 
     // Data refs

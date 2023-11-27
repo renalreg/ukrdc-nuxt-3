@@ -63,7 +63,6 @@
 </template>
 
 <script lang="ts">
-
 import { type SystemInfoSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseCardDescriptionItem from "~/components/base/BaseCardDescriptionItem.vue";
@@ -78,7 +77,7 @@ export default defineComponent({
   setup() {
     const { $toast } = useNuxtApp();
     const { systemInfoApi } = useApi();
-    const runtimeConfig = useRuntimeConfig()
+    const runtimeConfig = useRuntimeConfig();
 
     // Data refs
 

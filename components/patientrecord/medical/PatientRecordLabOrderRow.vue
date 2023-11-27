@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts">
-
 import { LabOrderShortSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import { formatDate } from "~/helpers/dateUtils";

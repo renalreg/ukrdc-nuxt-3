@@ -3,7 +3,7 @@ Utility functions to simplify interacting with a reactive Okta Auth state.
 */
 
 import { type AuthState, type JWTObject, type JWTPayload } from "@okta/okta-auth-js";
-import { useAuth } from '@okta/okta-vue';
+import { useAuth } from "@okta/okta-vue";
 
 export declare type UKRDCClaims = JWTPayload & {
   "org.ukrdc.permissions": string[];
@@ -75,6 +75,6 @@ export default function () {
     isAuthenticated,
     signInAuto,
     signOutAuto,
-    getUser
+    getUser,
   };
 }

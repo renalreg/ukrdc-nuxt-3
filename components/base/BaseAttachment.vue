@@ -13,8 +13,6 @@
 </template>
 
 <script lang="ts">
-
-
 import IconPaperClip from "~/components/icons/hero/20/solid/IconPaperClip.vue";
 
 export default defineComponent({

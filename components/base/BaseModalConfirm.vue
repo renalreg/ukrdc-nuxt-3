@@ -40,7 +40,6 @@
 </template>
 
 <script lang="ts">
-
 import BaseModal from "~/components/base/BaseModal.vue";
 import { type ModalInterface } from "~/interfaces/modal";
 
@@ -79,10 +78,7 @@ export default defineComponent({
       default: null,
     },
   },
-  emits: [
-    "confirm",
-    "cancel"
-  ],
+  emits: ["confirm", "cancel"],
   setup(props, { emit }) {
     const confirmModal = ref<ModalInterface>();
 

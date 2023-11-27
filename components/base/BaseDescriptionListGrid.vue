@@ -7,8 +7,6 @@
 </template>
 
 <script lang="ts">
-
-
 export default defineComponent({
   props: {
     cols: {

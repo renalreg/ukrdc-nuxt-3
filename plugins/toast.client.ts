@@ -53,7 +53,7 @@ export default defineNuxtPlugin((_) => {
 
   return {
     provide: {
-      toast: toastProgrammatic
-    }
-  }
+      toast: toastProgrammatic,
+    },
+  };
 });

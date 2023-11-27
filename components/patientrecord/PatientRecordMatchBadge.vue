@@ -7,8 +7,6 @@
 </template>
 
 <script lang="ts">
-
-
 import IconExclamationCircle from "~/components/icons/hero/20/solid/IconExclamationCircle.vue";
 
 export default defineComponent({

@@ -145,7 +145,6 @@
 </template>
 
 <script lang="ts">
-
 import { removeElement } from "~/helpers/domUtils";
 
 import BaseToastIcon from "./BaseToastIcon.vue";

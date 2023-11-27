@@ -1,6 +1,6 @@
-import { OktaAuth } from '@okta/okta-auth-js'
-import OktaVue from '@okta/okta-vue'
-import { navigationGuard } from '@okta/okta-vue'
+import { OktaAuth } from "@okta/okta-auth-js";
+import OktaVue from "@okta/okta-vue";
+import { navigationGuard } from "@okta/okta-vue";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const runtimeConfig = useRuntimeConfig();
@@ -9,19 +9,19 @@ export default defineNuxtPlugin((nuxtApp) => {
   const oktaAuth = new OktaAuth({
     issuer: runtimeOptions.issuer,
     clientId: runtimeOptions.clientId,
-    redirectUri: window.location.origin + '/app/login/callback',
-    postLogoutRedirectUri: window.location.origin + '/app',
+    redirectUri: window.location.origin + "/app/login/callback",
+    postLogoutRedirectUri: window.location.origin + "/app",
     scopes: ["openid", "profile", "email", "offline_access"],
     responseType: "code",
     pkce: true,
-  })
+  });
 
   // Set up router navigation guard
   const router = useRouter();
-  router.beforeEach(navigationGuard)
+  router.beforeEach(navigationGuard);
 
   // Enable background service for token refresh
-  oktaAuth.start()
+  oktaAuth.start();
 
   nuxtApp.vueApp.use(OktaVue, { oktaAuth });
-})
+});

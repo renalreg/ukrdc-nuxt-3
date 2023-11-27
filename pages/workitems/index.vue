@@ -6,35 +6,31 @@
 
     <div class="mb-4 flex flex-col">
       <BaseDateRange v-model="dateRange" class="mb-4" />
-        <!-- Facility select -->
-        <div v-if="facilities.length > 1" class="flex mb-4">
-          <USelectMenu
-            searchable
-            class="flex-1"
-            size="lg"
-            v-model="selectedFacility"
-            :options="facilities"
-            value-attribute="id"
-            option-attribute="description"
-            :search-attributes="['description', 'id']"
-            placeholder="Select a sending facility"
-          />
-          <UButton
-            color="white"
-            variant="solid"
-            class="ml-2"
-            size="lg"
-            @click="selectedFacility = undefined"
-            label="Clear"
-          />
-        </div>
+      <!-- Facility select -->
+      <div v-if="facilities.length > 1" class="flex mb-4">
+        <USelectMenu
+          searchable
+          class="flex-1"
+          size="lg"
+          v-model="selectedFacility"
+          :options="facilities"
+          value-attribute="id"
+          option-attribute="description"
+          :search-attributes="['description', 'id']"
+          placeholder="Select a sending facility"
+        />
+        <UButton
+          color="white"
+          variant="solid"
+          class="ml-2"
+          size="lg"
+          @click="selectedFacility = undefined"
+          label="Clear"
+        />
+      </div>
       <div class="flex items-center">
         <div class="flex-grow">
-          <BaseTabsModel
-            v-model="currentTab"
-            :tabs="workItemStatusTabs"
-            :mini="true"
-          />
+          <BaseTabsModel v-model="currentTab" :tabs="workItemStatusTabs" :mini="true" />
         </div>
         <UButton
           class="flex-shrink"
@@ -48,7 +44,7 @@
       </div>
     </div>
 
-    <UCard :ui="{body: { padding: '' }}">
+    <UCard :ui="{ body: { padding: '' } }">
       <!-- Skeleton results -->
       <div v-if="fetchInProgress">
         <ul class="divide-y divide-gray-300">
@@ -58,12 +54,7 @@
       <!-- Real results -->
       <div v-else>
         <ul class="divide-y divide-gray-300">
-          <li
-            v-for="item in workitems"
-            :key="item.id"
-            :item="item"
-            class="hover:bg-gray-50"
-          >
+          <li v-for="item in workitems" :key="item.id" :item="item" class="hover:bg-gray-50">
             <NuxtLink :to="`/workitems/${item.id}`">
               <WorkItemsListItem :item="item" />
             </NuxtLink>
@@ -115,8 +106,7 @@ export default defineComponent({
     const { page, total, size } = usePagination();
     const { makeDateRange } = useDateRange();
     const { arrayQuery } = useQuery();
-    const { facilities, selectedFacility } =
-      useFacilities();
+    const { facilities, selectedFacility } = useFacilities();
     const { orderAscending, orderBy, toggleOrder } = useSortBy();
     const { workItemsApi } = useApi();
 
@@ -173,7 +163,7 @@ export default defineComponent({
       ],
       () => {
         getWorkitems();
-      }
+      },
     );
 
     return {

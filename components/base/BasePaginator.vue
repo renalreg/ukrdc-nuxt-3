@@ -27,14 +27,14 @@
           </UButton>
         </div>
       </div>
-      <UButton variant="solid" color="white" :class="{ invisible: page * size >= total }" @click="next()"> Next </UButton>
+      <UButton variant="solid" color="white" :class="{ invisible: page * size >= total }" @click="next()">
+        Next
+      </UButton>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
-
-
 type Pages = (number | "...")[];
 
 export default defineComponent({
@@ -67,11 +67,7 @@ export default defineComponent({
       default: true,
     },
   },
-  emits: [
-    "next",
-    "prev",
-    "jump"
-  ],
+  emits: ["next", "prev", "jump"],
   setup(props, { emit }) {
     function pagination(current: number, total: number): Pages {
       if (total <= 1) {

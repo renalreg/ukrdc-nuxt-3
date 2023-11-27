@@ -28,7 +28,7 @@ export default defineComponent({
 
     // Head
     useHead({
-      title: `Mirth message ${route.params.id}`
+      title: `Mirth message ${route.params.id}`,
     });
 
     // Data refs

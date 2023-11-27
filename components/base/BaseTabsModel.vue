@@ -32,7 +32,6 @@
 </template>
 
 <script lang="ts">
-
 import BaseSelect from "~/components/base/BaseSelect.vue";
 import { type ModelTabItem } from "~/interfaces/tabs";
 
@@ -65,9 +64,7 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: [
-    "update:modelValue"
-  ],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
     const selectEl = ref<HTMLFormElement>();
 

@@ -56,7 +56,7 @@ export default defineComponent({
 
     // Head
     useHead({
-      title: `Record ${route.params.id}`
+      title: `Record ${route.params.id}`,
     });
 
     // Navigation

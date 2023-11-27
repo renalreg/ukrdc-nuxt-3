@@ -3,10 +3,7 @@
   <UCard class="mb-4">
     <template #header>
       <div class="flex items-center gap-2">
-        <BaseMarkdownDescriptionTooltip
-          v-if="labelled2d"
-          :description-markdown="labelled2d.metadata.description"
-        />
+        <BaseMarkdownDescriptionTooltip v-if="labelled2d" :description-markdown="labelled2d.metadata.description" />
         <div class="flex-1">
           <div class="flex gap-2">
             <h2>{{ labelled2d ? labelled2d.metadata.title : "" }}</h2>
@@ -15,22 +12,10 @@
             <h6>{{ labelled2d ? labelled2d.metadata.summary : "" }}</h6>
           </div>
         </div>
-        <UButton
-          v-if="labelled2d"
-          color="white"
-          label="Export"
-          @click="exportData"
-        />
+        <UButton v-if="labelled2d" color="white" label="Export" @click="exportData" />
       </div>
     </template>
-    <BasePiePlot
-      v-if="labelled2d"
-      :id="id"
-      :x="labelled2d.data.x"
-      :y="labelled2d.data.y"
-      :text="text"
-      class="h-72"
-    />
+    <BasePiePlot v-if="labelled2d" :id="id" :x="labelled2d.data.x" :y="labelled2d.data.y" :text="text" class="h-72" />
     <SkelePlot v-else />
   </UCard>
 </template>
@@ -90,16 +75,10 @@ export default defineComponent({
   setup(props) {
     function exportData() {
       const rows: (string | number)[][] = [
-        [
-          props.labelled2d.metadata.axisTitles?.x || "x",
-          props.labelled2d.metadata.axisTitles?.y || "y",
-        ],
+        [props.labelled2d.metadata.axisTitles?.x || "x", props.labelled2d.metadata.axisTitles?.y || "y"],
       ];
       for (let i = 0; i < props.labelled2d.data.x.length; i++) {
-        rows.push([
-          props.labelled2d.data.x[i],
-          props.labelled2d.data.y[i] as number,
-        ]);
+        rows.push([props.labelled2d.data.x[i], props.labelled2d.data.y[i] as number]);
       }
 
       const blob = new Blob([buildCsv(rows)], {

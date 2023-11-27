@@ -31,11 +31,7 @@
       </div>
 
       <div class="flex flex-col gap-2 lg:flex-row">
-        <BaseCollapseHeader
-          v-model="advancedOpen"
-          class="flex-grow"
-          label="More Options"
-        ></BaseCollapseHeader>
+        <BaseCollapseHeader v-model="advancedOpen" class="flex-grow" label="More Options"></BaseCollapseHeader>
 
         <USelectMenu
           v-model="statuses"
@@ -44,23 +40,14 @@
           placeholder="Select status"
         />
 
-        <form
-          v-show="!nationalId"
-          class="flex"
-          @submit.prevent="nationalId = nationalIdSearchString.trim()"
-        >
+        <form v-show="!nationalId" class="flex" @submit.prevent="nationalId = nationalIdSearchString.trim()">
           <UButtonGroup size="sm" orientation="horizontal">
-            <UInput
-              v-model="nationalIdSearchString"
-              placeholder="Filter by Patient Number"
-            />
+            <UInput v-model="nationalIdSearchString" placeholder="Filter by Patient Number" />
             <UButton type="submit" color="white" label="Go" />
           </UButtonGroup>
         </form>
 
-        <UButton v-show="nationalId" size="sm" @click="nationalId = null"
-          >Show Results From All Patients</UButton
-        >
+        <UButton v-show="nationalId" size="sm" @click="nationalId = null">Show Results From All Patients</UButton>
 
         <UButton
           class="flex-shrink"
@@ -69,11 +56,7 @@
           variant="solid"
           size="sm"
           :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
-          :icon="
-            orderAscending
-              ? 'i-heroicons-bars-arrow-up-20-solid'
-              : 'i-heroicons-bars-arrow-down-20-solid'
-          "
+          :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
         />
       </div>
     </div>
@@ -91,14 +74,7 @@
         placeholder="Select a message channel"
       >
       </USelectMenu>
-      <UButton
-        color="white"
-        variant="solid"
-        class="ml-2"
-        size="lg"
-        @click="selectedChannel = undefined"
-        >Clear</UButton
-      >
+      <UButton color="white" variant="solid" class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>
     </div>
 
     <UCard :ui="{ body: { padding: '' } }">
@@ -167,8 +143,7 @@ export default defineComponent({
     const { stringQuery, arrayQuery } = useQuery();
 
     const { facilities, selectedFacility } = useFacilities();
-    const { channels, channelIds, channelLabels, selectedChannel } =
-      useChannels();
+    const { channels, channelIds, channelLabels, selectedChannel } = useChannels();
 
     const { orderAscending, orderBy, toggleOrder } = useSortBy();
     const { messagesApi } = useApi();
@@ -179,11 +154,7 @@ export default defineComponent({
     const nationalIdSearchString = ref<string>("");
 
     // Set initial date dateRange
-    const dateRange = makeDateRange(
-      isAdmin ? nowString(-30) : nowString(-365),
-      nowString(0),
-      true
-    );
+    const dateRange = makeDateRange(isAdmin ? nowString(-30) : nowString(-365), nowString(0), true);
 
     // Data refs
     const messages = ref<MessageSchema[]>();
@@ -240,7 +211,7 @@ export default defineComponent({
       ],
       () => {
         getMessages();
-      }
+      },
     );
 
     return {

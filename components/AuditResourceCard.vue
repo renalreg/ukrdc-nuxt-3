@@ -1,5 +1,5 @@
 <template>
-  <UCard :ui="{body: { padding: '' }}" class="px-2 py-1">
+  <UCard :ui="{ body: { padding: '' } }" class="px-2 py-1">
     <div class="flex">
       <h6 class="flex-grow">{{ resourceName }}</h6>
       <h6 class="flex-none">{{ identifier(1) }}</h6>
@@ -13,7 +13,6 @@
 
 <script lang="ts">
 import { type AuditEventSchema } from "@ukkidney/ukrdc-axios-ts";
-
 
 export default defineComponent({
   props: {

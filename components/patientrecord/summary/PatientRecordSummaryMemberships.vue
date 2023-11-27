@@ -18,7 +18,6 @@
 </template>
 
 <script lang="ts">
-
 import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseBadge from "~/components/base/BaseBadge.vue";

@@ -20,7 +20,6 @@
 </template>
 
 <script lang="ts">
-
 import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import { formatDate } from "~/helpers/dateUtils";

@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <UCard :ui="{body: { padding: '' }}">
+    <UCard :ui="{ body: { padding: '' } }">
       <!-- Skeleton results -->
       <div v-if="auditFetchInProgress">
         <ul v-if="auditFetchInProgress" class="divide-y divide-gray-300">

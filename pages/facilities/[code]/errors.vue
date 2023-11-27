@@ -6,15 +6,9 @@
         <h2>Records Currently Failing</h2>
         <div class="flex w-full">
           <div class="flex-grow">
-            <h5>
-              Records where the most recent message received failed to process
-              due to errors.
-            </h5>
+            <h5>Records where the most recent message received failed to process due to errors.</h5>
           </div>
-          <BaseCollapseHeader
-            v-model="advancedOpen"
-            label="More Options"
-          ></BaseCollapseHeader>
+          <BaseCollapseHeader v-model="advancedOpen" label="More Options"></BaseCollapseHeader>
         </div>
         <!-- More Options -->
         <div v-show="advancedOpen" class="mt-4 flex">
@@ -29,20 +23,12 @@
             placeholder="Select a message channel"
           >
           </USelectMenu>
-          <UButton
-            color="white"
-            variant="solid"
-            class="ml-2"
-            size="lg"
-            @click="selectedChannel = undefined"
+          <UButton color="white" variant="solid" class="ml-2" size="lg" @click="selectedChannel = undefined"
             >Clear</UButton
           >
         </div>
       </template>
-      <div
-        v-if="errorMessages && errorMessagesTotal == 0"
-        class="p-8 text-center"
-      >
+      <div v-if="errorMessages && errorMessagesTotal == 0" class="p-8 text-center">
         <p>No active failing records</p>
       </div>
       <div v-else>
@@ -52,12 +38,7 @@
         </ul>
         <!-- Real results -->
         <ul class="divide-y divide-gray-300">
-          <li
-            v-for="item in errorMessages"
-            :key="item.id"
-            :item="item"
-            class="hover:bg-gray-50"
-          >
+          <li v-for="item in errorMessages" :key="item.id" :item="item" class="hover:bg-gray-50">
             <NuxtLink :to="`/messages/${item.id}`">
               <MessagesListItem :item="item" />
             </NuxtLink>
@@ -79,10 +60,7 @@
 </template>
 
 <script lang="ts">
-import {
-  type FacilityDetailsSchema,
-  type MessageSchema,
-} from "@ukkidney/ukrdc-axios-ts";
+import { type FacilityDetailsSchema, type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
 import { type PlotDatum } from "plotly.js-dist-min";
 
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";

@@ -10,11 +10,7 @@
         </div>
         <div>
           <h5 v-if="patientDocument">
-            {{
-              patientDocument.documenttime
-                ? formatDate(patientDocument.documenttime)
-                : "Unknown date"
-            }}
+            {{ patientDocument.documenttime ? formatDate(patientDocument.documenttime) : "Unknown date" }}
           </h5>
           <USkeleton v-else class="h-6 w-1/3" />
         </div>
@@ -23,73 +19,46 @@
         <BaseDescriptionListGridItem>
           <dt>Entered At</dt>
           <dd v-if="patientDocument">
-            {{
-              patientDocument.enteredatdesc ||
-              patientDocument.enteredatcode ||
-              "Unknown Facility"
-            }}
+            {{ patientDocument.enteredatdesc || patientDocument.enteredatcode || "Unknown Facility" }}
           </dd>
           <USkeleton v-else class="h-6 w-1/2" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Entered By</dt>
           <dd v-if="patientDocument">
-            {{
-              patientDocument.enteredbydesc ||
-              patientDocument.enteredbycode ||
-              "Unknown Person"
-            }}
+            {{ patientDocument.enteredbydesc || patientDocument.enteredbycode || "Unknown Person" }}
           </dd>
           <USkeleton v-else class="h-6 w-1/2" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Clinician:</dt>
           <dd v-if="patientDocument">
-            {{
-              patientDocument.cliniciandesc ||
-              patientDocument.cliniciancode ||
-              "Unknown Clinician"
-            }}
+            {{ patientDocument.cliniciandesc || patientDocument.cliniciancode || "Unknown Clinician" }}
           </dd>
           <USkeleton v-else class="h-6 w-1/2" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Document Date</dt>
           <dd v-if="patientDocument">
-            {{
-              patientDocument.documenttime
-                ? formatDate(patientDocument.documenttime)
-                : "Unknown date"
-            }}
+            {{ patientDocument.documenttime ? formatDate(patientDocument.documenttime) : "Unknown date" }}
           </dd>
           <USkeleton v-else class="h-6 w-1/3" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Creation Date</dt>
           <dd v-if="patientDocument">
-            {{
-              patientDocument.creationDate
-                ? formatDate(patientDocument.creationDate)
-                : "Unknown date"
-            }}
+            {{ patientDocument.creationDate ? formatDate(patientDocument.creationDate) : "Unknown date" }}
           </dd>
           <USkeleton v-else class="h-6 w-1/3" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Update Date</dt>
           <dd v-if="patientDocument">
-            {{
-              patientDocument.updateDate
-                ? formatDate(patientDocument.updateDate)
-                : "Unknown date"
-            }}
+            {{ patientDocument.updateDate ? formatDate(patientDocument.updateDate) : "Unknown date" }}
           </dd>
           <USkeleton v-else class="h-6 w-1/3" />
         </BaseDescriptionListGridItem>
-        <BaseDescriptionListGridItem
-          v-if="patientDocument && patientDocument.notetext"
-          class="sm:col-span-3"
-        >
+        <BaseDescriptionListGridItem v-if="patientDocument && patientDocument.notetext" class="sm:col-span-3">
           <dt>Note</dt>
           <dd class="whitespace-pre-wrap font-mono">
             {{ patientDocument.notetext }}
@@ -97,11 +66,7 @@
         </BaseDescriptionListGridItem>
         <UCard v-if="patientDocument" class="mt-2 sm:col-span-2">
           <BaseAttachment :filename="filename || 'Unknown filename'">
-            <UButton variant="link"
-              @click="downloadPatientRecordDocument()"
-            >
-              Download
-            </UButton>
+            <UButton variant="link" @click="downloadPatientRecordDocument()"> Download </UButton>
           </BaseAttachment>
         </UCard>
       </BaseDescriptionListGrid>
@@ -110,10 +75,7 @@
 </template>
 
 <script lang="ts">
-import {
-  type DocumentSchema,
-  type PatientRecordSchema,
-} from "@ukkidney/ukrdc-axios-ts";
+import { type DocumentSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseAttachment from "~/components/base/BaseAttachment.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
@@ -147,10 +109,7 @@ export default defineComponent({
       if (!patientDocument.value) {
         return undefined;
       }
-      return (
-        patientDocument.value.filename ||
-        `${patientDocument.value.documentname}.txt`
-      );
+      return patientDocument.value.filename || `${patientDocument.value.documentname}.txt`;
     });
 
     // Data fetching
@@ -178,15 +137,11 @@ export default defineComponent({
           {
             method: "GET",
             responseType: "blob",
-          }
+          },
         )
         .then((response) => {
           const blob = new Blob([response.data]);
-          saveAs(
-            blob,
-            patientDocument.value?.filename ||
-              `${patientDocument.value?.documentname}.txt`
-          );
+          saveAs(blob, patientDocument.value?.filename || `${patientDocument.value?.documentname}.txt`);
         });
     }
 

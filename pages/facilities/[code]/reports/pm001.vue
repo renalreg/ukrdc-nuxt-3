@@ -10,7 +10,7 @@
 
     <!-- If loading -->
     <div v-if="fetchInProgress">
-      <UCard :ui="{body: { padding: '' }}">
+      <UCard :ui="{ body: { padding: '' } }">
         <!-- Skeleton results -->
         <ul class="divide-y divide-gray-300">
           <BaseSkeleListItem v-for="n in 10" :key="n" />
@@ -18,7 +18,7 @@
       </UCard>
     </div>
     <div v-else>
-      <UCard :ui="{body: { padding: '' }}">
+      <UCard :ui="{ body: { padding: '' } }">
         <!-- Real results -->
         <ul class="divide-y divide-gray-300">
           <li v-for="record in records" :key="`record-${record.pid}`" class="hover:bg-gray-50">

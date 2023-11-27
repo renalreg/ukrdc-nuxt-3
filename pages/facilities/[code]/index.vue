@@ -37,9 +37,7 @@
               </div>
             </div>
             <template #footer>
-              <p class="text-sm text-gray-600">
-                Total records ever stored in the UKRDC for this facility
-              </p>
+              <p class="text-sm text-gray-600">Total records ever stored in the UKRDC for this facility</p>
             </template>
           </UCard>
 
@@ -54,27 +52,17 @@
                   <h1
                     class="flex-grow"
                     :class="
-                      (facility.statistics.patientsReceivingMessageError || 0) >
-                      0
-                        ? 'text-red-600'
-                        : 'text-green-700'
+                      (facility.statistics.patientsReceivingMessageError || 0) > 0 ? 'text-red-600' : 'text-green-700'
                     "
                   >
                     {{ facility.statistics.patientsReceivingMessageError }}
                   </h1>
-                  <NuxtLink
-                    class="hover:underline"
-                    :to="`/facilities/${facility.id}/errors`"
-                  >
-                    Show errors
-                  </NuxtLink>
+                  <NuxtLink class="hover:underline" :to="`/facilities/${facility.id}/errors`"> Show errors </NuxtLink>
                 </div>
               </div>
             </div>
             <template #footer>
-              <p class="text-sm text-gray-600">
-                Active records currently failing due to errors
-              </p>
+              <p class="text-sm text-gray-600">Active records currently failing due to errors</p>
             </template>
           </UCard>
         </div>
@@ -102,19 +90,11 @@
               <td class="font-medium text-gray-900">{{ item.name }}</td>
               <td class="hidden md:table-cell">
                 <div v-if="item.historic" class="flex items-center">
-                  <IconCircle
-                    v-if="item.historic"
-                    class="inline text-orange-400"
-                  />
+                  <IconCircle v-if="item.historic" class="inline text-orange-400" />
                   <p>Historic</p>
                 </div>
                 <div v-else class="flex items-center">
-                  <IconCircle
-                    class="inline"
-                    :class="
-                      extracts[item.key] > 0 ? 'text-green-600' : 'text-red-700'
-                    "
-                  />
+                  <IconCircle class="inline" :class="extracts[item.key] > 0 ? 'text-green-600' : 'text-red-700'" />
                   <p>{{ extracts[item.key] > 0 ? "Enabled" : "Unused" }}</p>
                 </div>
               </td>
@@ -133,17 +113,11 @@
 
           <ul role="list" class="-my-5 divide-y divide-gray-300">
             <li v-if="hasPermission('ukrdc:messages:read')" class="py-5">
-              <div
-                v-if="!facility.lastMessageReceivedAt"
-                class="flex items-center"
-              >
+              <div v-if="!facility.lastMessageReceivedAt" class="flex items-center">
                 <IconCircle class="inline text-red-600" />
                 <h3>Data flow inactive</h3>
               </div>
-              <div
-                v-else-if="facilityLastMessageOver48(facility)"
-                class="flex items-center"
-              >
+              <div v-else-if="facilityLastMessageOver48(facility)" class="flex items-center">
                 <IconCircle class="inline text-orange-400" />
                 <h3>Data flow warning</h3>
               </div>
@@ -160,20 +134,11 @@
                 <IconCircle class="inline text-red-600" />
                 <h3>Statistics unavailable</h3>
               </div>
-              <p class="mt-1">
-                Statistics are based on UKRDC data, and PatientView records are
-                not included.
-              </p>
-              <p class="mt-1">
-                You currently have no UKRDC records, and so statistics are
-                currently unavailable.
-              </p>
+              <p class="mt-1">Statistics are based on UKRDC data, and PatientView records are not included.</p>
+              <p class="mt-1">You currently have no UKRDC records, and so statistics are currently unavailable.</p>
               <p class="mt-1">
                 For more information, please refer to our
-                <a
-                  href="https://renalregistry.atlassian.net/wiki/spaces/UD/overview"
-                  target="_blank"
-                >
+                <a href="https://renalregistry.atlassian.net/wiki/spaces/UD/overview" target="_blank">
                   UKRDC feed documentation.
                 </a>
               </p>
@@ -183,13 +148,8 @@
                 <IconCircle class="inline text-indigo-600" />
                 <h3>UKRDC statistics</h3>
               </div>
-              <p class="mt-1">
-                Statistics are based on UKRDC data, and PatientView records are
-                not included.
-              </p>
-              <p class="mt-1">
-                You currently have {{ extracts.ukrdc }} UKRDC records.
-              </p>
+              <p class="mt-1">Statistics are based on UKRDC data, and PatientView records are not included.</p>
+              <p class="mt-1">You currently have {{ extracts.ukrdc }} UKRDC records.</p>
             </li>
           </ul>
         </UCard>
@@ -202,27 +162,17 @@
           <ul role="list" class="-my-5 divide-y divide-gray-300">
             <li class="py-5">
               <div class="flex items-center">
-                <IconCircle
-                  v-if="facility.dataFlow.pkbOut"
-                  class="inline text-green-600"
-                />
+                <IconCircle v-if="facility.dataFlow.pkbOut" class="inline text-green-600" />
                 <IconCircle v-else class="inline text-red-600" />
                 <h3>PKB Outbound</h3>
               </div>
               <p class="mt-1">
                 Data sending to
-                <a
-                  class="hover:underline"
-                  href="https://patientsknowbest.com/"
-                  target="blank"
-                >
-                  Patients Know Best
-                </a>
+                <a class="hover:underline" href="https://patientsknowbest.com/" target="blank"> Patients Know Best </a>
                 is {{ facility.dataFlow.pkbOut ? "enabled" : "disabled" }}.
               </p>
               <p v-if="facility.dataFlow.pkbOut">
-                Data will only be sent to PKB for patients with a PKB membership
-                record.
+                Data will only be sent to PKB for patients with a PKB membership record.
               </p>
             </li>
           </ul>
@@ -233,10 +183,7 @@
 </template>
 
 <script lang="ts">
-import {
-  type FacilityDetailsSchema,
-  type FacilityExtractsSchema,
-} from "@ukkidney/ukrdc-axios-ts";
+import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseAlertError from "~/components/base/alert/BaseAlertError.vue";
 import BaseTable from "~/components/base/BaseTable.vue";
@@ -277,10 +224,7 @@ export default defineComponent({
       if (!props.facility.lastMessageReceivedAt) {
         return "No data files received from this facility in over a year";
       } else {
-        return `Latest data file recieved on ${formatDate(
-          props.facility.lastMessageReceivedAt,
-          true
-        )}`;
+        return `Latest data file recieved on ${formatDate(props.facility.lastMessageReceivedAt, true)}`;
       }
     });
 

@@ -24,8 +24,6 @@
 </template>
 
 <script lang="ts">
-
-
 export default defineComponent({
   props: {
     label: {
@@ -44,9 +42,7 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: [
-    "update:modelValue"
-  ],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
     function toggle() {
       emit("update:modelValue", !props.modelValue);

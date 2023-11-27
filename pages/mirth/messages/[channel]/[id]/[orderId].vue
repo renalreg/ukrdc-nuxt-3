@@ -59,15 +59,9 @@
         </div>
       </div>
 
-      <div
-        v-for="(connectorMessageData, type) in availableconnectorMessageData"
-        :key="type"
-      >
+      <div v-for="(connectorMessageData, type) in availableconnectorMessageData" :key="type">
         <UCard v-if="currentTab == type">
-          <BaseCodeReader
-            :content="connectorMessageData.content || ''"
-            :content-type="connectorMessageData.dataType"
-          />
+          <BaseCodeReader :content="connectorMessageData.content || ''" :content-type="connectorMessageData.dataType" />
         </UCard>
       </div>
     </div>
@@ -142,43 +136,35 @@ export default defineComponent({
     });
 
     // Handle connectorMessage and metadata
-    const availableconnectorMessageData = computed<ConnectorMessageDataTabs>(
-      () => {
-        const tabs = {} as ConnectorMessageDataTabs;
-        if (connectorMessage.value) {
-          if (connectorMessage.value.raw) {
-            tabs.raw = connectorMessage.value.raw;
-          }
-          if (connectorMessage.value.encoded) {
-            tabs.encoded = connectorMessage.value.encoded;
-          }
-          if (connectorMessage.value.sent) {
-            tabs.sent = connectorMessage.value.sent;
-          }
-          if (connectorMessage.value.response) {
-            tabs.response = connectorMessage.value.response;
-          }
+    const availableconnectorMessageData = computed<ConnectorMessageDataTabs>(() => {
+      const tabs = {} as ConnectorMessageDataTabs;
+      if (connectorMessage.value) {
+        if (connectorMessage.value.raw) {
+          tabs.raw = connectorMessage.value.raw;
         }
-        return tabs;
+        if (connectorMessage.value.encoded) {
+          tabs.encoded = connectorMessage.value.encoded;
+        }
+        if (connectorMessage.value.sent) {
+          tabs.sent = connectorMessage.value.sent;
+        }
+        if (connectorMessage.value.response) {
+          tabs.response = connectorMessage.value.response;
+        }
       }
-    );
+      return tabs;
+    });
 
     const nonNullMetadata = computed<{ [key: string]: string }>(() => {
       if (connectorMessage.value?.metaDataMap) {
-        return Object.fromEntries(
-          Object.entries(connectorMessage.value.metaDataMap).filter(
-            ([_, v]) => v != null
-          )
-        );
+        return Object.fromEntries(Object.entries(connectorMessage.value.metaDataMap).filter(([_, v]) => v != null));
       } else {
         return {};
       }
     });
 
     const errorMessage = computed(() => {
-      return connectorMessage.value
-        ? connectorMessageError(connectorMessage.value)
-        : null;
+      return connectorMessage.value ? connectorMessageError(connectorMessage.value) : null;
     });
 
     return {

@@ -15,7 +15,7 @@ import {
   WorkItemsApi,
 } from "@ukkidney/ukrdc-axios-ts";
 import axios from "axios";
-import useAuth from './useAuth';
+import useAuth from "./useAuth";
 
 interface PydanticError {
   loc: string[];
@@ -34,9 +34,9 @@ function decodePydanticErrors(errors: PydanticError[]) {
 
 export default function () {
   const { $toast } = useNuxtApp();
-  const { $okta }= useAuth();
+  const { $okta } = useAuth();
 
-  const runtimeConfig = useRuntimeConfig()
+  const runtimeConfig = useRuntimeConfig();
 
   const defaultHeaders = {
     Accept: "application/json",
@@ -92,15 +92,19 @@ export default function () {
       // We're assuming here that the API server will log the related error, and so logging
       // here just leads to duplicate messages.
       if (e.response?.status === 0 || e.response?.status === 500) {
-        showError({ fatal: true, statusCode: 500, message: "An internal error occured. Our developers have been notified." });
-        throw e
+        showError({
+          fatal: true,
+          statusCode: 500,
+          message: "An internal error occured. Our developers have been notified.",
+        });
+        throw e;
       }
 
       // Build message and redirect to 422 without propagating
       if (e.response?.status === 422) {
         const msg = decodePydanticErrors(e.response.data.detail);
         showError({ fatal: true, statusCode: 422, message: msg });
-        throw e
+        throw e;
       }
 
       // All other error status codes

@@ -12,8 +12,6 @@
 </template>
 
 <script lang="ts">
-
-
 import IconInformationCircle from "~/components/icons/hero/20/solid/IconInformationCircle.vue";
 
 export default defineComponent({

@@ -89,7 +89,6 @@
 </template>
 
 <script lang="ts">
-
 import { type ExtendedCodeSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
@@ -110,7 +109,7 @@ export default defineComponent({
 
     // Head
     useHead({
-      title: `Code ${route.params.id}`
+      title: `Code ${route.params.id}`,
     });
 
     // Data refs

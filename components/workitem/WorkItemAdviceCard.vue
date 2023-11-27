@@ -12,17 +12,15 @@
       </li>
       <li v-if="workItemAdvices.includes(4)">
         <p>
-          You may need to use PatientView, RaDaR, or DemoGraphicGenerator.exe to
-          issue a demographic update before closing this Work Item.
+          You may need to use PatientView, RaDaR, or DemoGraphicGenerator.exe to issue a demographic update before
+          closing this Work Item.
         </p>
       </li>
       <li v-if="workItemAdvices.includes(5)">
         <p class="mb-1">
           Check the
-          <span class="font-bold text-indigo-600">Proposed Merge</span> below,
-          then click
-          <span class="font-bold text-yellow-600">Merge Master Records</span> if
-          the link is valid.
+          <span class="font-bold text-indigo-600">Proposed Merge</span> below, then click
+          <span class="font-bold text-yellow-600">Merge Master Records</span> if the link is valid.
         </p>
         <p>You may need to issue demographic updates before merging records.</p>
       </li>
@@ -34,8 +32,7 @@
       </li>
       <li v-if="workItemAdvices.includes(7)">
         <p>
-          A previous merge may have been completed but demographics on this
-          Person record were not updated to match.
+          A previous merge may have been completed but demographics on this Person record were not updated to match.
         </p>
       </li>
       <li v-if="workItemAdvices.includes(9)">
@@ -60,18 +57,13 @@
         </p>
       </li>
       <li v-if="workItemAdvices.includes(12)">
+        <p>The records associated with this Work Item may have already been merged.</p>
         <p>
-          The records associated with this Work Item may have already been
-          merged.
-        </p>
-        <p>
-          The destination record is missing, meaning it has either been deleted,
-          or merged into another record already.
+          The destination record is missing, meaning it has either been deleted, or merged into another record already.
         </p>
         <p>
           This Work item can likely be
-          <span class="font-bold text-green-600">closed</span> without further
-          action.
+          <span class="font-bold text-green-600">closed</span> without further action.
         </p>
       </li>
     </ul>
@@ -84,10 +76,7 @@
 </template>
 
 <script lang="ts">
-import {
-  type WorkItemExtendedSchema,
-  type WorkItemSchema,
-} from "@ukkidney/ukrdc-axios-ts";
+import { type WorkItemExtendedSchema, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import {
   collectionIsUnresolved,

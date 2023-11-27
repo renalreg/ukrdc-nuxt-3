@@ -28,8 +28,6 @@
 </template>
 
 <script lang="ts">
-
-
 export default defineComponent({
   props: {
     modelValue: {
@@ -47,9 +45,7 @@ export default defineComponent({
       default: "Item",
     },
   },
-  emits: [
-    "update:modelValue"
-  ],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
     function next(): void {
       emit("update:modelValue", props.modelValue + 1);

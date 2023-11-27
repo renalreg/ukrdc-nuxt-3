@@ -1,17 +1,17 @@
 <template>
   <div>
     <!-- Multiple UKRDC IDs -->
-    <UCard :ui="{body: { padding: '' }}" v-if="ukrdcIdGroup" class="mb-4">
+    <UCard :ui="{ body: { padding: '' } }" v-if="ukrdcIdGroup" class="mb-4">
       <EMPIMultipleIDItem :group="ukrdcIdGroup" heading="Multiple UKRDC IDs" />
     </UCard>
 
     <!-- Related Work Items card -->
-    <UCard :ui="{body: { padding: '' }}" class="mt-4">
+    <UCard :ui="{ body: { padding: '' } }" class="mt-4">
       <template #header>
         <div class="flex items-center">
-        <h2 class="flex-grow">Work Items</h2>
-        <BaseTabsModel v-model="currentWorkItemStatusTab" :tabs="workItemStatusTabs" :mini="true" />
-      </div>
+          <h2 class="flex-grow">Work Items</h2>
+          <BaseTabsModel v-model="currentWorkItemStatusTab" :tabs="workItemStatusTabs" :mini="true" />
+        </div>
       </template>
       <!-- Skeleton results -->
       <ul v-if="workItemsFetchInProgress" class="divide-y divide-gray-300">
@@ -32,13 +32,13 @@
 
     <!-- Related errors card -->
     <!-- Skeleton results -->
-    <UCard :ui="{body: { padding: '' }}" v-if="!relatedErrors" class="mt-4">
+    <UCard :ui="{ body: { padding: '' } }" v-if="!relatedErrors" class="mt-4">
       <ul class="divide-y divide-gray-300">
         <BaseSkeleListItem v-for="n in 5" :key="n" />
       </ul>
     </UCard>
     <!-- Real results -->
-    <UCard :ui="{body: { padding: '' }}" v-if="relatedErrors && relatedErrors.length > 0" class="mt-4">
+    <UCard :ui="{ body: { padding: '' } }" v-if="relatedErrors && relatedErrors.length > 0" class="mt-4">
       <template #header>
         <h2>Record Errors</h2>
       </template>

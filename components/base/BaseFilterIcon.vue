@@ -5,8 +5,6 @@
 </template>
 
 <script lang="ts">
-
-
 import IconFunnel from "~/components/icons/hero/20/solid/IconFunnel.vue";
 
 export default defineComponent({
@@ -20,8 +18,6 @@ export default defineComponent({
       default: true,
     },
   },
-  emits: [
-    "toggle"
-  ],
+  emits: ["toggle"],
 });
 </script>

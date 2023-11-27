@@ -22,7 +22,6 @@
 </template>
 
 <script lang="ts">
-
 import { FacilityDetailsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import QuickLink from "~/components/QuickLink.vue";

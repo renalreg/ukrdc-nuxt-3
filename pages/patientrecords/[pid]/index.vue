@@ -6,11 +6,7 @@
         <BaseDescriptionListGridItem>
           <dt>Names</dt>
           <dd>
-            <p
-              v-for="item in record.patient?.names || []"
-              :key="item.given + item.family"
-              class="sensitive"
-            >
+            <p v-for="item in record.patient?.names || []" :key="item.given + item.family" class="sensitive">
               {{ item.given }} {{ item.family }}
             </p>
           </dd>
@@ -19,46 +15,29 @@
           <dt>Gender</dt>
           <dd class="sensitive flex items-center gap-2">
             <div>{{ formatGender(record.patient.gender) }}</div>
-            <PatientRecordMatchBadge
-              v-if="genderMatches !== null"
-              :verified="genderMatches"
-            />
+            <PatientRecordMatchBadge v-if="genderMatches !== null" :verified="genderMatches" />
           </dd>
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Ethnicity</dt>
           <dd class="sensitive">
-            {{
-              record.patient.ethnicGroupDescription ||
-              record.patient.ethnicGroupCode ||
-              "Unknown"
-            }}
+            {{ record.patient.ethnicGroupDescription || record.patient.ethnicGroupCode || "Unknown" }}
           </dd>
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Date of Birth</dt>
           <dd class="sensitive flex items-center gap-2">
             <div>{{ formatDate(record.patient.birthTime, false) }}</div>
-            <PatientRecordMatchBadge
-              v-if="birthTimeMatches !== null"
-              :verified="birthTimeMatches"
-            />
+            <PatientRecordMatchBadge v-if="birthTimeMatches !== null" :verified="birthTimeMatches" />
           </dd>
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Date of Death</dt>
           <dd class="sensitive flex items-center gap-2">
             <div>
-              {{
-                record.patient.deathTime
-                  ? formatDate(record.patient.deathTime, false)
-                  : "N/A"
-              }}
+              {{ record.patient.deathTime ? formatDate(record.patient.deathTime, false) : "N/A" }}
             </div>
-            <PatientRecordMatchBadge
-              v-if="deathTimeMatches !== null"
-              :verified="deathTimeMatches"
-            />
+            <PatientRecordMatchBadge v-if="deathTimeMatches !== null" :verified="deathTimeMatches" />
           </dd>
         </BaseDescriptionListGridItem>
       </BaseDescriptionListGrid>
@@ -66,10 +45,7 @@
 
     <!-- Record message banners -->
     <NuxtLink :to="`/patientrecords/${record.pid}/messages`">
-      <LatestMessageAlert
-        :message="latestMessage || undefined"
-        :is-loading="latestMessageIsLoading"
-      />
+      <LatestMessageAlert :message="latestMessage || undefined" :is-loading="latestMessageIsLoading" />
     </NuxtLink>
 
     <!-- Main content container-->
@@ -83,10 +59,7 @@
         <!-- Record numbers -->
         <div class="mb-4">
           <h4 class="mb-3">Patient Numbers</h4>
-          <PatientRecordSummaryNumbers
-            class="patient-infocard-ul"
-            :record="record"
-          />
+          <PatientRecordSummaryNumbers class="patient-infocard-ul" :record="record" />
         </div>
         <!-- PV Data -->
         <div v-if="record.pvdata" class="col-span-3 mb-4 sm:col-span-2">
@@ -94,55 +67,28 @@
           <PatientRecordSummaryPVData :record="record" />
         </div>
         <!-- Addresses-->
-        <div
-          v-if="
-            record.patient &&
-            record.patient.addresses &&
-            record.patient.addresses.length > 0
-          "
-          class="mb-4"
-        >
+        <div v-if="record.patient && record.patient.addresses && record.patient.addresses.length > 0" class="mb-4">
           <h4 class="mb-3">Addresses</h4>
-          <PatientRecordSummaryAddresses
-            class="patient-infocard-ul"
-            :record="record"
-          />
+          <PatientRecordSummaryAddresses class="patient-infocard-ul" :record="record" />
         </div>
         <!-- Programme memberships-->
-        <div
-          v-if="
-            record.programMemberships && record.programMemberships.length > 0
-          "
-          class="mb-4"
-        >
+        <div v-if="record.programMemberships && record.programMemberships.length > 0" class="mb-4">
           <h4 class="mb-3">Program Memberships</h4>
-          <PatientRecordSummaryMemberships
-            class="patient-infocard-ul"
-            :record="record"
-          />
+          <PatientRecordSummaryMemberships class="patient-infocard-ul" :record="record" />
         </div>
         <!-- Family doctor-->
         <div v-if="record.patient && record.patient.familydoctor" class="mb-4">
           <h4 class="mb-3">Family Doctor</h4>
-          <PatientRecordSummaryFamilyDoctor
-            class="patient-infocard-ul"
-            :record="record"
-          />
+          <PatientRecordSummaryFamilyDoctor class="patient-infocard-ul" :record="record" />
         </div>
       </div>
       <!-- Related records -->
-      <UCard :ui="{body: { padding: '' }}" class="!overflow-visible col-span-3 md:col-span-2 h-fit">
+      <UCard :ui="{ body: { padding: '' } }" class="!overflow-visible col-span-3 md:col-span-2 h-fit">
         <template #header>
           <h2>Related Records</h2>
-          <p class="label">
-            All records, including data feeds and memberships, for this patient
-          </p>
+          <p class="label">All records, including data feeds and memberships, for this patient</p>
         </template>
-        <PatientRecordsGroupedList
-          v-if="related"
-          :records="related"
-          @refresh="refreshRecords"
-        />
+        <PatientRecordsGroupedList v-if="related" :records="related" @refresh="refreshRecords" />
         <ul v-else class="divide-y divide-gray-300">
           <BaseSkeleListItem v-for="n in 5" :key="n" />
         </ul>
@@ -269,9 +215,7 @@ export default defineComponent({
     const birthTimeMatches = computed<Boolean | null>(() => {
       if (related.value) {
         for (const relatedRecord of related.value) {
-          if (
-            relatedRecord.patient?.birthTime !== props.record.patient?.birthTime
-          ) {
+          if (relatedRecord.patient?.birthTime !== props.record.patient?.birthTime) {
             return false;
           }
         }
@@ -283,9 +227,7 @@ export default defineComponent({
     const deathTimeMatches = computed<Boolean | null>(() => {
       if (related.value) {
         for (const relatedRecord of related.value) {
-          if (
-            relatedRecord.patient?.deathTime !== props.record.patient?.deathTime
-          ) {
+          if (relatedRecord.patient?.deathTime !== props.record.patient?.deathTime) {
             return false;
           }
         }

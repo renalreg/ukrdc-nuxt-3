@@ -3,8 +3,8 @@
     <UCard class="mb-6">
       <div v-if="facilityStatsDialysis">
         Statistics calulated from a population of
-        <b>{{ facilityStatsDialysis.all.metadata.population }}</b> patients,
-        from {{ formatDate(facilityStatsDialysis.all.metadata.fromTime) }} to
+        <b>{{ facilityStatsDialysis.all.metadata.population }}</b> patients, from
+        {{ formatDate(facilityStatsDialysis.all.metadata.fromTime) }} to
         {{ formatDate(facilityStatsDialysis.all.metadata.toTime) }}
       </div>
       <USkeleton v-else class="h-8 w-2/3" />
@@ -15,9 +15,7 @@
         id="allPatientsHomeTherapiesPlot"
         :labelled2d="facilityStatsDialysis?.all.allPatientsHomeTherapies"
         :export-file-name="`incident-initial-access-${facility.id}`"
-        :text="
-          facilityStatsDialysis?.all.allPatientsHomeTherapies?.metadata?.populationSize?.toString()
-        "
+        :text="facilityStatsDialysis?.all.allPatientsHomeTherapies?.metadata?.populationSize?.toString()"
       />
       <Labelled2dBarPlot
         id="incentreDialysisFrequencyPlot"
@@ -36,17 +34,13 @@
         id="incidentHomeTherapiesPlot"
         :labelled2d="facilityStatsDialysis?.all.incidentHomeTherapies"
         :export-file-name="`incident-home-therapies-${facility.id}`"
-        :text="
-          facilityStatsDialysis?.all.incidentHomeTherapies?.metadata?.populationSize?.toString()
-        "
+        :text="facilityStatsDialysis?.all.incidentHomeTherapies?.metadata?.populationSize?.toString()"
       />
       <Labelled2dPiePlot
         id="incidentInitialAccessPlot"
         :labelled2d="facilityStatsDialysis?.all.incidentInitialAccess"
         :export-file-name="`incident-initial-access-${facility.id}`"
-        :text="
-          facilityStatsDialysis?.all.incidentInitialAccess?.metadata?.populationSize?.toString()
-        "
+        :text="facilityStatsDialysis?.all.incidentInitialAccess?.metadata?.populationSize?.toString()"
       />
     </div>
 
@@ -57,9 +51,7 @@
         id="prevalentHomeTherapiesPlot"
         :labelled2d="facilityStatsDialysis?.all.prevalentHomeTherapies"
         :export-file-name="`prevalent-home-therapies-${facility.id}`"
-        :text="
-          facilityStatsDialysis?.all.prevalentHomeTherapies?.metadata?.populationSize?.toString()
-        "
+        :text="facilityStatsDialysis?.all.prevalentHomeTherapies?.metadata?.populationSize?.toString()"
       />
     </div>
   </div>

@@ -4,9 +4,7 @@
       <div class="flex-grow pl-2">
         <div>
           <h2 v-if="heading">{{ heading }}</h2>
-          <h5 v-if="group && group.groupId">
-            Record Group {{ group.groupId }}
-          </h5>
+          <h5 v-if="group && group.groupId">Record Group {{ group.groupId }}</h5>
         </div>
       </div>
       <div class="flex-shrink">
@@ -47,9 +45,7 @@
           <MasterRecordsListItem
             :item="item.masterRecord"
             :details-label="item.lastUpdated ? 'Last checked' : undefined"
-            :details-value="
-              item.lastUpdated ? formatDate(item.lastUpdated) : undefined
-            "
+            :details-value="item.lastUpdated ? formatDate(item.lastUpdated) : undefined"
           />
         </NuxtLink>
       </li>

@@ -51,8 +51,7 @@
 </template>
 
 <script lang="ts">
-
-import { MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseCardDescriptionItem from "~/components/base/BaseCardDescriptionItem.vue";
 import BaseCardDescriptionList from "~/components/base/BaseCardDescriptionList.vue";

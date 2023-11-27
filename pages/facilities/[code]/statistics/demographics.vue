@@ -1,11 +1,11 @@
 <template>
   <div>
     <UCard class="mb-6">
-        <div v-if="facilityStatsDemographics">
-          Demographic statistics calulated from a population of
-          <b>{{ facilityStatsDemographics.metadata.population }}</b> patients.
-        </div>
-        <USkeleton v-else class="h-8 w-1/2" />
+      <div v-if="facilityStatsDemographics">
+        Demographic statistics calulated from a population of
+        <b>{{ facilityStatsDemographics.metadata.population }}</b> patients.
+      </div>
+      <USkeleton v-else class="h-8 w-1/2" />
     </UCard>
 
     <Labelled2dBarPlot
@@ -31,7 +31,11 @@
 </template>
 
 <script lang="ts">
-import { type DemographicsStats, type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type DemographicsStats,
+  type FacilityDetailsSchema,
+  type FacilityExtractsSchema,
+} from "@ukkidney/ukrdc-axios-ts";
 
 import Labelled2dBarPlot from "~/components/plots/stats/Labelled2dBarPlot.vue";
 import Labelled2dPiePlot from "~/components/plots/stats/Labelled2dPiePlot.vue";

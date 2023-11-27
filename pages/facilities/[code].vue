@@ -41,7 +41,7 @@ export default defineComponent({
 
     // Head
     useHead({
-      title: `${route.params.code}`
+      title: `${route.params.code}`,
     });
 
     // URL parameters

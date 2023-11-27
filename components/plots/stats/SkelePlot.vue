@@ -8,7 +8,6 @@
 </template>
 
 <script lang="ts">
-
 import useInterval from "~/composables/useInterval";
 
 export default defineComponent({

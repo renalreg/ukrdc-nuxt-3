@@ -56,10 +56,7 @@ export default defineComponent({
     };
 
     const errorTitle = computed(() => {
-      if (
-        props.error.statusCode &&
-        props.error.statusCode in friendlyErrorStatus
-      ) {
+      if (props.error.statusCode && props.error.statusCode in friendlyErrorStatus) {
         return friendlyErrorStatus[props.error.statusCode] || "Error";
       }
       return "An unknown error occured";

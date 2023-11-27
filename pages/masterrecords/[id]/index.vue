@@ -11,10 +11,7 @@
                 {{ record.givenname?.toLowerCase() }}
                 {{ record.surname?.toLowerCase() }}
               </div>
-              <TracingBadge
-                v-if="tracingRecord"
-                :verified="nameMatchesTracing"
-              />
+              <TracingBadge v-if="tracingRecord" :verified="nameMatchesTracing" />
             </div>
           </dd>
         </BaseDescriptionListGridItem>
@@ -24,14 +21,9 @@
           <dd>
             <div class="flex items-center gap-2">
               <div class="sensitive">
-                {{
-                  record.gender ? formatGender(record.gender) : "Unknown gender"
-                }}
+                {{ record.gender ? formatGender(record.gender) : "Unknown gender" }}
               </div>
-              <TracingBadge
-                v-if="tracingRecord"
-                :verified="tracingRecord.patient?.gender === record.gender"
-              />
+              <TracingBadge v-if="tracingRecord" :verified="tracingRecord.patient?.gender === record.gender" />
             </div>
           </dd>
         </BaseDescriptionListGridItem>
@@ -43,10 +35,7 @@
               <div class="sensitive">
                 {{ formatDate(record.dateOfBirth, false) }}
               </div>
-              <TracingBadge
-                v-if="tracingRecord"
-                :verified="birthTimeMatchesTracing"
-              />
+              <TracingBadge v-if="tracingRecord" :verified="birthTimeMatchesTracing" />
             </div>
           </dd>
         </BaseDescriptionListGridItem>
@@ -58,10 +47,7 @@
               <div class="sensitive">{{ record.nationalid }}</div>
               <TracingBadge
                 v-if="tracingRecord && record.nationalidType !== 'UKRDC'"
-                :verified="
-                  tracingRecord.localpatientid.trim() ===
-                  record.nationalid.trim()
-                "
+                :verified="tracingRecord.localpatientid.trim() === record.nationalid.trim()"
               />
             </div>
           </dd>
@@ -81,29 +67,22 @@
 
     <!-- Record message banners -->
     <NuxtLink :to="`/masterrecords/${record.id}/messages`">
-      <LatestMessageAlert
-        :message="latestMessage"
-        :is-loading="latestMessageIsLoading"
-      />
+      <LatestMessageAlert :message="latestMessage" :is-loading="latestMessageIsLoading" />
     </NuxtLink>
 
     <!-- Related Patient Records card -->
-    <UCard :ui="{body: { padding: '' }}" class="!overflow-visible mb-4">
+    <UCard :ui="{ body: { padding: '' } }" class="!overflow-visible mb-4">
       <template #header>
         <h2>Patient Records</h2>
       </template>
-      <PatientRecordsGroupedList
-        v-if="patientRecords"
-        :records="patientRecords"
-        @refresh="refreshRecords"
-      />
+      <PatientRecordsGroupedList v-if="patientRecords" :records="patientRecords" @refresh="refreshRecords" />
       <ul v-else class="divide-y divide-gray-300">
         <BaseSkeleListItem v-for="n in 5" :key="n" />
       </ul>
     </UCard>
 
     <!-- Related Master Records card -->
-    <UCard :ui="{body: { padding: '' }}">
+    <UCard :ui="{ body: { padding: '' } }">
       <template #header>
         <h2>Linked Master Records</h2>
       </template>
@@ -115,11 +94,7 @@
           :class="item.id === record.id ? 'bg-gray-50' : 'hover:bg-gray-50'"
         >
           <NuxtLink
-            v-tooltip="
-              item.id === record.id
-                ? 'You are currently viewing this record'
-                : null
-            "
+            v-tooltip="item.id === record.id ? 'You are currently viewing this record' : null"
             :to="`/masterrecords/${item.id}`"
           >
             <MasterRecordsListItem :item="item" />
@@ -242,9 +217,7 @@ export default defineComponent({
     function givenNameMatchesTracing() {
       if (tracingRecord.value && tracingRecord.value.patient) {
         for (const name of tracingRecord.value.patient.names) {
-          if (
-            props.record.givenname?.toLowerCase() === name.given.toLowerCase()
-          ) {
+          if (props.record.givenname?.toLowerCase() === name.given.toLowerCase()) {
             return true;
           }
         }
@@ -255,9 +228,7 @@ export default defineComponent({
     function surnameMatchesTracing() {
       if (tracingRecord.value && tracingRecord.value.patient) {
         for (const name of tracingRecord.value.patient.names) {
-          if (
-            props.record.surname?.toLowerCase() === name.family.toLowerCase()
-          ) {
+          if (props.record.surname?.toLowerCase() === name.family.toLowerCase()) {
             return true;
           }
         }
@@ -267,12 +238,7 @@ export default defineComponent({
 
     const birthTimeMatchesTracing = computed(() => {
       if (tracingRecord.value && tracingRecord.value.patient) {
-        if (
-          datesAreEqual(
-            props.record.dateOfBirth,
-            tracingRecord.value.patient.birthTime
-          )
-        ) {
+        if (datesAreEqual(props.record.dateOfBirth, tracingRecord.value.patient.birthTime)) {
           return true;
         }
       }

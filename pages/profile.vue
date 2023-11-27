@@ -63,20 +63,19 @@
 </template>
 
 <script lang="ts">
-
 import useAuth from "~/composables/useAuth";
 import usePermissions from "~/composables/usePermissions";
 
 export default defineComponent({
   setup() {
-    const runtimeConfig = useRuntimeConfig()
+    const runtimeConfig = useRuntimeConfig();
 
     const { getPermissions } = usePermissions();
     const { isAuthenticated, signOutAuto, getUser } = useAuth();
 
     // User info
     const user = ref();
-    const manageAccountUrl = runtimeConfig.public.manageAccountUrl
+    const manageAccountUrl = runtimeConfig.public.manageAccountUrl;
 
     onMounted(async () => {
       if (isAuthenticated.value) {
@@ -104,7 +103,7 @@ export default defineComponent({
       isAuthenticated,
       perms,
       classesForPermissions,
-      signOutAuto
+      signOutAuto,
     };
   },
   head: {

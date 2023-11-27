@@ -12,14 +12,11 @@
         v-on:update:modelValue="$emit('update:modelValue', $event)"
       />
     </form>
-    <UButton size="lg" v-if="showButton" @click="$emit('submit')"
-      >Search</UButton 
-    >
+    <UButton size="lg" v-if="showButton" @click="$emit('submit')">Search</UButton>
   </div>
 </template>
 
 <script lang="ts">
-
 export default defineComponent({
   props: {
     modelValue: {
@@ -37,9 +34,6 @@ export default defineComponent({
       default: true,
     },
   },
-  emits: [
-    'update:modelValue',
-    'submit'
-  ]
+  emits: ["update:modelValue", "submit"],
 });
 </script>

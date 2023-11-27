@@ -2,7 +2,7 @@
   <div class="sensitive">
     <BaseLoadingContainer :loading="!documents">
       <p v-if="documents && documents.length <= 0" class="text-center">No documents on record</p>
-      <UCard :ui="{body: { padding: '' }}" v-else>
+      <UCard :ui="{ body: { padding: '' } }" v-else>
         <ul class="divide-y divide-gray-300">
           <li v-for="item in documents" :key="item.id" :item="item" class="hover:bg-gray-50">
             <NuxtLink :to="`/patientrecords/${$route.params.pid}/medical/documents/${item.id}`">

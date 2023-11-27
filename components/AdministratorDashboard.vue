@@ -19,9 +19,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
           </div>
         </div>
         <template #footer>
-          <p class="text-sm text-gray-600">
-            Total distinct UKRDC IDs in the database
-          </p>
+          <p class="text-sm text-gray-600">Total distinct UKRDC IDs in the database</p>
         </template>
       </UCard>
 
@@ -32,21 +30,14 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
           </div>
           <div class="ml-5 w-0 flex-1">
             <h5>Open Work Items</h5>
-            <h1
-              v-if="counts"
-              :class="
-                counts.openWorkitems > 0 ? 'text-yellow-600' : 'text-green-600'
-              "
-            >
+            <h1 v-if="counts" :class="counts.openWorkitems > 0 ? 'text-yellow-600' : 'text-green-600'">
               {{ counts.openWorkitems }}
             </h1>
             <USkeleton v-else class="h-8 w-24" />
           </div>
         </div>
         <template #footer>
-          <p class="text-sm text-gray-600">
-            Work Items currently open and uninvestigated
-          </p>
+          <p class="text-sm text-gray-600">Work Items currently open and uninvestigated</p>
         </template>
       </UCard>
 
@@ -57,23 +48,14 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
           </div>
           <div class="ml-5 w-0 flex-1">
             <h5>Active Failing Records</h5>
-            <h1
-              v-if="counts"
-              :class="
-                counts.patientsReceivingErrors > 0
-                  ? 'text-red-600'
-                  : 'text-green-600'
-              "
-            >
+            <h1 v-if="counts" :class="counts.patientsReceivingErrors > 0 ? 'text-red-600' : 'text-green-600'">
               {{ counts.patientsReceivingErrors }}
             </h1>
             <USkeleton v-else class="h-8 w-24" />
           </div>
         </div>
         <template #footer>
-          <p class="text-sm text-gray-600">
-            Records with active data files currently failing due to errors
-          </p>
+          <p class="text-sm text-gray-600">Records with active data files currently failing due to errors</p>
         </template>
       </UCard>
     </div>
@@ -119,10 +101,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
 </template>
 
 <script lang="ts">
-import {
-  type AdminCountsSchema,
-  type HistoryPoint,
-} from "@ukkidney/ukrdc-axios-ts";
+import { type AdminCountsSchema, type HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
 import { type PlotDatum } from "plotly.js-dist-min";
 
 import IconExclamationTriangle from "~/components/icons/hero/24/outline/IconExclamationTriangle.vue";

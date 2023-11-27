@@ -169,7 +169,7 @@
                     </ul>
                   </div>
                 </div>
-                <UCheckbox 
+                <UCheckbox
                   v-if="(previewResponse && !previewErrorMessage) || deleteInProgress"
                   v-model="confirmChecked"
                   :disabled="!previewResponse"
@@ -244,11 +244,7 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: [
-    "cancel",
-    "confirm",
-    "deleted"
-  ],
+  emits: ["cancel", "confirm", "deleted"],
   setup(props, { emit }) {
     const { $toast } = useNuxtApp();
     const { visible, show, hide, toggle } = useModal();

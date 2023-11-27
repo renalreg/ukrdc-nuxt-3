@@ -46,7 +46,6 @@
 </template>
 
 <script lang="ts">
-
 import { ExtendedDiagnosisSchema, ExtendedRenalDiagnosisSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";

@@ -32,7 +32,6 @@
 </template>
 
 <script lang="ts">
-
 import { ExtendedCauseOfDeathSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";

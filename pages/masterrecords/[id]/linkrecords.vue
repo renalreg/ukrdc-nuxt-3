@@ -8,7 +8,11 @@
 </template>
 
 <script lang="ts">
-import { type LinkRecordSchema, type MasterRecordSchema, type MasterRecordStatisticsSchema } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type LinkRecordSchema,
+  type MasterRecordSchema,
+  type MasterRecordStatisticsSchema,
+} from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import LinkRecord from "~/components/LinkRecord.vue";

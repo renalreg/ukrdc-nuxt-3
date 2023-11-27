@@ -39,7 +39,6 @@
 </template>
 
 <script lang="ts">
-
 import { MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgeNationalID from "~/components/BadgeNationalID.vue";

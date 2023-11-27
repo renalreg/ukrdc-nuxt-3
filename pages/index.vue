@@ -10,7 +10,6 @@
 </template>
 
 <script lang="ts">
-
 import AdministratorDashboard from "~/components/AdministratorDashboard.vue";
 import DashboardAlerts from "~/components/DashboardAlerts.vue";
 import FacilitiesTable from "~/components/FacilitiesTable.vue";

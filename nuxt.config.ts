@@ -47,9 +47,7 @@ export default defineNuxtConfig({
   components: false,
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    '@nuxt/ui'
-  ],
+  modules: ["@nuxt/ui"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -84,9 +82,7 @@ export default defineNuxtConfig({
         protocol: process.env.API_PROTOCOL || "https",
       },
       // Okta domain
-      manageAccountUrl:
-        process.env.MANAGE_ACCOUNT_URL ||
-        "https://sso.ukkidney.org/app/UserHome",
+      manageAccountUrl: process.env.MANAGE_ACCOUNT_URL || "https://sso.ukkidney.org/app/UserHome",
       // Okta JS runtime config
       okta: {
         issuer: process.env.OAUTH_ISSUER,

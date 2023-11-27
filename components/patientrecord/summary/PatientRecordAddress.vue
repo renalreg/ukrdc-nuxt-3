@@ -26,7 +26,6 @@
 </template>
 
 <script lang="ts">
-
 import { AddressSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import PostCodeLink from "~/components/PostCodeLink.vue";

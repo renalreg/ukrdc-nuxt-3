@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts">
-
 import { ObservationSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgePrePost from "~/components/BadgePrePost.vue";

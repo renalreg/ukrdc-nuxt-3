@@ -22,7 +22,7 @@
     <BaseLoadingContainer :loading="!results">
       <div>
         <BaseDateRange v-model="dateRange" class="mb-4" />
-  
+
         <!-- Code select -->
         <div class="flex mb-4">
           <USelectMenu
@@ -56,7 +56,11 @@
             <NuxtLink v-if="selectedOrderId" :to="{ query: { order_id: null } }">
               <UButton color="white" variant="solid">Show Results From All Lab Orders</UButton>
             </NuxtLink>
-            <UButton color="red" variant="outline" v-if="selectedOrderId && selectedOrder" @click="deleteOrderAlert?.show()"
+            <UButton
+              color="red"
+              variant="outline"
+              v-if="selectedOrderId && selectedOrder"
+              @click="deleteOrderAlert?.show()"
               >Delete Lab Order</UButton
             >
           </div>

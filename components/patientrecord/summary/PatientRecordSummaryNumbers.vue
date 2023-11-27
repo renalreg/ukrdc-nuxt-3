@@ -24,7 +24,6 @@
 </template>
 
 <script lang="ts">
-
 import { PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import PatientRecordNumberCard from "~/components/patientrecord/summary/PatientRecordNumberCard.vue";

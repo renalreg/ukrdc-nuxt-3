@@ -6,11 +6,7 @@
       </div>
       <div>
         <div v-click-away="closeExportMenu" class="relative flex">
-          <UButton
-            color="white"
-            variant="solid"
-            @click="showExportMenu = !showExportMenu"
-          >
+          <UButton color="white" variant="solid" @click="showExportMenu = !showExportMenu">
             <div class="flex items-center">
               <div class="flex-grow">Export Codes</div>
               <div class="ml-2">
@@ -19,35 +15,35 @@
             </div>
           </UButton>
           <BaseMenu class="right-0 z-10 mb-2 mt-10" :show="showExportMenu">
-            <BaseMenuItem @click="exportCodeList">
-              Export Code List
-            </BaseMenuItem>
-            <BaseMenuItem @click="exportCodeMaps">
-              Export Code Maps
-            </BaseMenuItem>
-            <BaseMenuItem @click="exportCodeExclusions">
-              Export Code Exclusions
-            </BaseMenuItem>
+            <BaseMenuItem @click="exportCodeList"> Export Code List </BaseMenuItem>
+            <BaseMenuItem @click="exportCodeMaps"> Export Code Maps </BaseMenuItem>
+            <BaseMenuItem @click="exportCodeExclusions"> Export Code Exclusions </BaseMenuItem>
           </BaseMenu>
         </div>
       </div>
     </div>
 
-    <div
-      v-if="standards && standards.length > 1"
-      :class="$route.params.id ? 'hidden lg:flex' : 'flex'"
-      class="mb-4"
-    >
-      <USelectMenu searchable class="flex-1" size="lg" v-model="selectedStandard" :options="standards" placeholder="Select a coding standard"/>
-      <UButton color="white" variant="solid" class="ml-2" size="lg" @click="selectedStandard=undefined" label="Clear"/>
+    <div v-if="standards && standards.length > 1" :class="$route.params.id ? 'hidden lg:flex' : 'flex'" class="mb-4">
+      <USelectMenu
+        searchable
+        class="flex-1"
+        size="lg"
+        v-model="selectedStandard"
+        :options="standards"
+        placeholder="Select a coding standard"
+      />
+      <UButton
+        color="white"
+        variant="solid"
+        class="ml-2"
+        size="lg"
+        @click="selectedStandard = undefined"
+        label="Clear"
+      />
     </div>
 
     <div>
-      <SearchBar
-        v-model="searchboxString"
-        :focus="false"
-        :show-button="false"
-      />
+      <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
     </div>
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -60,10 +56,7 @@
           </ul>
           <!-- Real results -->
           <ul v-else class="divide-y divide-gray-300">
-            <li
-              v-for="code in codes"
-              :key="`${code.codingStandard}.${code.code}`"
-            >
+            <li v-for="code in codes" :key="`${code.codingStandard}.${code.code}`">
               <NuxtLink
                 :to="{
                   path: `/codes/${code.codingStandard}.${code.code}/`,
@@ -198,9 +191,7 @@ export default defineComponent({
         .getCodeList({
           page: page.value || 1,
           size: size.value,
-          codingStandard: selectedStandard.value
-            ? [selectedStandard.value]
-            : undefined,
+          codingStandard: selectedStandard.value ? [selectedStandard.value] : undefined,
           search: searchboxString.value || undefined,
         })
         .then((response) => {

@@ -2,10 +2,7 @@
   <div>
     <div class="mx-auto mb-4 max-w-7xl">
       <h1>Multiple UKRDC IDs</h1>
-      <h3>
-        Results of a scan that detect patients with more than one UKRDC Master
-        Record.
-      </h3>
+      <h3>Results of a scan that detect patients with more than one UKRDC Master Record.</h3>
     </div>
 
     <!-- Description list -->
@@ -24,12 +21,10 @@
             <span class="inline">Last Full Scan</span>
             <BaseInfoTooltip class="inline">
               <p>
-                New results are identified weekly by a <b>Full Scan</b>, but
-                existing results are re-checked hourly, see <b>Last checked</b>.
+                New results are identified weekly by a <b>Full Scan</b>, but existing results are re-checked hourly, see
+                <b>Last checked</b>.
               </p>
-              <p>
-                Resolved items will remain in this view until the next check.
-              </p>
+              <p>Resolved items will remain in this view until the next check.</p>
             </BaseInfoTooltip>
           </dt>
           <dd v-if="lastRunTime">
@@ -42,11 +37,8 @@
 
     <div v-if="groups">
       <div v-for="group in groups" :key="`group-${group.groupId}`">
-        <UCard :ui="{body: { padding: '' }}" class="mb-4">
-          <EMPIMultipleIDItem
-            :group="group"
-            :fetch-in-progress="fetchInProgress"
-          />
+        <UCard :ui="{ body: { padding: '' } }" class="mb-4">
+          <EMPIMultipleIDItem :group="group" :fetch-in-progress="fetchInProgress" />
         </UCard>
       </div>
 

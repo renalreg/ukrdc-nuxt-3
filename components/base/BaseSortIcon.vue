@@ -6,8 +6,6 @@
 </template>
 
 <script lang="ts">
-
-
 import IconBarsArrowDown from "~/components/icons/hero/20/solid/IconBarsArrowDown.vue";
 import IconBarsArrowUp from "~/components/icons/hero/20/solid/IconBarsArrowUp.vue";
 
@@ -28,8 +26,6 @@ export default defineComponent({
       default: true,
     },
   },
-  emits: [
-    "toggle"
-  ],
+  emits: ["toggle"],
 });
 </script>

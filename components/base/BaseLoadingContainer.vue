@@ -6,8 +6,6 @@
 </template>
 
 <script lang="ts">
-
-
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 
 export default defineComponent({

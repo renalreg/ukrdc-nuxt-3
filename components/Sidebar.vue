@@ -71,7 +71,6 @@
 </template>
 
 <script lang="ts">
-
 import ProfileBadge from "~/components/ProfileBadge.vue";
 import usePermissions from "~/composables/usePermissions";
 
@@ -99,14 +98,12 @@ export default defineComponent({
       default: true,
     },
   },
-  emits: [
-    'toggle'
-  ],
+  emits: ["toggle"],
   setup() {
     const { hasPermission, availableFacilities, firstFacility, hasMultipleFacilities } = usePermissions();
-    const runtimeConfig = useRuntimeConfig()
+    const runtimeConfig = useRuntimeConfig();
 
-    const deploymentEnv = runtimeConfig.public.deploymentEnv
+    const deploymentEnv = runtimeConfig.public.deploymentEnv;
 
     const pages = computed(() => {
       return [

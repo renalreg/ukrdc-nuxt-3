@@ -35,7 +35,6 @@
 </template>
 
 <script lang="ts">
-
 import BaseSelect from "~/components/base/BaseSelect.vue";
 import { urlCompare, urlStartsWith } from "~/helpers/pathUtils";
 import { type TabItem } from "~/interfaces/tabs";
@@ -68,9 +67,7 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: [
-    "change"
-  ],
+  emits: ["change"],
   setup(props, { emit }) {
     const router = useRouter();
     const route = useRoute();

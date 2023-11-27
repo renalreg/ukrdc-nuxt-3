@@ -26,7 +26,6 @@
 </template>
 
 <script lang="ts">
-
 import { type MedicationSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import { formatGender } from "~/helpers/codeUtils";

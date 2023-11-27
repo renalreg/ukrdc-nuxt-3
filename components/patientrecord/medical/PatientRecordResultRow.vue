@@ -24,7 +24,7 @@
         :to="{ query: { order_id: item.orderId } }"
       />
       <UButton
-      :ui="{ rounded: 'rounded-full' }"
+        :ui="{ rounded: 'rounded-full' }"
         color="white"
         variant="solid"
         class="opacity-0 group-hover:opacity-100"
@@ -37,7 +37,6 @@
 </template>
 
 <script lang="ts">
-
 import { type ResultItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgePrePost from "~/components/BadgePrePost.vue";
@@ -57,9 +56,7 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: [
-    "delete"
-  ],
+  emits: ["delete"],
   setup() {
     return { formatDate };
   },

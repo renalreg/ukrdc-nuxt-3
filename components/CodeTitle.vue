@@ -12,7 +12,6 @@ Re-usable formatted code title component.
 </template>
 
 <script lang="ts">
-
 export default defineComponent({
   props: {
     code: {

@@ -6,7 +6,6 @@
 </template>
 
 <script lang="ts">
-
 import { ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
 import MirthMessageChain from "~/components/MirthMessageChain.vue";

@@ -186,7 +186,12 @@
 </template>
 
 <script lang="ts">
-import { type AddressSchema, type NameSchema, type PatientRecordSchema, type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type AddressSchema,
+  type NameSchema,
+  type PatientRecordSchema,
+  type PatientRecordSummarySchema,
+} from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";

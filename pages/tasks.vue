@@ -41,7 +41,6 @@
 </template>
 
 <script lang="ts">
-
 import { type TrackableTaskSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgePublicPrivate from "~/components/BadgePublicPrivate.vue";

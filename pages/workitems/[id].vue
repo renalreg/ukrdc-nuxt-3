@@ -1,66 +1,36 @@
 <template>
   <div>
     <!-- Modals -->
-    <BaseModal
-      v-if="hasPermission('ukrdc:workitems:write')"
-      ref="updateWorkItemModal"
-    >
+    <BaseModal v-if="hasPermission('ukrdc:workitems:write')" ref="updateWorkItemModal">
       <div class="mb-4 text-left">
         <div class="mb-4">Add Work Item comment</div>
-        <UTextarea 
-          v-model="customComment"
-          :rows="3"
-          :color="customComment.length > 100 ? 'red' : 'primary'"
-        />
+        <UTextarea v-model="customComment" :rows="3" :color="customComment.length > 100 ? 'red' : 'primary'" />
       </div>
 
       <!-- Allow setting as WIP if not already closed -->
-      <UCheckbox
-        v-if="record && record.status !== 3"
-        v-model="isWIP"
-        label="Mark as work-in-progress (WIP)"
-      />
+      <UCheckbox v-if="record && record.status !== 3" v-model="isWIP" label="Mark as work-in-progress (WIP)" />
 
       <div class="flex justify-end">
         <UButton color="white" variant="solid" @click="updateWorkItemModal?.hide()">Cancel</UButton>
-        <UButton
-          color="indigo"
-          class="ml-2"
-          type="submit"
-          @click="updateWorkItem()"
-        >
-          Save
-        </UButton>
+        <UButton color="indigo" class="ml-2" type="submit" @click="updateWorkItem()"> Save </UButton>
       </div>
     </BaseModal>
 
     <BaseModal v-if="hasPermission('ukrdc:workitems:write')" ref="closeModal">
       <div class="text-left">
         <div class="mb-4">
-          {{
-            closeMessageOverride ? closeMessageOverride : "Close the Work Item"
-          }}
+          {{ closeMessageOverride ? closeMessageOverride : "Close the Work Item" }}
         </div>
 
         <label>
           Comments
-          <UTextarea
-            v-model="customComment"
-            :rows="3"
-            :color="customComment.length > 100 ? 'red' : 'primary'"
-          />
+          <UTextarea v-model="customComment" :rows="3" :color="customComment.length > 100 ? 'red' : 'primary'" />
         </label>
       </div>
 
       <div class="flex justify-end">
         <UButton color="white" variant="solid" @click="closeModal?.hide()"> Cancel </UButton>
-        <UButton
-          :disabled="!customComment"
-          type="submit"
-          class="ml-3"
-          color="red"
-          @click="handleCloseWorkItem()"
-        >
+        <UButton :disabled="!customComment" type="submit" class="ml-3" color="red" @click="handleCloseWorkItem()">
           Close Work Item
         </UButton>
       </div>
@@ -134,17 +104,14 @@
         <p>
           This work item was raised because demographic attributes on
           <span class="personrecord-label">{{
-            record.type === 9
-              ? "one of the incoming data files"
-              : "the Person Record"
+            record.type === 9 ? "one of the incoming data files" : "the Person Record"
           }}</span>
           below did not match the
           <span class="masterrecord-label">Master Record</span> it is linked to.
         </p>
         <p v-if="record.type !== 9 && messages && messages.length > 0">
           This may be because a <b>Related Data File</b> below updated the
-          <span class="masterrecord-label">Master Record</span>, and this update
-          means that it no longer matches the
+          <span class="masterrecord-label">Master Record</span>, and this update means that it no longer matches the
           <span class="personrecord-label">Person Record</span> below.
         </p>
       </div>
@@ -158,9 +125,7 @@
           <thead class="bg-gray-50">
             <tr>
               <th scope="col">Mismatched Attribute</th>
-              <th scope="col">
-                {{ record.type === 9 ? "Incoming" : "Person Record" }} Value
-              </th>
+              <th scope="col">{{ record.type === 9 ? "Incoming" : "Person Record" }} Value</th>
               <th scope="col">Master Recoed Value</th>
             </tr>
           </thead>
@@ -193,27 +158,19 @@
             <tr v-if="record.attributes.dateOfBirth">
               <td class="font-medium">Date of Birth</td>
               <td>
-                {{
-                  formatDate(record.attributes.dateOfBirth.split(":")[0], false)
-                }}
+                {{ formatDate(record.attributes.dateOfBirth.split(":")[0], false) }}
               </td>
               <td>
-                {{
-                  formatDate(record.attributes.dateOfBirth.split(":")[1], false)
-                }}
+                {{ formatDate(record.attributes.dateOfBirth.split(":")[1], false) }}
               </td>
             </tr>
             <tr v-if="record.attributes.dateOfDeath">
               <td class="font-medium">Date of Death</td>
               <td>
-                {{
-                  formatDate(record.attributes.dateOfDeath.split(":")[0], false)
-                }}
+                {{ formatDate(record.attributes.dateOfDeath.split(":")[0], false) }}
               </td>
               <td>
-                {{
-                  formatDate(record.attributes.dateOfDeath.split(":")[1], false)
-                }}
+                {{ formatDate(record.attributes.dateOfDeath.split(":")[1], false) }}
               </td>
             </tr>
             <tr v-if="record.attributes.gender">
@@ -230,13 +187,8 @@
       </div>
 
       <div class="mb-4">
-        <p class="font-medium">
-          Summary of currently stored record demographics.
-        </p>
-        <p>
-          If these now match, this work item can likely be closed with no
-          further action.
-        </p>
+        <p class="font-medium">Summary of currently stored record demographics.</p>
+        <p>If these now match, this work item can likely be closed with no further action.</p>
       </div>
 
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -250,29 +202,19 @@
             :full="showDestinationPersons"
           />
           <!-- Missing incoming person card -->
-          <div
-            v-else
-            class="rounded-md bg-yellow-50 p-4 font-medium text-yellow-800"
-          >
+          <div v-else class="rounded-md bg-yellow-50 p-4 font-medium text-yellow-800">
             <span v-if="record.type === 9">
-              Incoming file was rejected, so no Person record exists for this
-              work item yet.
+              Incoming file was rejected, so no Person record exists for this work item yet.
               <br />
               See Related Data Files below to identify the rejected file.
             </span>
-            <span v-else>
-              Person record associated with this work item is missing, and may
-              have been deleted.
-            </span>
+            <span v-else> Person record associated with this work item is missing, and may have been deleted. </span>
           </div>
         </div>
 
         <div id="destinationCard">
           <!-- Destination record card -->
-          <NuxtLink
-            v-if="record.destination.masterRecord"
-            :to="`/masterrecords/${record.destination.masterRecord.id}`"
-          >
+          <NuxtLink v-if="record.destination.masterRecord" :to="`/masterrecords/${record.destination.masterRecord.id}`">
             <MasterRecordCard
               :record="record.destination.masterRecord"
               :label="`Destination Master Record ${record.destination.masterRecord.id}`"
@@ -300,30 +242,16 @@
           >
             <MasterRecordCard
               :record="record.incoming.masterRecords[relatedRecordsIndex]"
-              :label="`Incoming Master Record ${relatedRecordsIndex + 1} of ${
-                record.incoming.masterRecords.length
-              }`"
+              :label="`Incoming Master Record ${relatedRecordsIndex + 1} of ${record.incoming.masterRecords.length}`"
             />
           </NuxtLink>
           <!-- Empty incoming records card -->
-          <div v-else class="rounded-md bg-red-50 p-4 font-medium text-red-800">
-            No new incoming Master Records
-          </div>
-          <NuxtLink
-            v-if="record.destination.masterRecord"
-            :to="`/masterrecords/${record.destination.masterRecord.id}`"
-          >
-            <MasterRecordCard
-              :record="record.destination.masterRecord"
-              label="Destination Master Record"
-            />
+          <div v-else class="rounded-md bg-red-50 p-4 font-medium text-red-800">No new incoming Master Records</div>
+          <NuxtLink v-if="record.destination.masterRecord" :to="`/masterrecords/${record.destination.masterRecord.id}`">
+            <MasterRecordCard :record="record.destination.masterRecord" label="Destination Master Record" />
           </NuxtLink>
         </div>
-        <UCard
-          :ui="{ body: { padding: '' } }"
-          v-if="record.incoming.masterRecords.length > 1"
-          class="mt-2 pl-4"
-        >
+        <UCard :ui="{ body: { padding: '' } }" v-if="record.incoming.masterRecords.length > 1" class="mt-2 pl-4">
           <BaseItemPaginator
             v-model="relatedRecordsIndex"
             :total="record.incoming.masterRecords.length"
@@ -333,16 +261,12 @@
     </div>
 
     <!-- Related messages card -->
-    <UCard
-      :ui="{ body: { padding: '' } }"
-      v-if="messages && messages.length > 0"
-      class="mb-8"
-    >
+    <UCard :ui="{ body: { padding: '' } }" v-if="messages && messages.length > 0" class="mb-8">
       <template #header>
         <h2>Related Data Files</h2>
         <h6>
-          Data files received around the time the work item was first raised.
-          One of these may be responsible for the work item.
+          Data files received around the time the work item was first raised. One of these may be responsible for the
+          work item.
         </h6>
       </template>
       <ul class="divide-y divide-gray-300">
@@ -365,7 +289,7 @@
     </UCard>
 
     <!-- Related Work Items  -->
-    <UCard :ui="{body: { padding: '' }}" v-if="workItemCollection.length > 0" class="mb-8">
+    <UCard :ui="{ body: { padding: '' } }" v-if="workItemCollection.length > 0" class="mb-8">
       <!-- Card header -->
       <template #header>
         <h2>Related Work Items</h2>
@@ -373,11 +297,7 @@
       </template>
       <!-- Results list -->
       <ul class="divide-y divide-gray-300">
-        <li
-          v-for="item in workItemCollection"
-          :key="item.id"
-          class="hover:bg-gray-50"
-        >
+        <li v-for="item in workItemCollection" :key="item.id" class="hover:bg-gray-50">
           <NuxtLink :to="`/workitems/${item.id}`">
             <WorkItemsListItem :item="item" />
           </NuxtLink>
@@ -388,11 +308,7 @@
 </template>
 
 <script lang="ts">
-import {
-  type MessageSchema,
-  type WorkItemExtendedSchema,
-  type WorkItemSchema,
-} from "@ukkidney/ukrdc-axios-ts";
+import { type MessageSchema, type WorkItemExtendedSchema, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseItemPaginator from "~/components/base/BaseItemPaginator.vue";
 import BaseModal from "~/components/base/BaseModal.vue";

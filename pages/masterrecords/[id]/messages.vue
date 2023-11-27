@@ -3,17 +3,17 @@
     <div class="mb-4 flex flex-col gap-2 lg:flex-row">
       <BaseDateRange v-model="dateRange" class="flex-1" />
       <UButton
-          class="flex-shrink"
-          @click="toggleOrder"
-          color="white"
-          variant="solid"
-          size="sm"
-          :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
-          :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
-        />
+        class="flex-shrink"
+        @click="toggleOrder"
+        color="white"
+        variant="solid"
+        size="sm"
+        :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
+        :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
+      />
     </div>
 
-    <UCard :ui="{body: { padding: '' }}" >
+    <UCard :ui="{ body: { padding: '' } }">
       <!-- Skeleton results -->
       <ul v-if="!messages" class="divide-y divide-gray-300">
         <BaseSkeleListItem v-for="n in 10" :key="n" />
@@ -40,7 +40,12 @@
 </template>
 
 <script lang="ts">
-import { type MasterRecordSchema, type MasterRecordStatisticsSchema, type MessageSchema, OrderBy } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type MasterRecordSchema,
+  type MasterRecordStatisticsSchema,
+  type MessageSchema,
+  OrderBy,
+} from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";

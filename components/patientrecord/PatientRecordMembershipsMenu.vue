@@ -26,7 +26,7 @@
 
     <div v-click-away="closeMenu" class="relative flex items-center justify-self-end">
       <UButton
-      color="white"
+        color="white"
         label="Add Memberships"
         icon="i-heroicons-plus-20-solid"
         class="z-0 mr-2 flex gap-1"
@@ -76,9 +76,7 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: [
-    "refresh"
-  ],
+  emits: ["refresh"],
   setup(props, { emit }) {
     const { $toast } = useNuxtApp();
     const { hasPermission } = usePermissions();

@@ -8,8 +8,6 @@
 </template>
 
 <script lang="ts">
-
-
 import IconCheckCircle from "~/components/icons/hero/20/solid/IconCheckCircle.vue";
 import IconExclamationCircle from "~/components/icons/hero/20/solid/IconExclamationCircle.vue";
 

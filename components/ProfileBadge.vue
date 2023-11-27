@@ -1,9 +1,6 @@
 <template>
   <div v-click-away="closeMenu" class="relative w-full justify-self-end">
-    <UButton color="white" variant="ghost" class="w-full"
-      label="Manage profile"
-      @click="showMenu = !showMenu"
-    >
+    <UButton color="white" variant="ghost" class="w-full" label="Manage profile" @click="showMenu = !showMenu">
       <div class="flex items-center gap-4 w-full" :class="{ 'flex-row-reverse': rightToLeft }">
         <div class="h-10 w-10">
           <span
@@ -61,7 +58,6 @@
 </template>
 
 <script lang="ts">
-
 import BaseMenu from "~/components/base/BaseMenu.vue";
 import BaseMenuDivider from "~/components/base/BaseMenuDivider.vue";
 import BaseMenuItem from "~/components/base/BaseMenuItem.vue";
@@ -86,7 +82,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const runtimeConfig = useRuntimeConfig()
+    const runtimeConfig = useRuntimeConfig();
 
     const { idToken, isAuthenticated, signOutAuto } = useAuth();
 
@@ -104,7 +100,7 @@ export default defineComponent({
       return "Signed Out";
     });
 
-    const manageAccountUrl = runtimeConfig.public.manageAccountUrl
+    const manageAccountUrl = runtimeConfig.public.manageAccountUrl;
 
     return {
       isAuthenticated,
@@ -112,7 +108,7 @@ export default defineComponent({
       showMenu,
       manageAccountUrl,
       closeMenu,
-      signOutAuto
+      signOutAuto,
     };
   },
 });

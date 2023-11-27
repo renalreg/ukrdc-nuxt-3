@@ -1,9 +1,7 @@
 <template>
   <div class="sensitive">
     <BaseLoadingContainer :loading="!observations">
-      <p v-if="observations && observations.length <= 0" class="text-center">
-        No observations on record
-      </p>
+      <p v-if="observations && observations.length <= 0" class="text-center">No observations on record</p>
       <div v-else>
         <!-- Code select -->
         <div class="flex mb-4">
@@ -63,10 +61,7 @@
 </template>
 
 <script lang="ts">
-import {
-  type ObservationSchema,
-  type PatientRecordSchema,
-} from "@ukkidney/ukrdc-axios-ts";
+import { type ObservationSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";

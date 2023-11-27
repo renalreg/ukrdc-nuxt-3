@@ -20,7 +20,6 @@ or an array of values when multiple instances are v-model'd onto the same array.
 </template>
 
 <script lang="ts">
-
 export default defineComponent({
   props: {
     label: {
@@ -48,9 +47,7 @@ export default defineComponent({
       default: "white",
     },
   },
-  emits: [
-    "update:modelValue"
-  ],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
     const model = computed({
       get: () => props.modelValue,

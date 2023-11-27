@@ -12,7 +12,9 @@
       </div>
       <div class="flex justify-center sm:justify-start">
         <div v-if="record.masterId">
-          <UButton color="white" variant="solid" size="lg" :to="`/masterrecords/${record.masterId}`"> View Master Record </UButton>
+          <UButton color="white" variant="solid" size="lg" :to="`/masterrecords/${record.masterId}`">
+            View Master Record
+          </UButton>
         </div>
       </div>
     </div>
@@ -47,7 +49,7 @@ export default defineComponent({
 
     // Head
     useHead({
-      title: `Record ${route.params.pid}`
+      title: `Record ${route.params.pid}`,
     });
 
     // Data refs

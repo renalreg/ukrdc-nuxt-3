@@ -26,19 +26,10 @@
         <BaseDescriptionListGridItem>
           <dt>Channel</dt>
           <dd v-if="message" class="flex items-center gap-1">
-            <span>{{
-              message.mirthChannel
-                ? message.mirthChannel
-                : message.mirthChannelId
-            }}</span>
+            <span>{{ message.mirthChannel ? message.mirthChannel : message.mirthChannelId }}</span>
             <BaseInfoTooltip class="inline">
-              <p>
-                This is the internal UKRDC channel responsible for processing
-                this message.
-              </p>
-              <p>
-                The channel may be important when debugging unexpected errors.
-              </p>
+              <p>This is the internal UKRDC channel responsible for processing this message.</p>
+              <p>The channel may be important when debugging unexpected errors.</p>
             </BaseInfoTooltip>
           </dd>
           <USkeleton v-else class="h-6 w-full" />
@@ -51,17 +42,9 @@
         <h2>Files</h2>
       </template>
       <BaseCard class="w-2/3">
-        <BaseAttachment
-          :filename="
-            message.filename || `${message.facility}-${message.id}.txt`
-          "
-        >
-          <UButton variant="link" :to="`/messages/${message.id}/source`">
-            View
-          </UButton>
-          <UButton variant="link" @click="downloadMessageSource">
-            Download
-          </UButton>
+        <BaseAttachment :filename="message.filename || `${message.facility}-${message.id}.txt`">
+          <UButton variant="link" :to="`/messages/${message.id}/source`"> View </UButton>
+          <UButton variant="link" @click="downloadMessageSource"> Download </UButton>
         </BaseAttachment>
       </BaseCard>
     </UCard>
@@ -70,13 +53,13 @@
       <template #header>
         <h2>Error message</h2>
       </template>
-        <div class="whitespace-pre-wrap font-mono">
-          {{ messageText }}
-        </div>
+      <div class="whitespace-pre-wrap font-mono">
+        {{ messageText }}
+      </div>
     </UCard>
 
     <!-- Related Patient Records card -->
-    <UCard :ui="{body: { padding: '' }}" v-if="patientRecords.length > 0" class="mt-4">
+    <UCard :ui="{ body: { padding: '' } }" v-if="patientRecords.length > 0" class="mt-4">
       <template #header>
         <h2>Related Records</h2>
       </template>
@@ -88,17 +71,12 @@
     </UCard>
 
     <!-- Related Work Items card -->
-    <UCard :ui="{body: { padding: '' }}" v-if="workItems.length > 0" class="mt-4">
+    <UCard :ui="{ body: { padding: '' } }" v-if="workItems.length > 0" class="mt-4">
       <template #header>
         <h2>Related Work Items</h2>
       </template>
       <ul class="divide-y divide-gray-300">
-        <li
-          v-for="item in workItems"
-          :key="item.id"
-          :item="item"
-          class="hover:bg-gray-50"
-        >
+        <li v-for="item in workItems" :key="item.id" :item="item" class="hover:bg-gray-50">
           <NuxtLink :to="`/workitems/${item.id}`">
             <WorkItemsListItem :item="item" />
           </NuxtLink>
@@ -107,15 +85,13 @@
     </UCard>
 
     <!-- Mirth Messages card -->
-    <UCard :ui="{body: { padding: '' }}" v-if="hasPermission('ukrdc:mirth:read')" class="mt-4">
+    <UCard :ui="{ body: { padding: '' } }" v-if="hasPermission('ukrdc:mirth:read')" class="mt-4">
       <template #header>
         <h2>Mirth Messages</h2>
       </template>
       <ul class="divide-y divide-gray-300">
         <li v-if="mirthMessage" class="hover:bg-gray-50">
-          <NuxtLink
-            :to="`/mirth/messages/${mirthMessage.channelId}/${mirthMessage.messageId}`"
-          >
+          <NuxtLink :to="`/mirth/messages/${mirthMessage.channelId}/${mirthMessage.messageId}`">
             <MirthMessageListItem :message="mirthMessage" />
           </NuxtLink>
         </li>
@@ -229,14 +205,8 @@ export default defineComponent({
           messageId: props.message.id,
         })
         .then((response) => {
-          const blob = new Blob([
-            response.data.content ? response.data.content : "",
-          ]);
-          saveAs(
-            blob,
-            props.message.filename ||
-              `${props.message.facility}-{message.id}.txt`
-          );
+          const blob = new Blob([response.data.content ? response.data.content : ""]);
+          saveAs(blob, props.message.filename || `${props.message.facility}-{message.id}.txt`);
         });
     }
 

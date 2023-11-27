@@ -3,11 +3,7 @@
     <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
       <div>
         <h5>Names</h5>
-        <p
-          v-for="item in record.patient?.names || []"
-          :key="item.given + item.family"
-          class="sensitive"
-        >
+        <p v-for="item in record.patient?.names || []" :key="item.given + item.family" class="sensitive">
           {{ item.given }} {{ item.family }}
         </p>
       </div>
@@ -18,11 +14,7 @@
       <div>
         <h5>Ethnicity</h5>
         <p class="sensitive">
-          {{
-            record.patient.ethnicGroupDescription ||
-            record.patient.ethnicGroupCode ||
-            "Unknown"
-          }}
+          {{ record.patient.ethnicGroupDescription || record.patient.ethnicGroupCode || "Unknown" }}
         </p>
       </div>
       <div>
@@ -34,11 +26,7 @@
       <div>
         <h5>Date of Death</h5>
         <p class="sensitive">
-          {{
-            record.patient.deathTime
-              ? formatDate(record.patient.deathTime, false)
-              : "N/A"
-          }}
+          {{ record.patient.deathTime ? formatDate(record.patient.deathTime, false) : "N/A" }}
         </p>
       </div>
     </div>

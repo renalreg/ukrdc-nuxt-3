@@ -46,9 +46,7 @@ export default defineComponent({
       default: "bar",
     },
   },
-  emits: [
-    "click"
-  ],
+  emits: ["click"],
   setup(props, { emit }) {
     const data: Data[] = [
       {

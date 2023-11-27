@@ -14,8 +14,6 @@
 </template>
 
 <script lang="ts">
-
-
 export default defineComponent({
   props: {
     visible: {
@@ -23,8 +21,6 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: [
-    'click'
-  ],
+  emits: ["click"],
 });
 </script>

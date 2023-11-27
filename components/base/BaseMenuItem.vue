@@ -55,8 +55,6 @@
 </template>
 
 <script lang="ts">
-
-
 export default defineComponent({
   props: {
     disabled: {
@@ -85,10 +83,7 @@ export default defineComponent({
       default: null,
     },
   },
-  emits: [
-    "click",
-    "close"
-  ],
+  emits: ["click", "close"],
 });
 </script>
 

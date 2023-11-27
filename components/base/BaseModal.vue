@@ -26,8 +26,6 @@
 </template>
 
 <script lang="ts">
-
-
 import BaseBlackout from "~/components/base/BaseBlackout.vue";
 import ModalTransition from "~/components/transition/ModalTransition.vue";
 import useModal from "~/composables/useModal";

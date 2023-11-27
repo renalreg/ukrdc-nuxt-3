@@ -18,7 +18,6 @@
 </template>
 
 <script lang="ts">
-
 import FacilitiesTable from "~/components/FacilitiesTable.vue";
 
 export default defineComponent({
