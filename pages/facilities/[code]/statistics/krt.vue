@@ -7,7 +7,7 @@
         from {{ formatDate(facilityStatsDialysis.all.metadata.fromTime) }} to
         {{ formatDate(facilityStatsDialysis.all.metadata.toTime) }}
       </div>
-      <BaseSkeleText v-else class="h-8 w-2/3" />
+      <USkeleton v-else class="h-8 w-2/3" />
     </UCard>
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -72,7 +72,6 @@ import {
   type UnitLevelDialysisStats,
 } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import Labelled2dBarPlot from "~/components/plots/stats/Labelled2dBarPlot.vue";
 import Labelled2dPiePlot from "~/components/plots/stats/Labelled2dPiePlot.vue";
 import useApi from "~/composables/useApi";
@@ -82,7 +81,6 @@ export default defineComponent({
   components: {
     Labelled2dBarPlot,
     Labelled2dPiePlot,
-    BaseSkeleText,
   },
   props: {
     facility: {

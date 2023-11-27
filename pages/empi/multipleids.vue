@@ -16,7 +16,7 @@
           <dd v-if="total">
             {{ total }}
           </dd>
-          <BaseSkeleText v-else class="mt-2 h-6 w-8" />
+          <USkeleton v-else class="mt-2 h-6 w-8" />
         </BaseDescriptionListGridItem>
 
         <BaseDescriptionListGridItem>
@@ -35,7 +35,7 @@
           <dd v-if="lastRunTime">
             {{ formatDate(lastRunTime, true) }}
           </dd>
-          <BaseSkeleText v-else class="mt-2 h-6 w-1/4" />
+          <USkeleton v-else class="mt-2 h-6 w-1/4" />
         </BaseDescriptionListGridItem>
       </BaseDescriptionListGrid>
     </UCard>
@@ -74,7 +74,6 @@ import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGr
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import EMPIMultipleIDItem from "~/components/EMPIMultipleIDItem.vue";
 import usePagination from "~/composables/query/usePagination";
 import useApi from "~/composables/useApi";
@@ -83,7 +82,6 @@ import { formatDate } from "~/helpers/dateUtils";
 export default defineComponent({
   components: {
     BaseLoadingIndicator,
-    BaseSkeleText,
     BaseDescriptionListGrid,
     BaseDescriptionListGridItem,
     BasePaginator,

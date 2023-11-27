@@ -5,11 +5,11 @@
 
     <div class="mb-2">
       <h1 v-if="facility">{{ facility.description }}</h1>
-      <BaseSkeleText v-else class="mb-2 h-8 w-1/4" />
+      <USkeleton v-else class="mb-2 h-8 w-1/4" />
       <h5 v-if="facility">
         {{ facility.id }}
       </h5>
-      <BaseSkeleText v-else class="h-4 w-1/2" />
+      <USkeleton v-else class="h-4 w-1/2" />
     </div>
 
     <div class="mb-6"><BaseTabsNavigation :tabs="tabs" /></div>
@@ -21,7 +21,6 @@
 <script lang="ts">
 import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import BaseTabsNavigation from "~/components/base/BaseTabsNavigation.vue";
 import DashboardAlerts from "~/components/DashboardAlerts.vue";
 import useApi from "~/composables/useApi";
@@ -32,7 +31,6 @@ import { type TabItem } from "~/interfaces/tabs";
 export default defineComponent({
   components: {
     DashboardAlerts,
-    BaseSkeleText,
     BaseTabsNavigation,
   },
   setup() {

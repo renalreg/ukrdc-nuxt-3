@@ -69,11 +69,11 @@
     <!-- Header -->
     <div class="mb-6">
       <h1 v-if="record">Work Item {{ record.id }} {{ statusString }}</h1>
-      <BaseSkeleText v-else class="mb-2 h-8 w-1/4" />
+      <USkeleton v-else class="mb-2 h-8 w-1/4" />
       <h5 v-if="record">
         {{ record.description }}
       </h5>
-      <BaseSkeleText v-else class="h-4 w-1/2" />
+      <USkeleton v-else class="h-4 w-1/2" />
     </div>
 
     <!-- Info Cards -->
@@ -402,7 +402,6 @@ import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import BaseItemPaginator from "~/components/base/BaseItemPaginator.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import BaseTable from "~/components/base/BaseTable.vue";
 import BaseTextArea from "~/components/base/BaseTextArea.vue";
 import IconArrowTopRightOnSquare from "~/components/icons/hero/20/solid/IconArrowTopRightOnSquare.vue";
@@ -433,7 +432,6 @@ interface AvailableActions {
 export default defineComponent({
   components: {
     BaseButton,
-    BaseSkeleText,
     BaseItemPaginator,
     BaseTextArea,
     BaseTable,

@@ -43,17 +43,17 @@
           <BaseCardDescriptionItem>
             <dt>Environment</dt>
             <dd v-if="serverInfo">{{ serverInfo.deploymentEnv }}</dd>
-            <BaseSkeleText v-else class="mb-2 h-6 w-3/4" />
+            <USkeleton v-else class="mb-2 h-6 w-3/4" />
           </BaseCardDescriptionItem>
           <BaseCardDescriptionItem>
             <dt>Version Reference</dt>
             <dd v-if="serverInfo">{{ serverInfo.githubRef }}</dd>
-            <BaseSkeleText v-else class="mb-2 h-6 w-3/4" />
+            <USkeleton v-else class="mb-2 h-6 w-3/4" />
           </BaseCardDescriptionItem>
           <BaseCardDescriptionItem>
             <dt>Version Hash</dt>
             <dd v-if="serverInfo">{{ serverInfo.githubSha }}</dd>
-            <BaseSkeleText v-else class="mb-2 h-6 w-3/4" />
+            <USkeleton v-else class="mb-2 h-6 w-3/4" />
           </BaseCardDescriptionItem>
         </BaseCardDescriptionList>
       </UCard>
@@ -69,13 +69,11 @@ import { type SystemInfoSchema } from "@ukkidney/ukrdc-axios-ts";
 import BaseButton from "~/components/base/BaseButton.vue";
 import BaseCardDescriptionItem from "~/components/base/BaseCardDescriptionItem.vue";
 import BaseCardDescriptionList from "~/components/base/BaseCardDescriptionList.vue";
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import useApi from "~/composables/useApi";
 
 export default defineComponent({
   components: {
     BaseButton,
-    BaseSkeleText,
     BaseCardDescriptionList,
     BaseCardDescriptionItem,
   },

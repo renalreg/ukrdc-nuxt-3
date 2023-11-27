@@ -36,8 +36,8 @@
             </p>
           </div>
           <div v-else>
-            <BaseSkeleText class="mb-2 h-8 w-24" />
-            <BaseSkeleText class="h-6 w-32" />
+            <USkeleton class="mb-2 h-8 w-24" />
+            <USkeleton class="h-6 w-32" />
           </div>
         </div>
         <div
@@ -71,14 +71,12 @@
 <script lang="ts">
 
 import BaseButton from "~/components/base/BaseButton.vue";
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import useAuth from "~/composables/useAuth";
 import usePermissions from "~/composables/usePermissions";
 
 export default defineComponent({
   components: {
     BaseButton,
-    BaseSkeleText,
   },
   setup() {
     const runtimeConfig = useRuntimeConfig()

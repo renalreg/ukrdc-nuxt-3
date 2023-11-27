@@ -76,9 +76,9 @@
       </li>
     </ul>
     <div v-else>
-      <BaseSkeleText class="mb-2 h-6 w-full" />
-      <BaseSkeleText class="mb-2 h-6 w-1/2" />
-      <BaseSkeleText class="mb-2 h-6 w-3/4" />
+      <USkeleton class="mb-2 h-6 w-full" />
+      <USkeleton class="mb-2 h-6 w-1/2" />
+      <USkeleton class="mb-2 h-6 w-3/4" />
     </div>
   </UCard>
 </template>
@@ -89,7 +89,6 @@ import {
   type WorkItemSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import {
   collectionIsUnresolved,
   workItemIsMergable,
@@ -99,9 +98,6 @@ import {
 } from "~/helpers/workItemUtils";
 
 export default defineComponent({
-  components: {
-    BaseSkeleText,
-  },
   props: {
     item: {
       type: Object as () => WorkItemExtendedSchema,

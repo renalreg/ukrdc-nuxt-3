@@ -5,11 +5,11 @@
         <h1 v-if="message">
           {{ message.msgStatus === "ERROR" ? "Error" : "Message" }} {{ message.id }} from {{ message.facility }}
         </h1>
-        <BaseSkeleText v-else class="mb-2 h-8 w-1/4" />
+        <USkeleton v-else class="mb-2 h-8 w-1/4" />
         <h5 v-if="message" class="line-clamp-1">
           {{ messageSummary }}
         </h5>
-        <BaseSkeleText v-else class="h-4 w-1/2" />
+        <USkeleton v-else class="h-4 w-1/2" />
       </div>
     </div>
 
@@ -20,15 +20,11 @@
 <script lang="ts">
 import { type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import useApi from "~/composables/useApi";
 import useSensitive from "~/composables/useSensitive";
 import { makeMessageSummary } from "~/helpers/messageUtils";
 
 export default defineComponent({
-  components: {
-    BaseSkeleText,
-  },
   setup() {
     const route = useRoute();
     const { messagesApi } = useApi();

@@ -5,7 +5,7 @@
           Demographic statistics calulated from a population of
           <b>{{ facilityStatsDemographics.metadata.population }}</b> patients.
         </div>
-        <BaseSkeleText v-else class="h-8 w-1/2" />
+        <USkeleton v-else class="h-8 w-1/2" />
     </UCard>
 
     <Labelled2dBarPlot
@@ -33,7 +33,6 @@
 <script lang="ts">
 import { type DemographicsStats, type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import Labelled2dBarPlot from "~/components/plots/stats/Labelled2dBarPlot.vue";
 import Labelled2dPiePlot from "~/components/plots/stats/Labelled2dPiePlot.vue";
 import useApi from "~/composables/useApi";
@@ -42,7 +41,6 @@ export default defineComponent({
   components: {
     Labelled2dBarPlot,
     Labelled2dPiePlot,
-    BaseSkeleText,
   },
   props: {
     facility: {

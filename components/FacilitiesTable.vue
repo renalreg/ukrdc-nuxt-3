@@ -59,12 +59,12 @@ Table of facilities and their basic statistics
       </thead>
       <tbody v-if="!facilities" class="divide-y divide-gray-300 bg-white">
         <tr v-for="n in 20" :key="n">
-          <td><BaseSkeleText class="h-6 w-12" /></td>
-          <td><BaseSkeleText class="h-6 w-64" /></td>
-          <td><BaseSkeleText class="h-6 w-12" /></td>
-          <td><BaseSkeleText class="h-6 w-12" /></td>
-          <td><BaseSkeleText class="h-6 w-12" /></td>
-          <td><BaseSkeleText class="h-6 w-32" /></td>
+          <td><USkeleton class="h-6 w-12" /></td>
+          <td><USkeleton class="h-6 w-64" /></td>
+          <td><USkeleton class="h-6 w-12" /></td>
+          <td><USkeleton class="h-6 w-12" /></td>
+          <td><USkeleton class="h-6 w-12" /></td>
+          <td><USkeleton class="h-6 w-32" /></td>
         </tr>
       </tbody>
       <tbody v-else class="divide-y divide-gray-300 bg-white">
@@ -119,7 +119,6 @@ Table of facilities and their basic statistics
 import { type FacilityDetailsSchema, FacilitySorterEnum, OrderBy } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseFilterIcon from "~/components/base/BaseFilterIcon.vue";
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import BaseSortIcon from "~/components/base/BaseSortIcon.vue";
 import BaseTable from "~/components/base/BaseTable.vue";
 import IconExclamationTriangle from "~/components/icons/hero/24/outline/IconExclamationTriangle.vue";
@@ -141,7 +140,6 @@ export default defineComponent({
     BaseFilterIcon,
     IconExclamationTriangle,
     SearchBar,
-    BaseSkeleText,
   },
   props: {
     includeEmpty: {

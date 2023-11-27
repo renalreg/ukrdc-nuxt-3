@@ -7,14 +7,14 @@
           <dd v-if="connectorMessage">
             {{ connectorMessage.connectorName }}
           </dd>
-          <BaseSkeleText v-else class="h-6 w-full" />
+          <USkeleton v-else class="h-6 w-full" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Send Attempts</dt>
           <dd v-if="connectorMessage">
             {{ connectorMessage.sendAttempts }}
           </dd>
-          <BaseSkeleText v-else class="h-6 w-full" />
+          <USkeleton v-else class="h-6 w-full" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Status</dt>
@@ -30,7 +30,7 @@
               >Success</span
             >
           </dd>
-          <BaseSkeleText v-else class="h-6 w-full" />
+          <USkeleton v-else class="h-6 w-full" />
         </BaseDescriptionListGridItem>
       </BaseDescriptionListGrid>
       <slot></slot>
@@ -84,7 +84,6 @@ import {
 import BaseCodeReader from "~/components/base/BaseCodeReader.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import BaseTabsModel from "~/components/base/BaseTabsModel.vue";
 import { connectorMessageError } from "~/helpers/mirthUtils";
 import { type ModelTabItem } from "~/interfaces/tabs";
@@ -98,7 +97,6 @@ interface ConnectorMessageDataTabs {
 
 export default defineComponent({
   components: {
-    BaseSkeleText,
     BaseDescriptionListGrid,
     BaseDescriptionListGridItem,
     BaseCodeReader,

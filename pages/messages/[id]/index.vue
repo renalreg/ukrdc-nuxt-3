@@ -8,19 +8,19 @@
           <dd v-if="message">
             <BadgeMessageStatus class="mr-2 flex-shrink" :message="message" />
           </dd>
-          <BaseSkeleText v-else class="h-6 w-full" />
+          <USkeleton v-else class="h-6 w-full" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Received</dt>
           <dd v-if="message">
             {{ message.received ? formatDate(message.received) : "Unknown" }}
           </dd>
-          <BaseSkeleText v-else class="h-6 w-full" />
+          <USkeleton v-else class="h-6 w-full" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Facility</dt>
           <SendingFacilityLink v-if="message" :code="message.facility" />
-          <BaseSkeleText v-else class="h-6 w-full" />
+          <USkeleton v-else class="h-6 w-full" />
         </BaseDescriptionListGridItem>
 
         <BaseDescriptionListGridItem>
@@ -41,7 +41,7 @@
               </p>
             </BaseInfoTooltip>
           </dd>
-          <BaseSkeleText v-else class="h-6 w-full" />
+          <USkeleton v-else class="h-6 w-full" />
         </BaseDescriptionListGridItem>
       </BaseDescriptionListGrid>
     </UCard>
@@ -142,7 +142,6 @@ import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.v
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import MirthMessageListItem from "~/components/MirthMessageListItem.vue";
 import PatientRecordsListItem from "~/components/patientrecord/PatientRecordsListItem.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
@@ -155,7 +154,6 @@ import { saveAs } from "~/helpers/fileUtils";
 
 export default defineComponent({
   components: {
-    BaseSkeleText,
     BaseSkeleListItem,
     BaseDescriptionListGrid,
     BaseDescriptionListGridItem,

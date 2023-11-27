@@ -15,7 +15,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
             <h1 v-if="counts" class="text-green-600">
               {{ counts.distinctPatients }}
             </h1>
-            <BaseSkeleText v-else class="h-8 w-24" />
+            <USkeleton v-else class="h-8 w-24" />
           </div>
         </div>
         <template #footer>
@@ -40,7 +40,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
             >
               {{ counts.openWorkitems }}
             </h1>
-            <BaseSkeleText v-else class="h-8 w-24" />
+            <USkeleton v-else class="h-8 w-24" />
           </div>
         </div>
         <template #footer>
@@ -67,7 +67,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
             >
               {{ counts.patientsReceivingErrors }}
             </h1>
-            <BaseSkeleText v-else class="h-8 w-24" />
+            <USkeleton v-else class="h-8 w-24" />
           </div>
         </div>
         <template #footer>
@@ -79,7 +79,6 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
     </div>
     <!-- Graphs -->
     <div class="flex flex-col gap-4">
-
       <!-- Error history -->
       <UCard>
         <template #header>
@@ -95,7 +94,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
           hovertemplate="<b>%{x}</b><br>New errors: %{y}<extra></extra>"
           @click="errorHistoryPointClickHandler"
         />
-        <BaseSkeleDiv v-else class="h-64 w-full" />
+        <USkeleton v-else class="h-64 w-full" />
       </UCard>
 
       <!-- WorkItems history -->
@@ -113,19 +112,19 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
           hovertemplate="<b>%{x}</b><br>New work items: %{y}<extra></extra>"
           @click="workitemHistoryPointClickHandler"
         />
-        <BaseSkeleDiv v-else class="h-64 w-full" />
+        <USkeleton v-else class="h-64 w-full" />
       </UCard>
-  
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { type AdminCountsSchema, type HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type AdminCountsSchema,
+  type HistoryPoint,
+} from "@ukkidney/ukrdc-axios-ts";
 import { type PlotDatum } from "plotly.js-dist-min";
 
-import BaseSkeleDiv from "~/components/base/BaseSkeleDiv.vue";
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import IconExclamationTriangle from "~/components/icons/hero/24/outline/IconExclamationTriangle.vue";
 import IconLink from "~/components/icons/hero/24/outline/IconLink.vue";
 import IconUsers from "~/components/icons/hero/24/outline/IconUsers.vue";
@@ -135,8 +134,6 @@ import { getPointDateRange, unpackHistoryPoints } from "~/helpers/chartUtils";
 
 export default defineComponent({
   components: {
-    BaseSkeleText,
-    BaseSkeleDiv,
     IconExclamationTriangle,
     IconLink,
     IconUsers,

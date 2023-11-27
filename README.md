@@ -24,6 +24,7 @@
 - [ ] Move all paginator components into card footer
 - [ ] Check all `sensitive` class components
 - [ ] (Eventually) fix https://github.com/nathanreyes/v-calendar/issues/1415
+- [ ] _Maybe_ replace in-house paginator with https://ui.nuxt.com/navigation/pagination#props
 
 - [ ] Replace all components available in NuxtUI with their NuxtUI versions
 

@@ -6,7 +6,7 @@
         <dd v-if="message && !isEmptyObject(message)">
           {{ message.messageId }}
         </dd>
-        <BaseSkeleText v-else class="h-6 w-full" />
+        <USkeleton v-else class="h-6 w-full" />
       </BaseDescriptionListGridItem>
       <BaseDescriptionListGridItem>
         <dt>Processed</dt>
@@ -14,14 +14,14 @@
           {{ message.processed ? "Yes" : "No" }}
           {{ hasErrors ? "(with errors)" : "" }}
         </dd>
-        <BaseSkeleText v-else class="h-6 w-full" />
+        <USkeleton v-else class="h-6 w-full" />
       </BaseDescriptionListGridItem>
       <BaseDescriptionListGridItem>
         <dt>Channel</dt>
         <dd v-if="message && !isEmptyObject(message)">
           {{ channelName }}
         </dd>
-        <BaseSkeleText v-else class="h-6 w-full" />
+        <USkeleton v-else class="h-6 w-full" />
       </BaseDescriptionListGridItem>
     </BaseDescriptionListGrid>
     <slot></slot>
@@ -33,13 +33,11 @@ import { type ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
-import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import { messageHasErrors } from "~/helpers/mirthUtils";
 import { isEmptyObject } from "~/helpers/objectUtils";
 
 export default defineComponent({
   components: {
-    BaseSkeleText,
     BaseDescriptionListGrid,
     BaseDescriptionListGridItem,
   },

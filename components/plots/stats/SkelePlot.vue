@@ -1,21 +1,17 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <BaseSkeleDiv class="h-72 w-full">
+  <USkeleton class="h-72 w-full">
     <div class="flex h-full w-full flex-col items-center justify-center">
       <p>{{ loadingText }}</p>
     </div>
-  </BaseSkeleDiv>
+  </USkeleton>
 </template>
 
 <script lang="ts">
 
-import BaseSkeleDiv from "~/components/base/BaseSkeleDiv.vue";
 import useInterval from "~/composables/useInterval";
 
 export default defineComponent({
-  components: {
-    BaseSkeleDiv,
-  },
   setup() {
     const { timeSinceMount } = useInterval();
 
