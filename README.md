@@ -20,6 +20,9 @@
 - [x] Fix toggle tabs (e.g. Work Item status selector)
 - [x] Fix checkbox models (e.g. data files status filter)
 - [ ] Fix name display component
+- [ ] Fix BaseCardDescriptionList style
+- [ ] Move all paginator components into card footer
+- [ ] Check all `sensitive` class components
 - [ ] (Eventually) fix https://github.com/nathanreyes/v-calendar/issues/1415
 
 - [ ] Replace all components available in NuxtUI with their NuxtUI versions

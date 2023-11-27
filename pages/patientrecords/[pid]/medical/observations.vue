@@ -30,7 +30,7 @@
         </BaseTable>
 
         <div v-if="observations && observations.length > 0">
-          <BaseCard>
+          <UCard>
             <BasePaginator
               :page="page"
               :size="size"
@@ -39,7 +39,7 @@
               @prev="page--"
               @jump="page = $event"
             />
-          </BaseCard>
+          </UCard>
         </div>
       </div>
     </BaseLoadingContainer>
@@ -49,7 +49,6 @@
 <script lang="ts">
 import { type ObservationSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSelectSearchable from "~/components/base/BaseSelectSearchable.vue";
@@ -62,7 +61,6 @@ import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseLoadingContainer,
     BaseTable,
     BasePaginator,

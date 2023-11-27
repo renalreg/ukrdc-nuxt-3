@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseCard class="mb-4 !overflow-visible px-4 pt-4">
+    <UCard class="mb-4 !overflow-visible">
       <SearchBar v-model="searchboxString" :focus="true" @submit="searchSubmit" />
       <BaseCollapseHeader v-model="advancedOpen" class="mb-4" label="More Options"></BaseCollapseHeader>
       <!-- More Options -->
@@ -22,20 +22,20 @@
           <BaseCheckpill v-model="extraRecordTypes" label="SURVEY" value="SURVEY" colour="red" />
         </div>
       </div>
-    </BaseCard>
+    </UCard>
 
     <!-- If loading -->
     <div v-if="searchInProgress">
-      <BaseCard>
+      <UCard :ui="{body: { padding: '' }}">
         <!-- Skeleton results -->
         <ul class="divide-y divide-gray-300">
           <BaseSkeleListItem v-for="n in 10" :key="n" />
         </ul>
-      </BaseCard>
+      </UCard>
     </div>
     <!-- If not loading, and results are not empty -->
     <div v-else-if="records.length > 0">
-      <BaseCard>
+      <UCard :ui="{body: { padding: '' }}">
         <!-- Real results -->
         <ul class="divide-y divide-gray-300">
           <PatientRecordsListItem
@@ -57,7 +57,7 @@
           @prev="page--"
           @jump="page = $event"
         />
-      </BaseCard>
+      </UCard>
     </div>
     <!-- If not loading, and results are empty -->
     <div v-else class="mt-2 text-center text-gray-500">
@@ -84,7 +84,6 @@
 <script lang="ts">
 import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseCheckpill from "~/components/base/BaseCheckpill.vue";
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
@@ -101,7 +100,6 @@ import useFacilities from "~/composables/useFacilities";
 export default defineComponent({
   components: {
     PatientRecordsListItem,
-    BaseCard,
     BaseSkeleListItem,
     BasePaginator,
     BaseCheckpill,

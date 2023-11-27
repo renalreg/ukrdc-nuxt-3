@@ -1,34 +1,66 @@
 <template>
   <div>
     <!-- Modals -->
-    <BaseModal v-if="hasPermission('ukrdc:workitems:write')" ref="updateWorkItemModal">
+    <BaseModal
+      v-if="hasPermission('ukrdc:workitems:write')"
+      ref="updateWorkItemModal"
+    >
       <div class="mb-4 text-left">
         <div class="mb-4">Add Work Item comment</div>
-        <BaseTextArea v-model="customComment" :max-length="100" rows="3"></BaseTextArea>
+        <BaseTextArea
+          v-model="customComment"
+          :max-length="100"
+          rows="3"
+        ></BaseTextArea>
       </div>
 
       <!-- Allow setting as WIP if not already closed -->
-      <BaseCheckbox v-if="record && record.status !== 3" v-model="isWIP" label="Mark as work-in-progress (WIP)" />
+      <BaseCheckbox
+        v-if="record && record.status !== 3"
+        v-model="isWIP"
+        label="Mark as work-in-progress (WIP)"
+      />
 
       <div class="flex justify-end">
         <BaseButton @click="updateWorkItemModal?.hide()">Cancel</BaseButton>
-        <BaseButton colour="indigo" class="ml-2" type="submit" @click="updateWorkItem()"> Save </BaseButton>
+        <BaseButton
+          colour="indigo"
+          class="ml-2"
+          type="submit"
+          @click="updateWorkItem()"
+        >
+          Save
+        </BaseButton>
       </div>
     </BaseModal>
 
     <BaseModal v-if="hasPermission('ukrdc:workitems:write')" ref="closeModal">
       <div class="text-left">
-        <div class="mb-4">{{ closeMessageOverride ? closeMessageOverride : "Close the Work Item" }}</div>
+        <div class="mb-4">
+          {{
+            closeMessageOverride ? closeMessageOverride : "Close the Work Item"
+          }}
+        </div>
 
         <label>
           Comments
-          <BaseTextArea v-model="customComment" :max-length="100" rows="3"></BaseTextArea>
+          <BaseTextArea
+            v-model="customComment"
+            :max-length="100"
+            rows="3"
+          ></BaseTextArea>
         </label>
       </div>
 
       <div class="flex justify-end">
         <BaseButton @click="closeModal?.hide()"> Cancel </BaseButton>
-        <BaseButton :disabled="!customComment" type="submit" class="ml-3" colour="red" @click="handleCloseWorkItem()">
+        <BaseButton
+          :disabled="!customComment"
+          type="submit"
+          class="ml-3"
+          colour="red"
+          @click="handleCloseWorkItem()"
+        >
           Close Work Item
         </BaseButton>
       </div>
@@ -105,26 +137,33 @@
         <p>
           This work item was raised because demographic attributes on
           <span class="personrecord-label">{{
-            record.type === 9 ? "one of the incoming data files" : "the Person Record"
+            record.type === 9
+              ? "one of the incoming data files"
+              : "the Person Record"
           }}</span>
-          below did not match the <span class="masterrecord-label">Master Record</span> it is linked to.
+          below did not match the
+          <span class="masterrecord-label">Master Record</span> it is linked to.
         </p>
         <p v-if="record.type !== 9 && messages && messages.length > 0">
           This may be because a <b>Related Data File</b> below updated the
-          <span class="masterrecord-label">Master Record</span>, and this update means that it no longer matches the
+          <span class="masterrecord-label">Master Record</span>, and this update
+          means that it no longer matches the
           <span class="personrecord-label">Person Record</span> below.
         </p>
       </div>
 
       <div v-if="record.attributes" class="mb-8">
         <p class="mb-4 font-medium">
-          Values of mismatching attributes <em>at the time this work item was first raised.</em>
+          Values of mismatching attributes
+          <em>at the time this work item was first raised.</em>
         </p>
         <BaseTable class="sensitive">
           <thead class="bg-gray-50">
             <tr>
               <th scope="col">Mismatched Attribute</th>
-              <th scope="col">{{ record.type === 9 ? "Incoming" : "Person Record" }} Value</th>
+              <th scope="col">
+                {{ record.type === 9 ? "Incoming" : "Person Record" }} Value
+              </th>
               <th scope="col">Master Recoed Value</th>
             </tr>
           </thead>
@@ -156,26 +195,51 @@
             </tr>
             <tr v-if="record.attributes.dateOfBirth">
               <td class="font-medium">Date of Birth</td>
-              <td>{{ formatDate(record.attributes.dateOfBirth.split(":")[0], false) }}</td>
-              <td>{{ formatDate(record.attributes.dateOfBirth.split(":")[1], false) }}</td>
+              <td>
+                {{
+                  formatDate(record.attributes.dateOfBirth.split(":")[0], false)
+                }}
+              </td>
+              <td>
+                {{
+                  formatDate(record.attributes.dateOfBirth.split(":")[1], false)
+                }}
+              </td>
             </tr>
             <tr v-if="record.attributes.dateOfDeath">
               <td class="font-medium">Date of Death</td>
-              <td>{{ formatDate(record.attributes.dateOfDeath.split(":")[0], false) }}</td>
-              <td>{{ formatDate(record.attributes.dateOfDeath.split(":")[1], false) }}</td>
+              <td>
+                {{
+                  formatDate(record.attributes.dateOfDeath.split(":")[0], false)
+                }}
+              </td>
+              <td>
+                {{
+                  formatDate(record.attributes.dateOfDeath.split(":")[1], false)
+                }}
+              </td>
             </tr>
             <tr v-if="record.attributes.gender">
               <td class="font-medium">Gender</td>
-              <td>{{ formatGender(record.attributes.gender.split(":")[0]) }}</td>
-              <td>{{ formatGender(record.attributes.gender.split(":")[1]) }}</td>
+              <td>
+                {{ formatGender(record.attributes.gender.split(":")[0]) }}
+              </td>
+              <td>
+                {{ formatGender(record.attributes.gender.split(":")[1]) }}
+              </td>
             </tr>
           </tbody>
         </BaseTable>
       </div>
 
       <div class="mb-4">
-        <p class="font-medium">Summary of currently stored record demographics.</p>
-        <p>If these now match, this work item can likely be closed with no further action.</p>
+        <p class="font-medium">
+          Summary of currently stored record demographics.
+        </p>
+        <p>
+          If these now match, this work item can likely be closed with no
+          further action.
+        </p>
       </div>
 
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -189,19 +253,29 @@
             :full="showDestinationPersons"
           />
           <!-- Missing incoming person card -->
-          <div v-else class="rounded-md bg-yellow-50 p-4 font-medium text-yellow-800">
+          <div
+            v-else
+            class="rounded-md bg-yellow-50 p-4 font-medium text-yellow-800"
+          >
             <span v-if="record.type === 9">
-              Incoming file was rejected, so no Person record exists for this work item yet.
+              Incoming file was rejected, so no Person record exists for this
+              work item yet.
               <br />
               See Related Data Files below to identify the rejected file.
             </span>
-            <span v-else> Person record associated with this work item is missing, and may have been deleted. </span>
+            <span v-else>
+              Person record associated with this work item is missing, and may
+              have been deleted.
+            </span>
           </div>
         </div>
 
         <div id="destinationCard">
           <!-- Destination record card -->
-          <NuxtLink v-if="record.destination.masterRecord" :to="`/masterrecords/${record.destination.masterRecord.id}`">
+          <NuxtLink
+            v-if="record.destination.masterRecord"
+            :to="`/masterrecords/${record.destination.masterRecord.id}`"
+          >
             <MasterRecordCard
               :record="record.destination.masterRecord"
               :label="`Destination Master Record ${record.destination.masterRecord.id}`"
@@ -229,82 +303,101 @@
           >
             <MasterRecordCard
               :record="record.incoming.masterRecords[relatedRecordsIndex]"
-              :label="`Incoming Master Record ${relatedRecordsIndex + 1} of ${record.incoming.masterRecords.length}`"
+              :label="`Incoming Master Record ${relatedRecordsIndex + 1} of ${
+                record.incoming.masterRecords.length
+              }`"
             />
           </NuxtLink>
           <!-- Empty incoming records card -->
-          <div v-else class="rounded-md bg-red-50 p-4 font-medium text-red-800">No new incoming Master Records</div>
-          <NuxtLink v-if="record.destination.masterRecord" :to="`/masterrecords/${record.destination.masterRecord.id}`">
-            <MasterRecordCard :record="record.destination.masterRecord" label="Destination Master Record" />
+          <div v-else class="rounded-md bg-red-50 p-4 font-medium text-red-800">
+            No new incoming Master Records
+          </div>
+          <NuxtLink
+            v-if="record.destination.masterRecord"
+            :to="`/masterrecords/${record.destination.masterRecord.id}`"
+          >
+            <MasterRecordCard
+              :record="record.destination.masterRecord"
+              label="Destination Master Record"
+            />
           </NuxtLink>
         </div>
-        <BaseCard v-if="record.incoming.masterRecords.length > 1" class="mt-2 pl-4">
+        <UCard
+          :ui="{ body: { padding: '' } }"
+          v-if="record.incoming.masterRecords.length > 1"
+          class="mt-2 pl-4"
+        >
           <BaseItemPaginator
             v-model="relatedRecordsIndex"
             :total="record.incoming.masterRecords.length"
             item-label="Record"
-        /></BaseCard>
+        /></UCard>
       </div>
     </div>
 
     <!-- Related messages card -->
-    <div v-if="messages && messages.length > 0" class="mb-8">
-      <BaseCard>
-        <BaseCardHeader>
-          <h2>Related Data Files</h2>
-          <h6>
-            Data files received around the time the work item was first raised. One of these may be responsible for the
-            work item.
-          </h6>
-        </BaseCardHeader>
-        <ul class="divide-y divide-gray-300">
-          <li v-for="item in messages" :key="item.id" class="hover:bg-gray-50">
-            <NuxtLink :to="`/messages/${item.id}`">
-              <MessagesListItem :item="item" />
-            </NuxtLink>
-          </li>
-        </ul>
-        <BasePaginator
-          class="border-t border-gray-200 bg-white"
-          :jump-to-top="false"
-          :page="messagesPage"
-          :size="messagesSize"
-          :total="messagesTotal"
-          @next="messagesPage++"
-          @prev="messagesPage--"
-          @jump="messagesPage = $event"
-        />
-      </BaseCard>
-    </div>
+    <UCard
+      :ui="{ body: { padding: '' } }"
+      v-if="messages && messages.length > 0"
+      class="mb-8"
+    >
+      <template #header>
+        <h2>Related Data Files</h2>
+        <h6>
+          Data files received around the time the work item was first raised.
+          One of these may be responsible for the work item.
+        </h6>
+      </template>
+      <ul class="divide-y divide-gray-300">
+        <li v-for="item in messages" :key="item.id" class="hover:bg-gray-50">
+          <NuxtLink :to="`/messages/${item.id}`">
+            <MessagesListItem :item="item" />
+          </NuxtLink>
+        </li>
+      </ul>
+      <BasePaginator
+        class="border-t border-gray-200 bg-white"
+        :jump-to-top="false"
+        :page="messagesPage"
+        :size="messagesSize"
+        :total="messagesTotal"
+        @next="messagesPage++"
+        @prev="messagesPage--"
+        @jump="messagesPage = $event"
+      />
+    </UCard>
 
     <!-- Related Work Items  -->
-    <BaseCard v-if="workItemCollection.length > 0" class="mb-8">
+    <UCard :ui="{body: { padding: '' }}" v-if="workItemCollection.length > 0" class="mb-8">
       <!-- Card header -->
-      <BaseCardHeader>
+      <template #header>
         <h2>Related Work Items</h2>
         <h6>Work Items for the same patient, raised by the same event</h6>
-      </BaseCardHeader>
+      </template>
       <!-- Results list -->
       <ul class="divide-y divide-gray-300">
-        <li v-for="item in workItemCollection" :key="item.id" class="hover:bg-gray-50">
+        <li
+          v-for="item in workItemCollection"
+          :key="item.id"
+          class="hover:bg-gray-50"
+        >
           <NuxtLink :to="`/workitems/${item.id}`">
             <WorkItemsListItem :item="item" />
           </NuxtLink>
         </li>
       </ul>
-    </BaseCard>
-
-    <!-- Related errors card -->
-    <WorkItemRelatedErrorsList v-if="record" class="mb-8 mt-4" :workitem="record" :size="5" />
+    </UCard>
   </div>
 </template>
 
 <script lang="ts">
-import { type MessageSchema, type WorkItemExtendedSchema, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type MessageSchema,
+  type WorkItemExtendedSchema,
+  type WorkItemSchema,
+} from "@ukkidney/ukrdc-axios-ts";
 
 import BaseButton from "~/components/base/BaseButton.vue";
-import BaseCard from "~/components/base/BaseCard.vue";
-import BaseCardHeader from "~/components/base/BaseCardHeader.vue";
 import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import BaseItemPaginator from "~/components/base/BaseItemPaginator.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
@@ -320,7 +413,6 @@ import MessagesListItem from "~/components/messages/MessagesListItem.vue";
 import PersonRecordCard from "~/components/PersonRecordCard.vue";
 import WorkItemAdviceCard from "~/components/workitem/WorkItemAdviceCard.vue";
 import WorkItemDetailCard from "~/components/workitem/WorkItemDetailCard.vue";
-import WorkItemRelatedErrorsList from "~/components/workitem/WorkItemRelatedErrorsList.vue";
 import WorkItemsListItem from "~/components/workitem/WorkItemsListItem.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
@@ -341,8 +433,6 @@ interface AvailableActions {
 export default defineComponent({
   components: {
     BaseButton,
-    BaseCard,
-    BaseCardHeader,
     BaseSkeleText,
     BaseItemPaginator,
     BaseTextArea,
@@ -357,7 +447,6 @@ export default defineComponent({
     MasterRecordCard,
     WorkItemAdviceCard,
     WorkItemDetailCard,
-    WorkItemRelatedErrorsList,
     WorkItemsListItem,
     MessagesListItem,
   },
@@ -370,7 +459,7 @@ export default defineComponent({
 
     // Head
     useHead({
-      title: `Work Item ${route.params.id}`
+      title: `Work Item ${route.params.id}`,
     });
 
     // Work item record data

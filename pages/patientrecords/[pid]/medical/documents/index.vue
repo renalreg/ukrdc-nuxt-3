@@ -2,7 +2,7 @@
   <div class="sensitive">
     <BaseLoadingContainer :loading="!documents">
       <p v-if="documents && documents.length <= 0" class="text-center">No documents on record</p>
-      <BaseCard v-else>
+      <UCard :ui="{body: { padding: '' }}" v-else>
         <ul class="divide-y divide-gray-300">
           <li v-for="item in documents" :key="item.id" :item="item" class="hover:bg-gray-50">
             <NuxtLink :to="`/patientrecords/${$route.params.pid}/medical/documents/${item.id}`">
@@ -20,7 +20,7 @@
           @prev="page--"
           @jump="page = $event"
         />
-      </BaseCard>
+      </UCard>
     </BaseLoadingContainer>
   </div>
 </template>
@@ -28,7 +28,6 @@
 <script lang="ts">
 import { type DocumentSummarySchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import PatientRecordDocumentListItem from "~/components/patientrecord/medical/PatientRecordDocumentListItem.vue";
@@ -39,7 +38,6 @@ import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseLoadingContainer,
     BasePaginator,
     PatientRecordDocumentListItem,

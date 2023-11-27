@@ -41,7 +41,7 @@
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <!-- Code list -->
       <div :class="$route.params.id ? 'hidden lg:block' : 'block'">
-        <BaseCard>
+        <UCard :ui="{body: { padding: '' }}">
           <!-- Skeleton results -->
           <ul v-if="fetchInProgress" class="divide-y divide-gray-300">
             <BaseSkeleListItem v-for="n in 10" :key="n" />
@@ -64,7 +64,7 @@
             @prev="page--"
             @jump="page = $event"
           />
-        </BaseCard>
+        </UCard>
       </div>
       <!-- Code details -->
       <div class="sticky top-4 h-screen grow">
@@ -74,9 +74,9 @@
           :to="{ path: `/codes/`, query: $route.query }"
           >Back to List</BaseButton
         >
-        <BaseCard class="pt-4" :class="$route.params.id ? 'block' : 'hidden lg:block'">
+        <UCard :class="$route.params.id ? 'block' : 'hidden lg:block'">
           <NuxtPage />
-        </BaseCard>
+        </UCard>
       </div>
     </div>
   </div>
@@ -86,7 +86,6 @@
 import { type CodeSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseButton from "~/components/base/BaseButton.vue";
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseMenu from "~/components/base/BaseMenu.vue";
 import BaseMenuItem from "~/components/base/BaseMenuItem.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
@@ -103,7 +102,6 @@ import { saveAs } from "~/helpers/fileUtils";
 export default defineComponent({
   components: {
     BaseButton,
-    BaseCard,
     BaseMenu,
     BaseMenuItem,
     BaseSkeleListItem,

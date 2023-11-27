@@ -67,7 +67,7 @@
           </BaseTable>
 
           <div v-if="results && results.length > 0" class="mt-4">
-            <BaseCard>
+            <UCard>
               <BasePaginator
                 :page="page"
                 :size="size"
@@ -76,7 +76,7 @@
                 @prev="page--"
                 @jump="page = $event"
               />
-            </BaseCard>
+            </UCard>
           </div>
         </div>
       </div>
@@ -93,7 +93,6 @@ import {
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseButton from "~/components/base/BaseButton.vue";
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
@@ -111,7 +110,6 @@ import { type ModalInterface } from "~/interfaces/modal";
 export default defineComponent({
   components: {
     BaseButton,
-    BaseCard,
     BaseLoadingContainer,
     BaseTable,
     BasePaginator,

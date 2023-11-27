@@ -1,79 +1,94 @@
 <template>
-  <BaseCard>
-    <BaseCardHeader><h2>Advice</h2></BaseCardHeader>
-    <BaseCardContent>
-      <ul v-if="item">
-        <li v-if="workItemAdvices.includes(2)">
-          <p>Related Work Items labelled UKRDC should be resolved first. See <b>Related Work Items</b> below.</p>
-        </li>
-        <li v-if="workItemAdvices.includes(4)">
-          <p>
-            You may need to use PatientView, RaDaR, or DemoGraphicGenerator.exe to issue a demographic update before
-            closing this Work Item.
-          </p>
-        </li>
-        <li v-if="workItemAdvices.includes(5)">
-          <p class="mb-1">
-            Check the <span class="font-bold text-indigo-600">Proposed Merge</span> below, then click
-            <span class="font-bold text-yellow-600">Merge Master Records</span> if the link is valid.
-          </p>
-          <p>You may need to issue demographic updates before merging records.</p>
-        </li>
-        <li v-if="workItemAdvices.includes(6)">
-          <p>
-            This Work Item was recently merged, and can now be
-            <span class="font-bold text-green-600">closed</span>.
-          </p>
-        </li>
-        <li v-if="workItemAdvices.includes(7)">
-          <p>
-            A previous merge may have been completed but demographics on this Person record were not updated to match.
-          </p>
-        </li>
-        <li v-if="workItemAdvices.includes(9)">
-          <p>
-            See
-            <a
-              href="https://renalregistry.atlassian.net/wiki/spaces/TNG/pages/1986232419/Person+matched+by+facility+extract+and+national+id+-+not+matched+by+demographics"
-              target="_blank"
-            >
-              documentation on Confluence
-            </a>
-            for advice on resolving this work item.
-          </p>
-        </li>
-        <li v-if="workItemAdvices.includes(10)">
-          <p>This Work Item is already closed. No further action to be taken.</p>
-        </li>
-        <li v-if="workItemAdvices.includes(11)">
-          <p>Related Work Items are still unresolved. See <b>Related Work Items</b> below.</p>
-        </li>
-        <li v-if="workItemAdvices.includes(12)">
-          <p>The records associated with this Work Item may have already been merged.</p>
-          <p>
-            The destination record is missing, meaning it has either been deleted, or merged into another record
-            already.
-          </p>
-          <p>
-            This Work item can likely be <span class="font-bold text-green-600">closed</span> without further action.
-          </p>
-        </li>
-      </ul>
-      <div v-else>
-        <BaseSkeleText class="mb-2 h-6 w-full" />
-        <BaseSkeleText class="mb-2 h-6 w-1/2" />
-        <BaseSkeleText class="mb-2 h-6 w-3/4" />
-      </div>
-    </BaseCardContent>
-  </BaseCard>
+  <UCard>
+    <template #header>
+      <h2>Advice</h2>
+    </template>
+    <ul v-if="item">
+      <li v-if="workItemAdvices.includes(2)">
+        <p>
+          Related Work Items labelled UKRDC should be resolved first. See
+          <b>Related Work Items</b> below.
+        </p>
+      </li>
+      <li v-if="workItemAdvices.includes(4)">
+        <p>
+          You may need to use PatientView, RaDaR, or DemoGraphicGenerator.exe to
+          issue a demographic update before closing this Work Item.
+        </p>
+      </li>
+      <li v-if="workItemAdvices.includes(5)">
+        <p class="mb-1">
+          Check the
+          <span class="font-bold text-indigo-600">Proposed Merge</span> below,
+          then click
+          <span class="font-bold text-yellow-600">Merge Master Records</span> if
+          the link is valid.
+        </p>
+        <p>You may need to issue demographic updates before merging records.</p>
+      </li>
+      <li v-if="workItemAdvices.includes(6)">
+        <p>
+          This Work Item was recently merged, and can now be
+          <span class="font-bold text-green-600">closed</span>.
+        </p>
+      </li>
+      <li v-if="workItemAdvices.includes(7)">
+        <p>
+          A previous merge may have been completed but demographics on this
+          Person record were not updated to match.
+        </p>
+      </li>
+      <li v-if="workItemAdvices.includes(9)">
+        <p>
+          See
+          <a
+            href="https://renalregistry.atlassian.net/wiki/spaces/TNG/pages/1986232419/Person+matched+by+facility+extract+and+national+id+-+not+matched+by+demographics"
+            target="_blank"
+          >
+            documentation on Confluence
+          </a>
+          for advice on resolving this work item.
+        </p>
+      </li>
+      <li v-if="workItemAdvices.includes(10)">
+        <p>This Work Item is already closed. No further action to be taken.</p>
+      </li>
+      <li v-if="workItemAdvices.includes(11)">
+        <p>
+          Related Work Items are still unresolved. See
+          <b>Related Work Items</b> below.
+        </p>
+      </li>
+      <li v-if="workItemAdvices.includes(12)">
+        <p>
+          The records associated with this Work Item may have already been
+          merged.
+        </p>
+        <p>
+          The destination record is missing, meaning it has either been deleted,
+          or merged into another record already.
+        </p>
+        <p>
+          This Work item can likely be
+          <span class="font-bold text-green-600">closed</span> without further
+          action.
+        </p>
+      </li>
+    </ul>
+    <div v-else>
+      <BaseSkeleText class="mb-2 h-6 w-full" />
+      <BaseSkeleText class="mb-2 h-6 w-1/2" />
+      <BaseSkeleText class="mb-2 h-6 w-3/4" />
+    </div>
+  </UCard>
 </template>
 
 <script lang="ts">
-import { type WorkItemExtendedSchema, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type WorkItemExtendedSchema,
+  type WorkItemSchema,
+} from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
-import BaseCardContent from "~/components/base/BaseCardContent.vue";
-import BaseCardHeader from "~/components/base/BaseCardHeader.vue";
 import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import {
   collectionIsUnresolved,
@@ -85,9 +100,6 @@ import {
 
 export default defineComponent({
   components: {
-    BaseCard,
-    BaseCardContent,
-    BaseCardHeader,
     BaseSkeleText,
   },
   props: {

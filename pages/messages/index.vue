@@ -61,7 +61,7 @@
       />
     </div>
 
-    <BaseCard>
+    <UCard :ui="{body: { padding: '' }}">
       <!-- Skeleton results -->
       <div v-if="fetchInProgress">
         <ul v-if="fetchInProgress" class="divide-y divide-gray-300">
@@ -87,14 +87,13 @@
           @jump="page = $event"
         />
       </div>
-    </BaseCard>
+    </UCard>
   </div>
 </template>
 
 <script lang="ts">
 import { type MessageSchema, OrderBy } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
@@ -117,7 +116,6 @@ import { nowString } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseSkeleListItem,
     BasePaginator,
     BaseCheckbox,

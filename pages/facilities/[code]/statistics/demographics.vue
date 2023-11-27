@@ -1,14 +1,12 @@
 <template>
   <div>
-    <BaseCard class="mb-6">
-      <BaseCardContent>
+    <UCard class="mb-6">
         <div v-if="facilityStatsDemographics">
           Demographic statistics calulated from a population of
           <b>{{ facilityStatsDemographics.metadata.population }}</b> patients.
         </div>
         <BaseSkeleText v-else class="h-8 w-1/2" />
-      </BaseCardContent>
-    </BaseCard>
+    </UCard>
 
     <Labelled2dBarPlot
       id="ageDistributionPlot"
@@ -35,8 +33,6 @@
 <script lang="ts">
 import { type DemographicsStats, type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
-import BaseCardContent from "~/components/base/BaseCardContent.vue";
 import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import Labelled2dBarPlot from "~/components/plots/stats/Labelled2dBarPlot.vue";
 import Labelled2dPiePlot from "~/components/plots/stats/Labelled2dPiePlot.vue";
@@ -46,8 +42,6 @@ export default defineComponent({
   components: {
     Labelled2dBarPlot,
     Labelled2dPiePlot,
-    BaseCard,
-    BaseCardContent,
     BaseSkeleText,
   },
   props: {

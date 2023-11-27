@@ -10,15 +10,15 @@
 
     <!-- If loading -->
     <div v-if="fetchInProgress">
-      <BaseCard>
+      <UCard :ui="{body: { padding: '' }}">
         <!-- Skeleton results -->
         <ul class="divide-y divide-gray-300">
           <BaseSkeleListItem v-for="n in 10" :key="n" />
         </ul>
-      </BaseCard>
+      </UCard>
     </div>
     <div v-else>
-      <BaseCard>
+      <UCard :ui="{body: { padding: '' }}">
         <!-- Real results -->
         <ul class="divide-y divide-gray-300">
           <li v-for="record in records" :key="`record-${record.pid}`" class="hover:bg-gray-50">
@@ -40,7 +40,7 @@
           @prev="page--"
           @jump="page = $event"
         />
-      </BaseCard>
+      </UCard>
     </div>
   </div>
 </template>
@@ -48,7 +48,6 @@
 <script lang="ts">
 import { type FacilityDetailsSchema, type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import PatientRecordsListItem from "~/components/patientrecord/PatientRecordsListItem.vue";
@@ -57,7 +56,6 @@ import useApi from "~/composables/useApi";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseSkeleListItem,
     BasePaginator,
     PatientRecordsListItem,

@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <BaseCard>
+    <UCard :ui="{body: { padding: '' }}">
       <!-- Skeleton results -->
       <div v-if="auditFetchInProgress">
         <ul v-if="auditFetchInProgress" class="divide-y divide-gray-300">
@@ -51,7 +51,7 @@
           @jump="page = $event"
         />
       </div>
-    </BaseCard>
+    </UCard>
   </div>
 </template>
 
@@ -60,7 +60,6 @@ import { type AuditEventSchema, AuditOperation, OrderBy, type PatientRecordSchem
 import { Resource } from "@ukkidney/ukrdc-axios-ts/api";
 
 import AuditListItem from "~/components/AuditListItem.vue";
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSelect from "~/components/base/BaseSelect.vue";
@@ -76,7 +75,6 @@ import { nowString } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseSkeleListItem,
     BasePaginator,
     BaseDateRange,

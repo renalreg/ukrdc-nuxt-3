@@ -15,9 +15,9 @@
     </BaseTable>
 
     <div v-if="orders.length > 0" class="mt-4">
-      <BaseCard>
+      <UCard>
         <BasePaginator :page="page" :size="size" :total="total" @next="page++" @prev="page--" @jump="page = $event" />
-      </BaseCard>
+      </UCard>
     </div>
   </div>
 </template>
@@ -25,7 +25,6 @@
 <script lang="ts">
 import { type LabOrderShortSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseTable from "~/components/base/BaseTable.vue";
 import PatientRecordLabOrderRow from "~/components/patientrecord/medical/PatientRecordLabOrderRow.vue";
@@ -37,7 +36,6 @@ export default defineComponent({
   components: {
     PatientRecordLabOrderRow,
     BaseTable,
-    BaseCard,
     BasePaginator,
   },
   props: {

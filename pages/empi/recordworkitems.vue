@@ -12,15 +12,15 @@
 
     <!-- If loading -->
     <div v-if="fetchInProgress">
-      <BaseCard>
+      <UCard :ui="{body: { padding: '' }}">
         <!-- Skeleton results -->
         <ul class="divide-y divide-gray-300">
           <BaseSkeleListItem v-for="n in 10" :key="n" />
         </ul>
-      </BaseCard>
+      </UCard>
     </div>
     <div v-else>
-      <BaseCard>
+      <UCard :ui="{body: { padding: '' }}">
         <!-- Real results -->
         <ul class="divide-y divide-gray-300">
           <li v-for="group in groups" :key="`group-${group.masterRecord.id}`" class="hover:bg-gray-50">
@@ -43,7 +43,7 @@
           @prev="page--"
           @jump="page = $event"
         />
-      </BaseCard>
+      </UCard>
     </div>
   </div>
 </template>
@@ -51,7 +51,6 @@
 <script lang="ts">
 import { type WorkItemGroup } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import MasterRecordsListItem from "~/components/MasterRecordsListItem.vue";
@@ -61,7 +60,6 @@ import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseSkeleListItem,
     BasePaginator,
     MasterRecordsListItem,

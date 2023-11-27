@@ -5,59 +5,86 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
 <template>
   <div>
     <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-3">
-      <BaseCard>
-        <div class="flex items-center p-4">
+      <UCard>
+        <div class="flex items-center">
           <div class="flex-shrink-0">
             <IconUsers class="text-gray-600" />
           </div>
           <div class="ml-5 w-0 flex-1">
             <h5>Total Patients</h5>
-            <h1 v-if="counts" class="text-green-600">{{ counts.distinctPatients }}</h1>
+            <h1 v-if="counts" class="text-green-600">
+              {{ counts.distinctPatients }}
+            </h1>
             <BaseSkeleText v-else class="h-8 w-24" />
           </div>
         </div>
-        <BaseCardFooter>Total distinct UKRDC IDs in the database</BaseCardFooter>
-      </BaseCard>
+        <template #footer>
+          <p class="text-sm text-gray-600">
+            Total distinct UKRDC IDs in the database
+          </p>
+        </template>
+      </UCard>
 
-      <BaseCard>
-        <div class="flex items-center p-4">
+      <UCard>
+        <div class="flex items-center">
           <div class="flex-shrink-0">
             <IconLink class="text-gray-600" />
           </div>
           <div class="ml-5 w-0 flex-1">
             <h5>Open Work Items</h5>
-            <h1 v-if="counts" :class="counts.openWorkitems > 0 ? 'text-yellow-600' : 'text-green-600'">
+            <h1
+              v-if="counts"
+              :class="
+                counts.openWorkitems > 0 ? 'text-yellow-600' : 'text-green-600'
+              "
+            >
               {{ counts.openWorkitems }}
             </h1>
             <BaseSkeleText v-else class="h-8 w-24" />
           </div>
         </div>
-        <BaseCardFooter>Work Items currently open and uninvestigated</BaseCardFooter>
-      </BaseCard>
+        <template #footer>
+          <p class="text-sm text-gray-600">
+            Work Items currently open and uninvestigated
+          </p>
+        </template>
+      </UCard>
 
-      <BaseCard>
-        <div class="flex items-center p-4">
+      <UCard>
+        <div class="flex items-center">
           <div class="flex-shrink-0">
             <IconExclamationTriangle class="text-gray-600" />
           </div>
           <div class="ml-5 w-0 flex-1">
             <h5>Active Failing Records</h5>
-            <h1 v-if="counts" :class="counts.patientsReceivingErrors > 0 ? 'text-red-600' : 'text-green-600'">
+            <h1
+              v-if="counts"
+              :class="
+                counts.patientsReceivingErrors > 0
+                  ? 'text-red-600'
+                  : 'text-green-600'
+              "
+            >
               {{ counts.patientsReceivingErrors }}
             </h1>
             <BaseSkeleText v-else class="h-8 w-24" />
           </div>
         </div>
-        <BaseCardFooter>Records with active data files currently failing due to errors </BaseCardFooter>
-      </BaseCard>
+        <template #footer>
+          <p class="text-sm text-gray-600">
+            Records with active data files currently failing due to errors
+          </p>
+        </template>
+      </UCard>
     </div>
     <!-- Graphs -->
     <div class="flex flex-col gap-4">
+
       <!-- Error history -->
-      <BaseCard>
-        <BaseCardHeader>
+      <UCard>
+        <template #header>
           <h2>Error History</h2>
-        </BaseCardHeader>
+        </template>
         <BaseTimeSeriesLinePlot
           v-if="errorsHistory"
           id="error-history-time-series"
@@ -69,12 +96,13 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
           @click="errorHistoryPointClickHandler"
         />
         <BaseSkeleDiv v-else class="h-64 w-full" />
-      </BaseCard>
+      </UCard>
+
       <!-- WorkItems history -->
-      <BaseCard>
-        <BaseCardHeader>
+      <UCard>
+        <template #header>
           <h2>Work Items History</h2>
-        </BaseCardHeader>
+        </template>
         <BaseTimeSeriesLinePlot
           v-if="workitemsHistory"
           id="workitem-history-time-series"
@@ -86,18 +114,16 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
           @click="workitemHistoryPointClickHandler"
         />
         <BaseSkeleDiv v-else class="h-64 w-full" />
-      </BaseCard>
+      </UCard>
+  
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { AdminCountsSchema, HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
-import { PlotDatum } from "plotly.js-dist-min";
+import { type AdminCountsSchema, type HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
+import { type PlotDatum } from "plotly.js-dist-min";
 
-import BaseCard from "~/components/base/BaseCard.vue";
-import BaseCardFooter from "~/components/base/BaseCardFooter.vue";
-import BaseCardHeader from "~/components/base/BaseCardHeader.vue";
 import BaseSkeleDiv from "~/components/base/BaseSkeleDiv.vue";
 import BaseSkeleText from "~/components/base/BaseSkeleText.vue";
 import IconExclamationTriangle from "~/components/icons/hero/24/outline/IconExclamationTriangle.vue";
@@ -109,9 +135,6 @@ import { getPointDateRange, unpackHistoryPoints } from "~/helpers/chartUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
-    BaseCardHeader,
-    BaseCardFooter,
     BaseSkeleText,
     BaseSkeleDiv,
     IconExclamationTriangle,

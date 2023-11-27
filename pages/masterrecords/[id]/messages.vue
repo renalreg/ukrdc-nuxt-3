@@ -13,7 +13,7 @@
         />
     </div>
 
-    <BaseCard>
+    <UCard :ui="{body: { padding: '' }}" >
       <!-- Skeleton results -->
       <ul v-if="!messages" class="divide-y divide-gray-300">
         <BaseSkeleListItem v-for="n in 10" :key="n" />
@@ -35,14 +35,13 @@
         @prev="page--"
         @jump="page = $event"
       />
-    </BaseCard>
+    </UCard>
   </div>
 </template>
 
 <script lang="ts">
 import { type MasterRecordSchema, type MasterRecordStatisticsSchema, type MessageSchema, OrderBy } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
@@ -57,7 +56,6 @@ import { nowString } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseSkeleListItem,
     BasePaginator,
     BaseDateRange,

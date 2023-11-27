@@ -2,26 +2,26 @@
   <BaseLoadingContainer :loading="!(diagnoses && renalDiagnoses && causesOfDeath)">
     <div class="sensitive grid grid-cols-3 gap-4">
       <div class="col-span-3 lg:col-span-2">
-        <BaseCard>
-          <BaseCardHeader>
+        <UCard>
+          <template #header>
             <h2>Diagnoses</h2>
-          </BaseCardHeader>
-          <BaseCardContent v-if="diagnoses && diagnoses.length <= 0">
+          </template>
+          <div v-if="diagnoses && diagnoses.length <= 0">
             <p class="text-center">No diagnoses on record</p>
-          </BaseCardContent>
+          </div>
           <ul v-else class="divide-y divide-gray-300">
             <PatientRecordDiagnosisListItem v-for="diagnosis in diagnoses" :key="diagnosis.id" :item="diagnosis" />
           </ul>
-        </BaseCard>
+        </UCard>
       </div>
       <div class="col-span-3 flex flex-col gap-4 lg:col-span-1">
-        <BaseCard>
-          <BaseCardHeader>
+        <UCard>
+          <template #header>
             <h2>Renal Diagnoses</h2>
-          </BaseCardHeader>
-          <BaseCardContent v-if="renalDiagnoses && renalDiagnoses.length <= 0">
+          </template>
+          <div v-if="renalDiagnoses && renalDiagnoses.length <= 0">
             <p class="text-center">No renal diagnoses on record</p>
-          </BaseCardContent>
+          </div>
           <ul v-else class="divide-y divide-gray-300">
             <PatientRecordDiagnosisListItem
               v-for="renalDiagnosis in renalDiagnoses"
@@ -30,14 +30,14 @@
               :small="true"
             />
           </ul>
-        </BaseCard>
-        <BaseCard>
-          <BaseCardHeader>
+        </UCard>
+        <UCard>
+          <template #header>
             <h2>Cause of Death</h2>
-          </BaseCardHeader>
-          <BaseCardContent v-if="causesOfDeath && causesOfDeath.length <= 0">
+          </template>
+          <div v-if="causesOfDeath && causesOfDeath.length <= 0">
             <p>No cause of death on record</p>
-          </BaseCardContent>
+          </div>
           <ul v-else class="divide-y divide-gray-300">
             <PatientRecordCauseOfDeathListItem
               v-for="causeOfDeath in causesOfDeath"
@@ -46,7 +46,7 @@
               :small="true"
             />
           </ul>
-        </BaseCard>
+        </UCard>
       </div>
     </div>
   </BaseLoadingContainer>
@@ -60,9 +60,6 @@ import {
   type PatientRecordSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
-import BaseCardContent from "~/components/base/BaseCardContent.vue";
-import BaseCardHeader from "~/components/base/BaseCardHeader.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import PatientRecordCauseOfDeathListItem from "~/components/patientrecord/medical/PatientRecordCauseOfDeathListItem.vue";
 import PatientRecordDiagnosisListItem from "~/components/patientrecord/medical/PatientRecordDiagnosisListItem.vue";
@@ -74,9 +71,6 @@ export default defineComponent({
     BaseLoadingContainer,
     PatientRecordCauseOfDeathListItem,
     PatientRecordDiagnosisListItem,
-    BaseCard,
-    BaseCardHeader,
-    BaseCardContent,
   },
   props: {
     record: {

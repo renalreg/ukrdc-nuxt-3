@@ -5,9 +5,9 @@ Includes a header with the Link Record ID and functionality to Unlink the record
 
 <template>
   <div>
-    <BaseCard class="mb-2 flex items-center p-2">
+    <UCard class="mb-2 flex items-center p-2">
       <h5>Link Record {{ record.id }}</h5>
-    </BaseCard>
+    </UCard>
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <PersonRecordCard :record="record.person" />
@@ -21,7 +21,6 @@ Includes a header with the Link Record ID and functionality to Unlink the record
 <script lang="ts">
 import { type LinkRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
 import BaseTextArea from "~/components/base/BaseTextArea.vue";
 import MasterRecordCard from "~/components/MasterRecordCard.vue";
@@ -31,7 +30,6 @@ import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseTextArea,
     BaseModal,
     PersonRecordCard,

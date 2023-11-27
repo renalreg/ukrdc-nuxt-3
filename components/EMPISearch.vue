@@ -9,7 +9,7 @@ Mini (half-width) search bar and results pages used in the EMPI Merge page.
     </div>
 
     <div v-if="masterrecords.length > 0">
-      <BaseCard>
+      <UCard>
         <!-- Skeleton results -->
         <ul v-if="searchInProgress" class="divide-y divide-gray-300">
           <BaseSkeleListItem v-for="n in 10" :key="n" />
@@ -30,7 +30,7 @@ Mini (half-width) search bar and results pages used in the EMPI Merge page.
           @prev="page--"
           @jump="page = $event"
         />
-      </BaseCard>
+      </UCard>
     </div>
     <div v-else class="mt-2 text-center text-gray-500">
       <BaseLoadingIndicator v-if="searchQueryIsPopulated && searchInProgress"></BaseLoadingIndicator>
@@ -45,7 +45,6 @@ Mini (half-width) search bar and results pages used in the EMPI Merge page.
 <script lang="ts">
 import { type MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
@@ -57,7 +56,6 @@ import useApi from "~/composables/useApi";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseLoadingIndicator,
     BaseSkeleListItem,
     BasePaginator,

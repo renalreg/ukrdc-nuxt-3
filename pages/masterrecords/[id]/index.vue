@@ -1,88 +1,112 @@
 <template>
   <div>
     <!-- Description list -->
-    <BaseCard class="mb-4">
-      <BaseCardContent>
-        <BaseDescriptionListGrid>
-          <BaseDescriptionListGridItem>
-            <dt>Full Name</dt>
-            <dd>
-              <div class="flex items-center gap-2">
-                <div class="sensitive capitalize">
-                  {{ record.givenname?.toLowerCase() }} {{ record.surname?.toLowerCase() }}
-                </div>
-                <TracingBadge v-if="tracingRecord" :verified="nameMatchesTracing" />
+    <UCard class="mb-4">
+      <BaseDescriptionListGrid>
+        <BaseDescriptionListGridItem>
+          <dt>Full Name</dt>
+          <dd>
+            <div class="flex items-center gap-2">
+              <div class="sensitive capitalize">
+                {{ record.givenname?.toLowerCase() }}
+                {{ record.surname?.toLowerCase() }}
               </div>
-            </dd>
-          </BaseDescriptionListGridItem>
+              <TracingBadge
+                v-if="tracingRecord"
+                :verified="nameMatchesTracing"
+              />
+            </div>
+          </dd>
+        </BaseDescriptionListGridItem>
 
-          <BaseDescriptionListGridItem>
-            <dt>Gender</dt>
-            <dd>
-              <div class="flex items-center gap-2">
-                <div class="sensitive">{{ record.gender ? formatGender(record.gender) : "Unknown gender" }}</div>
-                <TracingBadge v-if="tracingRecord" :verified="tracingRecord.patient?.gender === record.gender" />
+        <BaseDescriptionListGridItem>
+          <dt>Gender</dt>
+          <dd>
+            <div class="flex items-center gap-2">
+              <div class="sensitive">
+                {{
+                  record.gender ? formatGender(record.gender) : "Unknown gender"
+                }}
               </div>
-            </dd>
-          </BaseDescriptionListGridItem>
+              <TracingBadge
+                v-if="tracingRecord"
+                :verified="tracingRecord.patient?.gender === record.gender"
+              />
+            </div>
+          </dd>
+        </BaseDescriptionListGridItem>
 
-          <BaseDescriptionListGridItem>
-            <dt>Date of Birth</dt>
-            <dd>
-              <div class="flex items-center gap-2">
-                <div class="sensitive">{{ formatDate(record.dateOfBirth, false) }}</div>
-                <TracingBadge v-if="tracingRecord" :verified="birthTimeMatchesTracing" />
+        <BaseDescriptionListGridItem>
+          <dt>Date of Birth</dt>
+          <dd>
+            <div class="flex items-center gap-2">
+              <div class="sensitive">
+                {{ formatDate(record.dateOfBirth, false) }}
               </div>
-            </dd>
-          </BaseDescriptionListGridItem>
+              <TracingBadge
+                v-if="tracingRecord"
+                :verified="birthTimeMatchesTracing"
+              />
+            </div>
+          </dd>
+        </BaseDescriptionListGridItem>
 
-          <BaseDescriptionListGridItem>
-            <dt class="font-medium text-gray-500">National ID</dt>
-            <dd>
-              <div class="flex items-center gap-2">
-                <div class="sensitive">{{ record.nationalid }}</div>
-                <TracingBadge
-                  v-if="tracingRecord && record.nationalidType !== 'UKRDC'"
-                  :verified="tracingRecord.localpatientid.trim() === record.nationalid.trim()"
-                />
-              </div>
-            </dd>
-          </BaseDescriptionListGridItem>
+        <BaseDescriptionListGridItem>
+          <dt class="font-medium text-gray-500">National ID</dt>
+          <dd>
+            <div class="flex items-center gap-2">
+              <div class="sensitive">{{ record.nationalid }}</div>
+              <TracingBadge
+                v-if="tracingRecord && record.nationalidType !== 'UKRDC'"
+                :verified="
+                  tracingRecord.localpatientid.trim() ===
+                  record.nationalid.trim()
+                "
+              />
+            </div>
+          </dd>
+        </BaseDescriptionListGridItem>
 
-          <BaseDescriptionListGridItem>
-            <dt>ID Type</dt>
-            <dd>{{ record.nationalidType }}</dd>
-          </BaseDescriptionListGridItem>
+        <BaseDescriptionListGridItem>
+          <dt>ID Type</dt>
+          <dd>{{ record.nationalidType }}</dd>
+        </BaseDescriptionListGridItem>
 
-          <BaseDescriptionListGridItem>
-            <dt>Last Updated</dt>
-            <dd>{{ formatDate(record.lastUpdated) }}</dd>
-          </BaseDescriptionListGridItem>
-        </BaseDescriptionListGrid>
-      </BaseCardContent>
-    </BaseCard>
+        <BaseDescriptionListGridItem>
+          <dt>Last Updated</dt>
+          <dd>{{ formatDate(record.lastUpdated) }}</dd>
+        </BaseDescriptionListGridItem>
+      </BaseDescriptionListGrid>
+    </UCard>
 
     <!-- Record message banners -->
     <NuxtLink :to="`/masterrecords/${record.id}/messages`">
-      <LatestMessageAlert :message="latestMessage" :is-loading="latestMessageIsLoading" />
+      <LatestMessageAlert
+        :message="latestMessage"
+        :is-loading="latestMessageIsLoading"
+      />
     </NuxtLink>
 
     <!-- Related Patient Records card -->
-    <BaseCard class="!overflow-visible">
-      <BaseCardHeader>
+    <UCard :ui="{body: { padding: '' }}" class="!overflow-visible mb-4">
+      <template #header>
         <h2>Patient Records</h2>
-      </BaseCardHeader>
-      <PatientRecordsGroupedList v-if="patientRecords" :records="patientRecords" @refresh="refreshRecords" />
+      </template>
+      <PatientRecordsGroupedList
+        v-if="patientRecords"
+        :records="patientRecords"
+        @refresh="refreshRecords"
+      />
       <ul v-else class="divide-y divide-gray-300">
         <BaseSkeleListItem v-for="n in 5" :key="n" />
       </ul>
-    </BaseCard>
+    </UCard>
 
     <!-- Related Master Records card -->
-    <BaseCard class="mt-4">
-      <BaseCardHeader>
+    <UCard :ui="{body: { padding: '' }}">
+      <template #header>
         <h2>Linked Master Records</h2>
-      </BaseCardHeader>
+      </template>
       <ul v-if="relatedRecords" class="divide-y divide-gray-300">
         <li
           v-for="item in relatedRecords"
@@ -91,7 +115,11 @@
           :class="item.id === record.id ? 'bg-gray-50' : 'hover:bg-gray-50'"
         >
           <NuxtLink
-            v-tooltip="item.id === record.id ? 'You are currently viewing this record' : null"
+            v-tooltip="
+              item.id === record.id
+                ? 'You are currently viewing this record'
+                : null
+            "
             :to="`/masterrecords/${item.id}`"
           >
             <MasterRecordsListItem :item="item" />
@@ -101,7 +129,7 @@
       <ul v-else class="divide-y divide-gray-300">
         <BaseSkeleListItem v-for="n in 2" :key="n" />
       </ul>
-    </BaseCard>
+    </UCard>
   </div>
 </template>
 
@@ -113,9 +141,6 @@ import {
   type PatientRecordSummarySchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
-import BaseCardContent from "~/components/base/BaseCardContent.vue";
-import BaseCardHeader from "~/components/base/BaseCardHeader.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
@@ -131,9 +156,6 @@ import { isTracing } from "~/helpers/recordUtils";
 export default defineComponent({
   components: {
     LatestMessageAlert: AlertFileLatest,
-    BaseCard,
-    BaseCardContent,
-    BaseCardHeader,
     BaseSkeleListItem,
     BaseDescriptionListGrid,
     BaseDescriptionListGridItem,
@@ -220,7 +242,9 @@ export default defineComponent({
     function givenNameMatchesTracing() {
       if (tracingRecord.value && tracingRecord.value.patient) {
         for (const name of tracingRecord.value.patient.names) {
-          if (props.record.givenname?.toLowerCase() === name.given.toLowerCase()) {
+          if (
+            props.record.givenname?.toLowerCase() === name.given.toLowerCase()
+          ) {
             return true;
           }
         }
@@ -231,7 +255,9 @@ export default defineComponent({
     function surnameMatchesTracing() {
       if (tracingRecord.value && tracingRecord.value.patient) {
         for (const name of tracingRecord.value.patient.names) {
-          if (props.record.surname?.toLowerCase() === name.family.toLowerCase()) {
+          if (
+            props.record.surname?.toLowerCase() === name.family.toLowerCase()
+          ) {
             return true;
           }
         }
@@ -241,7 +267,12 @@ export default defineComponent({
 
     const birthTimeMatchesTracing = computed(() => {
       if (tracingRecord.value && tracingRecord.value.patient) {
-        if (datesAreEqual(props.record.dateOfBirth, tracingRecord.value.patient.birthTime)) {
+        if (
+          datesAreEqual(
+            props.record.dateOfBirth,
+            tracingRecord.value.patient.birthTime
+          )
+        ) {
           return true;
         }
       }

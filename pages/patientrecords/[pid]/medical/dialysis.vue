@@ -66,7 +66,7 @@
         </BaseTable>
 
         <div v-if="sessions && sessions.length > 0" class="mt-4">
-          <BaseCard>
+          <UCard>
             <BasePaginator
               :page="page"
               :size="size"
@@ -75,7 +75,7 @@
               @prev="page--"
               @jump="page = $event"
             />
-          </BaseCard>
+          </UCard>
         </div>
       </div>
     </BaseLoadingContainer>
@@ -85,7 +85,6 @@
 <script lang="ts">
 import { type DialysisSessionSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
@@ -101,7 +100,6 @@ export default defineComponent({
     BaseInfoTooltip,
     SendingFacilityLink,
     CodeTitle,
-    BaseCard,
     BaseLoadingContainer,
     BaseTable,
     BasePaginator,

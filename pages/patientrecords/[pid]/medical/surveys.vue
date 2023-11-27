@@ -1,41 +1,60 @@
 <template>
   <div class="sensitive">
-    <PatientRecordSurveyViewer ref="surveyViewerModal" class="md:w-large w-full" />
+    <PatientRecordSurveyViewer
+      ref="surveyViewerModal"
+      class="md:w-large w-full"
+    />
 
     <BaseLoadingContainer :loading="!surveys">
-      <p v-if="surveys && surveys.length <= 0" class="text-center">No surveys on record</p>
-      <div class="mt-3 grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2">
-        <BaseCard v-for="item in surveys" :key="item.id" class="col-span-1 flex items-center justify-between truncate">
-          <div class="flex-1 truncate px-4 py-2">
-            <p class="mb-2 font-medium text-gray-900 hover:text-gray-600">
-              {{ formatDate(item.surveytime, false) }}
-            </p>
-            <p class="text-gray-500">Type: {{ item.surveytypecode }}</p>
-            <p class="text-gray-500">
-              Entered at
-              {{ item.enteredatcode ? item.enteredatcode : "unknown location" }}
-              by {{ item.enteredbycode ? item.enteredbycode : "unknown person" }}
-            </p>
+      <p v-if="surveys && surveys.length <= 0" class="text-center">
+        No surveys on record
+      </p>
+      <div
+        class="mt-3 grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2"
+      >
+        <UCard v-for="item in surveys" :key="item.id">
+          <div class="col-span-1 flex items-center justify-between truncate">
+            <div class="flex-1 truncate">
+              <p class="mb-2 font-medium text-gray-900 hover:text-gray-600">
+                {{ formatDate(item.surveytime, false) }}
+              </p>
+              <p class="text-gray-500">Type: {{ item.surveytypecode }}</p>
+              <p class="text-gray-500">
+                Entered at
+                {{
+                  item.enteredatcode ? item.enteredatcode : "unknown location"
+                }}
+                by
+                {{ item.enteredbycode ? item.enteredbycode : "unknown person" }}
+              </p>
 
-            <div class="mt-2">
-              <span
-                class="inline-block flex-shrink-0 rounded-sm bg-indigo-100 px-2 py-0.5 text-sm font-medium text-indigo-800"
-                >{{ item.questions.length }} questions</span
-              >
-              <BaseButton class="float-right" @click="surveyViewerModal?.show(item)"> View survey </BaseButton>
+              <div class="mt-2">
+                <span
+                  class="inline-block flex-shrink-0 rounded-sm bg-indigo-100 px-2 py-0.5 text-sm font-medium text-indigo-800"
+                  >{{ item.questions.length }} questions</span
+                >
+                <BaseButton
+                  class="float-right"
+                  @click="surveyViewerModal?.show(item)"
+                >
+                  View survey
+                </BaseButton>
+              </div>
             </div>
           </div>
-        </BaseCard>
+        </UCard>
       </div>
     </BaseLoadingContainer>
   </div>
 </template>
 
 <script lang="ts">
-import { type PatientRecordSchema, type SurveySchema } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type PatientRecordSchema,
+  type SurveySchema,
+} from "@ukkidney/ukrdc-axios-ts";
 
 import BaseButton from "~/components/base/BaseButton.vue";
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import PatientRecordSurveyViewer from "~/components/patientrecord/medical/PatientRecordSurveyViewer.vue";
 import useApi from "~/composables/useApi";
@@ -46,7 +65,6 @@ export default defineComponent({
   components: {
     BaseLoadingContainer,
     BaseButton,
-    BaseCard,
     PatientRecordSurveyViewer,
   },
   props: {

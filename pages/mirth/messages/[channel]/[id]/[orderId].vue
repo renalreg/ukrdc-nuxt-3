@@ -1,51 +1,51 @@
 <template>
   <div>
-    <BaseCard class="mb-6">
-      <BaseCardContent>
-        <BaseDescriptionListGrid>
-          <BaseDescriptionListGridItem>
-            <dt>Connector Name</dt>
-            <dd v-if="connectorMessage">
-              {{ connectorMessage.connectorName }}
-            </dd>
-            <BaseSkeleText v-else class="h-6 w-full" />
-          </BaseDescriptionListGridItem>
-          <BaseDescriptionListGridItem>
-            <dt>Send Attempts</dt>
-            <dd v-if="connectorMessage">
-              {{ connectorMessage.sendAttempts }}
-            </dd>
-            <BaseSkeleText v-else class="h-6 w-full" />
-          </BaseDescriptionListGridItem>
-          <BaseDescriptionListGridItem>
-            <dt>Status</dt>
-            <dd v-if="connectorMessage">
-              <span
-                v-if="errorMessage"
-                class="inline-block flex-shrink-0 rounded-sm bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800"
-                >Error</span
-              >
-              <span
-                v-else
-                class="inline-block flex-shrink-0 rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
-                >Success</span
-              >
-            </dd>
-            <BaseSkeleText v-else class="h-6 w-full" />
-          </BaseDescriptionListGridItem>
-        </BaseDescriptionListGrid>
-        <slot></slot>
-      </BaseCardContent>
-    </BaseCard>
+    <UCard class="mb-6">
+      <BaseDescriptionListGrid>
+        <BaseDescriptionListGridItem>
+          <dt>Connector Name</dt>
+          <dd v-if="connectorMessage">
+            {{ connectorMessage.connectorName }}
+          </dd>
+          <BaseSkeleText v-else class="h-6 w-full" />
+        </BaseDescriptionListGridItem>
+        <BaseDescriptionListGridItem>
+          <dt>Send Attempts</dt>
+          <dd v-if="connectorMessage">
+            {{ connectorMessage.sendAttempts }}
+          </dd>
+          <BaseSkeleText v-else class="h-6 w-full" />
+        </BaseDescriptionListGridItem>
+        <BaseDescriptionListGridItem>
+          <dt>Status</dt>
+          <dd v-if="connectorMessage">
+            <span
+              v-if="errorMessage"
+              class="inline-block flex-shrink-0 rounded-sm bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800"
+              >Error</span
+            >
+            <span
+              v-else
+              class="inline-block flex-shrink-0 rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
+              >Success</span
+            >
+          </dd>
+          <BaseSkeleText v-else class="h-6 w-full" />
+        </BaseDescriptionListGridItem>
+      </BaseDescriptionListGrid>
+      <slot></slot>
+    </UCard>
 
-    <div class="mb-6"><BaseTabsModel v-model="currentTab" :tabs="tabs" :mini="true" /></div>
+    <div class="mb-6">
+      <BaseTabsModel v-model="currentTab" :tabs="tabs" :mini="true" />
+    </div>
     <div class="flex-1">
       <div v-if="currentTab == 'metadata'" id="viewerMetadata">
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          <BaseCard
+          <UCard
             v-for="(value, key) in nonNullMetadata"
             :key="key"
-            class="relative flex items-center space-x-2 px-4 py-4"
+            class="relative flex items-center space-x-2"
             :class="key === 'ERROR' ? 'border-2 border-red-500' : ''"
           >
             <div class="min-w-0 flex-1">
@@ -55,24 +55,32 @@
                 {{ value }}
               </p>
             </div>
-          </BaseCard>
+          </UCard>
         </div>
       </div>
 
-      <div v-for="(connectorMessageData, type) in availableconnectorMessageData" :key="type">
-        <BaseCard v-if="currentTab == type">
-          <BaseCodeReader :content="connectorMessageData.content || ''" :content-type="connectorMessageData.dataType" />
-        </BaseCard>
+      <div
+        v-for="(connectorMessageData, type) in availableconnectorMessageData"
+        :key="type"
+      >
+        <UCard v-if="currentTab == type">
+          <BaseCodeReader
+            :content="connectorMessageData.content || ''"
+            :content-type="connectorMessageData.dataType"
+          />
+        </UCard>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { type ChannelMessageModel, type ConnectorMessageData, type ConnectorMessageModel } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type ChannelMessageModel,
+  type ConnectorMessageData,
+  type ConnectorMessageModel,
+} from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
-import BaseCardContent from "~/components/base/BaseCardContent.vue";
 import BaseCodeReader from "~/components/base/BaseCodeReader.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
@@ -90,8 +98,6 @@ interface ConnectorMessageDataTabs {
 
 export default defineComponent({
   components: {
-    BaseCard,
-    BaseCardContent,
     BaseSkeleText,
     BaseDescriptionListGrid,
     BaseDescriptionListGridItem,
@@ -138,35 +144,43 @@ export default defineComponent({
     });
 
     // Handle connectorMessage and metadata
-    const availableconnectorMessageData = computed<ConnectorMessageDataTabs>(() => {
-      const tabs = {} as ConnectorMessageDataTabs;
-      if (connectorMessage.value) {
-        if (connectorMessage.value.raw) {
-          tabs.raw = connectorMessage.value.raw;
+    const availableconnectorMessageData = computed<ConnectorMessageDataTabs>(
+      () => {
+        const tabs = {} as ConnectorMessageDataTabs;
+        if (connectorMessage.value) {
+          if (connectorMessage.value.raw) {
+            tabs.raw = connectorMessage.value.raw;
+          }
+          if (connectorMessage.value.encoded) {
+            tabs.encoded = connectorMessage.value.encoded;
+          }
+          if (connectorMessage.value.sent) {
+            tabs.sent = connectorMessage.value.sent;
+          }
+          if (connectorMessage.value.response) {
+            tabs.response = connectorMessage.value.response;
+          }
         }
-        if (connectorMessage.value.encoded) {
-          tabs.encoded = connectorMessage.value.encoded;
-        }
-        if (connectorMessage.value.sent) {
-          tabs.sent = connectorMessage.value.sent;
-        }
-        if (connectorMessage.value.response) {
-          tabs.response = connectorMessage.value.response;
-        }
+        return tabs;
       }
-      return tabs;
-    });
+    );
 
     const nonNullMetadata = computed<{ [key: string]: string }>(() => {
       if (connectorMessage.value?.metaDataMap) {
-        return Object.fromEntries(Object.entries(connectorMessage.value.metaDataMap).filter(([_, v]) => v != null));
+        return Object.fromEntries(
+          Object.entries(connectorMessage.value.metaDataMap).filter(
+            ([_, v]) => v != null
+          )
+        );
       } else {
         return {};
       }
     });
 
     const errorMessage = computed(() => {
-      return connectorMessage.value ? connectorMessageError(connectorMessage.value) : null;
+      return connectorMessage.value
+        ? connectorMessageError(connectorMessage.value)
+        : null;
     });
 
     return {

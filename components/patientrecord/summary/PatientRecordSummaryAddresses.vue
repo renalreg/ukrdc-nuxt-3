@@ -1,21 +1,19 @@
 <template>
   <ul>
     <li v-for="item in record.patient.addresses" :key="item.street" class="col-span-1">
-      <BaseCard class="sensitive w-full px-4 py-2"> <PatientRecordAddress :address="item" /> </BaseCard>
+      <UCard class="sensitive w-full"> <PatientRecordAddress :address="item" /> </UCard>
     </li>
   </ul>
 </template>
 
 <script lang="ts">
 
-import { PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import PatientRecordAddress from "~/components/patientrecord/summary/PatientRecordAddress.vue";
 
 export default defineComponent({
   components: {
-    BaseCard,
     PatientRecordAddress,
   },
   props: {

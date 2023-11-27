@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- Real results -->
-    <BaseCard class="mt-4">
-      <BaseCardHeader>
+    <UCard :ui="{body: { padding: '' }}">
+      <template #header>
         <h2>Records Currently Failing</h2>
         <div class="flex w-full">
           <div class="flex-grow">
@@ -21,7 +21,7 @@
             :show-labels-only="true"
           />
         </div>
-      </BaseCardHeader>
+      </template>
       <div v-if="errorMessages && errorMessagesTotal == 0" class="p-8 text-center">
         <p>No active failing records</p>
       </div>
@@ -49,7 +49,7 @@
           @jump="errorMessagesPage = $event"
         />
       </div>
-    </BaseCard>
+    </UCard>
   </div>
 </template>
 
@@ -57,8 +57,6 @@
 import { type FacilityDetailsSchema, type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
 import { type PlotDatum } from "plotly.js-dist-min";
 
-import BaseCard from "~/components/base/BaseCard.vue";
-import BaseCardHeader from "~/components/base/BaseCardHeader.vue";
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSelectSearchable from "~/components/base/BaseSelectSearchable.vue";
@@ -70,8 +68,6 @@ import { getPointDateRange } from "~/helpers/chartUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
-    BaseCardHeader,
     BasePaginator,
     BaseSkeleListItem,
     BaseSelectSearchable,

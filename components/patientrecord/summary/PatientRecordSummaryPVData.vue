@@ -1,5 +1,5 @@
 <template>
-  <BaseCard class="grid w-full grid-cols-1 gap-4 px-4 py-2 sm:grid-cols-2">
+  <UCard class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
       <h5>RRT Status</h5>
       <p>{{ record.pvdata.rrtstatus || "Unknown" }}</p>
@@ -16,20 +16,16 @@
       <h5>Last Updated</h5>
       <p>{{ formatDate(record.pvdata.updateDate || record.pvdata.creationDate, true) }}</p>
     </div>
-  </BaseCard>
+  </UCard>
 </template>
 
 <script lang="ts">
 
-import { PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
-  components: {
-    BaseCard,
-  },
   props: {
     record: {
       type: Object as () => PatientRecordSchema,

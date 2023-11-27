@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <BaseCard>
+    <UCard :ui="{body: { padding: '' }}">
       <!-- Skeleton results -->
       <div v-if="fetchInProgress">
         <ul class="divide-y divide-gray-300">
@@ -65,14 +65,13 @@
           @jump="page = $event"
         />
       </div>
-    </BaseCard>
+    </UCard>
   </div>
 </template>
 
 <script lang="ts">
 import { OrderBy, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSelectSearchable from "~/components/base/BaseSelectSearchable.vue";
@@ -91,7 +90,6 @@ import { workItemStatusTabs } from "~/helpers/workItemUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseSkeleListItem,
     BasePaginator,
     BaseDateRange,

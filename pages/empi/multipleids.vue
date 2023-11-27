@@ -2,49 +2,55 @@
   <div>
     <div class="mx-auto mb-4 max-w-7xl">
       <h1>Multiple UKRDC IDs</h1>
-      <h3>Results of a scan that detect patients with more than one UKRDC Master Record.</h3>
+      <h3>
+        Results of a scan that detect patients with more than one UKRDC Master
+        Record.
+      </h3>
     </div>
 
     <!-- Description list -->
-    <BaseCard class="mb-6">
-      <BaseCardContent>
-        <BaseDescriptionListGrid>
-          <BaseDescriptionListGridItem>
-            <dt>Patients with Multiple UKRDC IDs</dt>
-            <dd v-if="total">
-              {{ total }}
-            </dd>
-            <BaseSkeleText v-else class="mt-2 h-6 w-8" />
-          </BaseDescriptionListGridItem>
+    <UCard class="mb-6">
+      <BaseDescriptionListGrid>
+        <BaseDescriptionListGridItem>
+          <dt>Patients with Multiple UKRDC IDs</dt>
+          <dd v-if="total">
+            {{ total }}
+          </dd>
+          <BaseSkeleText v-else class="mt-2 h-6 w-8" />
+        </BaseDescriptionListGridItem>
 
-          <BaseDescriptionListGridItem>
-            <dt class="flex items-center gap-1">
-              <span class="inline">Last Full Scan</span>
-              <BaseInfoTooltip class="inline">
-                <p>
-                  New results are identified weekly by a <b>Full Scan</b>, but existing results are re-checked hourly,
-                  see <b>Last checked</b>.
-                </p>
-                <p>Resolved items will remain in this view until the next check.</p>
-              </BaseInfoTooltip>
-            </dt>
-            <dd v-if="lastRunTime">
-              {{ formatDate(lastRunTime, true) }}
-            </dd>
-            <BaseSkeleText v-else class="mt-2 h-6 w-1/4" />
-          </BaseDescriptionListGridItem>
-        </BaseDescriptionListGrid>
-      </BaseCardContent>
-    </BaseCard>
+        <BaseDescriptionListGridItem>
+          <dt class="flex items-center gap-1">
+            <span class="inline">Last Full Scan</span>
+            <BaseInfoTooltip class="inline">
+              <p>
+                New results are identified weekly by a <b>Full Scan</b>, but
+                existing results are re-checked hourly, see <b>Last checked</b>.
+              </p>
+              <p>
+                Resolved items will remain in this view until the next check.
+              </p>
+            </BaseInfoTooltip>
+          </dt>
+          <dd v-if="lastRunTime">
+            {{ formatDate(lastRunTime, true) }}
+          </dd>
+          <BaseSkeleText v-else class="mt-2 h-6 w-1/4" />
+        </BaseDescriptionListGridItem>
+      </BaseDescriptionListGrid>
+    </UCard>
 
     <div v-if="groups">
       <div v-for="group in groups" :key="`group-${group.groupId}`">
-        <BaseCard class="mb-4">
-          <EMPIMultipleIDItem :group="group" :fetch-in-progress="fetchInProgress" />
-        </BaseCard>
+        <UCard :ui="{body: { padding: '' }}" class="mb-4">
+          <EMPIMultipleIDItem
+            :group="group"
+            :fetch-in-progress="fetchInProgress"
+          />
+        </UCard>
       </div>
 
-      <BaseCard>
+      <UCard>
         <BasePaginator
           class="bg-white"
           :page="page"
@@ -54,7 +60,7 @@
           @prev="page--"
           @jump="page = $event"
         />
-      </BaseCard>
+      </UCard>
     </div>
     <BaseLoadingIndicator v-else></BaseLoadingIndicator>
   </div>
@@ -63,8 +69,6 @@
 <script lang="ts">
 import { type MultipleUKRDCIDGroup } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
-import BaseCardContent from "~/components/base/BaseCardContent.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
@@ -78,8 +82,6 @@ import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
-    BaseCardContent,
     BaseLoadingIndicator,
     BaseSkeleText,
     BaseDescriptionListGrid,

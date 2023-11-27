@@ -33,9 +33,9 @@
     </BaseTable>
 
     <div v-if="tasks && tasks.length > 0" class="mb-4">
-      <BaseCard>
+      <UCard>
         <BasePaginator :page="page" :size="size" :total="total" @next="page++" @prev="page--" @jump="page = $event" />
-      </BaseCard>
+      </UCard>
     </div>
   </div>
 </template>
@@ -46,7 +46,6 @@ import { type TrackableTaskSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgePublicPrivate from "~/components/BadgePublicPrivate.vue";
 import BadgeTaskStatus from "~/components/BadgeTaskStatus.vue";
-import BaseCard from "~/components/base/BaseCard.vue";
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseTable from "~/components/base/BaseTable.vue";
@@ -56,7 +55,6 @@ import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseCard,
     BaseTable,
     BasePaginator,
     BaseInfoTooltip,

@@ -1,5 +1,5 @@
 <template>
-  <BaseCard class="px-2 py-1">
+  <UCard :ui="{body: { padding: '' }}" class="px-2 py-1">
     <div class="flex">
       <h6 class="flex-grow">{{ resourceName }}</h6>
       <h6 class="flex-none">{{ identifier(1) }}</h6>
@@ -8,18 +8,14 @@
       <h6 class="sensitive flex-grow">{{ primaryIdentifier }}</h6>
       <h6 class="sensitive flex-none">{{ identifier(2) }}</h6>
     </div>
-  </BaseCard>
+  </UCard>
 </template>
 
 <script lang="ts">
 import { type AuditEventSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseCard from "~/components/base/BaseCard.vue";
 
 export default defineComponent({
-  components: {
-    BaseCard,
-  },
   props: {
     item: {
       type: Object as () => AuditEventSchema,

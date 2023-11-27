@@ -3,9 +3,13 @@ Big link cards used in the EMPI page, to direct to Merge etc.
 -->
 
 <template>
-  <BaseCard class="group relative p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-cyan-500">
+  <UCard
+    class="group relative focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+  >
     <div>
-      <span class="inline-flex rounded-lg bg-indigo-50 p-3 text-indigo-700 ring-4 ring-white">
+      <span
+        class="inline-flex rounded-lg bg-indigo-50 p-3 text-indigo-700 ring-4 ring-white"
+      >
         <!-- Heroicon name: outline/link -->
         <svg
           class="h-6 w-6"
@@ -15,7 +19,12 @@ Big link cards used in the EMPI page, to direct to Merge etc.
           stroke="currentColor"
           aria-hidden="true"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="icon" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            :d="icon"
+          />
         </svg>
       </span>
     </div>
@@ -31,25 +40,26 @@ Big link cards used in the EMPI page, to direct to Merge etc.
         {{ description }}
       </p>
     </div>
-    <span class="pointer-events-none absolute right-6 top-6 text-gray-300 group-hover:text-gray-400" aria-hidden="true">
-      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+    <span
+      class="pointer-events-none absolute right-6 top-6 text-gray-300 group-hover:text-gray-400"
+      aria-hidden="true"
+    >
+      <svg
+        class="h-6 w-6"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
         <path
           d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z"
         />
       </svg>
     </span>
-  </BaseCard>
+  </UCard>
 </template>
 
 <script lang="ts">
-
-
-import BaseCard from "~/components/base/BaseCard.vue";
-
 export default defineComponent({
-  components: {
-    BaseCard,
-  },
   props: {
     title: {
       type: String,

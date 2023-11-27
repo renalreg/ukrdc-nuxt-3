@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex items-center justify-between px-4 py-3 sm:px-6" aria-label="Pagination">
+  <nav class="flex items-center justify-between" aria-label="Pagination">
     <div class="hidden sm:block">
       <p class="text-gray-700">
         Showing
