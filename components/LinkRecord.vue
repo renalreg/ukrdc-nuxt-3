@@ -22,7 +22,6 @@ Includes a header with the Link Record ID and functionality to Unlink the record
 import { type LinkRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseModal from "~/components/base/BaseModal.vue";
-import BaseTextArea from "~/components/base/BaseTextArea.vue";
 import MasterRecordCard from "~/components/MasterRecordCard.vue";
 import PersonRecordCard from "~/components/PersonRecordCard.vue";
 import { formatGender } from "~/helpers/codeUtils";
@@ -30,7 +29,6 @@ import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseTextArea,
     BaseModal,
     PersonRecordCard,
     MasterRecordCard,

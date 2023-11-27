@@ -7,11 +7,11 @@
     >
       <div class="mb-4 text-left">
         <div class="mb-4">Add Work Item comment</div>
-        <BaseTextArea
+        <UTextarea 
           v-model="customComment"
-          :max-length="100"
-          rows="3"
-        ></BaseTextArea>
+          :rows="3"
+          :color="customComment.length > 100 ? 'red' : 'primary'"
+        />
       </div>
 
       <!-- Allow setting as WIP if not already closed -->
@@ -22,7 +22,7 @@
       />
 
       <div class="flex justify-end">
-        <UButton @click="updateWorkItemModal?.hide()">Cancel</UButton>
+        <UButton color="white" variant="solid" @click="updateWorkItemModal?.hide()">Cancel</UButton>
         <UButton
           color="indigo"
           class="ml-2"
@@ -44,16 +44,16 @@
 
         <label>
           Comments
-          <BaseTextArea
+          <UTextarea
             v-model="customComment"
-            :max-length="100"
-            rows="3"
-          ></BaseTextArea>
+            :rows="3"
+            :color="customComment.length > 100 ? 'red' : 'primary'"
+          />
         </label>
       </div>
 
       <div class="flex justify-end">
-        <UButton @click="closeModal?.hide()"> Cancel </UButton>
+        <UButton color="white" variant="solid" @click="closeModal?.hide()"> Cancel </UButton>
         <UButton
           :disabled="!customComment"
           type="submit"
@@ -399,7 +399,6 @@ import BaseItemPaginator from "~/components/base/BaseItemPaginator.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseTable from "~/components/base/BaseTable.vue";
-import BaseTextArea from "~/components/base/BaseTextArea.vue";
 import IconArrowTopRightOnSquare from "~/components/icons/hero/20/solid/IconArrowTopRightOnSquare.vue";
 import IconCheckCircle from "~/components/icons/hero/20/solid/IconCheckCircle.vue";
 import IconPencil from "~/components/icons/hero/20/solid/IconPencil.vue";
@@ -428,7 +427,6 @@ interface AvailableActions {
 export default defineComponent({
   components: {
     BaseItemPaginator,
-    BaseTextArea,
     BaseTable,
     BaseModal,
     BaseCheckbox,

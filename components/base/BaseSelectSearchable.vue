@@ -54,17 +54,19 @@
       v-show="isOpen"
       class="absolute left-0 top-0 z-50 w-full rounded-md bg-white px-2 pt-2 shadow-lg ring-1 ring-black ring-opacity-5"
     >
-      <input
+      <UInput
         ref="searchInput"
+        size="lg"
         v-model="search"
         type="text"
-        class="bg-grey-darker block w-full rounded px-3 py-2"
+        class="bg-grey-darker block w-full rounded pb-2"
         style="outline: 0"
         @keydown.up="highlightPrev"
         @keydown.down="highlightNext"
         @keydown.enter.prevent="commitSelection"
         @keydown.esc="cancel"
         @keydown.tab.prevent
+        :placeholder="hint"
       />
       <ul
         v-show="options.length > 0"

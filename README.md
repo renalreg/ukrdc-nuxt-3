@@ -24,6 +24,7 @@
 - [ ] Move all paginator components into card footer
 - [ ] Check all `sensitive` class components
 - [ ] Fix all tooltips on buttons with tooltip= attribute
+- [ ] Replace all <input> elements with <UInput>
 - [ ] (Eventually) fix https://github.com/nathanreyes/v-calendar/issues/1415
 - [ ] _Maybe_ replace in-house paginator with https://ui.nuxt.com/navigation/pagination#props
 

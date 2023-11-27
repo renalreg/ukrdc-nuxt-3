@@ -100,7 +100,6 @@ import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSelectSearchable from "~/components/base/BaseSelectSearchable.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
-import BaseTextBoxMini from "~/components/base/BaseTextBoxMini.vue";
 import IconBarsArrowDown from "~/components/icons/hero/20/solid/IconBarsArrowDown.vue";
 import IconBarsArrowUp from "~/components/icons/hero/20/solid/IconBarsArrowUp.vue";
 import MessagesListItem from "~/components/messages/MessagesListItem.vue";
@@ -119,7 +118,6 @@ export default defineComponent({
     BaseSkeleListItem,
     BasePaginator,
     BaseCheckbox,
-    BaseTextBoxMini,
     BaseDateRange,
     BaseSelectSearchable,
     BaseCollapseHeader,
