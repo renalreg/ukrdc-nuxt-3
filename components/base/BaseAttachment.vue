@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between py-3 pl-3 pr-4">
+  <div class="flex items-center justify-between">
     <div class="flex w-0 flex-1 items-center">
       <IconPaperClip class="mr-2" />
       <p class="sensitive w-0 flex-1 truncate">

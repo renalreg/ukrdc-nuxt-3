@@ -56,12 +56,12 @@
             message.filename || `${message.facility}-${message.id}.txt`
           "
         >
-          <NuxtLink :to="`/messages/${message.id}/source`" class="font-medium">
+          <UButton variant="link" :to="`/messages/${message.id}/source`">
             View
-          </NuxtLink>
-          <BaseButtonLink class="font-medium" @click="downloadMessageSource">
+          </UButton>
+          <UButton variant="link" @click="downloadMessageSource">
             Download
-          </BaseButtonLink>
+          </UButton>
         </BaseAttachment>
       </BaseCard>
     </UCard>
@@ -137,7 +137,6 @@ import {
 
 import BadgeMessageStatus from "~/components/BadgeMessageStatus.vue";
 import BaseAttachment from "~/components/base/BaseAttachment.vue";
-import BaseButtonLink from "~/components/base/BaseButtonLink.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
@@ -157,7 +156,6 @@ export default defineComponent({
     BaseSkeleListItem,
     BaseDescriptionListGrid,
     BaseDescriptionListGridItem,
-    BaseButtonLink,
     BaseAttachment,
     BaseInfoTooltip,
     SendingFacilityLink,

@@ -95,21 +95,15 @@
             {{ patientDocument.notetext }}
           </dd>
         </BaseDescriptionListGridItem>
-        <div v-if="patientDocument" class="sm:col-span-2">
-          <dt>Attachments</dt>
-          <dd>
-            <UCard :ui="{body: { padding: '' }}">
-              <BaseAttachment :filename="filename || 'Unknown filename'">
-                <BaseButtonLink
-                  class="font-medium"
-                  @click="downloadPatientRecordDocument()"
-                >
-                  Download
-                </BaseButtonLink>
-              </BaseAttachment>
-            </UCard>
-          </dd>
-        </div>
+        <UCard v-if="patientDocument" class="mt-2 sm:col-span-2">
+          <BaseAttachment :filename="filename || 'Unknown filename'">
+            <UButton variant="link"
+              @click="downloadPatientRecordDocument()"
+            >
+              Download
+            </UButton>
+          </BaseAttachment>
+        </UCard>
       </BaseDescriptionListGrid>
     </UCard>
   </div>
@@ -122,7 +116,6 @@ import {
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseAttachment from "~/components/base/BaseAttachment.vue";
-import BaseButtonLink from "~/components/base/BaseButtonLink.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
 import useApi from "~/composables/useApi";
@@ -133,7 +126,6 @@ export default defineComponent({
   components: {
     BaseDescriptionListGrid,
     BaseDescriptionListGridItem,
-    BaseButtonLink,
     BaseAttachment,
   },
   props: {
