@@ -2,13 +2,13 @@
   <div>
     <PatientRecordDeleteModal ref="deleteModal" :item="item" @deleted="$emit('deleted')" />
     <div v-click-away="closeMenu" class="relative flex h-full items-center justify-self-end">
-      <BaseButtonSlot
+      <UButton color="gray" variant="ghost"
         label="Manage record"
         class="z-0 flex h-full items-center hover:bg-gray-50"
         @click="showMenu = !showMenu"
       >
-        <IconEllipsisVertical class="mx-1 text-gray-600 hover:text-gray-800" />
-      </BaseButtonSlot>
+        <IconEllipsisVertical class=" text-gray-600 hover:text-gray-800" />
+      </UButton>
 
       <BaseMenu class="right-0 top-0 z-10 mx-2 my-2" :show="showMenu">
         <BaseMenuItem @click="copyPID"> Copy PID </BaseMenuItem>
@@ -41,7 +41,6 @@
 <script lang="ts">
 import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButtonSlot from "~/components/base/BaseButtonSlot.vue";
 import BaseMenu from "~/components/base/BaseMenu.vue";
 import BaseMenuDivider from "~/components/base/BaseMenuDivider.vue";
 import BaseMenuItem from "~/components/base/BaseMenuItem.vue";
@@ -54,7 +53,6 @@ import { type ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {
-    BaseButtonSlot,
     BaseMenu,
     BaseMenuDivider,
     BaseMenuItem,

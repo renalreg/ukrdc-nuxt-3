@@ -131,7 +131,7 @@
         </div>
       </div>
       <!-- Related records -->
-      <UCard :ui="{body: { padding: '' }}" class="!overflow-visible col-span-3 md:col-span-2">
+      <UCard :ui="{body: { padding: '' }}" class="!overflow-visible col-span-3 md:col-span-2 h-fit">
         <template #header>
           <h2>Related Records</h2>
           <p class="label">

@@ -1,11 +1,10 @@
 <template>
   <div v-click-away="closeMenu" class="relative w-full justify-self-end">
-    <BaseButtonSlot
+    <UButton color="white" variant="ghost" class="w-full"
       label="Manage profile"
-      class="group block w-full rounded-md px-4 py-2 hover:bg-gray-100"
       @click="showMenu = !showMenu"
     >
-      <div class="flex items-center gap-4" :class="{ 'flex-row-reverse': rightToLeft }">
+      <div class="flex items-center gap-4 w-full" :class="{ 'flex-row-reverse': rightToLeft }">
         <div class="h-10 w-10">
           <span
             class="inline-block h-10 w-10 overflow-hidden rounded-full"
@@ -41,7 +40,7 @@
           </svg>
         </div>
       </div>
-    </BaseButtonSlot>
+    </UButton>
 
     <BaseMenu
       v-if="isAuthenticated"
@@ -63,7 +62,6 @@
 
 <script lang="ts">
 
-import BaseButtonSlot from "~/components/base/BaseButtonSlot.vue";
 import BaseMenu from "~/components/base/BaseMenu.vue";
 import BaseMenuDivider from "~/components/base/BaseMenuDivider.vue";
 import BaseMenuItem from "~/components/base/BaseMenuItem.vue";
@@ -71,7 +69,6 @@ import useAuth from "~/composables/useAuth";
 
 export default defineComponent({
   components: {
-    BaseButtonSlot,
     BaseMenu,
     BaseMenuItem,
     BaseMenuDivider,
