@@ -4,7 +4,7 @@
 
 ### System
 
-- [ ] Fix system configuration/support variables (replace all $config instances with useRuntimeConfig())
+- [x] Fix system configuration/support variables (replace all $config instances with useRuntimeConfig())
 
 ### Auth
 

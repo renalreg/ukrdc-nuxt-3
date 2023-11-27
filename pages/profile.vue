@@ -44,7 +44,7 @@
           class="mb-8 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse lg:mt-0 lg:flex-row lg:space-x-3"
         >
           <a
-            :href="$config.manageAccountUrl"
+            :href="manageAccountUrl"
             target="blank"
             type="button"
             class="rounded-md border border-gray-300 bg-white px-3 py-2 text-center font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -81,11 +81,14 @@ export default defineComponent({
     BaseSkeleText,
   },
   setup() {
+    const runtimeConfig = useRuntimeConfig()
+
     const { getPermissions } = usePermissions();
     const { isAuthenticated, signOutAuto, getUser } = useAuth();
 
     // User info
     const user = ref();
+    const manageAccountUrl = runtimeConfig.public.manageAccountUrl
 
     onMounted(async () => {
       if (isAuthenticated.value) {
@@ -109,6 +112,7 @@ export default defineComponent({
 
     return {
       user,
+      manageAccountUrl,
       isAuthenticated,
       perms,
       classesForPermissions,
