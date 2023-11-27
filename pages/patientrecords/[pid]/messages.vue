@@ -2,16 +2,15 @@
   <div>
     <div class="mb-4 flex flex-col gap-2 lg:flex-row">
       <BaseDateRange v-model="dateRange" class="flex-1" />
-      <BaseButtonMini class="flex-none" @click="toggleOrder">
-        <div v-show="orderAscending" class="flex">
-          <p>Oldest - Newest</p>
-          <IconBarsArrowUp class="ml-2 h-5 w-5" />
-        </div>
-        <div v-show="!orderAscending" class="flex">
-          <p>Newest - Oldest</p>
-          <IconBarsArrowDown class="ml-2 h-5 w-5" />
-        </div>
-      </BaseButtonMini>
+      <UButton
+          class="flex-shrink"
+          @click="toggleOrder"
+          color="white"
+          variant="solid"
+          size="sm"
+          :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
+          :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
+        />
     </div>
 
     <BaseCard>
@@ -43,7 +42,6 @@
 <script lang="ts">
 import { type MessageSchema, OrderBy, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButtonMini from "~/components/base/BaseButtonMini.vue";
 import BaseCard from "~/components/base/BaseCard.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
@@ -59,7 +57,6 @@ import { nowString } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseButtonMini,
     BaseCard,
     BaseSkeleListItem,
     BasePaginator,

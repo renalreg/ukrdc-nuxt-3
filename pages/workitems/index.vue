@@ -15,17 +15,22 @@
         hint="Select a facility..."
       />
       <div class="flex items-center">
-        <div class="flex-grow"><BaseTabsModel v-model="currentTab" :tabs="workItemStatusTabs" :mini="true" /></div>
-        <BaseButtonMini class="flex-shrink" @click="toggleOrder">
-          <div v-show="orderAscending" class="flex">
-            <p>Oldest - Newest</p>
-            <IconBarsArrowUp class="ml-2 h-5 w-5" />
-          </div>
-          <div v-show="!orderAscending" class="flex">
-            <p>Newest - Oldest</p>
-            <IconBarsArrowDown class="ml-2 h-5 w-5" />
-          </div>
-        </BaseButtonMini>
+        <div class="flex-grow">
+          <BaseTabsModel
+            v-model="currentTab"
+            :tabs="workItemStatusTabs"
+            :mini="true"
+          />
+        </div>
+        <UButton
+          class="flex-shrink"
+          @click="toggleOrder"
+          color="white"
+          variant="solid"
+          size="sm"
+          :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
+          :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
+        />
       </div>
     </div>
 
@@ -39,7 +44,12 @@
       <!-- Real results -->
       <div v-else>
         <ul class="divide-y divide-gray-300">
-          <li v-for="item in workitems" :key="item.id" :item="item" class="hover:bg-gray-50">
+          <li
+            v-for="item in workitems"
+            :key="item.id"
+            :item="item"
+            class="hover:bg-gray-50"
+          >
             <NuxtLink :to="`/workitems/${item.id}`">
               <WorkItemsListItem :item="item" />
             </NuxtLink>
@@ -62,7 +72,6 @@
 <script lang="ts">
 import { OrderBy, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButtonMini from "~/components/base/BaseButtonMini.vue";
 import BaseCard from "~/components/base/BaseCard.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
@@ -82,7 +91,6 @@ import { workItemStatusTabs } from "~/helpers/workItemUtils";
 
 export default defineComponent({
   components: {
-    BaseButtonMini,
     BaseCard,
     BaseSkeleListItem,
     BasePaginator,
@@ -97,7 +105,8 @@ export default defineComponent({
     const { page, total, size } = usePagination();
     const { makeDateRange } = useDateRange();
     const { arrayQuery } = useQuery();
-    const { facilities, facilityIds, facilityLabels, selectedFacility } = useFacilities();
+    const { facilities, facilityIds, facilityLabels, selectedFacility } =
+      useFacilities();
     const { orderAscending, orderBy, toggleOrder } = useSortBy();
     const { workItemsApi } = useApi();
 
@@ -154,7 +163,7 @@ export default defineComponent({
       ],
       () => {
         getWorkitems();
-      },
+      }
     );
 
     return {

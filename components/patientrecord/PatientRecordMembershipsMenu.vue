@@ -25,16 +25,15 @@
     </BaseModalSuccess>
 
     <div v-click-away="closeMenu" class="relative flex items-center justify-self-end">
-      <BaseButtonMini
-        label="Manage record"
+      <UButton
+      color="white"
+        label="Add Memberships"
+        icon="i-heroicons-plus-20-solid"
         class="z-0 mr-2 flex gap-1"
         :tooltip="!menuAvailable ? menuTooltip : undefined"
-        :class="{ 'btn-disabled': !menuAvailable }"
+        :disabled="!menuAvailable"
         @click="showMenu = !showMenu"
-      >
-        <IconPlus class="inline text-gray-800" />
-        Add Memberships
-      </BaseButtonMini>
+      />
 
       <BaseMenu class="right-2 top-8 z-10 ml-2" :show="menuAvailable && showMenu">
         <BaseMenuItem v-if="showCreatePkbMembership" @click="showCreatePkbMembershipConfirm">
@@ -49,25 +48,21 @@
 <script lang="ts">
 import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButtonMini from "~/components/base/BaseButtonMini.vue";
 import BaseMenu from "~/components/base/BaseMenu.vue";
 import BaseMenuItem from "~/components/base/BaseMenuItem.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import BaseModalSuccess from "~/components/base/BaseModalSuccess.vue";
 import IconCloudArrowUp from "~/components/icons/hero/20/solid/IconCloudArrowUp.vue";
-import IconPlus from "~/components/icons/hero/20/solid/IconPlus.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
 import { type ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {
-    BaseButtonMini,
     BaseMenu,
     BaseMenuItem,
     BaseModalSuccess,
     BaseModalConfirm,
-    IconPlus,
     IconCloudArrowUp,
   },
   props: {

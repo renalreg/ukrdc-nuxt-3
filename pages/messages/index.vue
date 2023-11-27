@@ -25,26 +25,26 @@
         </div>
 
         <form v-show="!nationalId" class="flex" @submit.prevent="nationalId = nationalIdSearchString.trim()">
-          <BaseTextBoxMini
-            v-model="nationalIdSearchString"
-            class="flex-grow rounded-r-none"
-            placeholder="Filter by Patient Number"
-          ></BaseTextBoxMini>
-          <BaseButtonMini anchor="left" type="submit">Go</BaseButtonMini>
+          <UButtonGroup size="sm" orientation="horizontal">
+            <UInput 
+              v-model="nationalIdSearchString"
+              placeholder="Filter by Patient Number"
+            />
+            <UButton type="submit" color="white" label="Go"/>
+          </UButtonGroup>
         </form>
 
-        <BaseButtonMini v-show="nationalId" @click="nationalId = null">Show Results From All Patients</BaseButtonMini>
+        <UButton v-show="nationalId" size="sm" @click="nationalId = null">Show Results From All Patients</UButton>
 
-        <BaseButtonMini @click="toggleOrder">
-          <div v-show="orderAscending" class="flex">
-            <p>Oldest - Newest</p>
-            <IconBarsArrowUp class="ml-2 h-5 w-5" />
-          </div>
-          <div v-show="!orderAscending" class="flex">
-            <p>Newest - Oldest</p>
-            <IconBarsArrowDown class="ml-2 h-5 w-5" />
-          </div>
-        </BaseButtonMini>
+        <UButton
+          class="flex-shrink"
+          @click="toggleOrder"
+          color="white"
+          variant="solid"
+          size="sm"
+          :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
+          :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
+        />
       </div>
     </div>
 
@@ -94,7 +94,6 @@
 <script lang="ts">
 import { type MessageSchema, OrderBy } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButtonMini from "~/components/base/BaseButtonMini.vue";
 import BaseCard from "~/components/base/BaseCard.vue";
 import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
@@ -118,7 +117,6 @@ import { nowString } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseButtonMini,
     BaseCard,
     BaseSkeleListItem,
     BasePaginator,

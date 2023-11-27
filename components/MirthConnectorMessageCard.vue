@@ -17,12 +17,13 @@
           class="inline-block flex-shrink-0 rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
           >Success</span
         >
-        <BaseButtonMini
+        <UButton
+          size="sm"
+          color="white"
           class="float-right"
+          label="View message"
           :to="`/mirth/messages/${message.channelId}/${message.messageId}/${message.orderId}`"
-        >
-          View message
-        </BaseButtonMini>
+        />
       </div>
     </div>
   </BaseCard>
@@ -31,14 +32,12 @@
 <script lang="ts">
 import { type ConnectorMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButtonMini from "~/components/base/BaseButtonMini.vue";
 import BaseCard from "~/components/base/BaseCard.vue";
 import { connectorMessageError } from "~/helpers/mirthUtils";
 
 export default defineComponent({
   components: {
     BaseCard,
-    BaseButtonMini,
   },
   props: {
     message: {

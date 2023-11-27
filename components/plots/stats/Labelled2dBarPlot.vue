@@ -11,7 +11,7 @@
           <h6>{{ labelled2d ? labelled2d.metadata.summary : "" }}</h6>
         </div>
       </div>
-      <BaseButtonMini v-if="labelled2d" @click="exportData">Export</BaseButtonMini>
+      <UButton v-if="labelled2d" color="white" label="Export" @click="exportData" />
     </BaseCardHeader>
     <BaseBarPlot
       v-if="labelled2d"
@@ -34,9 +34,8 @@
 
 <script lang="ts">
 
-import { Labelled2d } from "@ukkidney/ukrdc-axios-ts";
+import { type Labelled2d } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButtonMini from "~/components/base/BaseButtonMini.vue";
 import BaseCard from "~/components/base/BaseCard.vue";
 import BaseCardHeader from "~/components/base/BaseCardHeader.vue";
 import BaseBarPlot from "~/components/plots/base/BaseBarPlot.vue";
@@ -47,7 +46,6 @@ import { saveAs } from "~/helpers/fileUtils";
 
 export default defineComponent({
   components: {
-    BaseButtonMini,
     BaseBarPlot,
     BaseCard,
     BaseCardHeader,

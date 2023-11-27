@@ -1,6 +1,10 @@
 <template>
   <div v-if="buttonAvailable">
-    <BaseModalSuccess ref="startSyncSuccessModal" title="Started Syncing to PKB" confirm-label="Go back to records">
+    <BaseModalSuccess
+      ref="startSyncSuccessModal"
+      title="Started Syncing to PKB"
+      confirm-label="Go back to records"
+    >
       <p class="mb-4"><b>This usually takes a few minutes</b></p>
       <p>We're syncing data to PKB in the background.</p>
       <p>Depending on the size of the records, this may take up to an hour.</p>
@@ -26,25 +30,26 @@
       <p class="mt-3 font-mono">exportAllToPKB.fail {{ failedPIDs }}</p>
     </BaseModalSuccess>
 
-    <BaseButtonMini
-      label="Manage record"
+    <UButton
+      color="white"
+      label="Sync to PKB"
+      icon="i-heroicons-cloud-arrow-up-20-solid"
       class="z-0 mr-2 flex gap-1"
-      :tooltip="!hasPkbMembership ? 'Patient does not have a PKB membership record' : undefined"
-      :class="{ 'btn-disabled': !hasPkbMembership || syncInProgress }"
+      :tooltip="
+        !hasPkbMembership
+          ? 'Patient does not have a PKB membership record'
+          : undefined
+      "
+      :disabled="!hasPkbMembership || syncInProgress"
       @click="exportAllToPKB"
-    >
-      <IconCloudArrowUp class="inline text-gray-800" />
-      Sync to PKB
-    </BaseButtonMini>
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButtonMini from "~/components/base/BaseButtonMini.vue";
 import BaseModalSuccess from "~/components/base/BaseModalSuccess.vue";
-import IconCloudArrowUp from "~/components/icons/hero/20/solid/IconCloudArrowUp.vue";
 import usePermissions from "~/composables/usePermissions";
 import useRecordExport from "~/composables/useRecordExport";
 import { type ModalInterface } from "~/interfaces/modal";
@@ -52,8 +57,6 @@ import { type ModalInterface } from "~/interfaces/modal";
 export default defineComponent({
   components: {
     BaseModalSuccess,
-    BaseButtonMini,
-    IconCloudArrowUp,
   },
   props: {
     records: {

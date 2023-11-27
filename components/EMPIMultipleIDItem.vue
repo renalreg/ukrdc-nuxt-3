@@ -4,12 +4,16 @@
       <div class="flex-grow pl-2">
         <div>
           <h2 v-if="heading">{{ heading }}</h2>
-          <h5 v-if="group && group.groupId">Record Group {{ group.groupId }}</h5>
+          <h5 v-if="group && group.groupId">
+            Record Group {{ group.groupId }}
+          </h5>
         </div>
       </div>
       <div class="flex-shrink">
         <div v-if="!fetchInProgress">
-          <BaseButtonMini
+          <UButton
+            size="sm"
+            color="white"
             v-if="group.records.length == 2"
             :to="{
               path: '/empi/merge',
@@ -19,9 +23,15 @@
                 callback: $route.fullPath,
               },
             }"
-            >Start Merge</BaseButtonMini
-          >
-          <BaseButtonMini v-else :disabled="true">Can't automatically merge more than two records</BaseButtonMini>
+            label="Start Merge"
+          />
+          <UButton
+            size="sm"
+            color="white"
+            v-else
+            :disabled="true"
+            label="Can't automatically merge more than two records"
+          />
         </div>
       </div>
     </div>
@@ -37,7 +47,9 @@
           <MasterRecordsListItem
             :item="item.masterRecord"
             :details-label="item.lastUpdated ? 'Last checked' : undefined"
-            :details-value="item.lastUpdated ? formatDate(item.lastUpdated) : undefined"
+            :details-value="
+              item.lastUpdated ? formatDate(item.lastUpdated) : undefined
+            "
           />
         </NuxtLink>
       </li>
@@ -46,17 +58,14 @@
 </template>
 
 <script lang="ts">
+import { type MultipleUKRDCIDGroup } from "@ukkidney/ukrdc-axios-ts";
 
-import { MultipleUKRDCIDGroup } from "@ukkidney/ukrdc-axios-ts";
-
-import BaseButtonMini from "~/components/base/BaseButtonMini.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import MasterRecordsListItem from "~/components/MasterRecordsListItem.vue";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseButtonMini,
     BaseSkeleListItem,
     MasterRecordsListItem,
   },
