@@ -32,12 +32,6 @@ export default defineNuxtConfig({
     },
   },
 
-  // NuxtUI styling
-  ui: {
-    primary: 'indigo',
-    gray: 'cool'
-  },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["@/assets/css/main.css"],
 
