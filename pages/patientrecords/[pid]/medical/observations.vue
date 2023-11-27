@@ -1,14 +1,30 @@
 <template>
   <div class="sensitive">
     <BaseLoadingContainer :loading="!observations">
-      <p v-if="observations && observations.length <= 0" class="text-center">No observations on record</p>
+      <p v-if="observations && observations.length <= 0" class="text-center">
+        No observations on record
+      </p>
       <div v-else>
-        <BaseSelectSearchable
-          v-model="selectedCode"
-          class="mb-4"
-          :options="availableCodes"
-          hint="Select an observation type..."
-        />
+        <!-- Code select -->
+        <div class="flex mb-4">
+          <USelectMenu
+            searchable
+            class="flex-1"
+            size="lg"
+            v-model="selectedCode"
+            :options="availableCodes"
+            placeholder="Select a coding standard"
+          />
+          <UButton
+            color="white"
+            variant="solid"
+            class="ml-2"
+            size="lg"
+            @click="selectedCode = undefined"
+            label="Clear"
+          />
+          >
+        </div>
 
         <BaseTable class="mb-4">
           <thead class="bg-gray-50">
@@ -47,11 +63,13 @@
 </template>
 
 <script lang="ts">
-import { type ObservationSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type ObservationSchema,
+  type PatientRecordSchema,
+} from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseSelectSearchable from "~/components/base/BaseSelectSearchable.vue";
 import BaseTable from "~/components/base/BaseTable.vue";
 import PatientrecordObservationRow from "~/components/patientrecord/medical/PatientRecordObservationRow.vue";
 import usePagination from "~/composables/query/usePagination";
@@ -64,7 +82,6 @@ export default defineComponent({
     BaseLoadingContainer,
     BaseTable,
     BasePaginator,
-    BaseSelectSearchable,
     PatientrecordObservationRow,
   },
   props: {

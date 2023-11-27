@@ -22,13 +22,29 @@
     <BaseLoadingContainer :loading="!results">
       <div>
         <BaseDateRange v-model="dateRange" class="mb-4" />
-        <BaseSelectSearchable
-          v-model="selectedService"
-          class="mb-4"
-          :options="availableServicesIds"
-          :labels="availableServicesLabels"
-          hint="Select a result type..."
-        />
+  
+        <!-- Code select -->
+        <div class="flex mb-4">
+          <USelectMenu
+            searchable
+            class="flex-1"
+            size="lg"
+            v-model="selectedService"
+            :options="availableServices"
+            value-attribute="id"
+            option-attribute="description"
+            :search-attributes="['description', 'id']"
+            placeholder="Select a result type"
+          />
+          <UButton
+            color="white"
+            variant="solid"
+            class="ml-2"
+            size="lg"
+            @click="selectedService = undefined"
+            label="Clear"
+          />
+        </div>
 
         <p v-if="results && results.length <= 0" class="text-center">No results on record</p>
 
@@ -96,7 +112,6 @@ import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseSelectSearchable from "~/components/base/BaseSelectSearchable.vue";
 import BaseTable from "~/components/base/BaseTable.vue";
 import PatientRecordResultRow from "~/components/patientrecord/medical/PatientRecordResultRow.vue";
 import useDateRange from "~/composables/query/useDateRange";
@@ -112,7 +127,6 @@ export default defineComponent({
     BaseTable,
     BasePaginator,
     BaseDateRange,
-    BaseSelectSearchable,
     BaseModalConfirm,
     PatientRecordResultRow,
   },
@@ -157,13 +171,13 @@ export default defineComponent({
         });
 
       // If we don't already have a list of available codes, fetch one
-      if (availableServicesMap.value.length === 0) {
+      if (availableServices.value.length === 0) {
         patientRecordsApi
           .getPatientResultServices({
             pid: props.record.pid,
           })
           .then((response) => {
-            availableServicesMap.value = response.data;
+            availableServices.value = response.data;
           });
       }
     }
@@ -245,14 +259,14 @@ export default defineComponent({
 
     // Result item services
 
-    const availableServicesMap = ref([] as ResultItemServiceSchema[]);
+    const availableServices = ref([] as ResultItemServiceSchema[]);
 
     const availableServicesIds = computed(() => {
-      return availableServicesMap.value.map(({ id }) => id);
+      return availableServices.value.map(({ id }) => id);
     });
 
     const availableServicesLabels = computed(() => {
-      return availableServicesMap.value.map(({ description }) => description);
+      return availableServices.value.map(({ description }) => description);
     });
 
     const selectedService = stringQuery("service_id", null, true, true);
@@ -297,9 +311,7 @@ export default defineComponent({
       cancelDeleteResultItem,
       deleteResultItem,
       deleteLabOrder,
-      availableServicesMap,
-      availableServicesIds,
-      availableServicesLabels,
+      availableServices,
       selectedService,
       selectedOrderId,
       selectedOrder,

@@ -6,14 +6,28 @@
 
     <div class="mb-4 flex flex-col">
       <BaseDateRange v-model="dateRange" class="mb-4" />
-      <BaseSelectSearchable
-        v-if="facilityIds.length > 1"
-        v-model="selectedFacility"
-        class="mb-4"
-        :options="facilityIds"
-        :labels="facilityLabels"
-        hint="Select a facility..."
-      />
+        <!-- Facility select -->
+        <div v-if="facilities.length > 1" class="flex mb-4">
+          <USelectMenu
+            searchable
+            class="flex-1"
+            size="lg"
+            v-model="selectedFacility"
+            :options="facilities"
+            value-attribute="id"
+            option-attribute="description"
+            :search-attributes="['description', 'id']"
+            placeholder="Select a sending facility"
+          />
+          <UButton
+            color="white"
+            variant="solid"
+            class="ml-2"
+            size="lg"
+            @click="selectedFacility = undefined"
+            label="Clear"
+          />
+        </div>
       <div class="flex items-center">
         <div class="flex-grow">
           <BaseTabsModel
@@ -74,7 +88,6 @@ import { OrderBy, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseSelectSearchable from "~/components/base/BaseSelectSearchable.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import BaseTabsModel from "~/components/base/BaseTabsModel.vue";
 import IconBarsArrowDown from "~/components/icons/hero/20/solid/IconBarsArrowDown.vue";
@@ -93,7 +106,6 @@ export default defineComponent({
     BaseSkeleListItem,
     BasePaginator,
     BaseDateRange,
-    BaseSelectSearchable,
     BaseTabsModel,
     IconBarsArrowDown,
     IconBarsArrowUp,
@@ -103,7 +115,7 @@ export default defineComponent({
     const { page, total, size } = usePagination();
     const { makeDateRange } = useDateRange();
     const { arrayQuery } = useQuery();
-    const { facilities, facilityIds, facilityLabels, selectedFacility } =
+    const { facilities, selectedFacility } =
       useFacilities();
     const { orderAscending, orderBy, toggleOrder } = useSortBy();
     const { workItemsApi } = useApi();
@@ -173,8 +185,6 @@ export default defineComponent({
       workitems,
       statuses,
       facilities,
-      facilityIds,
-      facilityLabels,
       selectedFacility,
       orderAscending,
       orderBy,

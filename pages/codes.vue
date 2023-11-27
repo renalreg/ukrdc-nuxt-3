@@ -6,7 +6,11 @@
       </div>
       <div>
         <div v-click-away="closeExportMenu" class="relative flex">
-          <UButton color="white" variant="solid" @click="showExportMenu = !showExportMenu">
+          <UButton
+            color="white"
+            variant="solid"
+            @click="showExportMenu = !showExportMenu"
+          >
             <div class="flex items-center">
               <div class="flex-grow">Export Codes</div>
               <div class="ml-2">
@@ -15,41 +19,57 @@
             </div>
           </UButton>
           <BaseMenu class="right-0 z-10 mb-2 mt-10" :show="showExportMenu">
-            <BaseMenuItem @click="exportCodeList"> Export Code List </BaseMenuItem>
-            <BaseMenuItem @click="exportCodeMaps"> Export Code Maps </BaseMenuItem>
-            <BaseMenuItem @click="exportCodeExclusions"> Export Code Exclusions </BaseMenuItem>
+            <BaseMenuItem @click="exportCodeList">
+              Export Code List
+            </BaseMenuItem>
+            <BaseMenuItem @click="exportCodeMaps">
+              Export Code Maps
+            </BaseMenuItem>
+            <BaseMenuItem @click="exportCodeExclusions">
+              Export Code Exclusions
+            </BaseMenuItem>
           </BaseMenu>
         </div>
       </div>
     </div>
 
-    <div v-if="standards && standards.length > 1" :class="$route.params.id ? 'hidden lg:block' : 'block'">
-      <BaseSelectSearchable
-        v-model="selectedStandard"
-        class="mb-4"
-        :options="standards"
-        hint="Select a coding standard..."
-        :mount-opened="false"
-        :closable="true"
-      />
+    <div
+      v-if="standards && standards.length > 1"
+      :class="$route.params.id ? 'hidden lg:flex' : 'flex'"
+      class="mb-4"
+    >
+      <USelectMenu searchable class="flex-1" size="lg" v-model="selectedStandard" :options="standards" placeholder="Select a coding standard"/>
+      <UButton color="white" variant="solid" class="ml-2" size="lg" @click="selectedStandard=undefined" label="Clear"/>
     </div>
 
     <div>
-      <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
+      <SearchBar
+        v-model="searchboxString"
+        :focus="false"
+        :show-button="false"
+      />
     </div>
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <!-- Code list -->
       <div :class="$route.params.id ? 'hidden lg:block' : 'block'">
-        <UCard :ui="{body: { padding: '' }}">
+        <UCard :ui="{ body: { padding: '' } }">
           <!-- Skeleton results -->
           <ul v-if="fetchInProgress" class="divide-y divide-gray-300">
             <BaseSkeleListItem v-for="n in 10" :key="n" />
           </ul>
           <!-- Real results -->
           <ul v-else class="divide-y divide-gray-300">
-            <li v-for="code in codes" :key="`${code.codingStandard}.${code.code}`">
-              <NuxtLink :to="{ path: `/codes/${code.codingStandard}.${code.code}/`, query: $route.query }">
+            <li
+              v-for="code in codes"
+              :key="`${code.codingStandard}.${code.code}`"
+            >
+              <NuxtLink
+                :to="{
+                  path: `/codes/${code.codingStandard}.${code.code}/`,
+                  query: $route.query,
+                }"
+              >
                 <CodesListItem class="hover:bg-gray-50" :code="code" />
               </NuxtLink>
             </li>
@@ -68,7 +88,9 @@
       </div>
       <!-- Code details -->
       <div class="sticky top-4 h-screen grow">
-        <UButton color="white" variant="solid"
+        <UButton
+          color="white"
+          variant="solid"
           v-show="$route.params.id"
           class="mb-4 w-full lg:hidden"
           :to="{ path: `/codes/`, query: $route.query }"
@@ -88,7 +110,6 @@ import { type CodeSchema } from "@ukkidney/ukrdc-axios-ts";
 import BaseMenu from "~/components/base/BaseMenu.vue";
 import BaseMenuItem from "~/components/base/BaseMenuItem.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseSelectSearchable from "~/components/base/BaseSelectSearchable.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import CodesListItem from "~/components/CodesListItem.vue";
 import IconChevronDown from "~/components/icons/hero/24/solid/IconChevronDown.vue";
@@ -104,7 +125,6 @@ export default defineComponent({
     BaseMenuItem,
     BaseSkeleListItem,
     BasePaginator,
-    BaseSelectSearchable,
     IconChevronDown,
     CodesListItem,
     SearchBar,
@@ -178,7 +198,9 @@ export default defineComponent({
         .getCodeList({
           page: page.value || 1,
           size: size.value,
-          codingStandard: selectedStandard.value ? [selectedStandard.value] : undefined,
+          codingStandard: selectedStandard.value
+            ? [selectedStandard.value]
+            : undefined,
           search: searchboxString.value || undefined,
         })
         .then((response) => {

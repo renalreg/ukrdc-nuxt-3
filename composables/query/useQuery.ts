@@ -41,7 +41,7 @@ export default function () {
     resetPage: boolean = false,
   ) {
     return computed({
-      get: (): (string | null)[] => {
+      get: (): (string | null | undefined)[] => {
         const val = route.query[queryKey];
         if (val === undefined) {
           return defaultValue;
@@ -52,7 +52,7 @@ export default function () {
           return val;
         }
       },
-      set: (newValue: (string | null)[]) => {
+      set: (newValue: (string | null | undefined)[]) => {
         const newQuery = Object.assign({}, route.query, {
           [queryKey]: newValue,
         });
@@ -76,10 +76,10 @@ export default function () {
 
   function booleanQuery(queryKey: string, history: boolean = true, resetPage: boolean = false) {
     return computed({
-      get: (): boolean | null => {
+      get: (): boolean | null | undefined => {
         return singleQuery(route.query[queryKey]) === "true";
       },
-      set: (newValue: boolean | null) => {
+      set: (newValue: boolean | null | undefined) => {
         pushNewQuery(queryKey, newValue, history, resetPage);
       },
     });
@@ -92,14 +92,14 @@ export default function () {
     resetPage: boolean = false,
   ) {
     return computed({
-      get: (): string | null => {
+      get: (): string | null | undefined => {
         const val = singleQuery(route.query[queryKey]);
         if (val === null || val === undefined) {
           return defaultValue;
         }
         return val;
       },
-      set: (newValue: string | null) => {
+      set: (newValue: string | null | undefined) => {
         // Check if the query has actually changed
         const current = singleQuery(route.query[queryKey]);
         if (current !== null && current !== undefined) {
@@ -120,14 +120,14 @@ export default function () {
     resetPage: boolean = false,
   ) {
     return computed({
-      get: (): number | null => {
+      get: (): number | null | undefined => {
         const val = singleQuery(route.query[queryKey]);
         if (val === null || val === undefined) {
           return defaultValue;
         }
         return parseInt(val);
       },
-      set: (newValue: number | null) => {
+      set: (newValue: number | null | undefined) => {
         // Check if the query has actually changed
         const current = singleQuery(route.query[queryKey]);
         if (current !== null && current !== undefined) {

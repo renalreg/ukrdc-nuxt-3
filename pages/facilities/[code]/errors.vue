@@ -1,28 +1,48 @@
 <template>
   <div>
     <!-- Real results -->
-    <UCard :ui="{body: { padding: '' }}">
+    <UCard :ui="{ body: { padding: '' } }">
       <template #header>
         <h2>Records Currently Failing</h2>
         <div class="flex w-full">
           <div class="flex-grow">
-            <h5>Records where the most recent message received failed to process due to errors.</h5>
+            <h5>
+              Records where the most recent message received failed to process
+              due to errors.
+            </h5>
           </div>
-          <BaseCollapseHeader v-model="advancedOpen" label="More Options"></BaseCollapseHeader>
+          <BaseCollapseHeader
+            v-model="advancedOpen"
+            label="More Options"
+          ></BaseCollapseHeader>
         </div>
         <!-- More Options -->
-        <div v-show="advancedOpen" class="mt-4">
-          <BaseSelectSearchable
-            v-if="channelIds.length > 1"
+        <div v-show="advancedOpen" class="mt-4 flex">
+          <USelectMenu
+            searchable
+            class="flex-1"
+            size="lg"
             v-model="selectedChannel"
-            :options="channelIds"
-            :labels="channelLabels"
-            hint="Select a message channel..."
-            :show-labels-only="true"
-          />
+            :options="channels"
+            value-attribute="id"
+            option-attribute="name"
+            placeholder="Select a message channel"
+          >
+          </USelectMenu>
+          <UButton
+            color="white"
+            variant="solid"
+            class="ml-2"
+            size="lg"
+            @click="selectedChannel = undefined"
+            >Clear</UButton
+          >
         </div>
       </template>
-      <div v-if="errorMessages && errorMessagesTotal == 0" class="p-8 text-center">
+      <div
+        v-if="errorMessages && errorMessagesTotal == 0"
+        class="p-8 text-center"
+      >
         <p>No active failing records</p>
       </div>
       <div v-else>
@@ -32,7 +52,12 @@
         </ul>
         <!-- Real results -->
         <ul class="divide-y divide-gray-300">
-          <li v-for="item in errorMessages" :key="item.id" :item="item" class="hover:bg-gray-50">
+          <li
+            v-for="item in errorMessages"
+            :key="item.id"
+            :item="item"
+            class="hover:bg-gray-50"
+          >
             <NuxtLink :to="`/messages/${item.id}`">
               <MessagesListItem :item="item" />
             </NuxtLink>
@@ -54,12 +79,14 @@
 </template>
 
 <script lang="ts">
-import { type FacilityDetailsSchema, type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type FacilityDetailsSchema,
+  type MessageSchema,
+} from "@ukkidney/ukrdc-axios-ts";
 import { type PlotDatum } from "plotly.js-dist-min";
 
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseSelectSearchable from "~/components/base/BaseSelectSearchable.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import MessagesListItem from "~/components/messages/MessagesListItem.vue";
 import useApi from "~/composables/useApi";
@@ -70,7 +97,6 @@ export default defineComponent({
   components: {
     BasePaginator,
     BaseSkeleListItem,
-    BaseSelectSearchable,
     BaseCollapseHeader,
     MessagesListItem,
   },
@@ -82,7 +108,7 @@ export default defineComponent({
   },
   setup(props) {
     const router = useRouter();
-    const { channels, channelIds, channelLabels, selectedChannel } = useChannels();
+    const { channels, selectedChannel } = useChannels();
     const { facilitiesApi } = useApi();
 
     // Data refs
@@ -147,8 +173,6 @@ export default defineComponent({
       errorMessagesTotal,
       historyPointClickHandler,
       channels,
-      channelIds,
-      channelLabels,
       selectedChannel,
     };
   },
