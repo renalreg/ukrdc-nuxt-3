@@ -6,7 +6,7 @@
       <!-- More Options -->
       <div v-show="advancedOpen">
         <!-- Facility select -->
-        <div v-if="facilities.length > 1" class="flex mb-4">
+        <div v-if="facilities.length > 1" class="mb-4 flex">
           <USelectMenu
             searchable
             class="flex-1"

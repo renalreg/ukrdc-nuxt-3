@@ -8,7 +8,7 @@
       <BaseDateRange v-model="dateRange" class="mb-4" />
 
       <!-- Facility select -->
-      <div v-if="facilities.length > 1" class="flex mb-4">
+      <div v-if="facilities.length > 1" class="mb-4 flex">
         <USelectMenu
           searchable
           class="flex-1"
@@ -62,7 +62,7 @@
     </div>
 
     <!-- More Options -->
-    <div v-show="advancedOpen" class="flex mb-4">
+    <div v-show="advancedOpen" class="mb-4 flex">
       <USelectMenu
         searchable
         class="flex-1"

@@ -116,8 +116,6 @@ import BaseAlertError from "~/components/base/alert/BaseAlertError.vue";
 import BaseAlertWarning from "~/components/base/alert/BaseAlertWarning.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import EMPISearch from "~/components/EMPISearch.vue";
-import IconArrowsRightLeft from "~/components/icons/hero/20/solid/IconArrowsRightLeft.vue";
-import IconArrowsUpDown from "~/components/icons/hero/20/solid/IconArrowsUpDown.vue";
 import IconArrowRight from "~/components/icons/hero/24/solid/IconArrowRight.vue";
 import MasterRecordCard from "~/components/MasterRecordCard.vue";
 import useQuery from "~/composables/query/useQuery";
@@ -132,8 +130,6 @@ export default defineComponent({
     BaseAlertError,
     BaseAlertWarning,
     IconArrowRight,
-    IconArrowsRightLeft,
-    IconArrowsUpDown,
     MasterRecordCard,
     EMPISearch,
   },

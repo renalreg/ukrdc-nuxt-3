@@ -60,7 +60,6 @@ import { type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgeMessageStatus from "~/components/BadgeMessageStatus.vue";
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
-import IconFunnel from "~/components/icons/hero/20/solid/IconFunnel.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
 import useSensitive from "~/composables/useSensitive";
 import { formatDate } from "~/helpers/dateUtils";
@@ -70,7 +69,6 @@ export default defineComponent({
   components: {
     BaseInfoTooltip,
     SendingFacilityLink,
-    IconFunnel,
     BadgeMessageStatus,
   },
   props: {

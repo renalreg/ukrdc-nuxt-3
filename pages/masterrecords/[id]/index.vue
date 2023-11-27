@@ -71,7 +71,7 @@
     </NuxtLink>
 
     <!-- Related Patient Records card -->
-    <UCard :ui="{ body: { padding: '' } }" class="!overflow-visible mb-4">
+    <UCard :ui="{ body: { padding: '' } }" class="mb-4 !overflow-visible">
       <template #header>
         <h2>Patient Records</h2>
       </template>

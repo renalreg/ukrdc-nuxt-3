@@ -2,6 +2,8 @@
 
 - [ ] Re-implement sentry (https://www.lichter.io/articles/nuxt3-sentry-recipe/?ref=github-sentry-support-issue)
 
+- [ ] Fix ESLint issues
+
 ### System
 
 - [x] Fix system configuration/support variables (replace all $config instances with useRuntimeConfig())

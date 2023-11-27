@@ -24,7 +24,7 @@
         <BaseDateRange v-model="dateRange" class="mb-4" />
 
         <!-- Code select -->
-        <div class="flex mb-4">
+        <div class="mb-4 flex">
           <USelectMenu
             searchable
             class="flex-1"
@@ -264,15 +264,6 @@ export default defineComponent({
     // Result item services
 
     const availableServices = ref([] as ResultItemServiceSchema[]);
-
-    const availableServicesIds = computed(() => {
-      return availableServices.value.map(({ id }) => id);
-    });
-
-    const availableServicesLabels = computed(() => {
-      return availableServices.value.map(({ description }) => description);
-    });
-
     const selectedService = stringQuery("service_id", null, true, true);
 
     // Lab order filter

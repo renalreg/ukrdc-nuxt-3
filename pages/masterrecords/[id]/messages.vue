@@ -50,8 +50,6 @@ import {
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
-import IconBarsArrowDown from "~/components/icons/hero/20/solid/IconBarsArrowDown.vue";
-import IconBarsArrowUp from "~/components/icons/hero/20/solid/IconBarsArrowUp.vue";
 import MessagesListItem from "~/components/messages/MessagesListItem.vue";
 import useDateRange from "~/composables/query/useDateRange";
 import usePagination from "~/composables/query/usePagination";
@@ -64,8 +62,6 @@ export default defineComponent({
     BaseSkeleListItem,
     BasePaginator,
     BaseDateRange,
-    IconBarsArrowDown,
-    IconBarsArrowUp,
     MessagesListItem,
   },
   props: {

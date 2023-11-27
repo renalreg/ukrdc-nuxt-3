@@ -1,7 +1,7 @@
 <template>
   <div v-click-away="closeMenu" class="relative w-full justify-self-end">
     <UButton color="white" variant="ghost" class="w-full" label="Manage profile" @click="showMenu = !showMenu">
-      <div class="flex items-center gap-4 w-full" :class="{ 'flex-row-reverse': rightToLeft }">
+      <div class="flex w-full items-center gap-4" :class="{ 'flex-row-reverse': rightToLeft }">
         <div class="h-10 w-10">
           <span
             class="inline-block h-10 w-10 overflow-hidden rounded-full"

@@ -83,7 +83,7 @@
         </div>
       </div>
       <!-- Related records -->
-      <UCard :ui="{ body: { padding: '' } }" class="!overflow-visible col-span-3 md:col-span-2 h-fit">
+      <UCard :ui="{ body: { padding: '' } }" class="col-span-3 h-fit !overflow-visible md:col-span-2">
         <template #header>
           <h2>Related Records</h2>
           <p class="label">All records, including data feeds and memberships, for this patient</p>

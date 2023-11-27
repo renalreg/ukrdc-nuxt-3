@@ -40,14 +40,10 @@
 import { type ResultItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgePrePost from "~/components/BadgePrePost.vue";
-import IconFunnel from "~/components/icons/hero/20/solid/IconFunnel.vue";
-import IconTrash from "~/components/icons/hero/20/solid/IconTrash.vue";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    IconFunnel,
-    IconTrash,
     BadgePrePost,
   },
   props: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center gap-2 pb-4 md:mx-auto w-full">
+  <div class="flex w-full items-center gap-2 pb-4 md:mx-auto">
     <form @submit.prevent="$emit('submit')" class="flex-1">
       <UInput
         size="lg"

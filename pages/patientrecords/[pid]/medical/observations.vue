@@ -4,7 +4,7 @@
       <p v-if="observations && observations.length <= 0" class="text-center">No observations on record</p>
       <div v-else>
         <!-- Code select -->
-        <div class="flex mb-4">
+        <div class="mb-4 flex">
           <USelectMenu
             searchable
             class="flex-1"

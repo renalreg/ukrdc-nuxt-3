@@ -7,7 +7,7 @@
     <div class="mb-4 flex flex-col">
       <BaseDateRange v-model="dateRange" class="mb-4" />
       <!-- Facility select -->
-      <div v-if="facilities.length > 1" class="flex mb-4">
+      <div v-if="facilities.length > 1" class="mb-4 flex">
         <USelectMenu
           searchable
           class="flex-1"
@@ -81,8 +81,6 @@ import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import BaseTabsModel from "~/components/base/BaseTabsModel.vue";
-import IconBarsArrowDown from "~/components/icons/hero/20/solid/IconBarsArrowDown.vue";
-import IconBarsArrowUp from "~/components/icons/hero/20/solid/IconBarsArrowUp.vue";
 import WorkItemsListItem from "~/components/workitem/WorkItemsListItem.vue";
 import useDateRange from "~/composables/query/useDateRange";
 import usePagination from "~/composables/query/usePagination";
@@ -98,8 +96,6 @@ export default defineComponent({
     BasePaginator,
     BaseDateRange,
     BaseTabsModel,
-    IconBarsArrowDown,
-    IconBarsArrowUp,
     WorkItemsListItem,
   },
   setup() {
