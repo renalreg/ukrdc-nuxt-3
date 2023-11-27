@@ -58,7 +58,7 @@
         </BaseCardDescriptionList>
       </UCard>
     </div>
-    <BaseButton @click="copyConfigReport">Copy Configuration Report</BaseButton>
+    <UButton color="white" variant="solid" @click="copyConfigReport">Copy Configuration Report</UButton>
   </div>
 </template>
 
@@ -66,14 +66,12 @@
 
 import { type SystemInfoSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseCardDescriptionItem from "~/components/base/BaseCardDescriptionItem.vue";
 import BaseCardDescriptionList from "~/components/base/BaseCardDescriptionList.vue";
 import useApi from "~/composables/useApi";
 
 export default defineComponent({
   components: {
-    BaseButton,
     BaseCardDescriptionList,
     BaseCardDescriptionItem,
   },

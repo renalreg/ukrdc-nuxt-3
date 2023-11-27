@@ -33,12 +33,12 @@
                   class="inline-block flex-shrink-0 rounded-sm bg-indigo-100 px-2 py-0.5 text-sm font-medium text-indigo-800"
                   >{{ item.questions.length }} questions</span
                 >
-                <BaseButton
+                <UButton color="white" variant="solid"
                   class="float-right"
                   @click="surveyViewerModal?.show(item)"
                 >
                   View survey
-                </BaseButton>
+                </UButton>
               </div>
             </div>
           </div>
@@ -54,7 +54,6 @@ import {
   type SurveySchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import PatientRecordSurveyViewer from "~/components/patientrecord/medical/PatientRecordSurveyViewer.vue";
 import useApi from "~/composables/useApi";
@@ -64,7 +63,6 @@ import { type SurveyViewerModalInterface } from "~/interfaces/modal";
 export default defineComponent({
   components: {
     BaseLoadingContainer,
-    BaseButton,
     PatientRecordSurveyViewer,
   },
   props: {

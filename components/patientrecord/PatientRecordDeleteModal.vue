@@ -181,17 +181,16 @@
               <BaseLoadingIndicator></BaseLoadingIndicator>
             </div>
             <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-              <BaseButton
+              <UButton
                 v-if="previewResponse && !previewErrorMessage"
                 class="ml-2"
-                colour="red"
-                :primary="true"
+                color="red"
                 :disabled="!confirmChecked || deleteInProgress"
                 @click="doRealDelete()"
               >
                 Delete
-              </BaseButton>
-              <BaseButton @click="cancel()"> Cancel </BaseButton>
+              </UButton>
+              <UButton @click="cancel()"> Cancel </UButton>
             </div>
           </div>
         </ModalTransition>
@@ -211,7 +210,6 @@ import {
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseBlackout from "~/components/base/BaseBlackout.vue";
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import ModalTransition from "~/components/transition/ModalTransition.vue";
@@ -237,7 +235,6 @@ interface DeletePIDResponseSchema {
 
 export default defineComponent({
   components: {
-    BaseButton,
     BaseLoadingIndicator,
     BaseCheckbox,
     BaseBlackout,

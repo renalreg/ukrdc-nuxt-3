@@ -29,25 +29,23 @@
       </div>
     </div>
     <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-      <BaseButton :primary="true" class="ml-2" :colour="danger ? 'red' : 'indigo'" @click="confirm()">
+      <UButton :primary="true" class="ml-2" :color="danger ? 'red' : 'indigo'" @click="confirm()">
         {{ confirmLabel }}
-      </BaseButton>
-      <BaseButton @click="cancel()">
+      </UButton>
+      <UButton @click="cancel()">
         {{ cancelLabel }}
-      </BaseButton>
+      </UButton>
     </div>
   </BaseModal>
 </template>
 
 <script lang="ts">
 
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
 import { type ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {
-    BaseButton,
     BaseModal,
   },
   props: {

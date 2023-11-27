@@ -14,41 +14,39 @@
       <BadgePrePost v-if="item.prePost" :pre-post="item.prePost" />
     </td>
     <td class="flex gap-2 text-gray-500">
-      <BaseButton
+      <UButton
+        :ui="{ rounded: 'rounded-full' }"
+        color="white"
+        variant="solid"
         class="opacity-0 group-hover:opacity-100"
-        :round="true"
-        :tight="true"
         tooltip="Filter by this lab order"
-        label="Filter by this lab order"
+        icon="i-heroicons-funnel-20-solid"
         :to="{ query: { order_id: item.orderId } }"
-        ><IconFunnel />
-      </BaseButton>
-      <BaseButton
+      />
+      <UButton
+      :ui="{ rounded: 'rounded-full' }"
+        color="white"
+        variant="solid"
         class="opacity-0 group-hover:opacity-100"
-        :round="true"
-        :tight="true"
         tooltip="Delete this result item"
-        label="Delete this result item"
+        icon="i-heroicons-trash-20-solid"
         @click="$emit('delete', item)"
-        ><IconTrash />
-      </BaseButton>
+      />
     </td>
   </tr>
 </template>
 
 <script lang="ts">
 
-import { ResultItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type ResultItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgePrePost from "~/components/BadgePrePost.vue";
-import BaseButton from "~/components/base/BaseButton.vue";
 import IconFunnel from "~/components/icons/hero/20/solid/IconFunnel.vue";
 import IconTrash from "~/components/icons/hero/20/solid/IconTrash.vue";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseButton,
     IconFunnel,
     IconTrash,
     BadgePrePost,

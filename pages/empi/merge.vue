@@ -16,7 +16,7 @@
     <div class="mb-6 block gap-2 lg:flex">
       <div class="flex-1">
         <div v-if="superseded">
-          <BaseButton class="w-full" @click="clearSuperceeded"> Change Source Record </BaseButton>
+          <UButton color="white" variant="solid" size="lg" class="w-full" @click="clearSuperceeded"> Change Source Record </UButton>
           <NuxtLink :to="`/masterrecords/${superseded.id}`">
             <MasterRecordCard
               class="mt-4 !border-red-500"
@@ -28,20 +28,18 @@
         </div>
         <div v-else>
           <EMPISearch v-if="searchingFor === 'superseded'" :number-types="['UKRDC']" @select="selectSuperceeded" />
-          <BaseButton v-else class="w-full" @click="searchingFor = 'superseded'"> Search for a Record </BaseButton>
+          <UButton color="white" variant="solid" size="lg" v-else class="w-full" @click="searchingFor = 'superseded'"> Search for a Record </UButton>
         </div>
       </div>
 
-      <div class="my-4 mb-2 flex flex-none flex-row justify-center lg:my-0 lg:w-8 lg:flex-col lg:justify-start">
+      <div class="my-4 flex flex-none flex-row justify-center lg:my-0 lg:flex-col lg:justify-start">
         <div class="flex-shrink">
-          <button
+          <UButton square
+            color="white" variant="solid" size="lg"
+            icon="i-heroicons-arrows-right-left-20-solid"
             v-tooltip="'Switch Records'"
-            class="mx-auto block w-8 rounded-md border border-gray-300 bg-white font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             @click="switchRecords"
-          >
-            <IconArrowsRightLeft class="mx-auto my-2 hidden text-gray-400 lg:block" />
-            <IconArrowsUpDown class="mx-auto my-2 block text-gray-400 lg:hidden" />
-          </button>
+          />
         </div>
         <div class="hidden flex-grow flex-col justify-center lg:flex">
           <div v-show="superseded && superseding" class="h-8">
@@ -52,7 +50,7 @@
 
       <div class="flex-1">
         <div v-if="superseding">
-          <BaseButton class="w-full" @click="clearsuperseding"> Change Destination Record </BaseButton>
+          <UButton color="white" variant="solid" size="lg" class="w-full" @click="clearsuperseding"> Change Destination Record </UButton>
           <NuxtLink :to="`/masterrecords/${superseding.id}`">
             <MasterRecordCard
               class="mt-4 !border-green-500"
@@ -64,7 +62,7 @@
         </div>
         <div v-else>
           <EMPISearch v-if="searchingFor === 'superseding'" :number-types="['UKRDC']" @select="selectsuperseding" />
-          <BaseButton v-else class="w-full" @click="searchingFor = 'superseding'"> Search for a Record </BaseButton>
+          <UButton color="white" variant="solid" size="lg" v-else class="w-full" @click="searchingFor = 'superseding'"> Search for a Record </UButton>
         </div>
       </div>
     </div>
@@ -93,8 +91,8 @@
       </div>
 
       <div class="flex gap-2">
-        <BaseButton :primary="true" colour="red" @click="beginMergeAlert?.show()">Begin Record Merge</BaseButton>
-        <BaseButton v-if="callbackPath" :to="callbackPath">Cancel</BaseButton>
+        <UButton colour="red" variant="solid" @click="beginMergeAlert?.show()">Begin Record Merge</UButton>
+        <UButton color="white" variant="solid" v-if="callbackPath" :to="callbackPath">Cancel</UButton>
       </div>
     </div>
   </div>
@@ -106,7 +104,6 @@ import { type MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseAlertError from "~/components/base/alert/BaseAlertError.vue";
 import BaseAlertWarning from "~/components/base/alert/BaseAlertWarning.vue";
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import EMPISearch from "~/components/EMPISearch.vue";
 import IconArrowsRightLeft from "~/components/icons/hero/20/solid/IconArrowsRightLeft.vue";
@@ -121,7 +118,6 @@ type Direction = "superseding" | "superseded";
 
 export default defineComponent({
   components: {
-    BaseButton,
     BaseModalConfirm,
     BaseAlertError,
     BaseAlertWarning,

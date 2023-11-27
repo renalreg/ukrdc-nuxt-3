@@ -35,13 +35,13 @@
         <div v-else>
           <div class="mb-4 flex flex-grow items-center gap-2">
             <NuxtLink :to="'./laborders'">
-              <BaseButton>View Lab Orders</BaseButton>
+              <UButton color="white" variant="solid">View Lab Orders</UButton>
             </NuxtLink>
             <NuxtLink v-if="selectedOrderId" :to="{ query: { order_id: null } }">
-              <BaseButton>Show Results From All Lab Orders</BaseButton>
+              <UButton color="white" variant="solid">Show Results From All Lab Orders</UButton>
             </NuxtLink>
-            <BaseButton v-if="selectedOrderId && selectedOrder" colour="red" @click="deleteOrderAlert?.show()"
-              >Delete Lab Order</BaseButton
+            <UButton color="red" variant="outline" v-if="selectedOrderId && selectedOrder" @click="deleteOrderAlert?.show()"
+              >Delete Lab Order</UButton
             >
           </div>
 
@@ -92,7 +92,6 @@ import {
   type ResultItemServiceSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
@@ -109,7 +108,6 @@ import { type ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {
-    BaseButton,
     BaseLoadingContainer,
     BaseTable,
     BasePaginator,

@@ -33,17 +33,17 @@
       </div>
       <!-- Identifiers  -->
       <div class="col-span-3 flex items-center gap-4 lg:col-span-1">
-        <BaseButton
+        <UButton
           v-if="showPatientFilter"
+          :ui="{ rounded: 'rounded-full' }"
+          color="white"
+          variant="solid"
           :class="!item.ni ? 'invisible' : ''"
           class="opacity-0 group-hover:opacity-100"
-          :round="true"
-          :tight="true"
           :to="{ path: '/messages', query: { nationalid: item.ni } }"
           tooltip="Filter errors by this patient"
-          :label="`Filter errors by patient ${item.ni}`"
-          ><IconFunnel class="h-5 w-5" />
-        </BaseButton>
+          icon="i-heroicons-funnel-20-solid"
+        />
         <div class="flex-grow">
           <h5>Patient Number</h5>
           <p class="sensitive mt-2">
@@ -59,7 +59,6 @@
 import { type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgeMessageStatus from "~/components/BadgeMessageStatus.vue";
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import IconFunnel from "~/components/icons/hero/20/solid/IconFunnel.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
@@ -70,7 +69,6 @@ import { makeMessageSummary } from "~/helpers/messageUtils";
 export default defineComponent({
   components: {
     BaseInfoTooltip,
-    BaseButton,
     SendingFacilityLink,
     IconFunnel,
     BadgeMessageStatus,

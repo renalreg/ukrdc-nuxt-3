@@ -22,15 +22,15 @@
       />
 
       <div class="flex justify-end">
-        <BaseButton @click="updateWorkItemModal?.hide()">Cancel</BaseButton>
-        <BaseButton
-          colour="indigo"
+        <UButton @click="updateWorkItemModal?.hide()">Cancel</UButton>
+        <UButton
+          color="indigo"
           class="ml-2"
           type="submit"
           @click="updateWorkItem()"
         >
           Save
-        </BaseButton>
+        </UButton>
       </div>
     </BaseModal>
 
@@ -53,16 +53,16 @@
       </div>
 
       <div class="flex justify-end">
-        <BaseButton @click="closeModal?.hide()"> Cancel </BaseButton>
-        <BaseButton
+        <UButton @click="closeModal?.hide()"> Cancel </UButton>
+        <UButton
           :disabled="!customComment"
           type="submit"
           class="ml-3"
-          colour="red"
+          color="red"
           @click="handleCloseWorkItem()"
         >
           Close Work Item
-        </BaseButton>
+        </UButton>
       </div>
     </BaseModal>
 
@@ -89,31 +89,28 @@
       v-if="hasPermission('ukrdc:workitems:write') && record"
       class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
     >
-      <BaseButton
+      <UButton
         v-if="availableActions.comment"
-        :primary="true"
-        colour="indigo"
+        color="indigo"
         class="inline-flex w-full items-center justify-center"
         @click="updateWorkItemModal?.show()"
       >
         <IconPencil class="-ml-1 mr-2" />
         Update
-      </BaseButton>
+      </UButton>
 
-      <BaseButton
+      <UButton
         v-if="availableActions.close && record.status !== 3"
-        :primary="true"
         class="inline-flex w-full items-center justify-center"
-        colour="green"
+        color="green"
         @click="closeModal?.show()"
       >
         <IconCheckCircle class="-ml-1 mr-2" />
         Close
-      </BaseButton>
+      </UButton>
 
-      <BaseButton
+      <UButton
         v-if="availableActions.merge && record.status !== 3"
-        :primary="true"
         tooltip="You will be redirected here after merging"
         :to="{
           path: '/empi/merge',
@@ -124,11 +121,11 @@
           },
         }"
         class="inline-flex w-full items-center justify-center"
-        colour="yellow"
+        color="yellow"
       >
         <IconArrowTopRightOnSquare class="-ml-1 mr-2" />
         Merge Master Records
-      </BaseButton>
+      </UButton>
     </div>
 
     <!-- Work Item Trigger -->
@@ -397,7 +394,6 @@ import {
   type WorkItemSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseCheckbox from "~/components/base/BaseCheckbox.vue";
 import BaseItemPaginator from "~/components/base/BaseItemPaginator.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
@@ -431,7 +427,6 @@ interface AvailableActions {
 
 export default defineComponent({
   components: {
-    BaseButton,
     BaseItemPaginator,
     BaseTextArea,
     BaseTable,

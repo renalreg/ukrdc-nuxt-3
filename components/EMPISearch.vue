@@ -9,7 +9,7 @@ Mini (half-width) search bar and results pages used in the EMPI Merge page.
     </div>
 
     <div v-if="masterrecords.length > 0">
-      <UCard>
+      <UCard :ui="{body: { padding: '' }}">
         <!-- Skeleton results -->
         <ul v-if="searchInProgress" class="divide-y divide-gray-300">
           <BaseSkeleListItem v-for="n in 10" :key="n" />

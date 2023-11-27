@@ -46,7 +46,7 @@
           </svg>
         </div>
       </div>
-      <BaseButton colour="white" class="ml-2 w-24" @click="clear">Clear</BaseButton>
+      <UButton color="white" variant="solid" class="ml-2" @click="clear">Clear</UButton>
     </div>
 
     <!-- Popover -->
@@ -91,11 +91,9 @@
 <script lang="ts">
 
 import BaseBlackout from "~/components/base/BaseBlackout.vue";
-import BaseButton from "~/components/base/BaseButton.vue";
 
 export default defineComponent({
   components: {
-    BaseButton,
     BaseBlackout,
   },
   props: {

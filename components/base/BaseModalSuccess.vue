@@ -47,22 +47,20 @@
       </div>
     </div>
     <div class="mt-5 sm:mt-6">
-      <BaseButton :primary="true" class="w-full px-4 py-2" colour="indigo" @click="confirm()">
+      <UButton :primary="true" class="w-full px-4 py-2" @click="confirm()">
         {{ confirmLabel }}
-      </BaseButton>
+      </UButton>
     </div>
   </BaseModal>
 </template>
 
 <script lang="ts">
 
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
 import { type ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {
-    BaseButton,
     BaseModal,
   },
   props: {

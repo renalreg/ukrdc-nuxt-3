@@ -68,7 +68,7 @@
             <PatientRecordAddress :address="addressToUse.address" />
           </div>
 
-          <BaseButton @click="postUpdateConfirm?.show()">Apply Changes</BaseButton>
+          <UButton color="white" variant="solid" @click="postUpdateConfirm?.show()">Apply Changes</UButton>
         </div>
 
         <!-- Available Options -->
@@ -188,7 +188,6 @@
 <script lang="ts">
 import { type AddressSchema, type NameSchema, type PatientRecordSchema, type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import PatientRecordAddress from "~/components/patientrecord/summary/PatientRecordAddress.vue";
@@ -227,7 +226,6 @@ export default defineComponent({
   components: {
     BaseLoadingContainer,
     BaseModalConfirm,
-    BaseButton,
     PatientRecordAddress,
   },
   props: {

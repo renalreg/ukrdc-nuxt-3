@@ -12,7 +12,7 @@
       </div>
       <div class="flex justify-center sm:justify-start">
         <div v-if="record.masterId">
-          <BaseButton :to="`/masterrecords/${record.masterId}`" class="truncate"> View Master Record </BaseButton>
+          <UButton color="white" variant="solid" size="lg" :to="`/masterrecords/${record.masterId}`"> View Master Record </UButton>
         </div>
       </div>
     </div>
@@ -26,7 +26,6 @@
 <script lang="ts">
 import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseTabsNavigation from "~/components/base/BaseTabsNavigation.vue";
 import PatientRecordExtractSummary from "~/components/patientrecord/PatientRecordExtractSummary.vue";
 import useApi from "~/composables/useApi";
@@ -38,7 +37,6 @@ import { type TabItem } from "~/interfaces/tabs";
 export default defineComponent({
   components: {
     PatientRecordExtractSummary,
-    BaseButton,
     BaseTabsNavigation,
   },
   setup() {

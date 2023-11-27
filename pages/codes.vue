@@ -6,15 +6,15 @@
       </div>
       <div>
         <div v-click-away="closeExportMenu" class="relative flex">
-          <BaseButton @click="showExportMenu = !showExportMenu">
+          <UButton color="white" variant="solid" @click="showExportMenu = !showExportMenu">
             <div class="flex items-center">
               <div class="flex-grow">Export Codes</div>
               <div class="ml-2">
                 <IconChevronDown class="h-5 w-5 text-gray-700" />
               </div>
             </div>
-          </BaseButton>
-          <BaseMenu class="-right-2 z-10 mb-2 mt-14" :show="showExportMenu">
+          </UButton>
+          <BaseMenu class="right-0 z-10 mb-2 mt-10" :show="showExportMenu">
             <BaseMenuItem @click="exportCodeList"> Export Code List </BaseMenuItem>
             <BaseMenuItem @click="exportCodeMaps"> Export Code Maps </BaseMenuItem>
             <BaseMenuItem @click="exportCodeExclusions"> Export Code Exclusions </BaseMenuItem>
@@ -68,12 +68,12 @@
       </div>
       <!-- Code details -->
       <div class="sticky top-4 h-screen grow">
-        <BaseButton
+        <UButton color="white" variant="solid"
           v-show="$route.params.id"
           class="mb-4 w-full lg:hidden"
           :to="{ path: `/codes/`, query: $route.query }"
-          >Back to List</BaseButton
-        >
+          label="Back to List"
+        />
         <UCard :class="$route.params.id ? 'block' : 'hidden lg:block'">
           <NuxtPage />
         </UCard>
@@ -85,7 +85,6 @@
 <script lang="ts">
 import { type CodeSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseButton from "~/components/base/BaseButton.vue";
 import BaseMenu from "~/components/base/BaseMenu.vue";
 import BaseMenuItem from "~/components/base/BaseMenuItem.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
@@ -101,7 +100,6 @@ import { saveAs } from "~/helpers/fileUtils";
 
 export default defineComponent({
   components: {
-    BaseButton,
     BaseMenu,
     BaseMenuItem,
     BaseSkeleListItem,

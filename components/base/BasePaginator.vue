@@ -12,35 +12,32 @@
       </p>
     </div>
     <div class="flex flex-1 items-center justify-between gap-1 sm:justify-end">
-      <BaseButton :class="{ invisible: page <= 1 }" @click="prev()"> Previous </BaseButton>
+      <UButton variant="solid" color="white" :class="{ invisible: page <= 1 }" @click="prev()"> Previous </UButton>
       <div v-if="showPages" class="flex items-center justify-between gap-1 sm:justify-end">
         <div v-for="(pageLink, index) in paginationElements" :key="'paginator-' + index">
           <span v-if="pageLink === '...'" class="hidden px-2 font-medium lg:block"> ... </span>
-          <BaseButton
+          <UButton
             v-else
-            :colour="pageLink === page ? 'indigo' : 'white'"
+            :variant="pageLink === page ? 'outline' : 'solid'"
+            :color="pageLink === page ? 'indigo' : 'white'"
             class="hidden lg:block"
             @click="jump(pageLink)"
           >
             {{ pageLink }}
-          </BaseButton>
+          </UButton>
         </div>
       </div>
-      <BaseButton :class="{ invisible: page * size >= total }" @click="next()"> Next </BaseButton>
+      <UButton variant="solid" color="white" :class="{ invisible: page * size >= total }" @click="next()"> Next </UButton>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
 
-import BaseButton from "~/components/base/BaseButton.vue";
 
 type Pages = (number | "...")[];
 
 export default defineComponent({
-  components: {
-    BaseButton,
-  },
   props: {
     page: {
       type: Number,
