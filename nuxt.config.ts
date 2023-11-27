@@ -32,6 +32,12 @@ export default defineNuxtConfig({
     },
   },
 
+  // NuxtUI styling
+  ui: {
+    primary: 'indigo',
+    gray: 'cool'
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["@/assets/css/main.css"],
 
@@ -48,7 +54,7 @@ export default defineNuxtConfig({
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    //  "~/modules/okta-auth/index"
+    '@nuxt/ui'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
