@@ -39,16 +39,11 @@
             <AuditListItem :item="item" />
           </li>
         </ul>
-        <BasePaginator
-          class="border-t border-gray-200 bg-white"
-          :page="page"
-          :size="size"
-          :total="total"
-          @next="page++"
-          @prev="page--"
-          @jump="page = $event"
-        />
       </div>
+
+      <template #footer>
+        <BasePaginator :page="page" :size="size" :total="total" @next="page++" @prev="page--" @jump="page = $event" />
+      </template>
     </UCard>
   </div>
 </template>

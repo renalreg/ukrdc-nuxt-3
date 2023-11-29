@@ -73,10 +73,7 @@
               </UDropdown>
             </template>
           </UTable>
-        </UCard>
-
-        <div v-if="results && results.length > 0" class="mt-4">
-          <UCard>
+          <template #footer>
             <BasePaginator
               :page="page"
               :size="size"
@@ -85,8 +82,8 @@
               @prev="page--"
               @jump="page = $event"
             />
-          </UCard>
-        </div>
+          </template>
+        </UCard>
       </div>
     </BaseLoadingContainer>
   </div>

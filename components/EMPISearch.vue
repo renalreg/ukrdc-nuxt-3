@@ -20,16 +20,17 @@ Mini (half-width) search bar and results pages used in the EMPI Merge page.
             <MasterRecordsListItem class="cursor-pointer" :item="item" @click.native="$emit('select', item.id)" />
           </li>
         </ul>
-        <BasePaginator
-          class="border-t border-gray-200 bg-white"
-          :page="page"
-          :size="size"
-          :total="total"
-          :show-pages="false"
-          @next="page++"
-          @prev="page--"
-          @jump="page = $event"
-        />
+        <template #footer>
+          <BasePaginator
+            :page="page"
+            :size="size"
+            :total="total"
+            :show-pages="false"
+            @next="page++"
+            @prev="page--"
+            @jump="page = $event"
+          />
+        </template>
       </UCard>
     </div>
     <div v-else class="mt-2 text-center text-gray-500">

@@ -42,8 +42,9 @@
             </NuxtLink>
           </li>
         </ul>
+      </div>
+      <template #footer>
         <BasePaginator
-          class="border-t border-gray-200 bg-white"
           :jump-to-top="false"
           :page="errorMessagesPage"
           :size="errorMessagesSize"
@@ -52,7 +53,7 @@
           @prev="errorMessagesPage--"
           @jump="errorMessagesPage = $event"
         />
-      </div>
+      </template>
     </UCard>
   </div>
 </template>

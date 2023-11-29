@@ -27,13 +27,11 @@
             <BadgePrePost v-if="row.prePost" :pre-post="row.prePost" />
           </template>
         </UTable>
-      </UCard>
 
-      <div v-if="observations && observations.length > 0">
-        <UCard>
+        <template #footer>
           <BasePaginator :page="page" :size="size" :total="total" @next="page++" @prev="page--" @jump="page = $event" />
-        </UCard>
-      </div>
+        </template>
+      </UCard>
     </BaseLoadingContainer>
   </div>
 </template>

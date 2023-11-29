@@ -37,6 +37,10 @@
           </span>
         </template>
       </UTable>
+
+      <template #footer>
+        <BasePaginator :page="page" :size="size" :total="total" @next="page++" @prev="page--" @jump="page = $event" />
+      </template>
     </UCard>
   </div>
 </template>

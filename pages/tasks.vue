@@ -26,13 +26,10 @@
           </span>
         </template>
       </UTable>
-    </UCard>
-
-    <div v-if="tasks && tasks.length > 0" class="mb-4">
-      <UCard>
+      <template #footer>
         <BasePaginator :page="page" :size="size" :total="total" @next="page++" @prev="page--" @jump="page = $event" />
-      </UCard>
-    </div>
+      </template>
+    </UCard>
   </div>
 </template>
 

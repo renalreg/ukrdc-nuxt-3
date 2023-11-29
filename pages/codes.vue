@@ -48,16 +48,17 @@
               </NuxtLink>
             </li>
           </ul>
-          <BasePaginator
-            class="border-t border-gray-200 bg-white"
-            :page="page"
-            :size="size"
-            :total="total"
-            :show-pages="false"
-            @next="page++"
-            @prev="page--"
-            @jump="page = $event"
-          />
+          <template #footer>
+            <BasePaginator
+              :page="page"
+              :size="size"
+              :total="total"
+              :show-pages="false"
+              @next="page++"
+              @prev="page--"
+              @jump="page = $event"
+            />
+          </template>
         </UCard>
       </div>
       <!-- Code details -->

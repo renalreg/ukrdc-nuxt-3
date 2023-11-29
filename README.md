@@ -24,7 +24,7 @@
 - [x] Fix name display component
 - [ ] Fix layout for multiple diagnoses
 - [ ] Fix BaseCardDescriptionList style
-- [ ] Move all paginator components into card footer
+- [x] Move all paginator components into card footer
 - [ ] Check all `sensitive` class components
 - [ ] Fix all tooltips on buttons with tooltip= attribute
 - [ ] (Eventually) fix https://github.com/nathanreyes/v-calendar/issues/1415

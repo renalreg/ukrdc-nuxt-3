@@ -49,16 +49,18 @@
           </NuxtLink>
         </li>
       </ul>
-      <BasePaginator
-        class="border-t border-gray-200 bg-white"
-        :jump-to-top="false"
-        :page="relatedErrorsPage"
-        :size="relatedErrorsSize"
-        :total="relatedErrorsTotal"
-        @next="relatedErrorsPage++"
-        @prev="relatedErrorsPage--"
-        @jump="relatedErrorsPage = $event"
-      />
+
+      <template #footer>
+        <BasePaginator
+          :jump-to-top="false"
+          :page="relatedErrorsPage"
+          :size="relatedErrorsSize"
+          :total="relatedErrorsTotal"
+          @next="relatedErrorsPage++"
+          @prev="relatedErrorsPage--"
+          @jump="relatedErrorsPage = $event"
+        />
+      </template>
     </UCard>
   </div>
 </template>

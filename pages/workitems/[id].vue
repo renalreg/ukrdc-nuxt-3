@@ -210,16 +210,18 @@
           </NuxtLink>
         </li>
       </ul>
-      <BasePaginator
-        class="border-t border-gray-200 bg-white"
-        :jump-to-top="false"
-        :page="messagesPage"
-        :size="messagesSize"
-        :total="messagesTotal"
-        @next="messagesPage++"
-        @prev="messagesPage--"
-        @jump="messagesPage = $event"
-      />
+
+      <template #footer>
+        <BasePaginator
+          :jump-to-top="false"
+          :page="messagesPage"
+          :size="messagesSize"
+          :total="messagesTotal"
+          @next="messagesPage++"
+          @prev="messagesPage--"
+          @jump="messagesPage = $event"
+        />
+      </template>
     </UCard>
 
     <!-- Related Work Items  -->

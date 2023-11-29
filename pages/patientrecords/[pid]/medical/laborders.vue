@@ -19,13 +19,10 @@
           }}
         </template>
       </UTable>
-    </UCard>
-
-    <div v-if="orders.length > 0" class="mt-4">
-      <UCard>
+      <template #footer>
         <BasePaginator :page="page" :size="size" :total="total" @next="page++" @prev="page--" @jump="page = $event" />
-      </UCard>
-    </div>
+      </template>
+    </UCard>
   </div>
 </template>
 
