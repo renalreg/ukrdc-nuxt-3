@@ -55,7 +55,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
           </div>
         </div>
         <template #footer>
-          <p class="text-sm text-gray-600">Records with active data files currently failing due to errors</p>
+          <p class="text-sm text-gray-600">Active records currently failing due to errors</p>
         </template>
       </UCard>
     </div>
