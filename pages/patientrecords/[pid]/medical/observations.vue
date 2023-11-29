@@ -1,53 +1,38 @@
 <template>
   <div class="sensitive">
     <BaseLoadingContainer :loading="!observations">
-      <p v-if="observations && observations.length <= 0" class="text-center">No observations on record</p>
-      <div v-else>
-        <!-- Code select -->
-        <div class="mb-4 flex">
-          <USelectMenu
-            searchable
-            class="flex-1"
-            size="lg"
-            v-model="selectedCode"
-            :options="availableCodes"
-            placeholder="Select a coding standard"
-          />
-          <UButton class="ml-2" size="lg" @click="selectedCode = undefined" label="Clear" />
-          >
-        </div>
+      <!-- Code select -->
+      <div class="mb-4 flex">
+        <USelectMenu
+          searchable
+          class="flex-1"
+          size="lg"
+          v-model="selectedCode"
+          :options="availableCodes"
+          placeholder="Select a coding standard"
+        />
+        <UButton class="ml-2" size="lg" @click="selectedCode = undefined" label="Clear" />
+      </div>
 
-        <BaseTable class="mb-4">
-          <thead class="bg-gray-50">
-            <tr>
-              <th scope="col">Type</th>
-              <th scope="col">Value</th>
-              <th scope="col">Entered At</th>
-              <th scope="col">Entered On</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-300 bg-white">
-            <PatientrecordObservationRow
-              v-for="(item, index) in observations"
-              :key="`${item.observationCode}-${index}`"
-              :item="item"
-            />
-          </tbody>
-        </BaseTable>
+      <UCard :ui="{ body: { padding: '' } }" class="mb-4">
+        <UTable :loading="loading" :rows="observations" :columns="columns" class="sensitive">
+          <!-- Value -->
+          <template #value-data="{ row }"> {{ row.value }} {{ row.valueUnits }} </template>
+          <!-- observationTime -->
+          <template #observationTime-data="{ row }">
+            {{ row.observationTime ? formatDate(row.observationTime) : "No observation time" }}
+          </template>
+          <!-- prePost -->
+          <template #prePost-data="{ row }">
+            <BadgePrePost v-if="row.prePost" :pre-post="row.prePost" />
+          </template>
+        </UTable>
+      </UCard>
 
-        <div v-if="observations && observations.length > 0">
-          <UCard>
-            <BasePaginator
-              :page="page"
-              :size="size"
-              :total="total"
-              @next="page++"
-              @prev="page--"
-              @jump="page = $event"
-            />
-          </UCard>
-        </div>
+      <div v-if="observations && observations.length > 0">
+        <UCard>
+          <BasePaginator :page="page" :size="size" :total="total" @next="page++" @prev="page--" @jump="page = $event" />
+        </UCard>
       </div>
     </BaseLoadingContainer>
   </div>
@@ -58,8 +43,6 @@ import { type ObservationSchema, type PatientRecordSchema } from "@ukkidney/ukrd
 
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseTable from "~/components/base/BaseTable.vue";
-import PatientrecordObservationRow from "~/components/patientrecord/medical/PatientRecordObservationRow.vue";
 import usePagination from "~/composables/query/usePagination";
 import useQuery from "~/composables/query/useQuery";
 import useApi from "~/composables/useApi";
@@ -68,9 +51,7 @@ import { formatDate } from "~/helpers/dateUtils";
 export default defineComponent({
   components: {
     BaseLoadingContainer,
-    BaseTable,
     BasePaginator,
-    PatientrecordObservationRow,
   },
   props: {
     record: {
@@ -93,7 +74,10 @@ export default defineComponent({
 
     // Data fetching
 
+    const loading = ref(false);
+
     function fetchObservations() {
+      loading.value = true;
       patientRecordsApi
         .getPatientObservations({
           pid: props.record.pid,
@@ -106,6 +90,9 @@ export default defineComponent({
           total.value = response.data.total;
           page.value = response.data.page ?? 0;
           size.value = response.data.size ?? 0;
+        })
+        .finally(() => {
+          loading.value = false;
         });
 
       // If we don't already have a list of available codes, fetch one
@@ -128,11 +115,35 @@ export default defineComponent({
       fetchObservations();
     });
 
+    const columns = [
+      {
+        key: "observationCode",
+        label: "Type",
+      },
+      {
+        key: "observationValue",
+        label: "Value",
+      },
+      {
+        key: "enteredAt",
+        label: "Entered at",
+      },
+      {
+        key: "observationTime",
+        label: "Entered on",
+      },
+      {
+        key: "prePost",
+      },
+    ];
+
     return {
       page,
       size,
       total,
+      loading,
       observations,
+      columns,
       availableCodes,
       selectedCode,
       formatDate,

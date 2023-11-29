@@ -1,89 +1,72 @@
 <template>
   <div class="sensitive">
-    <BaseLoadingContainer :loading="!treatments">
-      <p v-if="treatments && treatments.length <= 0" class="text-center">No treatments on record</p>
-      <div v-else-if="treatments && treatments.length > 0" class="flow-root">
-        <!-- New UI-->
-        <BaseTable>
-          <thead class="bg-gray-50">
-            <tr>
-              <th scope="col">Facility / QBL05</th>
-              <th scope="col">Admit Date</th>
-              <th scope="col">Admit Reason</th>
-              <th scope="col">Discharge Date</th>
-              <th scope="col">Discharge Reason</th>
-              <!-- Info tooltip -->
-              <th scope="col" class="px-6 py-3"></th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-300 bg-white">
-            <tr v-for="treatment in treatments" :key="treatment.id">
-              <td class="font-medium">
-                <SendingFacilityLink class="inline font-medium" :code="treatment.healthCareFacilityCode" />
-                <span v-if="treatment.qbl05" class="inline">/ {{ treatment.qbl05 }}</span>
-              </td>
-              <!-- Admission-->
-              <td>
-                {{ treatment.fromTime ? formatDate(treatment.fromTime, false) : "None" }}
-              </td>
-              <td class="truncate">
-                <CodeTitle
-                  v-if="treatment.admitReasonCodeStd && treatment.admitReasonCode"
-                  :coding-standard="treatment.admitReasonCodeStd"
-                  :code="treatment.admitReasonCode"
-                />
-                <p v-if="treatment.admitReasonDesc">{{ treatment.admitReasonDesc }}</p>
-              </td>
-              <!-- Discharge-->
-              <td>
-                {{ treatment.toTime ? formatDate(treatment.toTime, false) : "None" }}
-              </td>
-              <td>
-                <CodeTitle
-                  v-if="treatment.dischargeReasonCodeStd && treatment.dischargeReasonCode"
-                  :coding-standard="treatment.dischargeReasonCodeStd"
-                  :code="treatment.dischargeReasonCode"
-                />
-                <p v-if="treatment.dischargeReasonDesc">{{ treatment.dischargeReasonDesc }}</p>
-                <p
-                  v-if="
-                    !treatment.dischargeReasonDesc &&
-                    !(treatment.dischargeReasonCodeStd && treatment.dischargeReasonCode)
-                  "
-                >
-                  None
+    <UCard :ui="{ body: { padding: '' } }" class="mb-4">
+      <UTable :loading="loading" :rows="treatments" :columns="columns" class="sensitive">
+        <!-- Facility / QBL05 -->
+        <template #healthCareFacilityCode-data="{ row }">
+          <span>
+            <SendingFacilityLink class="inline font-medium" :code="row.healthCareFacilityCode" />
+            <span v-if="row.qbl05" class="inline">/ {{ row.qbl05 }}</span>
+          </span>
+        </template>
+        <!-- Admit Date -->
+        <template #fromTime-data="{ row }">
+          {{ row.fromTime ? formatDate(row.fromTime, false) : "None" }}
+        </template>
+        <!-- Admit Reason -->
+        <template #admitReasonCode-data="{ row }">
+          <span class="truncate">
+            <CodeTitle
+              v-if="row.admitReasonCodeStd && row.admitReasonCode"
+              :coding-standard="row.admitReasonCodeStd"
+              :code="row.admitReasonCode"
+            />
+            <p v-if="row.admitReasonDesc">{{ row.admitReasonDesc }}</p>
+          </span>
+        </template>
+        <!-- Discharge Date -->
+        <template #toTime-data="{ row }">
+          {{ row.toTime ? formatDate(row.toTime, false) : "None" }}
+        </template>
+        <!-- Discharge Reason -->
+        <template #dischargeReasonCode-data="{ row }">
+          <span>
+            <CodeTitle
+              v-if="row.dischargeReasonCodeStd && row.dischargeReasonCode"
+              :coding-standard="row.dischargeReasonCodeStd"
+              :code="row.dischargeReasonCode"
+            />
+            <p v-if="row.dischargeReasonDesc">{{ row.dischargeReasonDesc }}</p>
+            <p v-if="!row.dischargeReasonDesc && !(row.dischargeReasonCodeStd && row.dischargeReasonCode)">None</p>
+          </span>
+        </template>
+        <!-- Extra info -->
+        <template #info-data="{ row }">
+          <span>
+            <BaseInfoTooltip>
+              <div class="sensitive">
+                <p><b>ID: </b>{{ row.id }}</p>
+                <br />
+                <p><b>Admit reason code: </b>{{ row.admitReasonCodeStd }} / {{ row.admitReasonCode }}</p>
+                <p>
+                  <b>Discharge reason code: </b>{{ row.dischargeReasonCodeStd || "None" }} /
+                  {{ row.dischargeReasonCode || "None" }}
                 </p>
-              </td>
-              <!-- Info tooltip-->
-              <td>
-                <BaseInfoTooltip>
-                  <div class="sensitive">
-                    <p><b>ID: </b>{{ treatment.id }}</p>
-                    <br />
-                    <p>
-                      <b>Admit reason code: </b>{{ treatment.admitReasonCodeStd }} / {{ treatment.admitReasonCode }}
-                    </p>
-                    <p>
-                      <b>Discharge reason code: </b>{{ treatment.dischargeReasonCodeStd || "None" }} /
-                      {{ treatment.dischargeReasonCode || "None" }}
-                    </p>
-                    <br />
-                    <p>
-                      <b>Healthcare facility code: </b>{{ treatment.healthCareFacilityCodeStd || "None" }} /
-                      {{ treatment.healthCareFacilityCode || "None" }}
-                    </p>
-                    <p>
-                      <b>Discharge location code: </b>{{ treatment.dischargeLocationCodeStd || "None" }} /
-                      {{ treatment.dischargeLocationCode || "None" }}
-                    </p>
-                  </div>
-                </BaseInfoTooltip>
-              </td>
-            </tr>
-          </tbody>
-        </BaseTable>
-      </div>
-    </BaseLoadingContainer>
+                <br />
+                <p>
+                  <b>Healthcare facility code: </b>{{ row.healthCareFacilityCodeStd || "None" }} /
+                  {{ row.healthCareFacilityCode || "None" }}
+                </p>
+                <p>
+                  <b>Discharge location code: </b>{{ row.dischargeLocationCodeStd || "None" }} /
+                  {{ row.dischargeLocationCode || "None" }}
+                </p>
+              </div>
+            </BaseInfoTooltip>
+          </span>
+        </template>
+      </UTable>
+    </UCard>
   </div>
 </template>
 
@@ -92,7 +75,6 @@ import { type PatientRecordSchema, type TreatmentSchema } from "@ukkidney/ukrdc-
 
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
-import BaseTable from "~/components/base/BaseTable.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
 import useApi from "~/composables/useApi";
@@ -102,7 +84,6 @@ export default defineComponent({
   components: {
     CodeTitle,
     SendingFacilityLink,
-    BaseTable,
     BaseLoadingContainer,
     BaseInfoTooltip,
   },
@@ -120,19 +101,52 @@ export default defineComponent({
     const treatments = ref<TreatmentSchema[]>();
 
     // Data fetching
+    const loading = ref(false);
     onMounted(() => {
+      loading.value = true;
       patientRecordsApi
         .getPatientTreatments({
           pid: props.record.pid,
         })
         .then((response) => {
           treatments.value = response.data;
+        })
+        .finally(() => {
+          loading.value = false;
         });
     });
 
+    const columns = [
+      {
+        key: "healthCareFacilityCode",
+        label: "Facility / QBL05",
+      },
+      {
+        key: "fromTime",
+        label: "Admit Date",
+      },
+      {
+        key: "admitReasonCode",
+        label: "Admit reason",
+      },
+      {
+        key: "toTime",
+        label: "Discharge Date",
+      },
+      {
+        key: "dischargeReasonCode",
+        label: "Discharge reason",
+      },
+      {
+        key: "info",
+      },
+    ];
+
     return {
       formatDate,
+      loading,
       treatments,
+      columns,
     };
   },
 });

@@ -1,84 +1,43 @@
 <template>
   <div class="sensitive">
-    <BaseLoadingContainer :loading="!sessions">
-      <p v-if="sessions && sessions.length <= 0" class="text-center">No dialysis sessions on record</p>
-      <div v-else>
-        <BaseTable>
-          <thead class="bg-gray-50">
-            <tr>
-              <th scope="col">Procedure Time</th>
-              <th scope="col">Type</th>
-              <th scope="col">Entered At</th>
-              <th scope="col">QHD20</th>
-              <th scope="col">QHD21</th>
-              <th scope="col">QHD31</th>
-              <!-- Info tooltip -->
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-300 bg-white">
-            <tr v-for="session in sessions" :key="session.id">
-              <!-- Procedure time-->
-              <td>
-                {{ session.proceduretime ? formatDate(session.proceduretime, true) : "None" }}
-              </td>
-              <!-- Procedure type-->
-              <td class="truncate">
-                <CodeTitle
-                  v-if="session.proceduretypecodestd && session.proceduretypecode"
-                  :coding-standard="session.proceduretypecodestd"
-                  :code="session.proceduretypecode"
-                />
-                <p v-if="session.proceduretypedesc">{{ session.proceduretypedesc }}</p>
-              </td>
-              <!-- Entered at -->
-              <td class="font-medium">
-                <SendingFacilityLink class="font-medium" :code="session.enteredatcode" />
-              </td>
-              <!-- Attributes-->
-              <td>{{ session.qhd20 ?? "None" }}</td>
-              <td>{{ session.qhd21 ?? "None" }}</td>
-              <td>{{ session.qhd31 ?? "None" }}</td>
-              <!-- Info tooltip-->
-              <td>
-                <BaseInfoTooltip>
-                  <div class="sensitive">
-                    <p><b>ID: </b>{{ session.id }}</p>
-                    <br />
-                    <div class="grid grid-cols-2">
-                      <div><b>QHD19: </b>{{ session.qhd19 || "None" }}</div>
-                      <div><b>QHD20: </b>{{ session.qhd20 || "None" }}</div>
-                      <div><b>QHD21: </b>{{ session.qhd21 || "None" }}</div>
-                      <div><b>QHD22: </b>{{ session.qhd22 || "None" }}</div>
-                      <div><b>QHD30: </b>{{ session.qhd30 || "None" }}</div>
-                      <div><b>QHD31: </b>{{ session.qhd31 || "None" }}</div>
-                      <div><b>QHD32: </b>{{ session.qhd32 || "None" }}</div>
-                      <div><b>QHD33: </b>{{ session.qhd33 || "None" }}</div>
-                    </div>
-                    <br />
-                    <p><b>Clinician: </b>{{ session.cliniciandesc ?? session.cliniciancode }}</p>
-                    <p><b>Entered by: </b>{{ session.enteredbydesc ?? session.enteredbycode }}</p>
-                  </div>
-                </BaseInfoTooltip>
-              </td>
-            </tr>
-          </tbody>
-        </BaseTable>
-
-        <div v-if="sessions && sessions.length > 0" class="mt-4">
-          <UCard>
-            <BasePaginator
-              :page="page"
-              :size="size"
-              :total="total"
-              @next="page++"
-              @prev="page--"
-              @jump="page = $event"
+    <UCard :ui="{ body: { padding: '' } }" class="mb-4">
+      <UTable :loading="loading" :rows="sessions" :columns="columns" class="sensitive">
+        <!-- Procedure time-->
+        <template #proceduretime-data="{ row }">
+          {{ row.proceduretime ? formatDate(row.proceduretime) : "None" }}
+        </template>
+        <!-- Procedure type-->
+        <template #proceduretypecode-data="{ row }">
+          <span class="truncate">
+            <CodeTitle
+              v-if="row.proceduretypecodestd && row.proceduretypecode"
+              :coding-standard="row.proceduretypecodestd"
+              :code="row.proceduretypecode"
             />
-          </UCard>
-        </div>
-      </div>
-    </BaseLoadingContainer>
+            <p v-if="row.proceduretypedesc">{{ row.proceduretypedesc }}</p>
+          </span>
+        </template>
+        <!-- Procedure type-->
+        <template #enteredatcode-data="{ row }">
+          <span>
+            <SendingFacilityLink class="font-medium" :code="row.enteredatcode" />
+          </span>
+        </template>
+        <!-- Extra info -->
+        <template #info-data="{ row }">
+          <span>
+            <BaseInfoTooltip>
+              <div class="sensitive">
+                <p><b>ID: </b>{{ row.id }}</p>
+                <br />
+                <p><b>Clinician: </b>{{ row.cliniciandesc ?? row.cliniciancode }}</p>
+                <p><b>Entered by: </b>{{ row.enteredbydesc ?? row.enteredbycode }}</p>
+              </div>
+            </BaseInfoTooltip>
+          </span>
+        </template>
+      </UTable>
+    </UCard>
   </div>
 </template>
 
@@ -88,7 +47,6 @@ import { type DialysisSessionSchema, type PatientRecordSchema } from "@ukkidney/
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseTable from "~/components/base/BaseTable.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
 import usePagination from "~/composables/query/usePagination";
@@ -101,7 +59,6 @@ export default defineComponent({
     SendingFacilityLink,
     CodeTitle,
     BaseLoadingContainer,
-    BaseTable,
     BasePaginator,
   },
   props: {
@@ -119,8 +76,9 @@ export default defineComponent({
     const sessions = ref<DialysisSessionSchema[]>();
 
     // Data fetching
-
+    const loading = ref(false);
     function fetchResults() {
+      loading.value = true;
       patientRecordsApi
         .getPatientDialysisSessions({
           pid: props.record.pid,
@@ -132,6 +90,9 @@ export default defineComponent({
           total.value = response.data.total;
           page.value = response.data.page ?? 0;
           size.value = response.data.size ?? 0;
+        })
+        .finally(() => {
+          loading.value = false;
         });
     }
 
@@ -145,12 +106,64 @@ export default defineComponent({
       fetchResults();
     });
 
+    const columns = [
+      {
+        key: "proceduretime",
+        label: "Procedure Time",
+      },
+      {
+        key: "proceduretypecode",
+        label: "Type",
+      },
+      {
+        key: "enteredatcode",
+        label: "Entered At",
+      },
+      {
+        key: "qhd19",
+        label: "QHD19",
+      },
+      {
+        key: "qhd20",
+        label: "QHD20",
+      },
+      {
+        key: "qhd21",
+        label: "QHD21",
+      },
+      {
+        key: "qhd22",
+        label: "QHD22",
+      },
+      {
+        key: "qhd30",
+        label: "QHD30",
+      },
+      {
+        key: "qhd31",
+        label: "QHD31",
+      },
+      {
+        key: "qhd32",
+        label: "QHD32",
+      },
+      {
+        key: "qhd33",
+        label: "QHD33",
+      },
+      {
+        key: "info",
+      },
+    ];
+
     return {
       page,
       size,
       total,
       formatDate,
+      loading,
       sessions,
+      columns,
     };
   },
 });

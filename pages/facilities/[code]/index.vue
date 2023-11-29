@@ -76,32 +76,20 @@
         </UCard>
 
         <!-- Record types -->
-
-        <BaseTable>
-          <thead class="bg-gray-50">
-            <tr>
-              <th scope="col">Record Type</th>
-              <th scope="col" class="hidden md:table-cell">Status</th>
-              <th scope="col">Total Records</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-300 bg-white">
-            <tr v-for="item in feedTableItems" :key="item.key">
-              <td class="font-medium text-gray-900">{{ item.name }}</td>
-              <td class="hidden md:table-cell">
-                <div v-if="item.historic" class="flex items-center">
-                  <IconCircle v-if="item.historic" class="inline text-orange-400" />
-                  <p>Historic</p>
-                </div>
-                <div v-else class="flex items-center">
-                  <IconCircle class="inline" :class="extracts[item.key] > 0 ? 'text-green-600' : 'text-red-700'" />
-                  <p>{{ extracts[item.key] > 0 ? "Enabled" : "Unused" }}</p>
-                </div>
-              </td>
-              <td>{{ extracts[item.key] > 0 ? extracts[item.key] : "" }}</td>
-            </tr>
-          </tbody>
-        </BaseTable>
+        <UCard :ui="{ body: { padding: '' } }">
+          <UTable :rows="feedTableItems" :columns="feedTableColumns">
+            <template #historic-data="{ row }">
+              <div v-if="row.historic" class="flex items-center">
+                <IconCircle v-if="row.historic" class="inline text-orange-400" />
+                <p>Historic</p>
+              </div>
+              <div v-else class="flex items-center">
+                <IconCircle class="inline" :class="row.totalPatients > 0 ? 'text-green-600' : 'text-red-700'" />
+                <p>{{ row.totalPatients > 0 ? "Enabled" : "Unused" }}</p>
+              </div>
+            </template>
+          </UTable>
+        </UCard>
       </div>
 
       <!-- Alerts -->
@@ -186,7 +174,6 @@
 import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseAlertError from "~/components/base/alert/BaseAlertError.vue";
-import BaseTable from "~/components/base/BaseTable.vue";
 import FacilityErrorsHistoryPlot from "~/components/FacilityErrorsHistoryPlot.vue";
 import IconExclamationTriangle from "~/components/icons/hero/24/outline/IconExclamationTriangle.vue";
 import IconUsers from "~/components/icons/hero/24/outline/IconUsers.vue";
@@ -199,7 +186,6 @@ import { allStatuses } from "~/helpers/messageUtils";
 export default defineComponent({
   components: {
     IconCircle,
-    BaseTable,
     BaseAlertError,
     IconExclamationTriangle,
     IconUsers,
@@ -232,6 +218,7 @@ export default defineComponent({
       name: string;
       key: keyof FacilityExtractsSchema;
       historic: boolean;
+      totalPatients: number;
     }
 
     const feedTableItems: FeedTableItem[] = [
@@ -239,36 +226,58 @@ export default defineComponent({
         name: "UKRDC Feeds",
         key: "ukrdc",
         historic: false,
+        totalPatients: props.extracts.ukrdc,
       },
       {
         name: "PatientView Feeds",
         key: "pv",
         historic: false,
+        totalPatients: props.extracts.pv,
       },
       {
         name: "RADAR Feeds",
         key: "radar",
         historic: false,
+        totalPatients: props.extracts.radar,
       },
       {
         name: "PatientView Migrated Records",
         key: "pvmig",
         historic: true,
+        totalPatients: props.extracts.pvmig,
       },
       {
         name: "HealthShare Migrated Records",
         key: "hsmig",
         historic: true,
+        totalPatients: props.extracts.hsmig,
       },
       {
         name: "Survey Feeds",
         key: "survey",
         historic: false,
+        totalPatients: props.extracts.survey,
       },
       {
         name: "UKRR Extract Records",
         key: "ukrr",
         historic: false,
+        totalPatients: props.extracts.ukrr,
+      },
+    ];
+
+    const feedTableColumns = [
+      {
+        key: "name",
+        label: "Name",
+      },
+      {
+        key: "historic",
+        label: "historic",
+      },
+      {
+        key: "totalPatients",
+        label: "Total records",
       },
     ];
 
@@ -278,6 +287,7 @@ export default defineComponent({
       allStatuses,
       latestDataInfo,
       feedTableItems,
+      feedTableColumns,
     };
   },
 });

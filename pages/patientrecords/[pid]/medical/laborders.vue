@@ -1,18 +1,25 @@
 <template>
   <div>
-    <p v-if="orders.length <= 0" class="text-center">No lab orders on record</p>
-
-    <BaseTable v-else>
-      <thead class="bg-gray-50">
-        <tr>
-          <th scope="col" class="px-6 py-3">Order ID</th>
-          <th scope="col" class="px-6 py-3">Collection Time</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-300 bg-white">
-        <PatientRecordLabOrderRow v-for="(item, index) in orders" :key="index" :item="item" />
-      </tbody>
-    </BaseTable>
+    <UCard :ui="{ body: { padding: '' } }" class="mb-4">
+      <UTable
+        :loading="loading"
+        :rows="orders"
+        :columns="columns"
+        class="sensitive"
+        @select="
+          $router.push({ path: `/patientrecords/${$event.pid}/medical/results`, query: { order_id: $event.id } })
+        "
+      >
+        <!-- specimenCollectedTime -->
+        <template #specimenCollectedTime-data="{ row }">
+          {{
+            row.specimenCollectedTime
+              ? `Collected ${formatDate(row.specimenCollectedTime, true)}`
+              : "No collection time found"
+          }}
+        </template>
+      </UTable>
+    </UCard>
 
     <div v-if="orders.length > 0" class="mt-4">
       <UCard>
@@ -26,16 +33,12 @@
 import { type LabOrderShortSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseTable from "~/components/base/BaseTable.vue";
-import PatientRecordLabOrderRow from "~/components/patientrecord/medical/PatientRecordLabOrderRow.vue";
 import usePagination from "~/composables/query/usePagination";
 import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    PatientRecordLabOrderRow,
-    BaseTable,
     BasePaginator,
   },
   props: {
@@ -54,8 +57,9 @@ export default defineComponent({
     const orders = ref([] as LabOrderShortSchema[]);
 
     // Data fetching
-
+    const loading = ref(false);
     function fetchOrders() {
+      loading.value = true;
       patientRecordsApi
         .getPatientLaborders({
           pid: props.record.pid,
@@ -67,6 +71,9 @@ export default defineComponent({
           total.value = response.data.total;
           page.value = response.data.page ?? 0;
           size.value = response.data.size ?? 0;
+        })
+        .finally(() => {
+          loading.value = false;
         });
     }
 
@@ -78,7 +85,18 @@ export default defineComponent({
       fetchOrders();
     });
 
-    return { page, size, total, orders, formatDate };
+    const columns = [
+      {
+        key: "id",
+        label: "Order ID",
+      },
+      {
+        key: "specimenCollectedTime",
+        label: "Collection Time",
+      },
+    ];
+
+    return { page, size, total, loading, orders, columns, formatDate };
   },
 });
 </script>

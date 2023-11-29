@@ -1,6 +1,6 @@
 <template>
   <li>
-    <div class="grid grid-cols-3 gap-4 px-4 py-4 sm:px-6" :class="[{ 'lg:grid-cols-5': !small }]">
+    <div class="grid grid-cols-3 gap-4" :class="[{ 'lg:grid-cols-5': !small }]">
       <!-- Code and description-->
       <div class="col-span-3" :class="[{ 'lg:col-span-2': !small }]">
         <CodeTitle
@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import { ExtendedDiagnosisSchema, ExtendedRenalDiagnosisSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type ExtendedDiagnosisSchema, type ExtendedRenalDiagnosisSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";
 import { formatDate } from "~/helpers/dateUtils";

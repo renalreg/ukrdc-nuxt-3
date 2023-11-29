@@ -20,77 +20,72 @@
     />
 
     <BaseLoadingContainer :loading="!results">
-      <div>
-        <BaseDateRange v-model="dateRange" class="mb-4" />
+      <BaseDateRange v-model="dateRange" class="mb-4" />
 
-        <!-- Code select -->
-        <div class="mb-4 flex">
-          <USelectMenu
-            searchable
-            class="flex-1"
-            size="lg"
-            v-model="selectedService"
-            :options="availableServices"
-            value-attribute="id"
-            option-attribute="description"
-            :search-attributes="['description', 'id']"
-            placeholder="Select a result type"
-          />
-          <UButton class="ml-2" size="lg" @click="selectedService = undefined" label="Clear" />
+      <!-- Code select -->
+      <div class="mb-4 flex">
+        <USelectMenu
+          searchable
+          class="flex-1"
+          size="lg"
+          v-model="selectedService"
+          :options="availableServices"
+          value-attribute="id"
+          option-attribute="description"
+          :search-attributes="['description', 'id']"
+          placeholder="Select a result type"
+        />
+        <UButton class="ml-2" size="lg" @click="selectedService = undefined" label="Clear" />
+      </div>
+
+      <div>
+        <div class="mb-4 flex flex-grow items-center gap-2">
+          <NuxtLink :to="'./laborders'">
+            <UButton>View Lab Orders</UButton>
+          </NuxtLink>
+          <NuxtLink v-if="selectedOrderId" :to="{ query: { order_id: null } }">
+            <UButton>Show Results From All Lab Orders</UButton>
+          </NuxtLink>
+          <UButton
+            color="red"
+            variant="outline"
+            v-if="selectedOrderId && selectedOrder"
+            @click="deleteOrderAlert?.show()"
+            >Delete Lab Order</UButton
+          >
         </div>
 
-        <p v-if="results && results.length <= 0" class="text-center">No results on record</p>
+        <UCard :ui="{ body: { padding: '' } }" class="mb-4">
+          <UTable :loading="loading" :rows="results" :columns="columns" class="sensitive">
+            <!-- Value -->
+            <template #value-data="{ row }"> {{ row.value }} {{ row.valueUnits }} </template>
+            <!-- observationTime -->
+            <template #observationTime-data="{ row }">
+              {{ row.observationTime ? formatDate(row.observationTime) : "No observation time" }}
+            </template>
+            <!-- prePost -->
+            <template #prePost-data="{ row }">
+              <BadgePrePost v-if="row.prePost" :pre-post="row.prePost" />
+            </template>
+            <template #actions-data="{ row }">
+              <UDropdown :items="menuItems(row)">
+                <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
+              </UDropdown>
+            </template>
+          </UTable>
+        </UCard>
 
-        <div v-else>
-          <div class="mb-4 flex flex-grow items-center gap-2">
-            <NuxtLink :to="'./laborders'">
-              <UButton>View Lab Orders</UButton>
-            </NuxtLink>
-            <NuxtLink v-if="selectedOrderId" :to="{ query: { order_id: null } }">
-              <UButton>Show Results From All Lab Orders</UButton>
-            </NuxtLink>
-            <UButton
-              color="red"
-              variant="outline"
-              v-if="selectedOrderId && selectedOrder"
-              @click="deleteOrderAlert?.show()"
-              >Delete Lab Order</UButton
-            >
-          </div>
-
-          <BaseTable>
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col">Type</th>
-                <th scope="col">Value</th>
-                <th scope="col">Order ID</th>
-                <th scope="col">Observation Time</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-300 bg-white">
-              <PatientRecordResultRow
-                v-for="(item, index) in results"
-                :key="index"
-                :item="item"
-                @delete="showDeleteResultItemModal"
-              />
-            </tbody>
-          </BaseTable>
-
-          <div v-if="results && results.length > 0" class="mt-4">
-            <UCard>
-              <BasePaginator
-                :page="page"
-                :size="size"
-                :total="total"
-                @next="page++"
-                @prev="page--"
-                @jump="page = $event"
-              />
-            </UCard>
-          </div>
+        <div v-if="results && results.length > 0" class="mt-4">
+          <UCard>
+            <BasePaginator
+              :page="page"
+              :size="size"
+              :total="total"
+              @next="page++"
+              @prev="page--"
+              @jump="page = $event"
+            />
+          </UCard>
         </div>
       </div>
     </BaseLoadingContainer>
@@ -109,8 +104,7 @@ import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseTable from "~/components/base/BaseTable.vue";
-import PatientRecordResultRow from "~/components/patientrecord/medical/PatientRecordResultRow.vue";
+import BadgePrePost from "~/components/BadgePrePost.vue";
 import useDateRange from "~/composables/query/useDateRange";
 import usePagination from "~/composables/query/usePagination";
 import useQuery from "~/composables/query/useQuery";
@@ -121,11 +115,10 @@ import { type ModalInterface } from "~/interfaces/modal";
 export default defineComponent({
   components: {
     BaseLoadingContainer,
-    BaseTable,
     BasePaginator,
     BaseDateRange,
     BaseModalConfirm,
-    PatientRecordResultRow,
+    BadgePrePost,
   },
   props: {
     record: {
@@ -149,7 +142,10 @@ export default defineComponent({
 
     // Data fetching
 
+    const loading = ref(false);
+
     function fetchResults() {
+      loading.value = true;
       patientRecordsApi
         .getPatientResults({
           pid: props.record.pid,
@@ -165,6 +161,9 @@ export default defineComponent({
           total.value = response.data.total;
           page.value = response.data.page ?? 0;
           size.value = response.data.size ?? 0;
+        })
+        .finally(() => {
+          loading.value = false;
         });
 
       // If we don't already have a list of available codes, fetch one
@@ -286,12 +285,55 @@ export default defineComponent({
       fetchLabOrder();
     });
 
+    const columns = [
+      {
+        key: "serviceId",
+        label: "Type",
+      },
+      {
+        key: "value",
+        label: "Value",
+      },
+      {
+        key: "orderId",
+        label: "Order ID",
+      },
+      {
+        key: "observationTime",
+        label: "Observation time",
+      },
+      {
+        key: "prePost",
+      },
+      {
+        key: "actions",
+      },
+    ];
+
+    const menuItems = (row: ResultItemSchema) => [
+      [
+        {
+          label: "Filter by this lab order",
+          icon: "i-heroicons-funnel-20-solid",
+          to: { query: { order_id: row.orderId } },
+        },
+        {
+          label: "Delete this result item",
+          icon: "i-heroicons-trash-20-solid",
+          click: () => showDeleteResultItemModal(row),
+        },
+      ],
+    ];
+
     return {
       page,
       size,
       total,
       dateRange,
+      loading,
       results,
+      columns,
+      menuItems,
       deleteResultAlert,
       deleteOrderAlert,
       itemToDelete,

@@ -115,69 +115,9 @@
           Values of mismatching attributes
           <em>at the time this work item was first raised.</em>
         </p>
-        <BaseTable class="sensitive">
-          <thead class="bg-gray-50">
-            <tr>
-              <th scope="col">Mismatched Attribute</th>
-              <th scope="col">{{ record.type === 9 ? "Incoming" : "Person Record" }} Value</th>
-              <th scope="col">Master Recoed Value</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-300 bg-white">
-            <tr v-if="record.attributes.givenname">
-              <td class="font-medium">Given Name</td>
-              <td>{{ record.attributes.givenname.split(":")[0] }}</td>
-              <td>{{ record.attributes.givenname.split(":")[1] }}</td>
-            </tr>
-            <tr v-if="record.attributes.surname">
-              <td class="font-medium">Surname</td>
-              <td>{{ record.attributes.surname.split(":")[0] }}</td>
-              <td>{{ record.attributes.surname.split(":")[1] }}</td>
-            </tr>
-            <tr v-if="record.attributes.localid">
-              <td class="font-medium">Local ID</td>
-              <td>{{ record.attributes.localid.split(":")[0] }}</td>
-              <td>{{ record.attributes.localid.split(":")[1] }}</td>
-            </tr>
-            <tr v-if="record.attributes.sendingFacility">
-              <td class="font-medium">Sending Facility</td>
-              <td>{{ record.attributes.sendingFacility.split(":")[0] }}</td>
-              <td>{{ record.attributes.sendingFacility.split(":")[1] }}</td>
-            </tr>
-            <tr v-if="record.attributes.sendingExtract">
-              <td class="font-medium">Sending Extract</td>
-              <td>{{ record.attributes.sendingExtract.split(":")[0] }}</td>
-              <td>{{ record.attributes.sendingExtract.split(":")[1] }}</td>
-            </tr>
-            <tr v-if="record.attributes.dateOfBirth">
-              <td class="font-medium">Date of Birth</td>
-              <td>
-                {{ formatDate(record.attributes.dateOfBirth.split(":")[0], false) }}
-              </td>
-              <td>
-                {{ formatDate(record.attributes.dateOfBirth.split(":")[1], false) }}
-              </td>
-            </tr>
-            <tr v-if="record.attributes.dateOfDeath">
-              <td class="font-medium">Date of Death</td>
-              <td>
-                {{ formatDate(record.attributes.dateOfDeath.split(":")[0], false) }}
-              </td>
-              <td>
-                {{ formatDate(record.attributes.dateOfDeath.split(":")[1], false) }}
-              </td>
-            </tr>
-            <tr v-if="record.attributes.gender">
-              <td class="font-medium">Gender</td>
-              <td>
-                {{ formatGender(record.attributes.gender.split(":")[0]) }}
-              </td>
-              <td>
-                {{ formatGender(record.attributes.gender.split(":")[1]) }}
-              </td>
-            </tr>
-          </tbody>
-        </BaseTable>
+        <UCard :ui="{ body: { padding: '' } }" class="mb-4">
+          <UTable :rows="attributesRows" :columns="attributesCols" class="sensitive"> </UTable>
+        </UCard>
       </div>
 
       <div class="mb-4">
@@ -307,10 +247,6 @@ import { type MessageSchema, type WorkItemExtendedSchema, type WorkItemSchema } 
 import BaseItemPaginator from "~/components/base/BaseItemPaginator.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseTable from "~/components/base/BaseTable.vue";
-import IconArrowTopRightOnSquare from "~/components/icons/hero/20/solid/IconArrowTopRightOnSquare.vue";
-import IconCheckCircle from "~/components/icons/hero/20/solid/IconCheckCircle.vue";
-import IconPencil from "~/components/icons/hero/20/solid/IconPencil.vue";
 import MasterRecordCard from "~/components/MasterRecordCard.vue";
 import MessagesListItem from "~/components/messages/MessagesListItem.vue";
 import PersonRecordCard from "~/components/PersonRecordCard.vue";
@@ -336,12 +272,8 @@ interface AvailableActions {
 export default defineComponent({
   components: {
     BaseItemPaginator,
-    BaseTable,
     BaseModal,
     BasePaginator,
-    IconCheckCircle,
-    IconArrowTopRightOnSquare,
-    IconPencil,
     PersonRecordCard,
     MasterRecordCard,
     WorkItemAdviceCard,
@@ -578,9 +510,72 @@ export default defineComponent({
       el.toggle();
     }
 
+    // Table data
+    interface AttributeRow {
+      key: string;
+      incomingValue: any;
+      destinationValue: any;
+    }
+
+    const attributesRows = computed<AttributeRow[]>(() => {
+      const rows: AttributeRow[] = [];
+      if (record.value?.attributes) {
+        for (const [key, value] of Object.entries(record.value.attributes)) {
+          if (value) {
+            // Format/process row data depending on key
+            if (key === "dateOfBirth" || key === "dateOfDeath") {
+              rows.push({
+                key: key,
+                incomingValue: formatDate(value.split(":")[0], false),
+                destinationValue: formatDate(value.split(":")[1], false),
+              });
+            } else if (key === "gender") {
+              rows.push({
+                key: key,
+                incomingValue: formatGender(value.split(":")[0]),
+                destinationValue: formatGender(value.split(":")[1]),
+              });
+            } else {
+              rows.push({
+                key: key,
+                incomingValue: value.split(":")[0],
+                destinationValue: value.split(":")[1],
+              });
+            }
+          }
+        }
+        return rows;
+      } else {
+        return [];
+      }
+    });
+
+    const attributesCols = computed(() => {
+      if (record.value) {
+        return [
+          {
+            key: "key",
+            label: "Mismatched attribute",
+          },
+          {
+            key: "incomingValue",
+            label: record.value.type === 9 ? "Incoming" : "Person Record",
+          },
+          {
+            key: "destinationValue",
+            label: "Master Record Value",
+          },
+        ];
+      } else {
+        return [];
+      }
+    });
+
     return {
       record,
       highlightedAttributes,
+      attributesRows,
+      attributesCols,
       formatDate,
       formatGender,
       isEmptyObject,

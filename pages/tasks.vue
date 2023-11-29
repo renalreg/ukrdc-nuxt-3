@@ -2,35 +2,31 @@
   <div>
     <h1 class="mb-4">Background Tasks</h1>
 
-    <BaseTable class="mb-4">
-      <thead class="bg-gray-50">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Visibility</th>
-          <th scope="col">Started By</th>
-          <th scope="col">Started</th>
-          <th scope="col">Finished</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-300 bg-white">
-        <tr v-for="task in tasks" :key="task.id">
-          <td class="truncate font-medium">{{ task.name }}</td>
-          <td><BadgePublicPrivate :visibility="task.visibility" /></td>
-          <td>{{ task.owner }}</td>
-          <td>{{ task.started ? formatDate(task.started) : "Unknown start time" }}</td>
-          <td>{{ task.finished ? formatDate(task.finished) : "" }}</td>
-          <td>
-            <div class="flex gap-1">
-              <BadgeTaskStatus :status="task.status" />
-              <BaseInfoTooltip v-if="task.error" class="inline">
-                <p><b>Task failed with error: </b>{{ task.error }}</p>
-              </BaseInfoTooltip>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </BaseTable>
+    <UCard :ui="{ body: { padding: '' } }" class="mb-4">
+      <UTable :rows="tasks" :columns="columns">
+        <template #visibility-data="{ row }">
+          <BadgePublicPrivate :visibility="row.visibility" />
+        </template>
+        <template #started-data="{ row }">
+          <span>
+            {{ row.started ? formatDate(row.started) : "Unknown start time" }}
+          </span>
+        </template>
+        <template #finished-data="{ row }">
+          <span>
+            {{ row.finished ? formatDate(row.finished) : "" }}
+          </span>
+        </template>
+        <template #status-data="{ row }">
+          <span class="flex gap-1">
+            <BadgeTaskStatus :status="row.status" />
+            <BaseInfoTooltip v-if="row.error" class="inline">
+              <p><b>Task failed with error: </b>{{ row.error }}</p>
+            </BaseInfoTooltip>
+          </span>
+        </template>
+      </UTable>
+    </UCard>
 
     <div v-if="tasks && tasks.length > 0" class="mb-4">
       <UCard>
@@ -47,14 +43,12 @@ import BadgePublicPrivate from "~/components/BadgePublicPrivate.vue";
 import BadgeTaskStatus from "~/components/BadgeTaskStatus.vue";
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseTable from "~/components/base/BaseTable.vue";
 import usePagination from "~/composables/query/usePagination";
 import useTasks from "~/composables/useTasks";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseTable,
     BasePaginator,
     BaseInfoTooltip,
     BadgePublicPrivate,
@@ -81,12 +75,40 @@ export default defineComponent({
       await getTasks();
     });
 
+    const columns = [
+      {
+        key: "name",
+        label: "Name",
+      },
+      {
+        key: "visibility",
+        label: "Visibility",
+      },
+      {
+        key: "owner",
+        label: "Started by",
+      },
+      {
+        key: "started",
+        label: "Started",
+      },
+      {
+        key: "finished",
+        label: "Finished",
+      },
+      {
+        key: "status",
+        label: "Status",
+      },
+    ];
+
     return {
       formatDate,
       page,
       total,
       size,
       tasks,
+      columns,
     };
   },
   head: {
