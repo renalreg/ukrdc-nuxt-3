@@ -4,6 +4,7 @@ export default defineAppConfig({
     primary: "indigo",
     gray: "cool",
     button: {
+      base: "inline-flex items-center justify-center",
       default: {
         size: "md",
         color: "white",

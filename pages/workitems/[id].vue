@@ -62,7 +62,6 @@
       <UButton
         v-if="availableActions.comment"
         color="indigo"
-        class="inline-flex w-full justify-center"
         @click="updateWorkItemModal?.show()"
         label="Update"
         icon="i-heroicons-pencil-20-solid"
@@ -70,13 +69,11 @@
 
       <UButton
         v-if="availableActions.close && record.status !== 3"
-        class="inline-flex w-full items-center justify-center"
         color="green"
         @click="closeModal?.show()"
-      >
-        <IconCheckCircle class="-ml-1 mr-2" />
-        Close
-      </UButton>
+        label="Close"
+        icon="i-heroicons-check-circle-20-solid"
+      />
 
       <UButton
         v-if="availableActions.merge && record.status !== 3"
@@ -89,12 +86,10 @@
             callback: $route.fullPath + '?justMerged=true',
           },
         }"
-        class="inline-flex w-full items-center justify-center"
         color="yellow"
-      >
-        <IconArrowTopRightOnSquare class="-ml-1 mr-2" />
-        Merge Master Records
-      </UButton>
+        label="Merge Master Records"
+        icon="i-heroicons-arrow-top-right-on-square-20-solid"
+      />
     </div>
 
     <!-- Work Item Trigger -->
