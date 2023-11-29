@@ -27,7 +27,7 @@
           </UButton>
         </div>
       </div>
-      <UButton class="{ invisible: page * size >= total }" @click="next()"> Next </UButton>
+      <UButton :class="{ invisible: page * size >= total }" @click="next()"> Next </UButton>
     </div>
   </nav>
 </template>
