@@ -2,34 +2,34 @@
   <BaseLoadingContainer :loading="!(diagnoses && renalDiagnoses && causesOfDeath)">
     <div class="sensitive grid grid-cols-3 gap-4">
       <div class="col-span-3 lg:col-span-2">
-        <UCard>
+        <UCard :ui="{ body: { padding: '' } }">
           <template #header>
             <h2>Diagnoses</h2>
           </template>
           <div v-if="diagnoses && diagnoses.length <= 0">
             <p class="text-center">No diagnoses on record</p>
           </div>
-          <ul v-else class="divide-y divide-gray-300">
+          <div v-else class="divide-y divide-gray-300">
             <PatientRecordDiagnosisListItem v-for="diagnosis in diagnoses" :key="diagnosis.id" :item="diagnosis" />
-          </ul>
+          </div>
         </UCard>
       </div>
       <div class="col-span-3 flex flex-col gap-4 lg:col-span-1">
-        <UCard>
+        <UCard :ui="{ body: { padding: '' } }">
           <template #header>
             <h2>Renal Diagnoses</h2>
           </template>
           <div v-if="renalDiagnoses && renalDiagnoses.length <= 0">
             <p class="text-center">No renal diagnoses on record</p>
           </div>
-          <ul v-else class="divide-y divide-gray-300">
+          <div v-else class="divide-y divide-gray-300">
             <PatientRecordDiagnosisListItem
               v-for="renalDiagnosis in renalDiagnoses"
               :key="renalDiagnosis.pid"
               :item="renalDiagnosis"
               :small="true"
             />
-          </ul>
+          </div>
         </UCard>
         <UCard>
           <template #header>
@@ -38,14 +38,14 @@
           <div v-if="causesOfDeath && causesOfDeath.length <= 0">
             <p>No cause of death on record</p>
           </div>
-          <ul v-else class="divide-y divide-gray-300">
+          <div v-else class="divide-y divide-gray-300">
             <PatientRecordCauseOfDeathListItem
               v-for="causeOfDeath in causesOfDeath"
               :key="causeOfDeath.pid"
               :item="causeOfDeath"
               :small="true"
             />
-          </ul>
+          </div>
         </UCard>
       </div>
     </div>
