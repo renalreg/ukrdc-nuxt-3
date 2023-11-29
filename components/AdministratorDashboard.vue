@@ -8,7 +8,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
       <UCard>
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <IconUsers class="text-gray-600" />
+            <UIcon name="i-heroicons-users" class="h-6 w-6 text-gray-600" />
           </div>
           <div class="ml-5 w-0 flex-1">
             <h5>Total Patients</h5>
@@ -26,7 +26,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
       <UCard>
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <IconLink class="text-gray-600" />
+            <UIcon name="i-heroicons-link" class="h-6 w-6 text-gray-600" />
           </div>
           <div class="ml-5 w-0 flex-1">
             <h5>Open Work Items</h5>
@@ -44,7 +44,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
       <UCard>
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <IconExclamationTriangle class="text-gray-600" />
+            <UIcon name="i-heroicons-exclamation-triangle" class="h-6 w-6 text-gray-600" />
           </div>
           <div class="ml-5 w-0 flex-1">
             <h5>Active Failing Records</h5>
@@ -104,18 +104,12 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
 import { type AdminCountsSchema, type HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
 import { type PlotDatum } from "plotly.js-dist-min";
 
-import IconExclamationTriangle from "~/components/icons/hero/24/outline/IconExclamationTriangle.vue";
-import IconLink from "~/components/icons/hero/24/outline/IconLink.vue";
-import IconUsers from "~/components/icons/hero/24/outline/IconUsers.vue";
 import BaseTimeSeriesLinePlot from "~/components/plots/base/BaseTimeSeriesLinePlot.vue";
 import useApi from "~/composables/useApi";
 import { getPointDateRange, unpackHistoryPoints } from "~/helpers/chartUtils";
 
 export default defineComponent({
   components: {
-    IconExclamationTriangle,
-    IconLink,
-    IconUsers,
     BaseTimeSeriesLinePlot,
   },
   setup() {

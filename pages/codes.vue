@@ -82,7 +82,6 @@ import { type CodeSchema } from "@ukkidney/ukrdc-axios-ts";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import CodesListItem from "~/components/CodesListItem.vue";
-import IconChevronDown from "~/components/icons/hero/24/solid/IconChevronDown.vue";
 import SearchBar from "~/components/SearchBar.vue";
 import usePagination from "~/composables/query/usePagination";
 import useQuery from "~/composables/query/useQuery";
@@ -93,7 +92,6 @@ export default defineComponent({
   components: {
     BaseSkeleListItem,
     BasePaginator,
-    IconChevronDown,
     CodesListItem,
     SearchBar,
   },

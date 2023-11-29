@@ -11,7 +11,6 @@
                 {{ record.givenname?.toLowerCase() }}
                 {{ record.surname?.toLowerCase() }}
               </div>
-              <TracingBadge v-if="tracingRecord" :verified="nameMatchesTracing" />
             </div>
           </dd>
         </BaseDescriptionListGridItem>
@@ -23,7 +22,6 @@
               <div class="sensitive">
                 {{ record.gender ? formatGender(record.gender) : "Unknown gender" }}
               </div>
-              <TracingBadge v-if="tracingRecord" :verified="tracingRecord.patient?.gender === record.gender" />
             </div>
           </dd>
         </BaseDescriptionListGridItem>
@@ -35,7 +33,6 @@
               <div class="sensitive">
                 {{ formatDate(record.dateOfBirth, false) }}
               </div>
-              <TracingBadge v-if="tracingRecord" :verified="birthTimeMatchesTracing" />
             </div>
           </dd>
         </BaseDescriptionListGridItem>
@@ -45,10 +42,6 @@
           <dd>
             <div class="flex items-center gap-2">
               <div class="sensitive">{{ record.nationalid }}</div>
-              <TracingBadge
-                v-if="tracingRecord && record.nationalidType !== 'UKRDC'"
-                :verified="tracingRecord.localpatientid.trim() === record.nationalid.trim()"
-              />
             </div>
           </dd>
         </BaseDescriptionListGridItem>
@@ -122,7 +115,6 @@ import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import MasterRecordsListItem from "~/components/MasterRecordsListItem.vue";
 import AlertFileLatest from "~/components/messages/AlertFileLatest.vue";
 import PatientRecordsGroupedList from "~/components/patientrecord/PatientRecordsGroupedList.vue";
-import TracingBadge from "~/components/TracingBadge.vue";
 import useApi from "~/composables/useApi";
 import { formatGender } from "~/helpers/codeUtils";
 import { datesAreEqual, formatDate } from "~/helpers/dateUtils";
@@ -134,7 +126,6 @@ export default defineComponent({
     BaseSkeleListItem,
     BaseDescriptionListGrid,
     BaseDescriptionListGridItem,
-    TracingBadge,
     MasterRecordsListItem,
     PatientRecordsGroupedList,
   },

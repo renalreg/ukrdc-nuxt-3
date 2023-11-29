@@ -8,8 +8,8 @@
             class="flex h-full flex-none cursor-pointer items-center justify-center self-stretch"
             @click="showChildren = !showChildren"
           >
-            <IconChevronDown v-show="showChildren" class="h-5 w-5 text-gray-400" />
-            <IconChevronRight v-show="!showChildren" class="h-5 w-5 text-gray-400" />
+            <UIcon name="i-heroicons-chevron-down-20-solid" v-show="showChildren" class="h-5 w-5 text-gray-400" />
+            <UIcon name="i-heroicons-chevron-right-20-solid" v-show="!showChildren" class="h-5 w-5 text-gray-400" />
           </div>
         </div>
 
@@ -37,15 +37,11 @@ import { type AuditEventSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import AuditResourceCard from "~/components/AuditResourceCard.vue";
 import BadgeCRUD from "~/components/BadgeCRUD.vue";
-import IconChevronDown from "~/components/icons/hero/24/solid/IconChevronDown.vue";
-import IconChevronRight from "~/components/icons/hero/24/solid/IconChevronRight.vue";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   name: "AuditListItem",
   components: {
-    IconChevronRight,
-    IconChevronDown,
     BadgeCRUD,
     AuditResourceCard,
   },

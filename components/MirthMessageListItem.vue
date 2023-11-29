@@ -19,7 +19,7 @@
         </div>
       </div>
       <div>
-        <IconChevronRight class="h-5 w-5 text-gray-400" />
+        <UIcon name="i-heroicons-chevron-right-20-solid" class="h-5 w-5 text-gray-400" />
       </div>
     </div>
   </li>
@@ -28,14 +28,10 @@
 <script lang="ts">
 import { type ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
-import IconChevronRight from "~/components/icons/hero/24/solid/IconChevronRight.vue";
 import { messageHasErrors } from "~/helpers/mirthUtils";
 import { isEmptyObject } from "~/helpers/objectUtils";
 
 export default defineComponent({
-  components: {
-    IconChevronRight,
-  },
   props: {
     message: {
       type: Object as () => ChannelMessageModel,

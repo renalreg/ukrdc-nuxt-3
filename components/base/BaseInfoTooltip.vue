@@ -1,7 +1,7 @@
 <template>
-  <VMenu class="flex items-center">
-    <button class="cursor-pointer text-gray-500 hover:text-gray-800">
-      <IconInformationCircle />
+  <VMenu class="flex items-center justify-center">
+    <button class="h-6 w-6 cursor-pointer text-gray-500 hover:text-gray-800">
+      <UIcon name="i-heroicons-information-circle" class="h-6 w-6" />
     </button>
 
     <!-- Popover content -->
@@ -10,13 +10,3 @@
     </template>
   </VMenu>
 </template>
-
-<script lang="ts">
-import IconInformationCircle from "~/components/icons/hero/20/solid/IconInformationCircle.vue";
-
-export default defineComponent({
-  components: {
-    IconInformationCircle,
-  },
-});
-</script>

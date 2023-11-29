@@ -42,9 +42,9 @@
             @click="switchRecords"
           />
         </div>
-        <div class="hidden flex-grow flex-col justify-center lg:flex">
+        <div class="hidden flex-grow flex-col items-center justify-center lg:flex">
           <div v-show="superseded && superseding" class="h-8">
-            <IconArrowRight class="mx-auto my-2 text-gray-400" />
+            <UIcon name="i-heroicons-arrow-right" class="mx-auto my-2 h-6 w-6 text-gray-400" />
           </div>
         </div>
       </div>
@@ -112,7 +112,6 @@ import { type MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import EMPISearch from "~/components/EMPISearch.vue";
-import IconArrowRight from "~/components/icons/hero/24/solid/IconArrowRight.vue";
 import MasterRecordCard from "~/components/MasterRecordCard.vue";
 import useQuery from "~/composables/query/useQuery";
 import useApi from "~/composables/useApi";
@@ -123,7 +122,6 @@ type Direction = "superseding" | "superseded";
 export default defineComponent({
   components: {
     BaseModalConfirm,
-    IconArrowRight,
     MasterRecordCard,
     EMPISearch,
   },

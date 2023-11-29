@@ -89,7 +89,8 @@
         @click="showDetail = !showDetail"
       >
         <div class="flex items-center gap-2">
-          <IconChevronDown
+          <UIcon
+            name="i-heroicons-chevron-down-20-solid"
             class="inline h-5 w-5 transform text-gray-500 transition group-hover:text-gray-800"
             :class="[showDetail ? 'rotate-180' : '']"
           />
@@ -118,8 +119,6 @@ import { formatGenderCharacter } from "~/helpers/codeUtils";
 import { formatDate } from "~/helpers/dateUtils";
 import { firstMRN, firstNI, isData, isMembership, isRADAR, isRealSendingFacility, isUKRR } from "~/helpers/recordUtils";
 
-import IconChevronDown from "../icons/hero/24/solid/IconChevronDown.vue";
-
 interface localNumber {
   label: string;
   number: string;
@@ -128,7 +127,6 @@ interface localNumber {
 export default defineComponent({
   components: {
     MembershipStatusBadge,
-    IconChevronDown,
     SendingFacilityLink,
     PatientRecordManageMenu,
     PatientRecordPeek,

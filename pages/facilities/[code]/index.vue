@@ -18,7 +18,7 @@
           <UCard>
             <div class="flex items-center">
               <div class="flex-shrink-0">
-                <IconUsers class="text-gray-600" />
+                <UIcon name="i-heroicons-users" class="h-6 w-6 text-gray-600" />
               </div>
               <div class="ml-5 w-0 flex-1">
                 <h5>Total Records</h5>
@@ -46,7 +46,7 @@
           <UCard>
             <div class="flex items-center">
               <div class="flex-shrink-0">
-                <IconExclamationTriangle class="text-gray-600" />
+                <UIcon name="i-heroicons-exclamation-triangle" class="h-6 w-6 text-gray-600" />
               </div>
               <div class="ml-5 w-0 flex-1">
                 <h5>Active Failing Records</h5>
@@ -176,8 +176,6 @@
 import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import FacilityErrorsHistoryPlot from "~/components/FacilityErrorsHistoryPlot.vue";
-import IconExclamationTriangle from "~/components/icons/hero/24/outline/IconExclamationTriangle.vue";
-import IconUsers from "~/components/icons/hero/24/outline/IconUsers.vue";
 import IconCircle from "~/components/icons/IconCircle.vue";
 import usePermissions from "~/composables/usePermissions";
 import { formatDate } from "~/helpers/dateUtils";
@@ -187,8 +185,6 @@ import { allStatuses } from "~/helpers/messageUtils";
 export default defineComponent({
   components: {
     IconCircle,
-    IconExclamationTriangle,
-    IconUsers,
     FacilityErrorsHistoryPlot,
   },
   props: {

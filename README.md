@@ -22,6 +22,7 @@
 - [x] Fix toggle tabs (e.g. Work Item status selector)
 - [x] Fix checkbox models (e.g. data files status filter)
 - [ ] Fix name display component
+- [ ] Fix layout for multiple diagnoses
 - [ ] Fix BaseCardDescriptionList style
 - [ ] Move all paginator components into card footer
 - [ ] Check all `sensitive` class components

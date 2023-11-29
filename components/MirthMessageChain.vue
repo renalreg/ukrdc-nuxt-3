@@ -11,8 +11,8 @@
           />
         </div>
 
-        <div v-if="index < Object.keys(chain).length - 1" class="align-center">
-          <IconArrowDown class="mx-auto my-2 text-gray-400" />
+        <div v-if="index < Object.keys(chain).length - 1" class="flex justify-center">
+          <UIcon name="i-heroicons-arrow-down" class="mx-auto my-2 h-6 w-6 text-gray-400" />
         </div>
       </div>
     </div>
@@ -22,7 +22,6 @@
 <script lang="ts">
 import { type ChannelMessageModel, type ConnectorMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
-import IconArrowDown from "~/components/icons/hero/24/solid/IconArrowDown.vue";
 import MirthConnectorMessageCard from "~/components/MirthConnectorMessageCard.vue";
 import { isEmptyObject } from "~/helpers/objectUtils";
 
@@ -32,7 +31,6 @@ interface ChainMap {
 
 export default defineComponent({
   components: {
-    IconArrowDown,
     MirthConnectorMessageCard,
   },
   props: {
