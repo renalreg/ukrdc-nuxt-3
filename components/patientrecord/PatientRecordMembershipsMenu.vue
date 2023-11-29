@@ -24,31 +24,20 @@
       <p>from the Data Feeds section</p>
     </BaseModalSuccess>
 
-    <div v-click-away="closeMenu" class="relative flex items-center justify-self-end">
+    <UDropdown :items="menuItems" :popper="{ placement: 'bottom-end' }">
       <UButton
-        label="Add Memberships"
-        icon="i-heroicons-plus-20-solid"
-        class="z-0 mr-2 flex gap-1"
-        :tooltip="!menuAvailable ? menuTooltip : undefined"
         :disabled="!menuAvailable"
-        @click="showMenu = !showMenu"
+        size="sm"
+        label="Add Memberships"
+        trailing-icon="i-heroicons-chevron-down-20-solid"
       />
-
-      <BaseMenu class="right-2 top-8 z-10 ml-2" :show="menuAvailable && showMenu">
-        <BaseMenuItem v-if="showCreatePkbMembership" @click="showCreatePkbMembershipConfirm">
-          Create PKB Membership
-        </BaseMenuItem>
-        <BaseMenuItem v-else :disabled="true"> PKB membership already exists </BaseMenuItem>
-      </BaseMenu>
-    </div>
+    </UDropdown>
   </div>
 </template>
 
 <script lang="ts">
 import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseMenu from "~/components/base/BaseMenu.vue";
-import BaseMenuItem from "~/components/base/BaseMenuItem.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import BaseModalSuccess from "~/components/base/BaseModalSuccess.vue";
 import IconCloudArrowUp from "~/components/icons/hero/20/solid/IconCloudArrowUp.vue";
@@ -58,8 +47,6 @@ import { type ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {
-    BaseMenu,
-    BaseMenuItem,
     BaseModalSuccess,
     BaseModalConfirm,
     IconCloudArrowUp,
@@ -93,26 +80,11 @@ export default defineComponent({
       return [...new Set(props.records.map((record) => record.ukrdcid))];
     });
 
-    const showMenu = ref(false);
     const menuAvailable = computed(() => {
       return hasPermission("ukrdc:memberships:create") && ukrdcids.value.length === 1;
     });
-    const menuTooltip = computed(() => {
-      if (!hasPermission("ukrdc:memberships:create")) {
-        return "You do not have permission to manage patient memberships";
-      } else if (ukrdcids.value.length !== 1) {
-        // TODO: Once JTRACE has been replaced with CUPID, this won't be relevant since UKRDCID will be the only grouping mechanism
-        return "Record has multiple UKRDC IDs. Please resolve before creating a membership";
-      }
-      return undefined;
-    });
-
-    function closeMenu() {
-      showMenu.value = false;
-    }
 
     function showCreatePkbMembershipConfirm() {
-      closeMenu();
       createPkbMembershipConfirm.value?.show();
     }
 
@@ -142,19 +114,25 @@ export default defineComponent({
             timeout: 5,
           });
           emit("refresh");
-          closeMenu();
         });
     }
 
+    const menuItems = [
+      [
+        {
+          label: "Create PKB Membership",
+          click: () => {
+            showCreatePkbMembershipConfirm();
+          },
+          disabled: !props.showCreatePkbMembership,
+        },
+      ],
+    ];
+
     return {
       ukrdcids,
-      showMenu,
       menuAvailable,
-      menuTooltip,
-      closeMenu,
-      createPkbMembershipConfirm,
-      createPkbMembershipSuccess,
-      showCreatePkbMembershipConfirm,
+      menuItems,
       createPkbMembership,
     };
   },

@@ -5,21 +5,9 @@
         <h1>Codes List</h1>
       </div>
       <div>
-        <div v-click-away="closeExportMenu" class="relative flex">
-          <UButton @click="showExportMenu = !showExportMenu">
-            <div class="flex items-center">
-              <div class="flex-grow">Export Codes</div>
-              <div class="ml-2">
-                <IconChevronDown class="h-5 w-5 text-gray-700" />
-              </div>
-            </div>
-          </UButton>
-          <BaseMenu class="right-0 z-10 mb-2 mt-10" :show="showExportMenu">
-            <BaseMenuItem @click="exportCodeList"> Export Code List </BaseMenuItem>
-            <BaseMenuItem @click="exportCodeMaps"> Export Code Maps </BaseMenuItem>
-            <BaseMenuItem @click="exportCodeExclusions"> Export Code Exclusions </BaseMenuItem>
-          </BaseMenu>
-        </div>
+        <UDropdown :items="exportMenuItems">
+          <UButton color="white" label="Export codes" trailing-icon="i-heroicons-chevron-down-20-solid" />
+        </UDropdown>
       </div>
     </div>
 
@@ -91,8 +79,6 @@
 <script lang="ts">
 import { type CodeSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseMenu from "~/components/base/BaseMenu.vue";
-import BaseMenuItem from "~/components/base/BaseMenuItem.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import CodesListItem from "~/components/CodesListItem.vue";
@@ -105,8 +91,6 @@ import { saveAs } from "~/helpers/fileUtils";
 
 export default defineComponent({
   components: {
-    BaseMenu,
-    BaseMenuItem,
     BaseSkeleListItem,
     BasePaginator,
     IconChevronDown,
@@ -132,46 +116,25 @@ export default defineComponent({
 
     // Code exporting
 
-    const showExportMenu = ref(false);
-
-    function closeExportMenu() {
-      showExportMenu.value = false;
-    }
-
     function exportCodeList() {
-      codesApi
-        .getCodeListExport()
-        .then(({ data }) => {
-          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-          saveAs(blob, "code-list.csv");
-        })
-        .finally(() => {
-          closeExportMenu();
-        });
+      codesApi.getCodeListExport().then(({ data }) => {
+        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+        saveAs(blob, "code-list.csv");
+      });
     }
 
     function exportCodeMaps() {
-      codesApi
-        .getCodeMapsExport()
-        .then(({ data }) => {
-          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-          saveAs(blob, "code-maps.csv");
-        })
-        .finally(() => {
-          closeExportMenu();
-        });
+      codesApi.getCodeMapsExport().then(({ data }) => {
+        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+        saveAs(blob, "code-maps.csv");
+      });
     }
 
     function exportCodeExclusions() {
-      codesApi
-        .getCodeExclusionsExport()
-        .then(({ data }) => {
-          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-          saveAs(blob, "code-exclusions.csv");
-        })
-        .finally(() => {
-          closeExportMenu();
-        });
+      codesApi.getCodeExclusionsExport().then(({ data }) => {
+        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+        saveAs(blob, "code-exclusions.csv");
+      });
     }
 
     // Data fetching
@@ -205,6 +168,32 @@ export default defineComponent({
       getCodes();
     });
 
+    const exportMenuItems = [
+      [
+        {
+          label: "Export Code List",
+          icon: "i-heroicons-list-bullet-20-solid",
+          click: () => {
+            exportCodeList();
+          },
+        },
+        {
+          label: "Export Code Maps",
+          icon: "i-heroicons-map-20-solid",
+          click: () => {
+            exportCodeMaps();
+          },
+        },
+        {
+          label: "Export Code Exclusions",
+          icon: "i-heroicons-x-circle-20-solid",
+          click: () => {
+            exportCodeExclusions();
+          },
+        },
+      ],
+    ];
+
     return {
       standards,
       selectedStandard,
@@ -215,11 +204,7 @@ export default defineComponent({
       page,
       total,
       size,
-      showExportMenu,
-      closeExportMenu,
-      exportCodeList,
-      exportCodeMaps,
-      exportCodeExclusions,
+      exportMenuItems,
     };
   },
   head: {

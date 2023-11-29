@@ -1,51 +1,21 @@
 <template>
   <div>
     <PatientRecordDeleteModal ref="deleteModal" :item="item" @deleted="$emit('deleted')" />
-    <div v-click-away="closeMenu" class="relative flex h-full items-center justify-self-end">
+
+    <UDropdown :items="menuItems" class="h-full" :popper="{ placement: 'right-start' }">
       <UButton
         color="gray"
         variant="ghost"
-        label="Manage record"
         class="z-0 flex h-full items-center hover:bg-gray-50"
-        @click="showMenu = !showMenu"
-      >
-        <IconEllipsisVertical class="text-gray-600 hover:text-gray-800" />
-      </UButton>
-
-      <BaseMenu class="right-0 top-0 z-10 mx-2 my-2" :show="showMenu">
-        <BaseMenuItem @click="copyPID"> Copy PID </BaseMenuItem>
-        <div v-if="hasPermission('ukrdc:records:export') && (showRadarSync || showPkbSync)">
-          <BaseMenuDivider />
-          <BaseMenuItem v-if="showPkbSync" @click="exportPKBandCloseMenu"> Sync Record to PKB </BaseMenuItem>
-          <BaseMenuItem v-if="showRadarSync" @click="exportRADARandCloseMenu"> Sync Record to RADAR </BaseMenuItem>
-        </div>
-        <div v-if="hasPermission('ukrdc:records:write')">
-          <BaseMenuDivider />
-          <BaseMenuItem
-            :disabled="!demographicsUpdatable"
-            :tooltip="
-              demographicsUpdatable ? undefined : 'Demographics cannot be directly modified for this record type'
-            "
-            @click="$router.push(`/patientrecords/${item.pid}/update/demographics`)"
-          >
-            Edit Demographics
-          </BaseMenuItem>
-        </div>
-        <div v-if="hasPermission('ukrdc:records:delete')">
-          <BaseMenuDivider />
-          <BaseMenuItem @click="showDeleteModal"> Delete Record </BaseMenuItem>
-        </div>
-      </BaseMenu>
-    </div>
+        icon="i-heroicons-ellipsis-vertical"
+      />
+    </UDropdown>
   </div>
 </template>
 
 <script lang="ts">
 import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseMenu from "~/components/base/BaseMenu.vue";
-import BaseMenuDivider from "~/components/base/BaseMenuDivider.vue";
-import BaseMenuItem from "~/components/base/BaseMenuItem.vue";
 import IconEllipsisVertical from "~/components/icons/hero/24/solid/IconEllipsisVertical.vue";
 import PatientRecordDeleteModal from "~/components/patientrecord/PatientRecordDeleteModal.vue";
 import usePermissions from "~/composables/usePermissions";
@@ -55,9 +25,6 @@ import { type ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {
-    BaseMenu,
-    BaseMenuDivider,
-    BaseMenuItem,
     IconEllipsisVertical,
     PatientRecordDeleteModal,
   },
@@ -85,34 +52,18 @@ export default defineComponent({
 
     const deleteModal = ref<ModalInterface>();
 
-    const showMenu = ref(false);
-
-    const demographicsUpdatable = computed<Boolean>(() => {
-      return demographicsUpdateAllowed(props.item);
-    });
-
-    function closeMenu() {
-      showMenu.value = false;
-    }
-
     function copyPID() {
-      navigator.clipboard
-        .writeText(props.item.pid)
-        .then(() => {
-          $toast.show({
-            type: "success",
-            title: "Success",
-            message: "PID copied to clipboard",
-            timeout: 5,
-          });
-        })
-        .finally(() => {
-          closeMenu();
+      navigator.clipboard.writeText(props.item.pid).then(() => {
+        $toast.show({
+          type: "success",
+          title: "Success",
+          message: "PID copied to clipboard",
+          timeout: 5,
         });
+      });
     }
 
     function showDeleteModal() {
-      closeMenu();
       deleteModal.value?.show();
     }
 
@@ -143,9 +94,6 @@ export default defineComponent({
         })
         .catch((e) => {
           showExportErrorToast(e);
-        })
-        .finally(() => {
-          closeMenu();
         });
     }
 
@@ -156,17 +104,58 @@ export default defineComponent({
         })
         .catch((e) => {
           showExportErrorToast(e);
-        })
-        .finally(() => {
-          closeMenu();
         });
     }
 
+    const menuItems = [
+      [
+        {
+          label: "Copy PID",
+          icon: "i-heroicons-document-duplicate-20-solid",
+          click: () => {
+            copyPID();
+          },
+        },
+      ],
+      [
+        {
+          label: "Sync record to PKB",
+          icon: "i-heroicons-cloud-arrow-up-20-solid",
+          click: () => {
+            exportPKBandCloseMenu();
+          },
+          disabled: !(hasPermission("ukrdc:records:export") && (props.showRadarSync || props.showPkbSync)),
+        },
+        {
+          label: "Sync record to RADAR",
+          icon: "i-heroicons-cloud-arrow-up-20-solid",
+          click: () => {
+            exportRADARandCloseMenu();
+          },
+          disabled: !(hasPermission("ukrdc:records:export") && (props.showRadarSync || props.showPkbSync)),
+        },
+      ],
+      [
+        {
+          label: "Edit demographics",
+          icon: "i-heroicons-pencil-20-solid",
+          to: `/patientrecords/${props.item.pid}/update/demographics`,
+          disabled: !(hasPermission("ukrdc:records:write") && demographicsUpdateAllowed(props.item)),
+        },
+        {
+          label: "Delete record",
+          icon: "i-heroicons-trash-20-solid",
+          click: () => {
+            showDeleteModal();
+          },
+          disabled: !hasPermission("ukrdc:records:delete"),
+        },
+      ],
+    ];
+
     return {
       deleteModal,
-      showMenu,
-      demographicsUpdatable,
-      closeMenu,
+      menuItems,
       copyPID,
       showDeleteModal,
       hasPermission,

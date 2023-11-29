@@ -28,8 +28,8 @@
 
     <UButton
       label="Sync to PKB"
+      size="sm"
       icon="i-heroicons-cloud-arrow-up-20-solid"
-      class="z-0 mr-2 flex gap-1"
       :tooltip="!hasPkbMembership ? 'Patient does not have a PKB membership record' : undefined"
       :disabled="!hasPkbMembership || syncInProgress"
       @click="exportAllToPKB"
