@@ -1,22 +1,27 @@
 <template>
   <div v-if="dash && (dash.warnings.length > 0 || dash.messages.length > 0)">
-    <BaseAlertWarning v-for="message in dash.warnings" :key="message" :message="message"> </BaseAlertWarning>
-    <BaseAlertInfo v-for="message in dash.messages" :key="message" :message="message"> </BaseAlertInfo>
+    <UAlert
+      color="orange"
+      icon="i-heroicons-exclamation-triangle-20-solid"
+      v-for="message in dash.warnings"
+      :key="message"
+      :title="message"
+    />
+    <UAlert
+      icon="i-heroicons-information-circle-20-solid"
+      v-for="message in dash.messages"
+      :key="message"
+      :title="message"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { type DashboardSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseAlertInfo from "~/components/base/alert/BaseAlertInfo.vue";
-import BaseAlertWarning from "~/components/base/alert/BaseAlertWarning.vue";
 import useApi from "~/composables/useApi";
 
 export default defineComponent({
-  components: {
-    BaseAlertInfo,
-    BaseAlertWarning,
-  },
   setup() {
     const { dashboardApi } = useApi();
 

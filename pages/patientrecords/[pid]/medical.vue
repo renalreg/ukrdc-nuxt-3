@@ -1,14 +1,14 @@
 <template>
   <div>
     <NuxtLink :to="`/patientrecords/${record.pid}/`">
-      <BaseAlertWarning v-if="!recordProbablyContainsData" class="mb-4">
-        <div>
-          <p class="text-yellow-700">
-            You are currently viewing {{ recordDescription }}, which may not contain medical data.
-          </p>
-          <p class="text-yellow-700">Click to check Related Records for available data feed records.</p>
-        </div>
-      </BaseAlertWarning>
+      <UAlert
+        v-if="!recordProbablyContainsData"
+        color="orange"
+        icon="i-heroicons-exclamation-triangle-20-solid"
+        class="mb-4"
+        :title="`You are currently viewing ${recordDescription}, which may not contain medical data.`"
+        description="Click to check Related Records for available data feed records."
+      />
     </NuxtLink>
     <BaseTabsNavigation id="medical-tabs" class="mb-6" :tabs="tabs" :mini="true" :eager-to-collapse="true" />
     <NuxtPage v-if="record" :record="record" />
@@ -18,7 +18,6 @@
 <script lang="ts">
 import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseAlertWarning from "~/components/base/alert/BaseAlertWarning.vue";
 import BaseTabsNavigation from "~/components/base/BaseTabsNavigation.vue";
 import { isInformational, isMembership } from "~/helpers/recordUtils";
 import { type TabItem } from "~/interfaces/tabs";
@@ -26,7 +25,6 @@ import { type TabItem } from "~/interfaces/tabs";
 export default defineComponent({
   components: {
     BaseTabsNavigation,
-    BaseAlertWarning,
   },
   props: {
     record: {

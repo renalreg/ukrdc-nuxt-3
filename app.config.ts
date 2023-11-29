@@ -11,5 +11,11 @@ export default defineAppConfig({
         variant: "solid",
       },
     },
+    alert: {
+      default: {
+        variant: "subtle",
+        color: "primary",
+      },
+    },
   },
 });

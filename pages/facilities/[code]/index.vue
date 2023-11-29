@@ -1,13 +1,15 @@
 <template>
   <div>
-    <NuxtLink :to="`/facilities/${facility.id}/errors`">
-      <BaseAlertError
+    <ULink :to="`/facilities/${facility.id}/errors`">
+      <UAlert
         v-if="(facility.statistics.patientsReceivingMessageError || 0) > 0"
+        :title="`${facility.statistics.patientsReceivingMessageError} patients are not receiving data due to errors in their incoming files. Click for details.`"
+        color="red"
+        icon="i-heroicons-exclamation-triangle-20-solid"
         class="mb-4"
-        :message="`${facility.statistics.patientsReceivingMessageError} patients are not receiving data due to errors in their incoming files. Click for details.`"
       >
-      </BaseAlertError>
-    </NuxtLink>
+      </UAlert>
+    </ULink>
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
       <div class="col-span-1 flex flex-col gap-4 lg:col-span-2">
@@ -173,7 +175,6 @@
 <script lang="ts">
 import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseAlertError from "~/components/base/alert/BaseAlertError.vue";
 import FacilityErrorsHistoryPlot from "~/components/FacilityErrorsHistoryPlot.vue";
 import IconExclamationTriangle from "~/components/icons/hero/24/outline/IconExclamationTriangle.vue";
 import IconUsers from "~/components/icons/hero/24/outline/IconUsers.vue";
@@ -186,7 +187,6 @@ import { allStatuses } from "~/helpers/messageUtils";
 export default defineComponent({
   components: {
     IconCircle,
-    BaseAlertError,
     IconExclamationTriangle,
     IconUsers,
     FacilityErrorsHistoryPlot,

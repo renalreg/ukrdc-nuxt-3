@@ -3,16 +3,18 @@
     <!-- Issues alert -->
     <div v-if="record && stats && stats.ukrdcids > 1">
       <NuxtLink :to="`/masterrecords/${record.id}/issues`">
-        <BaseAlertError
+        <UAlert
+          color="red"
+          icon="i-heroicons-exclamation-triangle-20-solid"
           class="mb-4"
-          :message="`${stats.ukrdcids} UKRDC IDs found for this patient. Click for details.`"
+          :title="`${stats.ukrdcids} UKRDC IDs found for this patient. Click for details.`"
         />
       </NuxtLink>
     </div>
 
     <div v-if="record && issueMessage">
       <NuxtLink :to="`/masterrecords/${record.id}/issues`">
-        <BaseAlertWarning class="mb-4" :message="issueMessage" />
+        <UAlert color="orange" icon="i-heroicons-exclamation-triangle-20-solid" class="mb-4" :title="issueMessage" />
       </NuxtLink>
     </div>
 
@@ -33,8 +35,6 @@
 <script lang="ts">
 import { type MasterRecordSchema, type MasterRecordStatisticsSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseAlertError from "~/components/base/alert/BaseAlertError.vue";
-import BaseAlertWarning from "~/components/base/alert/BaseAlertWarning.vue";
 import BaseTabsNavigation from "~/components/base/BaseTabsNavigation.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
@@ -46,8 +46,6 @@ import { type TabItem } from "~/interfaces/tabs";
 export default defineComponent({
   components: {
     BaseTabsNavigation,
-    BaseAlertError,
-    BaseAlertWarning,
   },
   setup() {
     const route = useRoute();

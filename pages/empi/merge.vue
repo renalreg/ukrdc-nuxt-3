@@ -68,12 +68,20 @@
       </div>
     </div>
 
-    <BaseAlertWarning v-if="mergeBlockDescription" class="mb-4" :message="mergeBlockDescription" />
-
-    <BaseAlertError
-      v-if="highlightSections.length > 0"
+    <UAlert
+      color="orange"
+      icon="i-heroicons-exclamation-triangle-20-solid"
+      v-if="mergeBlockDescription"
       class="mb-4"
-      :message="`You are about to merge records with mismatching demographics for: ${highlightSections.join(', ')}`"
+      :title="mergeBlockDescription"
+    />
+
+    <UAlert
+      v-if="highlightSections.length > 0"
+      color="red"
+      icon="i-heroicons-exclamation-triangle-20-solid"
+      class="mb-4"
+      :title="`You are about to merge records with mismatching demographics for: ${highlightSections.join(', ')}`"
     />
 
     <div v-if="readyToMerge">
@@ -102,8 +110,6 @@
 <script lang="ts">
 import { type MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseAlertError from "~/components/base/alert/BaseAlertError.vue";
-import BaseAlertWarning from "~/components/base/alert/BaseAlertWarning.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import EMPISearch from "~/components/EMPISearch.vue";
 import IconArrowRight from "~/components/icons/hero/24/solid/IconArrowRight.vue";
@@ -117,8 +123,6 @@ type Direction = "superseding" | "superseded";
 export default defineComponent({
   components: {
     BaseModalConfirm,
-    BaseAlertError,
-    BaseAlertWarning,
     IconArrowRight,
     MasterRecordCard,
     EMPISearch,

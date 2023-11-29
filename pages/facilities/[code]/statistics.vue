@@ -1,30 +1,27 @@
 <template>
   <div>
-    <BaseTabsNavigation id="stats-tabs" class="mb-6" :tabs="tabs" :mini="true" />
+    <BaseTabsNavigation id="stats-tabs" class="mb-4" :tabs="tabs" :mini="true" />
+
+    <UAlert
+      class="mb-4"
+      title="The data displayed on this page have yet to be fully verified and may be subject to change or correction."
+      description="They should be used for the purposes of improving data quality and accuracy, and should not be used to form the
+        basis of clinical decisions."
+      icon="i-heroicons-information-circle-20-solid"
+    />
 
     <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" />
-
-    <BaseAlertInfo>
-      <div class="text-blue-700">
-        The data displayed on this page have yet to be fully verified and may be subject to change or correction.
-        <br />
-        They should be used for the purposes of improving data quality and accuracy, and should not be used to form the
-        basis of clinical decisions.
-      </div>
-    </BaseAlertInfo>
   </div>
 </template>
 
 <script lang="ts">
 import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseAlertInfo from "~/components/base/alert/BaseAlertInfo.vue";
 import BaseTabsNavigation from "~/components/base/BaseTabsNavigation.vue";
 
 export default defineComponent({
   components: {
     BaseTabsNavigation,
-    BaseAlertInfo,
   },
   props: {
     facility: {
