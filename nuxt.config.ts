@@ -32,6 +32,15 @@ export default defineNuxtConfig({
     },
   },
 
+  // Vue compiler options
+  vue: {
+    compilerOptions: {
+      // Preserve whitespace in templates
+      // We use this a _lot_ when joining strings together
+      whitespace: "preserve",
+    },
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["@/assets/css/main.css"],
 

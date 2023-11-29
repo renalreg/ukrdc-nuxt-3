@@ -30,15 +30,17 @@
 
               <!-- Name, DoB, gender -->
               <div :class="[!showSenderFirst ? 'order-1' : 'order-2']">
-                <span class="line-clamp-1">
-                  <h5 class="sensitive inline truncate capitalize">{{ item.patient?.names[0].given.toLowerCase() }}</h5>
-                  <h5 class="sensitive inline truncate capitalize italic">
+                <h5 class="truncate">
+                  <span class="sensitive truncate font-medium capitalize">
+                    {{ item.patient?.names[0].given.toLowerCase() }}
+                  </span>
+                  <span class="sensitive truncate font-medium capitalize italic">
                     {{ item.patient?.names[0].family.toLowerCase() }}
-                  </h5>
-                  <h5 class="sensitive ml-1 inline">
+                  </span>
+                  <span class="sensitive ml-1 font-medium">
                     {{ item.patient?.gender ? formatGenderCharacter(item.patient?.gender) : "?" }}
-                  </h5>
-                </span>
+                  </span>
+                </h5>
                 <p class="sensitive mt-2 flex items-center" :class="[{ 'text-red-700': item.patient?.deathTime }]">
                   {{ item.patient?.birthTime ? formatDate(item.patient?.birthTime, false) : "Unknown date of birth" }}
                   {{ item.patient?.deathTime ? ` – ${formatDate(item.patient?.deathTime, false)}` : "" }}

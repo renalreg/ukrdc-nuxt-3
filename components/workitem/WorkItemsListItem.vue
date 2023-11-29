@@ -9,16 +9,19 @@
         >
           Closed
         </span>
-        <span v-if="item.person">
-          <h5 class="sensitive inline capitalize">{{ item.person.givenname?.toLowerCase() }}</h5>
-          <h5 class="sensitive inline capitalize italic">{{ item.person.surname?.toLowerCase() }}</h5>
-        </span>
-        <h5 v-if="item.person && item.masterRecord" class="inline">→</h5>
-        <span v-if="item.masterRecord">
-          <h5 class="sensitive inline capitalize">{{ item.masterRecord.givenname?.toLowerCase() }}</h5>
-          <h5 class="sensitive inline capitalize italic">{{ item.masterRecord.surname?.toLowerCase() }}</h5>
-        </span>
-        <h5 v-else class="inline truncate capitalize text-red-800">Missing Record</h5>
+        <h5 v-if="item.person">
+          <span class="sensitive inline capitalize">{{ item.person.givenname?.toLowerCase() }}</span>
+          <span class="sensitive inline capitalize italic">{{ item.person.surname?.toLowerCase() }}</span>
+          <span v-if="item.person && item.masterRecord">→</span>
+          <span v-if="item.masterRecord" class="sensitive capitalize">
+            {{ item.masterRecord.givenname?.toLowerCase() }}
+          </span>
+          <span v-if="item.masterRecord" class="sensitive capitalize italic">
+            {{ item.masterRecord.surname?.toLowerCase() }}
+          </span>
+          <span v-else class="truncate capitalize text-red-800">Missing Record</span>
+        </h5>
+        <h5 v-else class="truncate capitalize text-red-800">Missing Record</h5>
         <p class="mt-2 truncate">{{ item.type }}: {{ item.description }}</p>
       </div>
       <!-- National ID -->

@@ -21,7 +21,7 @@
 - [x] Fix collapse sections (e.g. advanced search settings)
 - [x] Fix toggle tabs (e.g. Work Item status selector)
 - [x] Fix checkbox models (e.g. data files status filter)
-- [ ] Fix name display component
+- [x] Fix name display component
 - [ ] Fix layout for multiple diagnoses
 - [ ] Fix BaseCardDescriptionList style
 - [ ] Move all paginator components into card footer
