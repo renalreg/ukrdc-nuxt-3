@@ -11,7 +11,7 @@
       <UCheckbox v-if="record && record.status !== 3" v-model="isWIP" label="Mark as work-in-progress (WIP)" />
 
       <div class="flex justify-end">
-        <UButton color="white" variant="solid" @click="updateWorkItemModal?.hide()">Cancel</UButton>
+        <UButton @click="updateWorkItemModal?.hide()">Cancel</UButton>
         <UButton color="indigo" class="ml-2" type="submit" @click="updateWorkItem()"> Save </UButton>
       </div>
     </BaseModal>
@@ -29,7 +29,7 @@
       </div>
 
       <div class="flex justify-end">
-        <UButton color="white" variant="solid" @click="closeModal?.hide()"> Cancel </UButton>
+        <UButton @click="closeModal?.hide()"> Cancel </UButton>
         <UButton :disabled="!customComment" type="submit" class="ml-3" color="red" @click="handleCloseWorkItem()">
           Close Work Item
         </UButton>
@@ -62,12 +62,11 @@
       <UButton
         v-if="availableActions.comment"
         color="indigo"
-        class="inline-flex w-full items-center justify-center"
+        class="inline-flex w-full justify-center"
         @click="updateWorkItemModal?.show()"
-      >
-        <IconPencil class="-ml-1 mr-2" />
-        Update
-      </UButton>
+        label="Update"
+        icon="i-heroicons-pencil-20-solid"
+      />
 
       <UButton
         v-if="availableActions.close && record.status !== 3"

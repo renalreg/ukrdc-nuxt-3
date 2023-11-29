@@ -20,14 +20,7 @@
           :search-attributes="['description', 'id']"
           placeholder="Select a sending facility"
         />
-        <UButton
-          color="white"
-          variant="solid"
-          class="ml-2"
-          size="lg"
-          @click="selectedFacility = undefined"
-          label="Clear"
-        />
+        <UButton class="ml-2" size="lg" @click="selectedFacility = undefined" label="Clear" />
       </div>
 
       <div class="flex flex-col gap-2 lg:flex-row">
@@ -43,7 +36,7 @@
         <form v-show="!nationalId" class="flex" @submit.prevent="nationalId = nationalIdSearchString.trim()">
           <UButtonGroup size="sm" orientation="horizontal">
             <UInput v-model="nationalIdSearchString" placeholder="Filter by Patient Number" />
-            <UButton type="submit" color="white" label="Go" />
+            <UButton type="submit" label="Go" />
           </UButtonGroup>
         </form>
 
@@ -52,8 +45,6 @@
         <UButton
           class="flex-shrink"
           @click="toggleOrder"
-          color="white"
-          variant="solid"
           size="sm"
           :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
           :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
@@ -74,7 +65,7 @@
         placeholder="Select a message channel"
       >
       </USelectMenu>
-      <UButton color="white" variant="solid" class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>
+      <UButton class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>
     </div>
 
     <UCard :ui="{ body: { padding: '' } }">

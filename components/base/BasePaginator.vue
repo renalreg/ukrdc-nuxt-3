@@ -12,7 +12,7 @@
       </p>
     </div>
     <div class="flex flex-1 items-center justify-between gap-1 sm:justify-end">
-      <UButton variant="solid" color="white" :class="{ invisible: page <= 1 }" @click="prev()"> Previous </UButton>
+      <UButton :class="{ invisible: page <= 1 }" @click="prev()"> Previous </UButton>
       <div v-if="showPages" class="flex items-center justify-between gap-1 sm:justify-end">
         <div v-for="(pageLink, index) in paginationElements" :key="'paginator-' + index">
           <span v-if="pageLink === '...'" class="hidden px-2 font-medium lg:block"> ... </span>
@@ -27,9 +27,7 @@
           </UButton>
         </div>
       </div>
-      <UButton variant="solid" color="white" :class="{ invisible: page * size >= total }" @click="next()">
-        Next
-      </UButton>
+      <UButton class="{ invisible: page * size >= total }" @click="next()"> Next </UButton>
     </div>
   </nav>
 </template>

@@ -36,14 +36,7 @@
             :search-attributes="['description', 'id']"
             placeholder="Select a result type"
           />
-          <UButton
-            color="white"
-            variant="solid"
-            class="ml-2"
-            size="lg"
-            @click="selectedService = undefined"
-            label="Clear"
-          />
+          <UButton class="ml-2" size="lg" @click="selectedService = undefined" label="Clear" />
         </div>
 
         <p v-if="results && results.length <= 0" class="text-center">No results on record</p>
@@ -51,10 +44,10 @@
         <div v-else>
           <div class="mb-4 flex flex-grow items-center gap-2">
             <NuxtLink :to="'./laborders'">
-              <UButton color="white" variant="solid">View Lab Orders</UButton>
+              <UButton>View Lab Orders</UButton>
             </NuxtLink>
             <NuxtLink v-if="selectedOrderId" :to="{ query: { order_id: null } }">
-              <UButton color="white" variant="solid">Show Results From All Lab Orders</UButton>
+              <UButton>Show Results From All Lab Orders</UButton>
             </NuxtLink>
             <UButton
               color="red"

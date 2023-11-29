@@ -68,7 +68,7 @@
             <PatientRecordAddress :address="addressToUse.address" />
           </div>
 
-          <UButton color="white" variant="solid" @click="postUpdateConfirm?.show()">Apply Changes</UButton>
+          <UButton @click="postUpdateConfirm?.show()">Apply Changes</UButton>
         </div>
 
         <!-- Available Options -->

@@ -12,7 +12,7 @@
             <h6>{{ labelled2d ? labelled2d.metadata.summary : "" }}</h6>
           </div>
         </div>
-        <UButton v-if="labelled2d" color="white" label="Export" @click="exportData" />
+        <UButton v-if="labelled2d" label="Export" @click="exportData" />
       </div>
     </template>
     <BaseBarPlot

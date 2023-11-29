@@ -16,9 +16,7 @@
     <div class="mb-6 block gap-2 lg:flex">
       <div class="flex-1">
         <div v-if="superseded">
-          <UButton color="white" variant="solid" size="lg" class="w-full" @click="clearSuperceeded">
-            Change Source Record
-          </UButton>
+          <UButton size="lg" class="w-full" @click="clearSuperceeded"> Change Source Record </UButton>
           <NuxtLink :to="`/masterrecords/${superseded.id}`">
             <MasterRecordCard
               class="mt-4 !border-red-500"
@@ -30,9 +28,7 @@
         </div>
         <div v-else>
           <EMPISearch v-if="searchingFor === 'superseded'" :number-types="['UKRDC']" @select="selectSuperceeded" />
-          <UButton color="white" variant="solid" size="lg" v-else class="w-full" @click="searchingFor = 'superseded'">
-            Search for a Record
-          </UButton>
+          <UButton size="lg" v-else class="w-full" @click="searchingFor = 'superseded'"> Search for a Record </UButton>
         </div>
       </div>
 
@@ -40,8 +36,6 @@
         <div class="flex-shrink">
           <UButton
             square
-            color="white"
-            variant="solid"
             size="lg"
             icon="i-heroicons-arrows-right-left-20-solid"
             v-tooltip="'Switch Records'"
@@ -57,9 +51,7 @@
 
       <div class="flex-1">
         <div v-if="superseding">
-          <UButton color="white" variant="solid" size="lg" class="w-full" @click="clearsuperseding">
-            Change Destination Record
-          </UButton>
+          <UButton size="lg" class="w-full" @click="clearsuperseding"> Change Destination Record </UButton>
           <NuxtLink :to="`/masterrecords/${superseding.id}`">
             <MasterRecordCard
               class="mt-4 !border-green-500"
@@ -71,9 +63,7 @@
         </div>
         <div v-else>
           <EMPISearch v-if="searchingFor === 'superseding'" :number-types="['UKRDC']" @select="selectsuperseding" />
-          <UButton color="white" variant="solid" size="lg" v-else class="w-full" @click="searchingFor = 'superseding'">
-            Search for a Record
-          </UButton>
+          <UButton size="lg" v-else class="w-full" @click="searchingFor = 'superseding'"> Search for a Record </UButton>
         </div>
       </div>
     </div>
@@ -102,8 +92,8 @@
       </div>
 
       <div class="flex gap-2">
-        <UButton colour="red" variant="solid" @click="beginMergeAlert?.show()">Begin Record Merge</UButton>
-        <UButton color="white" variant="solid" v-if="callbackPath" :to="callbackPath">Cancel</UButton>
+        <UButton colour="red" @click="beginMergeAlert?.show()">Begin Record Merge</UButton>
+        <UButton v-if="callbackPath" :to="callbackPath">Cancel</UButton>
       </div>
     </div>
   </div>

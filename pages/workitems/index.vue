@@ -19,14 +19,7 @@
           :search-attributes="['description', 'id']"
           placeholder="Select a sending facility"
         />
-        <UButton
-          color="white"
-          variant="solid"
-          class="ml-2"
-          size="lg"
-          @click="selectedFacility = undefined"
-          label="Clear"
-        />
+        <UButton class="ml-2" size="lg" @click="selectedFacility = undefined" label="Clear" />
       </div>
       <div class="flex items-center">
         <div class="flex-grow">
@@ -35,8 +28,6 @@
         <UButton
           class="flex-shrink"
           @click="toggleOrder"
-          color="white"
-          variant="solid"
           size="sm"
           :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
           :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"

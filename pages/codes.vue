@@ -6,7 +6,7 @@
       </div>
       <div>
         <div v-click-away="closeExportMenu" class="relative flex">
-          <UButton color="white" variant="solid" @click="showExportMenu = !showExportMenu">
+          <UButton @click="showExportMenu = !showExportMenu">
             <div class="flex items-center">
               <div class="flex-grow">Export Codes</div>
               <div class="ml-2">
@@ -32,14 +32,7 @@
         :options="standards"
         placeholder="Select a coding standard"
       />
-      <UButton
-        color="white"
-        variant="solid"
-        class="ml-2"
-        size="lg"
-        @click="selectedStandard = undefined"
-        label="Clear"
-      />
+      <UButton class="ml-2" size="lg" @click="selectedStandard = undefined" label="Clear" />
     </div>
 
     <div>
@@ -82,8 +75,6 @@
       <!-- Code details -->
       <div class="sticky top-4 h-screen grow">
         <UButton
-          color="white"
-          variant="solid"
           v-show="$route.params.id"
           class="mb-4 w-full lg:hidden"
           :to="{ path: `/codes/`, query: $route.query }"

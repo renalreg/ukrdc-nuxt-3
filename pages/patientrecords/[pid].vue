@@ -12,9 +12,7 @@
       </div>
       <div class="flex justify-center sm:justify-start">
         <div v-if="record.masterId">
-          <UButton color="white" variant="solid" size="lg" :to="`/masterrecords/${record.masterId}`">
-            View Master Record
-          </UButton>
+          <UButton size="lg" :to="`/masterrecords/${record.masterId}`"> View Master Record </UButton>
         </div>
       </div>
     </div>

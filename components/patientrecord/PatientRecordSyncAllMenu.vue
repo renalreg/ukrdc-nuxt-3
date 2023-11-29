@@ -27,7 +27,6 @@
     </BaseModalSuccess>
 
     <UButton
-      color="white"
       label="Sync to PKB"
       icon="i-heroicons-cloud-arrow-up-20-solid"
       class="z-0 mr-2 flex gap-1"

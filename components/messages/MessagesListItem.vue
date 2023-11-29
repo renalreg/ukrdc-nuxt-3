@@ -36,8 +36,6 @@
         <UButton
           v-if="showPatientFilter"
           :ui="{ rounded: 'rounded-full' }"
-          color="white"
-          variant="solid"
           :class="!item.ni ? 'invisible' : ''"
           class="opacity-0 group-hover:opacity-100"
           :to="{ path: '/messages', query: { nationalid: item.ni } }"

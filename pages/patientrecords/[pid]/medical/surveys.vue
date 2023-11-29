@@ -24,9 +24,7 @@
                   class="inline-block flex-shrink-0 rounded-sm bg-indigo-100 px-2 py-0.5 text-sm font-medium text-indigo-800"
                   >{{ item.questions.length }} questions</span
                 >
-                <UButton color="white" variant="solid" class="float-right" @click="surveyViewerModal?.show(item)">
-                  View survey
-                </UButton>
+                <UButton class="float-right" @click="surveyViewerModal?.show(item)"> View survey </UButton>
               </div>
             </div>
           </div>

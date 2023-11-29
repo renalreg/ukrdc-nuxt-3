@@ -23,9 +23,7 @@
             placeholder="Select a message channel"
           >
           </USelectMenu>
-          <UButton color="white" variant="solid" class="ml-2" size="lg" @click="selectedChannel = undefined"
-            >Clear</UButton
-          >
+          <UButton class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>
         </div>
       </template>
       <div v-if="errorMessages && errorMessagesTotal == 0" class="p-8 text-center">

@@ -19,7 +19,6 @@
         >
         <UButton
           size="sm"
-          color="white"
           class="float-right"
           label="View message"
           :to="`/mirth/messages/${message.channelId}/${message.messageId}/${message.orderId}`"

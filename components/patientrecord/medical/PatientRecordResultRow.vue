@@ -16,8 +16,6 @@
     <td class="flex gap-2 text-gray-500">
       <UButton
         :ui="{ rounded: 'rounded-full' }"
-        color="white"
-        variant="solid"
         class="opacity-0 group-hover:opacity-100"
         tooltip="Filter by this lab order"
         icon="i-heroicons-funnel-20-solid"
@@ -25,8 +23,6 @@
       />
       <UButton
         :ui="{ rounded: 'rounded-full' }"
-        color="white"
-        variant="solid"
         class="opacity-0 group-hover:opacity-100"
         tooltip="Delete this result item"
         icon="i-heroicons-trash-20-solid"

@@ -5,8 +5,6 @@
       <UButton
         class="flex-shrink"
         @click="toggleOrder"
-        color="white"
-        variant="solid"
         size="sm"
         :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
         :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"

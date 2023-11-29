@@ -43,8 +43,8 @@
         <div
           class="mb-8 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse lg:mt-0 lg:flex-row lg:space-x-3"
         >
-          <UButton color="white" variant="solid" to="manageAccountUrl" target="_blank"> Manage Account</UButton>
-          <UButton color="white" variant="solid" @click="signOutAuto()"> Sign out </UButton>
+          <UButton to="manageAccountUrl" target="_blank"> Manage Account</UButton>
+          <UButton @click="signOutAuto()"> Sign out </UButton>
         </div>
       </div>
       <div class="mb-4">

@@ -58,7 +58,7 @@
         </BaseCardDescriptionList>
       </UCard>
     </div>
-    <UButton color="white" variant="solid" @click="copyConfigReport">Copy Configuration Report</UButton>
+    <UButton @click="copyConfigReport">Copy Configuration Report</UButton>
   </div>
 </template>
 

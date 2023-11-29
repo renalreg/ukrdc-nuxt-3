@@ -13,14 +13,7 @@
             :options="availableCodes"
             placeholder="Select a coding standard"
           />
-          <UButton
-            color="white"
-            variant="solid"
-            class="ml-2"
-            size="lg"
-            @click="selectedCode = undefined"
-            label="Clear"
-          />
+          <UButton class="ml-2" size="lg" @click="selectedCode = undefined" label="Clear" />
           >
         </div>
 

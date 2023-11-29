@@ -18,14 +18,7 @@
             :search-attributes="['description', 'id']"
             placeholder="Select a sending facility"
           />
-          <UButton
-            color="white"
-            variant="solid"
-            class="ml-2"
-            size="lg"
-            @click="selectedFacility = undefined"
-            label="Clear"
-          />
+          <UButton class="ml-2" size="lg" @click="selectedFacility = undefined" label="Clear" />
         </div>
         <!-- MasterRecord type filter (will be redundant with new EMPI)-->
         <div class="mb-4 flex flex-grow items-center gap-2">
