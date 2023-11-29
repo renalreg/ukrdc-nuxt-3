@@ -15,11 +15,12 @@
       ref="createPkbMembershipSuccess"
       title="PKB Membership Created"
       confirm-label="Go back to records"
+      @confirm="$emit('refresh')"
     >
       <p class="mb-4"><b>No data has been automatically sent</b></p>
       <p>To send data, click</p>
       <div class="my-1 flex items-center justify-center gap-2">
-        <IconCloudArrowUp class="inline text-gray-800" /><b>Sync to PKB</b>
+        <UIcon name="i-heroicons-cloud-arrow-up-20-solid" class="inline text-gray-800" /><b>Sync to PKB</b>
       </div>
       <p>from the Data Feeds section</p>
     </BaseModalSuccess>
@@ -40,7 +41,6 @@ import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import BaseModalSuccess from "~/components/base/BaseModalSuccess.vue";
-import IconCloudArrowUp from "~/components/icons/hero/20/solid/IconCloudArrowUp.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
 import { type ModalInterface } from "~/interfaces/modal";
@@ -49,7 +49,6 @@ export default defineComponent({
   components: {
     BaseModalSuccess,
     BaseModalConfirm,
-    IconCloudArrowUp,
   },
   props: {
     records: {
@@ -104,16 +103,6 @@ export default defineComponent({
             message: error.response.data.detail,
             timeout: 10,
           });
-        })
-        .finally(() => {
-          // Notify of task started
-          $toast.show({
-            type: "info",
-            title: "Creating Membership",
-            message: "This might take a few seconds",
-            timeout: 5,
-          });
-          emit("refresh");
         });
     }
 
@@ -130,6 +119,8 @@ export default defineComponent({
     ];
 
     return {
+      createPkbMembershipConfirm,
+      createPkbMembershipSuccess,
       ukrdcids,
       menuAvailable,
       menuItems,
