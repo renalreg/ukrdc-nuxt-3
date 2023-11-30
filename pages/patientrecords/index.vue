@@ -2,9 +2,9 @@
   <div>
     <UCard class="mb-4 !overflow-visible">
       <SearchBar v-model="searchboxString" :focus="true" @submit="searchSubmit" />
-      <BaseCollapseHeader v-model="advancedOpen" class="mb-4" label="More Options"></BaseCollapseHeader>
+      <BaseCollapseHeader v-model="advancedOpen" label="More Options"></BaseCollapseHeader>
       <!-- More Options -->
-      <div v-show="advancedOpen">
+      <div v-show="advancedOpen" class="mt-4">
         <!-- Facility select -->
         <div v-if="facilities.length > 1" class="mb-4 flex">
           <USelectMenu
@@ -21,7 +21,7 @@
           <UButton class="ml-2" size="lg" @click="selectedFacility = undefined" label="Clear" />
         </div>
         <!-- MasterRecord type filter (will be redundant with new EMPI)-->
-        <div class="mb-4 flex flex-grow items-center gap-2">
+        <div class="flex flex-grow items-center gap-2">
           <BaseCheckpill v-model="extraRecordTypes" label="MIGRATED" value="MIGRATED" colour="blue" />
           <BaseCheckpill v-model="extraRecordTypes" label="INFORMATIONAL" value="INFORMATIONAL" colour="purple" />
           <BaseCheckpill v-model="extraRecordTypes" label="MEMBERSHIPS" value="MEMBERSHIPS" colour="green" />
