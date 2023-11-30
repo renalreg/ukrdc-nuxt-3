@@ -3,12 +3,7 @@
 <template>
   <div :class="[sticky ? 'sticky top-4 z-50' : '']">
     <div :class="[eagerToCollapse ? 'lg:hidden' : 'sm:hidden']">
-      <label for="tabs" class="sr-only">Select a tab</label>
-      <BaseSelect id="tabs" ref="selectEl" name="tabs" :value="selectedHref" @change="switchTab">
-        <option v-for="tab in tabs" :key="tab.name" :value="tab.href" :selected="tabIsActive(tab)">
-          {{ tab.name }}
-        </option>
-      </BaseSelect>
+      <USelect v-model="selectValue" :options="tabs" option-attribute="name" value-attribute="href" />
     </div>
     <div class="hidden" :class="[eagerToCollapse ? 'lg:block' : 'sm:block']">
       <nav :class="[mini ? 'tab-nav-mini' : 'tab-nav-primary']" aria-label="Tabs">
@@ -35,12 +30,10 @@
 </template>
 
 <script lang="ts">
-import BaseSelect from "~/components/base/BaseSelect.vue";
 import { urlCompare, urlStartsWith } from "~/helpers/pathUtils";
 import { type TabItem } from "~/interfaces/tabs";
 
 export default defineComponent({
-  components: { BaseSelect },
   props: {
     tabs: {
       type: Array as () => TabItem[],
@@ -72,18 +65,24 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
 
-    const selectEl = ref<HTMLFormElement>();
-
-    const selectedHref = computed(() => {
-      // We need to allow our BaseSelect component's current value to account for tabs having children,
-      // so we use tabIsActive to find the current active tab, and set the value to that.
-      // Without this, any href tab items with children will break the currently selected tab in
-      // the select/option UI for these tabs.
-      for (const tab of props.tabs) {
-        if (tabIsActive(tab)) {
-          return tab.href;
+    // We need to allow our select component's current value to account for tabs having children,
+    // so we use tabIsActive to find the current active tab, and set the value to that.
+    // Without this, any href tab items with children will break the currently selected tab in
+    // the select/option UI for these tabs.
+    const selectValue = computed<string | undefined>({
+      get() {
+        for (const tab of props.tabs) {
+          if (tabIsActive(tab)) {
+            return tab.href;
+          }
         }
-      }
+      },
+      set(href: string | undefined) {
+        if (href) {
+          router.push({ path: href });
+          emit("change", href);
+        }
+      },
     });
 
     function tabIsActive(tab: TabItem) {
@@ -93,12 +92,7 @@ export default defineComponent({
       return urlCompare(route.path, tab.href);
     }
 
-    function switchTab(href: string) {
-      router.push({ path: href });
-      emit("change", href);
-    }
-
-    return { selectEl, selectedHref, tabIsActive, switchTab };
+    return { selectValue, tabIsActive };
   },
 });
 </script>

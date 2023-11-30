@@ -3,10 +3,7 @@
 <template>
   <div :class="[sticky ? 'sticky top-4 z-50' : '']">
     <div :class="[eagerToCollapse ? 'lg:hidden' : 'sm:hidden']">
-      <label for="tabs" class="sr-only">Select a tab</label>
-      <BaseSelect id="tabs" ref="selectEl" name="tabs" :value="modelValue" @change="setValue">
-        <option v-for="tab in tabs" :key="tab.value">{{ tab.name }}</option>
-      </BaseSelect>
+      <USelect v-model="selectValue" :options="tabs" option-attribute="name" value-attribute="value" />
     </div>
     <div class="hidden" :class="[eagerToCollapse ? 'lg:block' : 'sm:block']">
       <nav class="flex" :class="[mini ? 'tab-nav-mini' : 'tab-nav-primary']" aria-label="Tabs">
@@ -32,12 +29,9 @@
 </template>
 
 <script lang="ts">
-import BaseSelect from "~/components/base/BaseSelect.vue";
 import { type ModelTabItem } from "~/interfaces/tabs";
 
 export default defineComponent({
-  components: { BaseSelect },
-
   props: {
     tabs: {
       type: Array as () => ModelTabItem[],
@@ -66,8 +60,6 @@ export default defineComponent({
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
-    const selectEl = ref<HTMLFormElement>();
-
     function tabIsActive(tab: ModelTabItem) {
       return props.modelValue === tab.value;
     }
@@ -76,7 +68,16 @@ export default defineComponent({
       emit("update:modelValue", value);
     }
 
-    return { selectEl, tabIsActive, setValue };
+    const selectValue = computed<any>({
+      get() {
+        return props.modelValue;
+      },
+      set(value: any) {
+        setValue(value);
+      },
+    });
+
+    return { tabIsActive, setValue, selectValue };
   },
 });
 </script>

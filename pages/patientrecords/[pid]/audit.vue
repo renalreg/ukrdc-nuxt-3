@@ -5,23 +5,26 @@
         <BaseDateRange v-model="dateRange" class="flex-1" />
         <UButton
           class="flex-shrink"
-          @click="toggleOrder"
-          size="sm"
-          :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
           :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
+          :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
+          size="sm"
+          @click="toggleOrder"
         />
       </div>
       <div class="flex gap-4">
-        <BaseSelect v-model="selectedResource">
-          <option value="" disabled selected hidden>Select a resource type</option>
-          <option :value="null">All resources</option>
-          <option v-for="resource in availableResources" :key="resource">{{ resource }}</option>
-        </BaseSelect>
-        <BaseSelect v-model="selectedOperation">
-          <option value="" disabled selected hidden>Select an operation</option>
-          <option :value="null">All operations</option>
-          <option v-for="operation in availableOperations" :key="operation">{{ operation }}</option>
-        </BaseSelect>
+        <USelect
+          v-model="selectedResource"
+          :options="availableResources"
+          placeholder="Select a resource type"
+          class="w-64"
+        />
+        <USelect
+          v-model="selectedOperation"
+          :options="availableOperations"
+          placeholder="Select an operation"
+          class="w-64"
+        />
+        <UButton class="flex-shrink" label="Clear" size="sm" @click="clearSelection" />
       </div>
     </div>
 
@@ -55,7 +58,6 @@ import { Resource } from "@ukkidney/ukrdc-axios-ts/api";
 import AuditListItem from "~/components/AuditListItem.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BaseSelect from "~/components/base/BaseSelect.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import useDateRange from "~/composables/query/useDateRange";
 import usePagination from "~/composables/query/usePagination";
@@ -69,7 +71,6 @@ export default defineComponent({
     BaseSkeleListItem,
     BasePaginator,
     BaseDateRange,
-    BaseSelect,
     AuditListItem,
   },
   props: {
@@ -79,6 +80,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const router = useRouter();
     const { page, total, size } = usePagination();
     const { makeDateRange } = useDateRange();
     const { stringQuery } = useQuery();
@@ -95,6 +97,15 @@ export default defineComponent({
     const selectedResource = stringQuery("resource", null, true, true);
     const availableOperations: string[] = Object.values(AuditOperation).sort();
     const selectedOperation = stringQuery("operation", null, true, true);
+
+    function clearSelection() {
+      router.replace({
+        query: {
+          selectedOperation: undefined,
+          selectedResource: undefined,
+        },
+      });
+    }
 
     // Data fetching
 
@@ -151,6 +162,7 @@ export default defineComponent({
       orderAscending,
       orderBy,
       toggleOrder,
+      clearSelection,
       availableResources,
       selectedResource,
       availableOperations,
