@@ -17,5 +17,8 @@ export default defineAppConfig({
         color: "primary",
       },
     },
+    notifications: {
+      position: "top-0 bottom-auto",
+    },
   },
 });

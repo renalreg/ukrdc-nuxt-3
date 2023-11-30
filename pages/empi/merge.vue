@@ -128,7 +128,7 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     const router = useRouter();
-    const { $toast } = useNuxtApp();
+    const toast = useToast();
     const { stringQuery } = useQuery();
     const { patientIndexOperationsApi, masterRecordsApi } = useApi();
 
@@ -272,11 +272,9 @@ export default defineComponent({
             },
           })
           .then(() => {
-            $toast.show({
-              type: "success",
+            toast.add({
               title: "Success",
-              message: "Record merge request sent successfully",
-              timeout: 10,
+              description: "Record merge request sent successfully",
             });
             clearMerge();
             if (callbackPath.value) {

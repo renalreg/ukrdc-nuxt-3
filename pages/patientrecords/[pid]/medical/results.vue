@@ -97,11 +97,11 @@ import {
   type ResultItemServiceSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
+import BadgePrePost from "~/components/BadgePrePost.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
-import BadgePrePost from "~/components/BadgePrePost.vue";
 import useDateRange from "~/composables/query/useDateRange";
 import usePagination from "~/composables/query/usePagination";
 import useQuery from "~/composables/query/useQuery";
@@ -124,7 +124,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { $toast } = useNuxtApp();
+    const toast = useToast();
     const { page, total, size } = usePagination();
     const { makeDateRange } = useDateRange();
     const { stringQuery } = useQuery();
@@ -215,11 +215,9 @@ export default defineComponent({
             resultitemId: itemToDelete.value.id,
           })
           .then(() => {
-            $toast.show({
-              type: "success",
+            toast.add({
               title: "Success",
-              message: "Result Item deleted",
-              timeout: 10,
+              description: "Result Item deleted",
             });
             fetchResults();
             itemToDelete.value = null;
@@ -236,11 +234,9 @@ export default defineComponent({
             orderId: selectedOrder.value.id,
           })
           .then(() => {
-            $toast.show({
-              type: "success",
+            toast.add({
               title: "Success",
-              message: "Lab Order deleted",
-              timeout: 10,
+              description: "Lab Order deleted",
             });
             selectedOrderId.value = null;
             fetchResults();

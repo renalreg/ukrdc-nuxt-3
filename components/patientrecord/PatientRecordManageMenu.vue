@@ -44,7 +44,7 @@ export default defineComponent({
   },
   emits: ["deleted"],
   setup(props) {
-    const { $toast } = useNuxtApp();
+    const toast = useToast();
     const { hasPermission } = usePermissions();
     const { exportRADAR, exportPKB } = useRecordExport();
 
@@ -52,11 +52,9 @@ export default defineComponent({
 
     function copyPID() {
       navigator.clipboard.writeText(props.item.pid).then(() => {
-        $toast.show({
-          type: "success",
+        toast.add({
           title: "Success",
-          message: "PID copied to clipboard",
-          timeout: 5,
+          description: "PID copied to clipboard",
         });
       });
     }
@@ -67,21 +65,18 @@ export default defineComponent({
 
     function showExportSuccessToast() {
       // Notify of task finished
-      $toast.show({
-        type: "success",
+      toast.add({
         title: "Sync Started",
-        message: "This may take a few minutes depending on the size of the record.",
-        timeout: 10,
+        description: "This may take a few minutes depending on the size of the record.",
       });
     }
 
     function showExportErrorToast(e: Error) {
       // Notify of task error
-      $toast.show({
-        type: "danger",
+      toast.add({
         title: "Sync Failed",
-        message: e.message,
-        timeout: 10,
+        color: "red",
+        description: e.message,
       });
     }
 

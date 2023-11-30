@@ -33,7 +33,7 @@ function decodePydanticErrors(errors: PydanticError[]) {
 }
 
 export default function () {
-  const { $toast } = useNuxtApp();
+  const toast = useToast();
   const { $okta } = useAuth();
 
   const runtimeConfig = useRuntimeConfig();
@@ -115,10 +115,10 @@ export default function () {
 
         // If we have no message to show, don't create a toast
         if (msgToShow) {
-          $toast.show({
-            type: "danger",
+          toast.add({
             title: "Error Fetching Data",
-            message: msgToShow,
+            description: msgToShow,
+            color: "red",
             timeout: 5,
           });
         }

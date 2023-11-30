@@ -286,7 +286,7 @@ export default defineComponent({
   setup() {
     // Dependencies
     const route = useRoute();
-    const { $toast } = useNuxtApp();
+    const toast = useToast();
     const { hasPermission } = usePermissions();
     const { workItemsApi } = useApi();
 
@@ -337,7 +337,7 @@ export default defineComponent({
           messages.value = response.data.items;
           messagesPage.value = response.data.page ?? 0;
           messagesSize.value = response.data.size ?? 0;
-          messagesTotal.value = response.data.total;
+          messagesTotal.value = response.data.total ?? 0;
         });
     }
 
@@ -450,19 +450,16 @@ export default defineComponent({
           },
         })
         .then(() => {
-          $toast.show({
-            type: "success",
+          toast.add({
             title: "Success",
-            message: "Work item updated. Reloading...",
-            timeout: 5,
+            description: "Work item updated. Reloading...",
           });
         })
         .catch((error) => {
-          $toast.show({
-            type: "danger",
+          toast.add({
             title: "Error",
-            message: error.response.data.detail,
-            timeout: 10,
+            description: error.response.data.detail,
+            color: "red",
           });
           throw error;
         })
@@ -486,18 +483,16 @@ export default defineComponent({
           },
         })
         .then(() => {
-          $toast.show({
-            type: "success",
+          toast.add({
             title: "Success",
-            message: "Work Item closed. Reloading...",
+            description: "Work Item closed. Reloading...",
           });
         })
         .catch((error) => {
-          $toast.show({
-            type: "danger",
+          toast.add({
             title: "Error",
-            message: error.response.data.detail,
-            timeout: 10,
+            description: error.response.data.detail,
+            color: "red",
           });
           throw error;
         })
@@ -527,19 +522,19 @@ export default defineComponent({
             // Format/process row data depending on key
             if (key === "dateOfBirth" || key === "dateOfDeath") {
               rows.push({
-                key: key,
+                key,
                 incomingValue: formatDate(value.split(":")[0], false),
                 destinationValue: formatDate(value.split(":")[1], false),
               });
             } else if (key === "gender") {
               rows.push({
-                key: key,
+                key,
                 incomingValue: formatGender(value.split(":")[0]),
                 destinationValue: formatGender(value.split(":")[1]),
               });
             } else {
               rows.push({
-                key: key,
+                key,
                 incomingValue: value.split(":")[0],
                 destinationValue: value.split(":")[1],
               });

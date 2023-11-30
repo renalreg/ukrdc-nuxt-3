@@ -75,7 +75,7 @@ export default defineComponent({
     BaseCardDescriptionItem,
   },
   setup() {
-    const { $toast } = useNuxtApp();
+    const toast = useToast();
     const { systemInfoApi } = useApi();
     const runtimeConfig = useRuntimeConfig();
 
@@ -111,11 +111,9 @@ export default defineComponent({
 
     function copyConfigReport() {
       navigator.clipboard.writeText(configReportJSON.value).then(() => {
-        $toast.show({
-          type: "success",
+        toast.add({
           title: "Success",
-          message: "Configuration Report copied to clipboard",
-          timeout: 5,
+          description: "Configuration Report copied to clipboard",
         });
       });
     }

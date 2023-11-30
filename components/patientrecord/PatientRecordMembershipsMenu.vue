@@ -62,8 +62,8 @@ export default defineComponent({
     },
   },
   emits: ["refresh"],
-  setup(props, { emit }) {
-    const { $toast } = useNuxtApp();
+  setup(props) {
+    const toast = useToast();
     const { hasPermission } = usePermissions();
     const { ukrdcRecordGroupApi } = useApi();
 
@@ -97,10 +97,10 @@ export default defineComponent({
         })
         .catch((error) => {
           // Notify of task error
-          $toast.show({
-            type: "danger",
+          toast.add({
             title: "Error creating PKB membership",
-            message: error.response.data.detail,
+            description: error.response.data.detail,
+            color: "red",
             timeout: 10,
           });
         });

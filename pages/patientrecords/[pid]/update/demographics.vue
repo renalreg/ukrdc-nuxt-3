@@ -242,7 +242,7 @@ export default defineComponent({
 
   setup(props) {
     const router = useRouter();
-    const { $toast } = useNuxtApp();
+    const toast = useToast();
     const { hasPermission } = usePermissions();
     const { patientRecordsApi, ukrdcRecordGroupApi } = useApi();
 
@@ -395,20 +395,17 @@ export default defineComponent({
           demographicUpdateRequest: requestParams,
         })
         .then(() => {
-          $toast.show({
-            type: "success",
+          toast.add({
             title: "Success",
-            message: "Record demographics updated successfully",
-            timeout: 10,
+            description: "Record demographics updated successfully",
           });
           router.push(`/patientrecords/${props.record.pid}`);
         })
         .catch((error) => {
-          $toast.show({
-            type: "danger",
+          toast.add({
             title: "Error",
-            message: "Failed to update record demographics",
-            timeout: 10,
+            description: "Failed to update record demographics",
+            color: "red",
           });
           throw error;
         });

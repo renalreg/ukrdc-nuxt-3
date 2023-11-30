@@ -25,6 +25,7 @@
 - [x] Fix layout for multiple diagnoses
 - [ ] Fix BaseCardDescriptionList style
 - [x] Move all paginator components into card footer
+- [ ] Fix truncation on membership cards
 - [ ] Check all `sensitive` class components
 - [ ] Fix all tooltips on buttons with tooltip= attribute
 - [ ] (Eventually) fix https://github.com/nathanreyes/v-calendar/issues/1415

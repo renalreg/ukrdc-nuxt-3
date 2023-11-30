@@ -246,7 +246,7 @@ export default defineComponent({
   },
   emits: ["cancel", "confirm", "deleted"],
   setup(props, { emit }) {
-    const { $toast } = useNuxtApp();
+    const toast = useToast();
     const { visible, show, hide, toggle } = useModal();
     const { patientRecordsApi } = useApi();
 
@@ -306,11 +306,9 @@ export default defineComponent({
             // Emit an event notifying parents that a record has been deleted
             emit("deleted");
             // Show success toast
-            $toast.show({
-              type: "success",
+            toast.add({
               title: "Success",
-              message: "Record deleted",
-              timeout: 5,
+              description: "Record deleted",
             });
           })
           .catch((error) => {
