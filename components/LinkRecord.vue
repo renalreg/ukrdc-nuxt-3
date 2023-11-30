@@ -5,7 +5,7 @@ Includes a header with the Link Record ID and functionality to Unlink the record
 
 <template>
   <div>
-    <UCard class="mb-2 flex items-center p-2">
+    <UCard class="mb-2 flex items-center">
       <h5>Link Record {{ record.id }}</h5>
     </UCard>
 

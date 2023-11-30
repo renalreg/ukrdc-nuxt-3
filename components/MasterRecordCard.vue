@@ -1,5 +1,5 @@
 <template>
-  <div class="borderless-card border-2 border-indigo-500">
+  <div class="borderless-card border-2 border-indigo-500 text-gray-800">
     <div class="flex h-24 flex-col justify-center px-4 sm:px-6">
       <span :class="highlight.includes('name') ? highlightClasses : []">
         <h2 class="sensitive inline capitalize" :class="highlight.includes('givenname') ? highlightClasses : []">

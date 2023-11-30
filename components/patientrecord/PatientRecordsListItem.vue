@@ -5,7 +5,7 @@
       <div class="flex divide-x divide-gray-200">
         <!-- Main record info -->
         <NuxtLink :to="`/patientrecords/${item.pid}`" class="flex-grow">
-          <div class="flex min-w-0 items-center gap-2 hover:bg-gray-50">
+          <div class="flex min-w-0 items-center gap-2 text-gray-800 hover:bg-gray-50">
             <div class="grid w-full min-w-0 flex-1 grid-cols-3 items-center gap-2 py-4 pl-4 sm:pl-6 lg:grid-cols-4">
               <!-- Sender -->
               <div v-if="showSender" :class="[showSenderFirst ? 'order-1' : 'order-2']">

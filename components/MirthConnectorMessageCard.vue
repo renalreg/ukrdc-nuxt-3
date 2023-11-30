@@ -1,28 +1,32 @@
 <template>
-  <UCard class="col-span-1 flex items-center justify-between truncate">
-    <div class="flex-1 truncate px-4 py-2">
+  <UCard class="col-span-1">
+    <div class="truncate">
       <h3>
         {{ message.connectorName }}
       </h3>
       <p>{{ message.sendAttempts }} send attempts</p>
 
-      <div class="mt-2">
-        <span
-          v-if="errorMessage"
-          class="inline-block flex-shrink-0 rounded-sm bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800"
-          >Error</span
-        >
-        <span
-          v-else
-          class="inline-block flex-shrink-0 rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
-          >Success</span
-        >
-        <UButton
-          size="sm"
-          class="float-right"
-          label="View message"
-          :to="`/mirth/messages/${message.channelId}/${message.messageId}/${message.orderId}`"
-        />
+      <div class="mt-2 flex w-full items-end">
+        <div class="flex-1 flex-grow">
+          <span
+            v-if="errorMessage"
+            class="inline-block flex-shrink-0 rounded-sm bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800"
+            >Error</span
+          >
+          <span
+            v-else
+            class="inline-block flex-shrink-0 rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
+            >Success</span
+          >
+        </div>
+
+        <div class="flex-0">
+          <UButton
+            size="sm"
+            label="View message"
+            :to="`/mirth/messages/${message.channelId}/${message.messageId}/${message.orderId}`"
+          />
+        </div>
       </div>
     </div>
   </UCard>

@@ -1,45 +1,43 @@
 <template>
-  <li>
-    <!-- Content container -->
-    <div class="grid w-full min-w-0 grid-cols-3 px-4 py-4 sm:px-6 md:gap-4 lg:grid-cols-4">
-      <!-- Name, DoB, gender -->
-      <div>
-        <span class="truncate">
-          <h5 class="sensitive inline capitalize">{{ item.givenname?.toLowerCase() }}</h5>
-          <h5 class="sensitive inline capitalize italic">{{ item.surname?.toLowerCase() }}</h5>
-        </span>
-        <p class="sensitive mt-2 flex items-center">
-          {{ formatDate(item.dateOfBirth, false) }}
-          <b class="ml-1"> {{ item.gender ? formatGenderCharacter(item.gender) : "Unknown gender" }}</b>
-        </p>
-      </div>
-      <!-- Record ID (large breakpoint only if a detail column is given) -->
-      <div :class="detailsValue ? 'hidden lg:block' : ''">
-        <h5>Record ID</h5>
-        <p class="mt-2">
-          {{ item.id }}
-        </p>
-      </div>
-      <!-- National ID -->
-      <div>
-        <p class="sensitive">
-          {{ item.nationalid.trim() }}
-        </p>
-        <BadgeNationalID class="mt-2" :nationalid-type="item.nationalidType" />
-      </div>
-      <!-- Details, defaults to record updated time, but can be overridden by props  -->
-      <div v-if="detailsValue">
-        <h5>{{ detailsLabel }}</h5>
-        <p class="mt-2">
-          {{ detailsValue }}
-        </p>
-      </div>
+  <!-- Content container -->
+  <div class="grid w-full min-w-0 grid-cols-3 px-4 py-4 text-gray-800 sm:px-6 md:gap-4 lg:grid-cols-4">
+    <!-- Name, DoB, gender -->
+    <div>
+      <span class="truncate">
+        <h5 class="sensitive inline capitalize">{{ item.givenname?.toLowerCase() }}</h5>
+        <h5 class="sensitive inline capitalize italic">{{ item.surname?.toLowerCase() }}</h5>
+      </span>
+      <p class="sensitive mt-2 flex items-center">
+        {{ formatDate(item.dateOfBirth, false) }}
+        <b class="ml-1"> {{ item.gender ? formatGenderCharacter(item.gender) : "Unknown gender" }}</b>
+      </p>
     </div>
-  </li>
+    <!-- Record ID (large breakpoint only if a detail column is given) -->
+    <div :class="detailsValue ? 'hidden lg:block' : ''">
+      <h5>Record ID</h5>
+      <p class="mt-2">
+        {{ item.id }}
+      </p>
+    </div>
+    <!-- National ID -->
+    <div>
+      <p class="sensitive">
+        {{ item.nationalid.trim() }}
+      </p>
+      <BadgeNationalID class="mt-2" :nationalid-type="item.nationalidType" />
+    </div>
+    <!-- Details, defaults to record updated time, but can be overridden by props  -->
+    <div v-if="detailsValue">
+      <h5>{{ detailsLabel }}</h5>
+      <p class="mt-2">
+        {{ detailsValue }}
+      </p>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgeNationalID from "~/components/BadgeNationalID.vue";
 import { formatGenderCharacter } from "~/helpers/codeUtils";

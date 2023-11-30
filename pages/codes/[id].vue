@@ -1,7 +1,7 @@
 <template>
   <BaseLoadingIndicator v-if="!code"></BaseLoadingIndicator>
   <div v-else-if="code">
-    <div class="px-4 sm:px-6">
+    <div>
       <!-- Heading -->
       <div class="mb-4">
         <CodeTitle :code="code.code" :coding-standard="code.codingStandard" />
