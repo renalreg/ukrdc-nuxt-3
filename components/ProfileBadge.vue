@@ -4,7 +4,7 @@
       <div class="flex w-full items-center gap-4">
         <UAvatar icon="i-heroicons-user-circle" size="md" class="flex-0" />
         <div class="flex-1">
-          <p class="text-base font-medium text-gray-700 group-hover:text-gray-900">
+          <p class="text-left text-base font-medium text-gray-700 group-hover:text-gray-900">
             {{ displayName }}
           </p>
         </div>

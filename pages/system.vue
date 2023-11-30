@@ -15,7 +15,7 @@
 
     <h2 class="my-4">System Configuration</h2>
     <div class="mb-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <UCard>
+      <UCard :ui="{ body: { padding: '' } }">
         <template #header>
           <h2>Client</h2>
         </template>
@@ -35,7 +35,7 @@
         </BaseCardDescriptionList>
       </UCard>
 
-      <UCard>
+      <UCard :ui="{ body: { padding: '' } }">
         <template #header>
           <h2>Server</h2>
         </template>
