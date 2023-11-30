@@ -9,10 +9,10 @@
       <!-- Facility select -->
       <div v-if="facilities.length > 1" class="mb-4 flex">
         <USelectMenu
+          v-model="selectedFacility"
           searchable
           class="flex-1"
           size="lg"
-          v-model="selectedFacility"
           :options="facilities"
           value-attribute="id"
           option-attribute="description"
@@ -23,7 +23,15 @@
       </div>
       <div class="flex items-center">
         <div class="flex-grow">
-          <BaseTabsModel v-model="currentTab" :tabs="workItemStatusTabs" :mini="true" />
+          <USelectMenu
+            v-model="statuses"
+            :options="workItemStatusTabs"
+            multiple
+            placeholder="Select status"
+            option-attribute="name"
+            value-attribute="value"
+            class="w-48"
+          />
         </div>
         <UButton
           class="flex-shrink"
@@ -66,7 +74,6 @@ import { OrderBy, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
-import BaseTabsModel from "~/components/base/BaseTabsModel.vue";
 import WorkItemsListItem from "~/components/workitem/WorkItemsListItem.vue";
 import useDateRange from "~/composables/query/useDateRange";
 import usePagination from "~/composables/query/usePagination";
@@ -81,7 +88,6 @@ export default defineComponent({
     BaseSkeleListItem,
     BasePaginator,
     BaseDateRange,
-    BaseTabsModel,
     WorkItemsListItem,
   },
   setup() {
@@ -114,7 +120,7 @@ export default defineComponent({
           page: page.value || 1,
           size: size.value,
           orderBy: orderBy.value as OrderBy,
-          status: [currentTab.value],
+          status: statuses.value.filter((el) => !isNaN(Number(el))).map(Number),
           facility: selectedFacility.value || undefined,
           since: dateRange.value.start || undefined,
           until: dateRange.value.end || undefined,

@@ -37,9 +37,9 @@ by the same event, which can be resolved without the others.
 
 */
 
-import { WorkItemExtendedSchema, WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type WorkItemExtendedSchema, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import { ModelTabItem } from "~/interfaces/tabs";
+import { type ModelTabItem } from "~/interfaces/tabs";
 
 export function workItemIsOpen(item: WorkItemSchema): Boolean {
   return item?.status !== 3;
@@ -90,14 +90,14 @@ export function collectionIsUnresolved(related: WorkItemSchema[]) {
 export const workItemStatusTabs: ModelTabItem[] = [
   {
     name: "Open",
-    value: 1,
+    value: "1",
   },
   {
     name: "WIP",
-    value: 2,
+    value: "2",
   },
   {
     name: "Closed",
-    value: 3,
+    value: "3",
   },
 ];

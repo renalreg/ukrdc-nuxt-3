@@ -10,7 +10,15 @@
       <template #header>
         <div class="flex items-center">
           <h2 class="flex-grow">Work Items</h2>
-          <BaseTabsModel v-model="currentWorkItemStatusTab" :tabs="workItemStatusTabs" :mini="true" />
+          <USelectMenu
+            v-model="workItemStatuses"
+            :options="workItemStatusTabs"
+            multiple
+            placeholder="Select status"
+            option-attribute="name"
+            value-attribute="value"
+            class="w-48"
+          />
         </div>
       </template>
       <!-- Skeleton results -->
@@ -76,7 +84,6 @@ import {
 
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
-import BaseTabsModel from "~/components/base/BaseTabsModel.vue";
 import EMPIMultipleIDItem from "~/components/EMPIMultipleIDItem.vue";
 import MessagesListItem from "~/components/messages/MessagesListItem.vue";
 import WorkItemsListItem from "~/components/workitem/WorkItemsListItem.vue";
@@ -90,7 +97,6 @@ export default defineComponent({
   components: {
     BasePaginator,
     BaseSkeleListItem,
-    BaseTabsModel,
     MessagesListItem,
     EMPIMultipleIDItem,
     WorkItemsListItem,
@@ -122,7 +128,7 @@ export default defineComponent({
     const hasMultipleUKRDCIDs = ref(false);
 
     // Work item status tab
-    const currentWorkItemStatusTab = ref<number>(1);
+    const workItemStatuses = ref<string[]>(["1"]);
 
     // Data fetching
 
@@ -136,7 +142,7 @@ export default defineComponent({
         masterRecordsApi
           .getMasterRecordWorkitems({
             recordId: props.record.id,
-            status: [currentWorkItemStatusTab.value],
+            status: workItemStatuses.value.filter((el) => !isNaN(Number(el))).map(Number),
           })
           .then((response) => {
             workItems.value = response.data;
@@ -201,7 +207,7 @@ export default defineComponent({
       updateRelatedErrors();
     });
 
-    watch(currentWorkItemStatusTab, () => {
+    watch(workItemStatuses, () => {
       fetchWorkItems();
     });
 
@@ -225,7 +231,7 @@ export default defineComponent({
       relatedErrorsTotal,
       ukrdcIdGroup,
       workItemStatusTabs,
-      currentWorkItemStatusTab,
+      workItemStatuses,
       formatGender,
       formatDate,
     };

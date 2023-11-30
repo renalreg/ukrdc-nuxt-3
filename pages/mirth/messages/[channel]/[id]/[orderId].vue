@@ -36,39 +36,44 @@
       <slot></slot>
     </UCard>
 
-    <div class="mb-6">
-      <BaseTabsModel v-model="currentTab" :tabs="tabs" :mini="true" />
-    </div>
-    <div class="flex-1">
-      <div v-if="currentTab == 'metadata'" id="viewerMetadata">
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          <UCard
-            v-for="(value, key) in nonNullMetadata"
-            :key="key"
-            class="relative flex items-center space-x-2"
-            :class="key === 'ERROR' ? 'border-2 border-red-500' : ''"
-          >
-            <div class="min-w-0 flex-1">
-              <span class="absolute inset-0" aria-hidden="true" />
-              <p class="font-medium text-gray-900">{{ key }}</p>
-              <p class="line-clamp-3 text-gray-500">
-                {{ value }}
-              </p>
+    <UTabs :items="tabs">
+      <template #item="{ item }">
+        <div class="flex-1">
+          <div v-if="item.key == 'metadata'" id="viewerMetadata">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+              <UCard
+                v-for="(value, key) in nonNullMetadata"
+                :key="key"
+                class="relative flex items-center space-x-2"
+                :class="key === 'ERROR' ? 'border-2 border-red-500' : ''"
+              >
+                <div class="min-w-0 flex-1">
+                  <span class="absolute inset-0" aria-hidden="true" />
+                  <p class="font-medium text-gray-900">{{ key }}</p>
+                  <p class="line-clamp-3 text-gray-500">
+                    {{ value }}
+                  </p>
+                </div>
+              </UCard>
             </div>
-          </UCard>
-        </div>
-      </div>
+          </div>
 
-      <div v-for="(connectorMessageData, type) in availableconnectorMessageData" :key="type">
-        <UCard v-if="currentTab == type">
-          <BaseCodeReader :content="connectorMessageData.content || ''" :content-type="connectorMessageData.dataType" />
-        </UCard>
-      </div>
-    </div>
+          <div v-for="(connectorMessageData, type) in availableconnectorMessageData" :key="type">
+            <UCard v-if="item.key == type" :ui="{ body: { padding: '' } }">
+              <BaseCodeReader
+                :content="connectorMessageData.content || ''"
+                :content-type="connectorMessageData.dataType"
+              />
+            </UCard>
+          </div>
+        </div>
+      </template>
+    </UTabs>
   </div>
 </template>
 
 <script lang="ts">
+import type { TabItem } from "@nuxt/ui/dist/runtime/types/tabs";
 import {
   type ChannelMessageModel,
   type ConnectorMessageData,
@@ -78,9 +83,7 @@ import {
 import BaseCodeReader from "~/components/base/BaseCodeReader.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
-import BaseTabsModel from "~/components/base/BaseTabsModel.vue";
 import { connectorMessageError } from "~/helpers/mirthUtils";
-import { type ModelTabItem } from "~/interfaces/tabs";
 
 interface ConnectorMessageDataTabs {
   raw: ConnectorMessageData;
@@ -94,7 +97,6 @@ export default defineComponent({
     BaseDescriptionListGrid,
     BaseDescriptionListGridItem,
     BaseCodeReader,
-    BaseTabsModel,
   },
   props: {
     message: {
@@ -115,17 +117,17 @@ export default defineComponent({
     // Manage viewer tabs
     const currentTab = ref<string>("metadata");
 
-    const tabs = computed<ModelTabItem[]>(() => {
+    const tabs = computed<TabItem[]>(() => {
       const tabs = [
         {
-          name: "metadata",
-          value: "metadata",
+          label: "metadata",
+          key: "metadata",
         },
       ];
       for (const key of Object.keys(availableconnectorMessageData.value)) {
         tabs.push({
-          name: key,
-          value: key,
+          label: key,
+          key,
         });
       }
       return tabs;

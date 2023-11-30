@@ -1,7 +1,10 @@
 <template>
   <div>
     <div v-if="contentType === 'XML'" class="border-b border-gray-200 pb-3 pl-8 pt-3">
-      <BaseToggle v-model="formatMessage" label="Format XML" />
+      <div class="flex gap-2">
+        <UToggle v-model="formatMessage" name="Format XML" size="lg" color="green" />
+        <span class="font-medium text-gray-900">Format XML </span>
+      </div>
     </div>
 
     <div v-if="content" class="box-border px-4 text-left font-mono text-sm">
@@ -14,10 +17,7 @@
 <script lang="ts">
 import formatXml from "xml-formatter";
 
-import BaseToggle from "~/components/base/BaseToggle.vue";
-
 export default defineComponent({
-  components: { BaseToggle },
   props: {
     content: {
       type: String,
