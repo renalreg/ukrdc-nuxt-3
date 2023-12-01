@@ -1,7 +1,5 @@
 <template>
   <div class="sensitive">
-    <PatientRecordSurveyViewer ref="surveyViewerModal" class="md:w-large w-full" />
-
     <BaseLoadingContainer :loading="!surveys">
       <p v-if="surveys && surveys.length <= 0" class="text-center">No surveys on record</p>
       <div class="mt-3 grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2">
@@ -24,7 +22,7 @@
                   class="inline-block flex-shrink-0 rounded-sm bg-indigo-100 px-2 py-0.5 text-sm font-medium text-indigo-800"
                   >{{ item.questions.length }} questions</span
                 >
-                <UButton class="float-right" @click="surveyViewerModal?.show(item)"> View survey </UButton>
+                <UButton class="float-right" :to="`./surveys/${item.id}`"> View survey </UButton>
               </div>
             </div>
           </div>
@@ -38,15 +36,12 @@
 import { type PatientRecordSchema, type SurveySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
-import PatientRecordSurveyViewer from "~/components/patientrecord/medical/PatientRecordSurveyViewer.vue";
 import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
-import { type SurveyViewerModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {
     BaseLoadingContainer,
-    PatientRecordSurveyViewer,
   },
   props: {
     record: {
@@ -57,9 +52,6 @@ export default defineComponent({
 
   setup(props) {
     const { patientRecordsApi } = useApi();
-
-    // Element refs
-    const surveyViewerModal = ref<SurveyViewerModalInterface>();
 
     // Data refs
     const surveys = ref<SurveySchema[]>();
@@ -78,7 +70,6 @@ export default defineComponent({
     return {
       surveys,
       formatDate,
-      surveyViewerModal,
     };
   },
 });
