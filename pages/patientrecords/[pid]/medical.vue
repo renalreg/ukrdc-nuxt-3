@@ -84,10 +84,12 @@ export default defineComponent({
       {
         name: "Documents",
         href: `/patientrecords/${route.params.pid}/medical/documents`,
+        hasChildren: true,
       },
       {
         name: "Surveys",
         href: `/patientrecords/${route.params.pid}/medical/surveys`,
+        hasChildren: true,
       },
     ] as TabItem[];
 
