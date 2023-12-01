@@ -34,15 +34,16 @@
     </div>
     <!-- Identifiers  -->
     <div class="col-span-3 flex items-center gap-4 lg:col-span-1">
-      <UButton
-        v-if="showPatientFilter"
-        :ui="{ rounded: 'rounded-full' }"
-        :class="!item.ni ? 'invisible' : ''"
-        class="opacity-0 group-hover:opacity-100"
-        :to="{ path: '/messages', query: { nationalid: item.ni } }"
-        tooltip="Filter errors by this patient"
-        icon="i-heroicons-funnel-20-solid"
-      />
+      <UTooltip v-if="showPatientFilter" text="Filter errors by this patient">
+        <UButton
+          :ui="{ rounded: 'rounded-full' }"
+          :class="!item.ni ? 'invisible' : ''"
+          class="opacity-0 group-hover:opacity-100"
+          :to="{ path: '/messages', query: { nationalid: item.ni } }"
+          icon="i-heroicons-funnel-20-solid"
+        />
+      </UTooltip>
+
       <div class="flex-grow">
         <h5>Patient Number</h5>
         <p class="sensitive mt-2">

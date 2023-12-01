@@ -1,10 +1,7 @@
 <template>
-  <UIcon
-    name="i-heroicons-exclamation-circle-20-solid"
-    v-if="!verified"
-    v-tooltip="'Value does not match other records for this patient'"
-    class="-ml-1 mr-2 inline h-5 w-5 text-yellow-600"
-  />
+  <UTooltip v-if="!verified" text="Value does not match other records for this patient">
+    <UIcon name="i-heroicons-exclamation-circle-20-solid" class="-ml-1 mr-2 inline h-5 w-5 text-yellow-600" />
+  </UTooltip>
 </template>
 
 <script lang="ts">

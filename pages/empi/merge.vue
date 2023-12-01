@@ -34,13 +34,9 @@
 
       <div class="my-4 flex flex-none flex-row justify-center lg:my-0 lg:flex-col lg:justify-start">
         <div class="flex-shrink">
-          <UButton
-            square
-            size="lg"
-            icon="i-heroicons-arrows-right-left-20-solid"
-            v-tooltip="'Switch Records'"
-            @click="switchRecords"
-          />
+          <UTooltip text="Switch Records">
+            <UButton square size="lg" icon="i-heroicons-arrows-right-left-20-solid" @click="switchRecords" />
+          </UTooltip>
         </div>
         <div class="hidden flex-grow flex-col items-center justify-center lg:flex">
           <div v-show="superseded && superseding" class="h-8">

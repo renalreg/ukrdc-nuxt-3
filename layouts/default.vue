@@ -100,8 +100,6 @@
 </template>
 
 <script lang="ts">
-import "floating-vue/dist/style.css";
-
 import ProfileBadge from "~/components/ProfileBadge.vue";
 import Sidebar from "~/components/Sidebar.vue";
 import useSensitive from "~/composables/useSensitive";

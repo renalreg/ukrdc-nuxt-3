@@ -79,21 +79,22 @@
         icon="i-heroicons-check-circle-20-solid"
       />
 
-      <UButton
-        v-if="availableActions.merge && record.status !== 3"
-        tooltip="You will be redirected here after merging"
-        :to="{
-          path: '/empi/merge',
-          query: {
-            superseded: record.incoming.masterRecords[relatedRecordsIndex].id,
-            superseding: record.destination.masterRecord?.id,
-            callback: $route.fullPath + '?justMerged=true',
-          },
-        }"
-        color="yellow"
-        label="Merge Master Records"
-        icon="i-heroicons-arrow-top-right-on-square-20-solid"
-      />
+      <UTooltip v-if="availableActions.merge && record.status !== 3" text="You will be redirected here after merging">
+        <UButton
+          :to="{
+            path: '/empi/merge',
+            query: {
+              superseded: record.incoming.masterRecords[relatedRecordsIndex].id,
+              superseding: record.destination.masterRecord?.id,
+              callback: $route.fullPath + '?justMerged=true',
+            },
+          }"
+          color="yellow"
+          label="Merge Master Records"
+          icon="i-heroicons-arrow-top-right-on-square-20-solid"
+          class="w-full"
+        />
+      </UTooltip>
     </div>
 
     <!-- Work Item Trigger -->

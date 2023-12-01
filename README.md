@@ -23,11 +23,11 @@
 - [x] Fix checkbox models (e.g. data files status filter)
 - [x] Fix name display component
 - [x] Fix layout for multiple diagnoses
-- [ ] Fix BaseCardDescriptionList style
+- [x] Fix BaseCardDescriptionList style
 - [x] Move all paginator components into card footer
-- [ ] Fix truncation on membership cards
+- [x] Fix truncation on membership cards
 - [ ] Check all `sensitive` class components
-- [ ] Fix all tooltips on buttons with tooltip= attribute
+- [x] Fix all tooltips on buttons with tooltip= attribute
 - [ ] (Eventually) fix https://github.com/nathanreyes/v-calendar/issues/1415
 - [ ] _Maybe_ replace in-house paginator with https://ui.nuxt.com/navigation/pagination#props
 
@@ -35,12 +35,11 @@
   - [x] Remaining input elements
   - [x] Remaining select elements
   - [x] Toggle elements (https://ui.nuxt.com/forms/toggle)
-  - [ ] Modals
-    - [ ] Full screen modals for e.g. message source viewer
+  - [x] Modals
+    - [x] Full screen modals for e.g. message source viewer
   - [x] Toasts (https://ui.nuxt.com/overlays/notification)
-  - [ ] Tooltips/popovers
+  - [x] Tooltips/popovers
   - [ ] Mobile sidebar with https://ui.nuxt.com/overlays/slideover
-  - [ ] Tabs with https://ui.nuxt.com/navigation/tabs (within existing components, match style etc?)
 
 ### Model
 

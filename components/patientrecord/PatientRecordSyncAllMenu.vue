@@ -26,14 +26,18 @@
       <p class="mt-3 font-mono">exportAllToPKB.fail {{ failedPIDs }}</p>
     </BaseModalSuccess>
 
-    <UButton
-      label="Sync to PKB"
-      size="sm"
-      icon="i-heroicons-cloud-arrow-up-20-solid"
-      :tooltip="!hasPkbMembership ? 'Patient does not have a PKB membership record' : undefined"
-      :disabled="!hasPkbMembership || syncInProgress"
-      @click="exportAllToPKB"
-    />
+    <UTooltip
+      :text="!hasPkbMembership ? 'Patient does not have a PKB membership record' : undefined"
+      :prevent="hasPkbMembership"
+    >
+      <UButton
+        label="Sync to PKB"
+        size="sm"
+        icon="i-heroicons-cloud-arrow-up-20-solid"
+        :disabled="!hasPkbMembership || syncInProgress"
+        @click="exportAllToPKB"
+      />
+    </UTooltip>
   </div>
 </template>
 

@@ -35,12 +35,9 @@ Table of facilities and their basic statistics
             <div>
               {{ row.lastMessageReceivedAt ? formatDate(row.lastMessageReceivedAt, false) : "> Year Ago" }}
             </div>
-            <UIcon
-              v-if="facilityLastMessageOver48(row)"
-              name="i-heroicons-exclamation-triangle"
-              class="inline h-6 w-6 text-yellow-600"
-              v-tooltip="'No files received in over 48 hours'"
-            />
+            <UTooltip v-if="facilityLastMessageOver48(row)" text="No files received in over 48 hours">
+              <UIcon name="i-heroicons-exclamation-triangle" class="inline h-6 w-6 text-yellow-600" />
+            </UTooltip>
           </span>
         </template>
       </UTable>

@@ -86,10 +86,7 @@
           class=""
           :class="item.id === record.id ? 'bg-gray-50' : 'hover:bg-gray-50'"
         >
-          <NuxtLink
-            v-tooltip="item.id === record.id ? 'You are currently viewing this record' : null"
-            :to="`/masterrecords/${item.id}`"
-          >
+          <NuxtLink :to="`/masterrecords/${item.id}`">
             <MasterRecordsListItem :item="item" />
           </NuxtLink>
         </li>
