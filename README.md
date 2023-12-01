@@ -31,7 +31,7 @@
 - [ ] (Eventually) fix https://github.com/nathanreyes/v-calendar/issues/1415
 - [ ] _Maybe_ replace in-house paginator with https://ui.nuxt.com/navigation/pagination#props
 
-- [ ] Replace all components available in NuxtUI with their NuxtUI versions
+- [x] Replace all components available in NuxtUI with their NuxtUI versions
   - [x] Remaining input elements
   - [x] Remaining select elements
   - [x] Toggle elements (https://ui.nuxt.com/forms/toggle)
@@ -39,7 +39,7 @@
     - [x] Full screen modals for e.g. message source viewer
   - [x] Toasts (https://ui.nuxt.com/overlays/notification)
   - [x] Tooltips/popovers
-  - [ ] Mobile sidebar with https://ui.nuxt.com/overlays/slideover
+  - [x] Mobile sidebar with https://ui.nuxt.com/overlays/slideover
 
 ### Model
 
@@ -61,7 +61,7 @@
 
 ### Minor UI fixes
 
-- [ ] Fix sidebar open transition
+- [x] Fix sidebar open transition
 
 ### Nice-to-have new stuff
 

@@ -2,60 +2,14 @@
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="flex h-screen overflow-hidden bg-white">
     <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-
-    <transition :duration="300">
-      <div v-show="sbOpen" class="md:hidden">
-        <div class="fixed inset-0 z-40 flex">
-          <!--Off-canvas menu overlay, show/hide based on off-canvas menu state.-->
-          <transition
-            enter-active-class="transition-opacity ease-linear"
-            enter-class="opacity-0"
-            enter-to-class="opacity-100"
-            leave-active-class="transition-opacity ease-linear"
-            leave-class="opacity-100"
-            leave-to-class="opacity-0"
-          >
-            <div v-show="sbOpen" class="fixed inset-0">
-              <div class="absolute inset-0 bg-gray-600 opacity-75" @click="toggle()"></div>
-            </div>
-          </transition>
-
-          <!--Off-canvas menu, show/hide based on off-canvas menu state.-->
-          <transition
-            enter-active-class="transition ease-in-out transform"
-            enter-class="-translate-x-full"
-            enter-to-class="translate-x-0"
-            leave-active-class="transition ease-in-out transform"
-            leave-class="translate-x-0"
-            leave-to-class="-translate-x-full"
-          >
-            <Sidebar
-              v-show="sbOpen"
-              :show-close-button="true"
-              :show-profile="false"
-              class="relative flex w-full max-w-xs flex-1 flex-col"
-              @toggle="toggle()"
-            />
-          </transition>
-          <!-- Force sidebar to shrink to fit close icon -->
-          <transition
-            enter-active-class="transition ease-in-out transform"
-            enter-class="-translate-x-full"
-            enter-to-class="translate-x-0"
-            leave-active-class="transition ease-in-out transform"
-            leave-class="translate-x-0"
-            leave-to-class="-translate-x-full"
-          >
-            <div v-show="sbOpen" class="w-14 flex-shrink-0"></div>
-          </transition>
-        </div>
-      </div>
-    </transition>
+    <USlideover v-model="sbOpen" class="flex-0 w-64 md:hidden" side="left">
+      <Sidebar :show-close-button="true" :show-profile="false" class="relative" @toggle="toggle()" />
+    </USlideover>
 
     <!-- Static sidebar for desktop -->
     <div class="hidden md:flex md:flex-shrink-0">
-      <div class="flex w-64 flex-col">
-        <Sidebar class="flex h-0 flex-1 flex-col border-r border-gray-200" />
+      <div class="flex flex-col">
+        <Sidebar class="h-0 border-r border-gray-200" />
       </div>
     </div>
 

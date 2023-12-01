@@ -1,24 +1,5 @@
 <template>
-  <div class="bg-gray-50">
-    <div v-if="showCloseButton" class="absolute right-0 top-0 -mr-12 pt-2">
-      <button
-        class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-        @click="$emit('toggle')"
-      >
-        <span class="sr-only">Close sidebar</span>
-        <!-- Heroicon name: outline/x -->
-        <svg
-          class="h-6 w-6 text-white"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
+  <div class="flex w-64 flex-1 flex-col bg-gray-50">
     <div class="h-0 flex-1 overflow-y-auto pb-4 pt-6">
       <div class="mb-2 flex flex-shrink-0 items-center px-4">
         <img class="h-auto w-full" src="~/assets/UKKA_UKRDC.svg" alt="Workflow" />
@@ -87,11 +68,6 @@ export default defineComponent({
     ProfileBadge,
   },
   props: {
-    showCloseButton: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
     showProfile: {
       type: Boolean,
       required: false,
