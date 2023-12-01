@@ -1,202 +1,185 @@
 <template>
-  <transition :duration="200">
-    <div v-show="visible" class="fixed inset-0 z-10 overflow-y-auto">
-      <div class="flex min-h-screen w-screen items-end justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0">
-        <!-- Background overlay, show/hide based on modal state. -->
-        <BaseBlackout :visible="visible" @click="hide()" />
+  <UModal v-model="visible" :transition="false">
+    <div class="p-4">
+      <div class="sm:flex sm:items-start">
+        <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0">
+          <UIcon name="i-heroicons-exclamation-circle" class="h-6 w-6 text-red-600" />
+        </div>
+        <div class="ml-8 mt-3 text-left sm:ml-4 sm:mt-0">
+          <h3 id="modal-headline" class="text-lg font-medium leading-6 text-gray-900">
+            {{ previewErrorMessage ? "Unable to delete patient record" : "Delete patient record" }}
+          </h3>
+          <div class="mt-2">
+            <div v-if="previewErrorMessage">
+              <p>{{ previewErrorMessage }}</p>
+            </div>
+            <div v-if="previewResponse && !deleteInProgress">
+              <p class="mb-2">All data associated with this patient record will be deleted, including:</p>
+              <div class="mt-4 grid grid-cols-2 gap-2">
+                <!-- Patient record -->
+                <UAlert
+                  color="red"
+                  variant="subtle"
+                  :title="`Patient record ${previewResponse.patientRecord.pid}`"
+                  :description="`Created ${formatDate(previewResponse.patientRecord.repositoryCreationDate, false)}`"
+                  class="col-span-2 text-center"
+                />
 
-        <!-- This element is to trick the browser into centering the modal contents. -->
-        <span class="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true">&#8203;</span>
-        <!-- Modal panel, show/hide based on modal state. -->
-        <ModalTransition>
-          <div
-            v-show="visible"
-            class="inline-block w-full transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-3/4 sm:max-w-3xl sm:p-6 sm:align-middle"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-headline"
-          >
-            <div class="sm:flex sm:items-start">
-              <div
-                class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
-              >
-                <!-- Heroicon name: outline/exclamation -->
-                <svg
-                  class="h-6 w-6 text-red-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                  />
-                </svg>
-              </div>
-              <div class="ml-8 mt-3 text-left sm:ml-4 sm:mt-0">
-                <h3 id="modal-headline" class="text-lg font-medium leading-6 text-gray-900">
-                  {{ previewErrorMessage ? "Unable to delete patient record" : "Delete patient record" }}
-                </h3>
-                <div class="mb-4 mt-2">
-                  <div v-if="previewErrorMessage">
-                    <p>{{ previewErrorMessage }}</p>
-                  </div>
-                  <div v-if="previewResponse && !deleteInProgress">
-                    <h3 class="mb-2">The following data will be permanantly deleted</h3>
-                    <ul class="sensitive list-disc">
-                      <li>
-                        Patient record {{ previewResponse.patientRecord.pid }} - UKRDCID
-                        {{ previewResponse.patientRecord.ukrdcid }} - Created
-                        {{ formatDate(previewResponse.patientRecord.repositoryCreationDate, false) }}
-                        <ul class="ml-4 list-disc">
-                          <li v-if="previewResponse.patientRecord.programMemberships.length > 0">
-                            {{ previewResponse.patientRecord.programMemberships.length }} program memberships
-                            <ul class="ml-4 list-disc">
-                              <li
-                                v-for="membership in previewResponse.patientRecord.programMemberships"
-                                :key="membership.programName"
-                              >
-                                {{ membership.programName }} since {{ formatDate(membership.fromTime, false) }}
-                              </li>
-                            </ul>
-                          </li>
-                          <li v-if="previewResponse.patientRecord.socialHistories.length > 0">
-                            {{ previewResponse.patientRecord.socialHistories.length }} social histories
-                          </li>
-                          <li v-if="previewResponse.patientRecord.familyHistories.length > 0">
-                            {{ previewResponse.patientRecord.familyHistories.length }} family histories
-                          </li>
-                          <li v-if="previewResponse.patientRecord.observations.length > 0">
-                            {{ previewResponse.patientRecord.observations.length }} observations
-                          </li>
-                          <li v-if="previewResponse.patientRecord.allergies.length > 0">
-                            {{ previewResponse.patientRecord.allergies.length }} allergies
-                          </li>
-                          <li v-if="previewResponse.patientRecord.diagnoses.length > 0">
-                            {{ previewResponse.patientRecord.diagnoses.length }} diagnoses
-                          </li>
-                          <li v-if="previewResponse.patientRecord.renaldiagnoses.length > 0">
-                            {{ previewResponse.patientRecord.renaldiagnoses.length }} renal diagnoses
-                          </li>
-                          <li v-if="previewResponse.patientRecord.medications.length > 0">
-                            {{ previewResponse.patientRecord.medications.length }} medications
-                          </li>
-                          <li v-if="previewResponse.patientRecord.procedures.length > 0">
-                            {{ previewResponse.patientRecord.procedures.length }} procedures
-                          </li>
-                          <li v-if="previewResponse.patientRecord.documents.length > 0">
-                            {{ previewResponse.patientRecord.documents.length }} documents
-                          </li>
-                          <li v-if="previewResponse.patientRecord.encounters.length > 0">
-                            {{ previewResponse.patientRecord.encounters.length }} encounters
-                          </li>
-                          <li v-if="previewResponse.patientRecord.clinicalRelationships.length > 0">
-                            {{ previewResponse.patientRecord.clinicalRelationships.length }} clinical relationships
-                          </li>
-                          <li v-if="previewResponse.patientRecord.surveys.length > 0">
-                            {{ previewResponse.patientRecord.surveys.length }} surveys
-                          </li>
-                          <li v-if="previewResponse.patientRecord.patient">
-                            Patient - Date of Birth
-                            {{ formatDate(previewResponse.patientRecord.patient.birthTime, false) }}
-                            <ul class="ml-4 list-disc">
-                              <li
-                                v-for="name in previewResponse.patientRecord.patient.names"
-                                :key="name.given + name.family"
-                              >
-                                Patient Name {{ name.given }} {{ name.family }}
-                              </li>
-                            </ul>
-                            <ul class="ml-4 list-disc">
-                              <li
-                                v-for="number in previewResponse.patientRecord.patient.numbers"
-                                :key="number.organization + number.numbertype + number.patientid"
-                              >
-                                Patient Number {{ number.organization }}:{{ number.numbertype }}:{{ number.patientid }}
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                      <li v-if="previewResponse.empi.masterRecords.length > 0">
-                        {{ previewResponse.empi.masterRecords.length }} Master Records
-                        <ul class="ml-4 list-disc">
-                          <li v-for="masterRecord in previewResponse.empi.masterRecords" :key="masterRecord.id">
-                            Master Record {{ masterRecord.id }} - {{ masterRecord.givenname }}
-                            {{ masterRecord.surname }} - Date of Birth
-                            {{ formatDate(masterRecord.dateOfBirth, false) }}
-                          </li>
-                        </ul>
-                      </li>
+                <UAlert
+                  v-if="previewResponse.patientRecord.programMemberships.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.programMemberships.length"
+                  description="Program memberships"
+                  class="text-center"
+                />
 
-                      <li v-if="previewResponse.empi.persons.length > 0">
-                        {{ previewResponse.empi.persons.length }} Person Records
-                        <ul class="ml-4 list-disc">
-                          <li v-for="person in previewResponse.empi.persons" :key="person.id">
-                            Person {{ person.id }} - {{ person.givenname }} {{ person.surname }} - Date of Birth
-                            {{ formatDate(person.dateOfBirth, false) }}
-                          </li>
-                        </ul>
-                      </li>
+                <UAlert
+                  v-if="previewResponse.patientRecord.resultItems.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.resultItems.length"
+                  description="Result items"
+                  class="text-center"
+                />
 
-                      <li v-if="previewResponse.empi.linkRecords.length > 0">
-                        {{ previewResponse.empi.linkRecords.length }} Link Records
-                        <ul class="ml-4 list-disc">
-                          <li v-for="linkRecord in previewResponse.empi.linkRecords" :key="linkRecord.id">
-                            Link Record {{ linkRecord.id }} - Person {{ linkRecord.personId }} linked to Master Record
-                            {{ linkRecord.masterId }}
-                          </li>
-                        </ul>
-                      </li>
+                <UAlert
+                  v-if="previewResponse.patientRecord.observations.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.observations.length"
+                  description="Observations"
+                  class="text-center"
+                />
 
-                      <li v-if="previewResponse.empi.pidxrefs.length > 0">
-                        {{ previewResponse.empi.pidxrefs.length }} PID Cross References
-                        <ul class="ml-4 list-disc">
-                          <li v-for="pidXRef in previewResponse.empi.pidxrefs" :key="pidXRef.id">
-                            PIDXRef {{ pidXRef.id }} - {{ pidXRef.sendingFacility }} via {{ pidXRef.sendingExtract }}:
-                            {{ pidXRef.localid }}
-                          </li>
-                        </ul>
-                      </li>
+                <UAlert
+                  v-if="previewResponse.patientRecord.medications.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.medications.length"
+                  description="Medications"
+                  class="text-center"
+                />
 
-                      <li v-if="previewResponse.empi.workItems.length > 0">
-                        {{ previewResponse.empi.workItems.length }} Work Items
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <UCheckbox
-                  v-if="(previewResponse && !previewErrorMessage) || deleteInProgress"
-                  v-model="confirmChecked"
-                  :disabled="!previewResponse"
-                  label="Yes, delete this record and all associated data"
+                <UAlert
+                  v-if="previewResponse.patientRecord.documents.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.documents.length"
+                  description="Documents"
+                  class="text-center"
+                />
+
+                <UAlert
+                  v-if="previewResponse.patientRecord.diagnoses.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.diagnoses.length"
+                  description="Diagnoses"
+                  class="text-center"
+                />
+
+                <UAlert
+                  v-if="previewResponse.patientRecord.renaldiagnoses.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.renaldiagnoses.length"
+                  description="Renal diagnoses"
+                  class="text-center"
+                />
+
+                <UAlert
+                  v-if="previewResponse.patientRecord.procedures.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.procedures.length"
+                  description="Procedures"
+                  class="text-center"
+                />
+
+                <UAlert
+                  v-if="previewResponse.patientRecord.encounters.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.encounters.length"
+                  description="Clinical encounters"
+                  class="text-center"
+                />
+
+                <UAlert
+                  v-if="previewResponse.patientRecord.clinicalRelationships.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.clinicalRelationships.length"
+                  description="Clinical relationships"
+                  class="text-center"
+                />
+
+                <UAlert
+                  v-if="previewResponse.patientRecord.surveys.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.surveys.length"
+                  description="Surveys"
+                  class="text-center"
+                />
+
+                <UAlert
+                  v-if="previewResponse.patientRecord.socialHistories.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.socialHistories.length"
+                  description="Social histories"
+                  class="text-center"
+                />
+
+                <UAlert
+                  v-if="previewResponse.patientRecord.familyHistories.length > 0"
+                  color="red"
+                  variant="subtle"
+                  :title="previewResponse.patientRecord.familyHistories.length"
+                  description="Family histories"
+                  class="text-center"
                 />
               </div>
-            </div>
-            <div v-if="(!previewErrorMessage && !previewResponse) || deleteInProgress" class="w-full">
-              <BaseLoadingIndicator></BaseLoadingIndicator>
-            </div>
-            <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+
               <UButton
                 v-if="previewResponse && !previewErrorMessage"
-                class="ml-2"
-                color="red"
-                :disabled="!confirmChecked || deleteInProgress"
-                @click="doRealDelete()"
-              >
-                Delete
-              </UButton>
-              <UButton @click="cancel()"> Cancel </UButton>
+                variant="link"
+                size="sm"
+                label="Download summary of data"
+                class="float-right"
+                @click="downloadSummary"
+              />
             </div>
           </div>
-        </ModalTransition>
+
+          <div v-if="(previewResponse && !previewErrorMessage) || deleteInProgress" class="clear-right pt-4">
+            <UCheckbox
+              v-model="confirmChecked"
+              :disabled="!previewResponse"
+              label="Yes, delete this record and all associated data"
+            />
+          </div>
+        </div>
+      </div>
+      <div v-if="(!previewErrorMessage && !previewResponse) || deleteInProgress" class="w-full">
+        <BaseLoadingIndicator></BaseLoadingIndicator>
+      </div>
+      <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <UButton
+          v-if="previewResponse && !previewErrorMessage"
+          class="ml-2"
+          color="red"
+          :disabled="!confirmChecked || deleteInProgress"
+          @click="doRealDelete()"
+        >
+          Delete
+        </UButton>
+        <UButton @click="cancel()"> Cancel </UButton>
       </div>
     </div>
-  </transition>
+  </UModal>
 </template>
 
 <script lang="ts">
@@ -209,12 +192,11 @@ import {
   type WorkItemSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseBlackout from "~/components/base/BaseBlackout.vue";
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
-import ModalTransition from "~/components/transition/ModalTransition.vue";
 import useApi from "~/composables/useApi";
 import useModal from "~/composables/useModal";
 import { formatDate } from "~/helpers/dateUtils";
+import { saveAs } from "~/helpers/fileUtils";
 
 interface DeletePIDFromEMPISchema {
   persons: PersonSchema[];
@@ -235,8 +217,6 @@ interface DeletePIDResponseSchema {
 export default defineComponent({
   components: {
     BaseLoadingIndicator,
-    BaseBlackout,
-    ModalTransition,
   },
   props: {
     item: {
@@ -285,6 +265,11 @@ export default defineComponent({
       }
     });
 
+    function downloadSummary() {
+      const blob = new Blob([JSON.stringify(previewResponse.value)]);
+      saveAs(blob, `${props.item.pid}-deleteSummary.json`);
+    }
+
     function doRealDelete() {
       // Emit confirm event (currently unused)
       emit("confirm");
@@ -328,6 +313,7 @@ export default defineComponent({
       deleteResponse,
       previewErrorMessage,
       deleteInProgress,
+      downloadSummary,
       doRealDelete,
       cancel,
       show,

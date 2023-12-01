@@ -12,6 +12,8 @@ export default defineAppConfig({
       },
     },
     alert: {
+      title: "truncate",
+      description: "truncate",
       default: {
         variant: "subtle",
         color: "primary",
