@@ -69,7 +69,7 @@
           :to="{ path: `/codes/`, query: $route.query }"
           label="Back to List"
         />
-        <UCard :class="$route.params.id ? 'block' : 'hidden lg:block'">
+        <UCard :class="$route.params.id ? 'block' : 'hidden lg:block'" :ui="{ body: { padding: '' } }" class="py-4">
           <NuxtPage />
         </UCard>
       </div>

@@ -1,16 +1,16 @@
 <template>
   <BaseLoadingIndicator v-if="!code"></BaseLoadingIndicator>
-  <div v-else-if="code">
-    <div>
+  <div v-else-if="code" class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4 pl-4 sm:pl-6">
       <!-- Heading -->
-      <div class="mb-4">
+      <div>
         <CodeTitle :code="code.code" :coding-standard="code.codingStandard" />
         <p class="mt-2">
           {{ code.description || "No description found" }}
         </p>
       </div>
       <!-- Extra fields  -->
-      <div class="mb-4">
+      <div>
         <div>
           <h5 class="inline">Type:</h5>
           <p class="inline">{{ code.objectType || "None" }}</p>
@@ -21,7 +21,7 @@
         </div>
       </div>
       <!-- Code lifecycle  -->
-      <div class="mb-4">
+      <div>
         <div>
           <h5 class="inline">Created:</h5>
           <p class="inline">{{ formatDate(code.creationDate) }}</p>
@@ -32,39 +32,36 @@
         </div>
       </div>
       <!-- Links -->
-      <div v-if="externalLink" class="mb-4">
+      <div v-if="externalLink">
         <a :href="externalLink" target="_blank">{{ externalLink }}</a>
       </div>
     </div>
 
-    <!-- Code maps  -->
-    <div v-if="code.mapsTo.length > 0 || code.mappedBy.length > 0">
-      <!-- Maps to  -->
-      <div v-if="code.mapsTo.length > 0">
-        <div class="border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
-          <h4>Maps To</h4>
-        </div>
-        <ul class="divide-y divide-gray-300">
-          <CodeMapItem
-            v-for="mappedCode in code.mapsTo"
-            :key="`${mappedCode.destinationCodingStandard}.${mappedCode.destinationCode}`"
-            :map="mappedCode"
-          />
-        </ul>
+    <!-- Maps to  -->
+    <div v-if="code.mapsTo.length > 0">
+      <div class="mb-4 border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
+        <h4>Maps To</h4>
       </div>
+      <div class="flex flex-col gap-4 divide-y divide-gray-300">
+        <CodeMapItem
+          v-for="mappedCode in code.mapsTo"
+          :key="`${mappedCode.destinationCodingStandard}.${mappedCode.destinationCode}`"
+          :map="mappedCode"
+        />
+      </div>
+    </div>
 
-      <!-- Mapped by  -->
-      <div v-if="code.mappedBy.length > 0">
-        <div class="border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
-          <h4>Mapped By</h4>
-        </div>
-        <ul class="divide-y divide-gray-300">
-          <CodeMapItem
-            v-for="mappedCode in code.mappedBy"
-            :key="`${mappedCode.sourceCodingStandard}.${mappedCode.sourceCode}`"
-            :map="mappedCode"
-          />
-        </ul>
+    <!-- Mapped by  -->
+    <div v-if="code.mappedBy.length > 0">
+      <div class="mb-4 border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
+        <h4>Mapped By</h4>
+      </div>
+      <div class="flex flex-col gap-4 divide-y divide-gray-300">
+        <CodeMapItem
+          v-for="mappedCode in code.mappedBy"
+          :key="`${mappedCode.sourceCodingStandard}.${mappedCode.sourceCode}`"
+          :map="mappedCode"
+        />
       </div>
     </div>
 
