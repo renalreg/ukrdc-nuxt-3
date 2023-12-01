@@ -1,7 +1,7 @@
 <template>
   <div>
     <BaseLoadingIndicator v-if="fetchSourceInProgress"></BaseLoadingIndicator>
-    <UCard v-else-if="source && source.content">
+    <UCard v-else-if="source && source.content" :ui="{ body: { padding: '' } }">
       <BaseCodeReader
         :content="source.content"
         :content-type="source.contentType"

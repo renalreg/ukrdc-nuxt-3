@@ -45,7 +45,7 @@ export default defineNuxtConfig({
   css: ["@/assets/css/main.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~/plugins/v-calendar.client.ts", "~/plugins/v-tooltip.client.ts", "~/plugins/vue-clickaway.client.ts"],
+  plugins: ["~/plugins/v-calendar.client.ts", "~/plugins/v-tooltip.client.ts"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,

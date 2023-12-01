@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Modals -->
+    <!-- Update modal -->
     <BaseModal v-if="hasPermission('ukrdc:workitems:write')" ref="updateWorkItemModal">
       <div class="mb-4 text-left">
         <div class="mb-4">Add Work Item comment</div>
@@ -16,16 +16,20 @@
       </div>
     </BaseModal>
 
+    <!-- Close modal -->
     <BaseModal v-if="hasPermission('ukrdc:workitems:write')" ref="closeModal">
-      <div class="text-left">
+      <div class="mb-4 text-left">
         <div class="mb-4">
           {{ closeMessageOverride ? closeMessageOverride : "Close the Work Item" }}
         </div>
 
-        <label>
-          Comments
-          <UTextarea v-model="customComment" :rows="3" :color="customComment.length > 100 ? 'red' : 'primary'" />
-        </label>
+        <label for="closeModalComments"> Comments </label>
+        <UTextarea
+          id="closeModalComments"
+          v-model="customComment"
+          :rows="3"
+          :color="customComment.length > 100 ? 'red' : 'primary'"
+        />
       </div>
 
       <div class="flex justify-end">

@@ -1,35 +1,31 @@
 <template>
   <BaseModal ref="confirmModal">
-    <div
-      class="mx-auto flex h-12 w-12 items-center justify-center rounded-full"
-      :class="danger ? 'bg-red-100' : 'bg-indigo-100'"
-    >
-      <!-- Heroicon name: outline/exclamation -->
-      <svg
-        class="h-6 w-6"
-        :class="danger ? 'text-red-600' : 'text-indigo-600'"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        aria-hidden="true"
+    <div class="mb-2 flex flex-col gap-6 px-2 py-2 sm:flex-row">
+      <div
+        class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:mx-0"
+        :class="danger ? 'bg-red-100' : 'bg-indigo-100'"
       >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="modalIcon" />
-      </svg>
-    </div>
-    <div class="mt-3 text-center sm:mt-5">
-      <h3 id="modal-headline" class="text-lg font-medium leading-6 text-gray-900">
-        {{ title }}
-      </h3>
-      <div class="mt-2">
-        <p v-if="message">
-          {{ message }}
-        </p>
-        <slot />
+        <UIcon
+          :name="danger ? 'i-heroicons-exclamation-circle' : 'i-heroicons-question-mark-circle'"
+          class="h-6 w-6"
+          :class="danger ? 'text-red-600' : 'text-indigo-600'"
+        />
+      </div>
+      <div class="text-center sm:text-left">
+        <h3 id="modal-headline" class="mb-4 text-lg font-medium leading-6 text-gray-900">
+          {{ title }}
+        </h3>
+        <div>
+          <p v-if="message">
+            {{ message }}
+          </p>
+          <slot />
+        </div>
       </div>
     </div>
-    <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-      <UButton :primary="true" class="ml-2" :color="danger ? 'red' : 'indigo'" @click="confirm()">
+
+    <div class="flex flex-col gap-2 px-4 sm:flex-row-reverse sm:px-0">
+      <UButton :primary="true" :color="danger ? 'red' : 'indigo'" @click="confirm()">
         {{ confirmLabel }}
       </UButton>
       <UButton @click="cancel()">

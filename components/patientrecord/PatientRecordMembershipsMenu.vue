@@ -18,11 +18,9 @@
       @confirm="$emit('refresh')"
     >
       <p class="mb-4"><b>No data has been automatically sent</b></p>
-      <p>To send data, click</p>
-      <div class="my-1 flex items-center justify-center gap-2">
-        <UIcon name="i-heroicons-cloud-arrow-up-20-solid" class="inline text-gray-800" /><b>Sync to PKB</b>
-      </div>
-      <p>from the Data Feeds section</p>
+      <p class="inline">To send data, click</p>
+      <UButton label="Sync to PKB" size="xs" icon="i-heroicons-cloud-arrow-up-20-solid" class="cursor-default" />
+      <p class="inline">from the Data Feeds section.</p>
     </BaseModalSuccess>
 
     <UDropdown :items="menuItems" :popper="{ placement: 'bottom-end' }">

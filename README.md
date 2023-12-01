@@ -32,12 +32,12 @@
 - [ ] _Maybe_ replace in-house paginator with https://ui.nuxt.com/navigation/pagination#props
 
 - [ ] Replace all components available in NuxtUI with their NuxtUI versions
-  - [ ] Remaining input elements
-  - [ ] Remaining select elements
-  - [ ] Toggle elements (https://ui.nuxt.com/forms/toggle)
+  - [x] Remaining input elements
+  - [x] Remaining select elements
+  - [x] Toggle elements (https://ui.nuxt.com/forms/toggle)
   - [ ] Modals
     - [ ] Full screen modals for e.g. message source viewer
-  - [ ] Toasts (https://ui.nuxt.com/overlays/notification)
+  - [x] Toasts (https://ui.nuxt.com/overlays/notification)
   - [ ] Tooltips/popovers
   - [ ] Mobile sidebar with https://ui.nuxt.com/overlays/slideover
   - [ ] Tabs with https://ui.nuxt.com/navigation/tabs (within existing components, match style etc?)
