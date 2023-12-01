@@ -9,9 +9,12 @@
       </div>
       <div class="flex flex-1 items-center justify-between truncate">
         <div class="flex-1 truncate px-4 py-2">
-          <b class="sensitive truncate">
-            {{ number }}
-          </b>
+          <UTooltip :text="number" :ui="{ wrapper: 'truncate block' }">
+            <b class="sensitive truncate">
+              {{ number }}
+            </b>
+          </UTooltip>
+
           <p class="sensitive">{{ organization }}</p>
         </div>
       </div>

@@ -6,7 +6,9 @@
       class="col-span-1 flex rounded-md shadow-sm"
     >
       <UCard class="w-full truncate">
-        <b>{{ item.programName }}</b>
+        <UTooltip :text="item.programName" :ui="{ wrapper: 'truncate block' }">
+          <b>{{ item.programName }}</b>
+        </UTooltip>
         <p v-if="item.fromTime">Since {{ formatDate(item.fromTime, false) }}</p>
         <div class="mt-2">
           <BaseBadge v-if="!item.toTime" class="bg-green-100 text-green-800">Active</BaseBadge>
