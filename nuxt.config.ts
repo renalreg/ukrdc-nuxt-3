@@ -7,13 +7,11 @@ export default defineNuxtConfig({
   // Disable SSR, and build as an SPA
   ssr: false,
 
-  // Routing workarounds
-  // This is the only way I've found to get routing on a sub-path working properly
-  // for SSR: false on Nuxt Bridge
+  // Base app configuration
   app: {
     baseURL: "/app",
     buildAssetsDir: "/app/_nuxt/",
-    // Global page headers: https://go.nuxtjs.dev/config-head
+    // Global page headers
     head: {
       title: "UKRDC Web Client",
       link: [{ rel: "icon", type: "image/x-icon", href: "/app/favicon.ico" }],
@@ -48,24 +46,24 @@ export default defineNuxtConfig({
     },
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["@/assets/css/main.css"],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~/plugins/v-calendar.client.ts"],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: false,
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxt/ui"],
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+  // Build Configuration
   build: {
     transpile: [
       "marked", // See https://github.com/markedjs/marked/issues/2265#issuecomment-1754764288
     ],
   },
+
+  // Global CSS
+  css: ["@/assets/css/main.css"],
+
+  // Modules
+  modules: ["@nuxt/ui"],
+
+  // Plugins to run before rendering page
+  plugins: ["~/plugins/v-calendar.client.ts", "~/plugins/auth.client.ts"],
+
+  // Auto import components
+  components: false,
 
   // PostCSS config
   postcss: {
