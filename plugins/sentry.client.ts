@@ -23,12 +23,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       new Sentry.BrowserTracing({
         routingInstrumentation: Sentry.vueRouterInstrumentation(router),
       }),
-      new Sentry.Replay(),
     ],
-    // Configure this whole part as you need it!
-    tracesSampleRate: 1.0, // Change in prod
-    replaysSessionSampleRate: 1.0, // Change in prod
-    replaysOnErrorSampleRate: 1.0, // Change in prod if necessary
+    tracesSampleRate: 1.0, // Lower if traffic substantially increases
   });
 
   nuxtApp.vueApp.mixin(
