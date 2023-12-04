@@ -3,9 +3,9 @@ Automatically set and clear the Sentry usercontext based on auth status.
 */
 import { type AuthState } from "@okta/okta-auth-js";
 import { useAuth } from "@okta/okta-vue";
+import * as Sentry from "@sentry/vue";
 
 export default defineNuxtPlugin((_) => {
-  const { $sentrySetUser } = useNuxtApp();
   const $okta = useAuth();
 
   // When auth state changes, update sentry user context
@@ -13,12 +13,12 @@ export default defineNuxtPlugin((_) => {
     if (newAuthState && newAuthState.isAuthenticated) {
       const rawIdToken = $okta.getIdToken();
       const idToken = rawIdToken ? $okta.token.decode(rawIdToken) : null;
-      $sentrySetUser({
+      Sentry.setUser({
         id: idToken?.payload.sub,
         email: idToken?.payload.email,
       });
     } else {
-      $sentrySetUser(null);
+      Sentry.setUser(null);
     }
   }
 
