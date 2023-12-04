@@ -56,8 +56,8 @@
 
 ### Deployment
 
-- [ ] Add docker image using new deployment method (https://github.com/renalreg/ukrdc-nuxt/blob/9c393c79ae8f840c5c6a8ef38857c0172aa1f172/start.sh and https://github.com/renalreg/ukrdc-nuxt/blob/9c393c79ae8f840c5c6a8ef38857c0172aa1f172/Dockerfile)
-- [ ] Add back github actions
+- [x] Add docker image using new deployment method (https://github.com/renalreg/ukrdc-nuxt/blob/9c393c79ae8f840c5c6a8ef38857c0172aa1f172/start.sh and https://github.com/renalreg/ukrdc-nuxt/blob/9c393c79ae8f840c5c6a8ef38857c0172aa1f172/Dockerfile)
+- [x] Add back github actions
 
 ### Minor UI fixes
 

@@ -1,0 +1,11 @@
+version: "3.9"
+
+# FOR TESTING PURPOSES ONLY, DO NOT USE IN PRODUCTION.
+# SEE https://github.com/renalreg/ukrdc-compose/
+
+services:
+  nuxt:
+    build: .
+    env_file: .env
+    ports:
+      - 3000:3000
