@@ -89,11 +89,11 @@ export default defineNuxtConfig({
       demoMode: process.env.DEMO_MODE,
       // Custom UKRDC API config
       api: {
-        host: process.env.API_HOST || "",
-        protocol: process.env.API_PROTOCOL || "https",
+        host: process.env.API_HOST,
+        protocol: "https",
       },
       // Okta domain
-      manageAccountUrl: process.env.MANAGE_ACCOUNT_URL || "https://sso.ukkidney.org/app/UserHome",
+      manageAccountUrl: "https://sso.ukkidney.org/app/UserHome",
       // Okta JS runtime config
       okta: {
         issuer: process.env.OAUTH_ISSUER,
