@@ -99,6 +99,11 @@ export default defineNuxtConfig({
         issuer: process.env.OAUTH_ISSUER,
         clientId: process.env.APP_CLIENT_ID,
       },
+      // Sentry runtime config
+      sentry: {
+        dsn: process.env.SENTRY_DSN,
+        environment: process.env.DEPLOYMENT_ENV || "development",
+      },
     },
   },
 });

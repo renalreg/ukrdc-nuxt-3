@@ -2,9 +2,6 @@ FROM node:21-alpine as builder
 
 # Environment variables used for building and Sentry release
 ARG SENTRY_DSN
-ARG SENTRY_ORG
-ARG SENTRY_PROJECT
-ARG SENTRY_AUTH_TOKEN
 ARG GITHUB_SHA
 ARG GITHUB_REF
 

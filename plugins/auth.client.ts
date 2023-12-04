@@ -1,6 +1,5 @@
 import { OktaAuth } from "@okta/okta-auth-js";
-import OktaVue from "@okta/okta-vue";
-import { navigationGuard } from "@okta/okta-vue";
+import OktaVue, { navigationGuard } from "@okta/okta-vue";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const runtimeConfig = useRuntimeConfig();
