@@ -138,9 +138,6 @@ export default function () {
     baseUrl = `${runtimeConfig.public.api.protocol || "https"}://${runtimeConfig.public.api.host}`;
   }
 
-  console.log(runtimeConfig.public.api);
-  console.log({ baseUrl });
-
   // Create API instances
   const adminApi = new AdminApi(undefined, baseUrl, apiInstance);
   const dashboardApi = new DashboardApi(undefined, baseUrl, apiInstance);
