@@ -41,12 +41,10 @@
       <template #header>
         <h2>Files</h2>
       </template>
-      <BaseCard class="w-2/3">
-        <BaseAttachment :filename="message.filename || `${message.facility}-${message.id}.txt`">
-          <UButton variant="link" :to="`/messages/${message.id}/source`"> View </UButton>
-          <UButton variant="link" @click="downloadMessageSource"> Download </UButton>
-        </BaseAttachment>
-      </BaseCard>
+      <BaseAttachment :filename="message.filename || `${message.facility}-${message.id}.txt`">
+        <UButton variant="link" :to="`/messages/${message.id}/source`"> View </UButton>
+        <UButton variant="link" @click="downloadMessageSource"> Download </UButton>
+      </BaseAttachment>
     </UCard>
 
     <UCard v-if="message && message.error" class="mb-4">
