@@ -2,7 +2,7 @@
 
 - [ ] Re-implement sentry (https://www.lichter.io/articles/nuxt3-sentry-recipe/?ref=github-sentry-support-issue)
 
-- [ ] Fix ESLint issues
+- [x] Fix ESLint issues
 
 ### System
 
@@ -29,6 +29,7 @@
 - [x] Fix all tooltips on buttons with tooltip= attribute
 
 - [x] Replace all components available in NuxtUI with their NuxtUI versions
+
   - [x] Remaining input elements
   - [x] Remaining select elements
   - [x] Toggle elements (https://ui.nuxt.com/forms/toggle)

@@ -41,6 +41,13 @@ export default defineNuxtConfig({
     },
   },
 
+  // Vite bundler options
+  vite: {
+    optimizeDeps: {
+      include: ["plotly.js-dist-min"],
+    },
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["@/assets/css/main.css"],
 

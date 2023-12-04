@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { type Data, newPlot } from "plotly.js-dist-min";
+import Plotly from "plotly.js-dist-min";
 
 import { plotColours } from "~/helpers/colourUtils";
 
@@ -39,7 +39,7 @@ export default defineComponent({
   },
 
   setup(props) {
-    const data: Data[] = [
+    const data: Plotly.Data[] = [
       {
         values: props.y as number[],
         labels: props.x as string[],
@@ -75,7 +75,7 @@ export default defineComponent({
     const config = { responsive: true };
 
     onMounted(() => {
-      newPlot(props.id, data, layout, config);
+      Plotly.newPlot(props.id, data, layout, config);
     });
   },
 });

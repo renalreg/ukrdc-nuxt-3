@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { type AxisType, type Data, newPlot, type PlotData } from "plotly.js-dist-min";
+import Plotly from "plotly.js-dist-min";
 
 import { plotColours, tailwindColours } from "~/helpers/colourUtils";
 
@@ -63,7 +63,7 @@ export default defineComponent({
   },
 
   setup(props) {
-    const data: Data[] = [
+    const data: Plotly.Data[] = [
       {
         x: (props.orientation === "h" ? props.y : props.x) as number[] | string[],
         y: (props.orientation === "h" ? props.x : props.y) as number[],
@@ -77,7 +77,7 @@ export default defineComponent({
             width: 1,
           },
         },
-        hoverinfo: props.hoverinfo as PlotData["hoverinfo"],
+        hoverinfo: props.hoverinfo as Plotly.PlotData["hoverinfo"],
         hovertemplate: props.hovertemplate,
       },
     ];
@@ -88,7 +88,7 @@ export default defineComponent({
       margin: { t: 10, r: 10, b: 20, l: 20 },
       xaxis: {
         title: props.orientation === "h" ? props.yLabel : props.xLabel,
-        type: (props.orientation === "h" ? props.yType : props.xType) as AxisType,
+        type: (props.orientation === "h" ? props.yType : props.xType) as Plotly.AxisType,
         fixedrange: props.fixedrange,
         automargin: true,
         titlefont: {
@@ -98,7 +98,7 @@ export default defineComponent({
       },
       yaxis: {
         title: props.orientation === "h" ? props.xLabel : props.yLabel,
-        type: (props.orientation === "h" ? props.xType : props.yType) as AxisType,
+        type: (props.orientation === "h" ? props.xType : props.yType) as Plotly.AxisType,
         fixedrange: props.fixedrange,
         automargin: true,
         titlefont: {
@@ -113,7 +113,7 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      newPlot(props.id, data, layout, config);
+      Plotly.newPlot(props.id, data, layout, config);
     });
   },
 });

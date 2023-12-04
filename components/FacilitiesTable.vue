@@ -8,8 +8,12 @@ Table of facilities and their basic statistics
 
     <UCard :ui="{ body: { padding: '' } }">
       <UTable :rows="filteredFacilities" :columns="columns" @select="$emit('select', $event.id)">
+        <!-- Total patients -->
+        <template #totalPatients-data="{ row }">
+          {{ row.statistics.totalPatients }}
+        </template>
         <!-- Failing records -->
-        <template #statistics.patientsReceivingMessageError-data="{ row }">
+        <template #patientsReceivingMessageError-data="{ row }">
           <span class="flex items-center">
             <IconCircle
               class="inline"
@@ -23,7 +27,7 @@ Table of facilities and their basic statistics
           </span>
         </template>
         <!-- Sending to PKB -->
-        <template #dataFlow.pkbOut-data="{ row }">
+        <template #pkbOut-data="{ row }">
           <span class="flex items-center">
             <IconCircle class="inline" :class="row.dataFlow.pkbOut ? 'text-green-600' : 'text-red-700'" />
             <p>{{ row.dataFlow.pkbOut ? "Yes" : "No" }}</p>
@@ -135,7 +139,7 @@ export default defineComponent({
         sortable: true,
       },
       {
-        key: "statistics.totalPatients",
+        key: "totalPatients",
         label: "Total records",
         sortable: true,
       },
@@ -145,7 +149,7 @@ export default defineComponent({
         sortable: true,
       },
       {
-        key: "dataFlow.pkbOut",
+        key: "pkbOut",
         label: "Sending to PKB",
         sortable: true,
       },

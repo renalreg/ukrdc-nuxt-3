@@ -24,7 +24,7 @@
         mode="dateTime"
         color="indigo"
         is-range
-        @update:modelValue="onInput"
+        @update:model-value="onInput"
       >
         <template #default="{ inputValue, inputEvents, showPopover }">
           <div class="flex h-full flex-row items-center justify-start" @click="showPopover">

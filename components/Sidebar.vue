@@ -18,7 +18,7 @@
                   ? ['bg-gray-100', 'text-gray-900']
                   : ['text-gray-600', 'hover:bg-gray-50', 'hover:text-gray-900'],
               ]"
-              @click.native="$emit('toggle')"
+              @click="$emit('toggle')"
             >
               <svg
                 class="mr-4 h-6 w-6 text-gray-500"

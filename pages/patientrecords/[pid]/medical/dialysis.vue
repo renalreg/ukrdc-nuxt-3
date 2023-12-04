@@ -49,7 +49,6 @@
 import { type DialysisSessionSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
-import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
@@ -62,7 +61,6 @@ export default defineComponent({
     BaseInfoTooltip,
     SendingFacilityLink,
     CodeTitle,
-    BaseLoadingContainer,
     BasePaginator,
   },
   props: {

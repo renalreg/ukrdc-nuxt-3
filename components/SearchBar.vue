@@ -9,7 +9,7 @@
         leading-icon="i-heroicons-magnifying-glass-20-solid"
         type="search"
         :model-value="modelValue"
-        @update:modelValue="$emit('update:modelValue', $event)"
+        @update:model-value="$emit('update:modelValue', $event)"
       />
     </form>
     <UButton v-if="showButton" size="lg" @click="$emit('submit')">Search</UButton>

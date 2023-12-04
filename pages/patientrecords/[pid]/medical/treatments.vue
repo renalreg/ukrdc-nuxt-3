@@ -74,7 +74,6 @@
 import { type PatientRecordSchema, type TreatmentSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
-import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
 import useApi from "~/composables/useApi";
@@ -84,7 +83,6 @@ export default defineComponent({
   components: {
     CodeTitle,
     SendingFacilityLink,
-    BaseLoadingContainer,
     BaseInfoTooltip,
   },
   props: {

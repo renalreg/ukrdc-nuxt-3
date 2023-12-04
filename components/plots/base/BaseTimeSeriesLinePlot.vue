@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { type Data, newPlot, type PlotData } from "plotly.js-dist-min";
+import Plotly from "plotly.js-dist-min";
 
 import { tailwindColours } from "~/helpers/colourUtils";
 
@@ -48,7 +48,7 @@ export default defineComponent({
   },
   emits: ["click"],
   setup(props, { emit }) {
-    const data: Data[] = [
+    const data: Plotly.Data[] = [
       {
         x: props.x as number[],
         y: props.y as number[],
@@ -57,7 +57,7 @@ export default defineComponent({
           color: tailwindColours.indigo[500],
           width: 2,
         },
-        hoverinfo: props.hoverinfo as PlotData["hoverinfo"],
+        hoverinfo: props.hoverinfo as Plotly.PlotData["hoverinfo"],
         hovertemplate: props.hovertemplate,
       },
     ];
@@ -88,9 +88,9 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      const plot = await newPlot(props.id, data, layout, config);
+      const plot = await Plotly.newPlot(props.id, data, layout, config);
 
-      plot.on("plotly_click", function (data) {
+      plot.on("plotly_click", function (data: Plotly.Data) {
         emit("click", data.points[data.points.length - 1]);
       });
     });
