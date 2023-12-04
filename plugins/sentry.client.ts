@@ -26,8 +26,29 @@ export default defineNuxtPlugin((nuxtApp) => {
       new Sentry.Replay(),
     ],
     // Configure this whole part as you need it!
-    tracesSampleRate: 0.2, // Change in prod
+    tracesSampleRate: 1.0, // Change in prod
     replaysSessionSampleRate: 1.0, // Change in prod
     replaysOnErrorSampleRate: 1.0, // Change in prod if necessary
   });
+
+  nuxtApp.vueApp.mixin(
+    Sentry.createTracingMixins({ trackComponents: true, timeout: 2000, hooks: ["activate", "mount", "update"] }),
+  );
+  Sentry.attachErrorHandler(nuxtApp.vueApp, {
+    logErrors: false,
+    attachProps: true,
+    trackComponents: true,
+    timeout: 2000,
+    hooks: ["activate", "mount", "update"],
+  });
+
+  return {
+    provide: {
+      sentrySetContext: Sentry.setContext,
+      sentrySetUser: Sentry.setUser,
+      sentrySetTag: Sentry.setTag,
+      sentryAddBreadcrumb: Sentry.addBreadcrumb,
+      sentryCaptureException: Sentry.captureException,
+    },
+  };
 });
