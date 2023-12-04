@@ -37,8 +37,9 @@
 </template>
 
 <script lang="ts">
-import { type ObservationSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type ObservationSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts/api";
 
+import BadgePrePost from "~/components/BadgePrePost.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import usePagination from "~/composables/query/usePagination";
@@ -50,6 +51,7 @@ export default defineComponent({
   components: {
     BaseLoadingContainer,
     BasePaginator,
+    BadgePrePost,
   },
   props: {
     record: {
@@ -85,7 +87,7 @@ export default defineComponent({
         })
         .then((response) => {
           observations.value = response.data.items;
-          total.value = response.data.total;
+          total.value = response.data.total ?? 0;
           page.value = response.data.page ?? 0;
           size.value = response.data.size ?? 0;
         })

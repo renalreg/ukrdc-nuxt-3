@@ -4,7 +4,7 @@
   >
     <!-- Heading -->
     <div class="col-span-5 lg:col-span-3">
-      <div class="flex gap-2">
+      <div class="flex items-center gap-2">
         <div class="truncate">
           <h5 class="sensitive truncate md:inline">
             {{ item.filename || "Internal file" }}
