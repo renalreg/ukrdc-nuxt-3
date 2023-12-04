@@ -26,10 +26,7 @@
 - [x] Fix BaseCardDescriptionList style
 - [x] Move all paginator components into card footer
 - [x] Fix truncation on membership cards
-- [ ] Check all `sensitive` class components
 - [x] Fix all tooltips on buttons with tooltip= attribute
-- [ ] (Eventually) fix https://github.com/nathanreyes/v-calendar/issues/1415
-- [ ] _Maybe_ replace in-house paginator with https://ui.nuxt.com/navigation/pagination#props
 
 - [x] Replace all components available in NuxtUI with their NuxtUI versions
   - [x] Remaining input elements
@@ -41,14 +38,16 @@
   - [x] Tooltips/popovers
   - [x] Mobile sidebar with https://ui.nuxt.com/overlays/slideover
 
+- [ ] Fix truncation on master record (and patient record?) list items
+
+- [ ] Check all `sensitive` class components
+- [ ] (Eventually) fix https://github.com/nathanreyes/v-calendar/issues/1415
+- [ ] _Maybe_ replace in-house paginator with https://ui.nuxt.com/navigation/pagination#props
+
 ### Model
 
 - [x] Fix all custom input components v-model
   - [x] Data files national ID filter
-
-### v-calendar
-
-- [ ] https://github.com/nathanreyes/v-calendar/issues/1415
 
 ### Popover/alerts
 
