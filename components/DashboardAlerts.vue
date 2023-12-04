@@ -1,16 +1,16 @@
 <template>
   <div v-if="dash && (dash.warnings.length > 0 || dash.messages.length > 0)">
     <UAlert
-      color="orange"
-      icon="i-heroicons-exclamation-triangle-20-solid"
       v-for="message in dash.warnings"
       :key="message"
+      color="orange"
+      icon="i-heroicons-exclamation-triangle-20-solid"
       :title="message"
     />
     <UAlert
-      icon="i-heroicons-information-circle-20-solid"
       v-for="message in dash.messages"
       :key="message"
+      icon="i-heroicons-information-circle-20-solid"
       :title="message"
     />
   </div>

@@ -18,13 +18,13 @@
       <VDatePicker
         class="w-full"
         :model-value="modelValue"
-        @update:modelValue="onInput"
         :is24hr="true"
         :popover="{ visibility: 'hidden', placement: 'bottom' }"
         :step="1"
         mode="dateTime"
         color="indigo"
         is-range
+        @update:modelValue="onInput"
       >
         <template #default="{ inputValue, inputEvents, showPopover }">
           <div class="flex h-full flex-row items-center justify-start" @click="showPopover">

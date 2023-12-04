@@ -10,17 +10,17 @@
       <!-- Facility select -->
       <div v-if="facilities.length > 1" class="mb-4 flex">
         <USelectMenu
+          v-model="selectedFacility"
           searchable
           class="flex-1"
           size="lg"
-          v-model="selectedFacility"
           :options="facilities"
           value-attribute="id"
           option-attribute="description"
           :search-attributes="['description', 'id']"
           placeholder="Select a sending facility"
         />
-        <UButton class="ml-2" size="lg" @click="selectedFacility = undefined" label="Clear" />
+        <UButton class="ml-2" size="lg" label="Clear" @click="selectedFacility = undefined" />
       </div>
 
       <div class="flex flex-col gap-2 lg:flex-row">
@@ -44,10 +44,10 @@
 
         <UButton
           class="flex-shrink"
-          @click="toggleOrder"
           size="sm"
           :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
           :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
+          @click="toggleOrder"
         />
       </div>
     </div>
@@ -55,10 +55,10 @@
     <!-- More Options -->
     <div v-show="advancedOpen" class="mb-4 flex">
       <USelectMenu
+        v-model="selectedChannel"
         searchable
         class="flex-1"
         size="lg"
-        v-model="selectedChannel"
         :options="channels"
         value-attribute="id"
         option-attribute="name"

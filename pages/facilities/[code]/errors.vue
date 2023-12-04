@@ -13,10 +13,10 @@
         <!-- More Options -->
         <div v-show="advancedOpen" class="mt-4 flex">
           <USelectMenu
+            v-model="selectedChannel"
             searchable
             class="flex-1"
             size="lg"
-            v-model="selectedChannel"
             :options="channels"
             value-attribute="id"
             option-attribute="name"

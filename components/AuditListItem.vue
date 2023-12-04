@@ -8,8 +8,8 @@
             class="flex h-full flex-none cursor-pointer items-center justify-center self-stretch"
             @click="showChildren = !showChildren"
           >
-            <UIcon name="i-heroicons-chevron-down-20-solid" v-show="showChildren" class="h-5 w-5 text-gray-400" />
-            <UIcon name="i-heroicons-chevron-right-20-solid" v-show="!showChildren" class="h-5 w-5 text-gray-400" />
+            <UIcon v-show="showChildren" name="i-heroicons-chevron-down-20-solid" class="h-5 w-5 text-gray-400" />
+            <UIcon v-show="!showChildren" name="i-heroicons-chevron-right-20-solid" class="h-5 w-5 text-gray-400" />
           </div>
         </div>
 

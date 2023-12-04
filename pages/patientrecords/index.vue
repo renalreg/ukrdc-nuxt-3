@@ -8,17 +8,17 @@
         <!-- Facility select -->
         <div v-if="facilities.length > 1" class="mb-4 flex">
           <USelectMenu
+            v-model="selectedFacility"
             searchable
             class="flex-1"
             size="lg"
-            v-model="selectedFacility"
             :options="facilities"
             value-attribute="id"
             option-attribute="description"
             :search-attributes="['description', 'id']"
             placeholder="Select a sending facility"
           />
-          <UButton class="ml-2" size="lg" @click="selectedFacility = undefined" label="Clear" />
+          <UButton class="ml-2" size="lg" label="Clear" @click="selectedFacility = undefined" />
         </div>
         <!-- MasterRecord type filter (will be redundant with new EMPI)-->
         <div class="flex flex-grow items-center gap-2">

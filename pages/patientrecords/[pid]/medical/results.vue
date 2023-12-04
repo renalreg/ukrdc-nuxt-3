@@ -25,17 +25,17 @@
       <!-- Code select -->
       <div class="mb-4 flex">
         <USelectMenu
+          v-model="selectedService"
           searchable
           class="flex-1"
           size="lg"
-          v-model="selectedService"
           :options="availableServices"
           value-attribute="id"
           option-attribute="description"
           :search-attributes="['description', 'id']"
           placeholder="Select a result type"
         />
-        <UButton class="ml-2" size="lg" @click="selectedService = undefined" label="Clear" />
+        <UButton class="ml-2" size="lg" label="Clear" @click="selectedService = undefined" />
       </div>
 
       <div>
@@ -47,9 +47,9 @@
             <UButton>Show Results From All Lab Orders</UButton>
           </NuxtLink>
           <UButton
+            v-if="selectedOrderId && selectedOrder"
             color="red"
             variant="outline"
-            v-if="selectedOrderId && selectedOrder"
             @click="deleteOrderAlert?.show()"
             >Delete Lab Order</UButton
           >

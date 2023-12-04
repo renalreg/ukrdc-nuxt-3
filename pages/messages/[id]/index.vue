@@ -59,7 +59,7 @@
     </UCard>
 
     <!-- Related Patient Records card -->
-    <UCard :ui="{ body: { padding: '' } }" v-if="patientRecords.length > 0" class="mt-4">
+    <UCard v-if="patientRecords.length > 0" :ui="{ body: { padding: '' } }" class="mt-4">
       <template #header>
         <h2>Related Records</h2>
       </template>
@@ -71,7 +71,7 @@
     </UCard>
 
     <!-- Related Work Items card -->
-    <UCard :ui="{ body: { padding: '' } }" v-if="workItems.length > 0" class="mt-4">
+    <UCard v-if="workItems.length > 0" :ui="{ body: { padding: '' } }" class="mt-4">
       <template #header>
         <h2>Related Work Items</h2>
       </template>
@@ -85,7 +85,7 @@
     </UCard>
 
     <!-- Mirth Messages card -->
-    <UCard :ui="{ body: { padding: '' } }" v-if="hasPermission('ukrdc:mirth:read')" class="mt-4">
+    <UCard v-if="hasPermission('ukrdc:mirth:read')" :ui="{ body: { padding: '' } }" class="mt-4">
       <template #header>
         <h2>Mirth Messages</h2>
       </template>

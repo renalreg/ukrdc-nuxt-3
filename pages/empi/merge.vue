@@ -28,7 +28,7 @@
         </div>
         <div v-else>
           <EMPISearch v-if="searchingFor === 'superseded'" :number-types="['UKRDC']" @select="selectSuperceeded" />
-          <UButton size="lg" v-else class="w-full" @click="searchingFor = 'superseded'"> Search for a Record </UButton>
+          <UButton v-else size="lg" class="w-full" @click="searchingFor = 'superseded'"> Search for a Record </UButton>
         </div>
       </div>
 
@@ -59,15 +59,15 @@
         </div>
         <div v-else>
           <EMPISearch v-if="searchingFor === 'superseding'" :number-types="['UKRDC']" @select="selectsuperseding" />
-          <UButton size="lg" v-else class="w-full" @click="searchingFor = 'superseding'"> Search for a Record </UButton>
+          <UButton v-else size="lg" class="w-full" @click="searchingFor = 'superseding'"> Search for a Record </UButton>
         </div>
       </div>
     </div>
 
     <UAlert
+      v-if="mergeBlockDescription"
       color="orange"
       icon="i-heroicons-exclamation-triangle-20-solid"
-      v-if="mergeBlockDescription"
       class="mb-4"
       :title="mergeBlockDescription"
     />

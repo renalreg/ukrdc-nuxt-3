@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full items-center gap-2 pb-4 md:mx-auto">
-    <form @submit.prevent="$emit('submit')" class="flex-1">
+    <form class="flex-1" @submit.prevent="$emit('submit')">
       <UInput
         size="lg"
         :autofocus="focus"
@@ -8,11 +8,11 @@
         placeholder="Search"
         leading-icon="i-heroicons-magnifying-glass-20-solid"
         type="search"
-        :modelValue="modelValue"
-        v-on:update:modelValue="$emit('update:modelValue', $event)"
+        :model-value="modelValue"
+        @update:modelValue="$emit('update:modelValue', $event)"
       />
     </form>
-    <UButton size="lg" v-if="showButton" @click="$emit('submit')">Search</UButton>
+    <UButton v-if="showButton" size="lg" @click="$emit('submit')">Search</UButton>
   </div>
 </template>
 

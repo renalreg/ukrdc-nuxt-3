@@ -4,14 +4,14 @@
       <!-- Code select -->
       <div class="mb-4 flex">
         <USelectMenu
+          v-model="selectedCode"
           searchable
           class="flex-1"
           size="lg"
-          v-model="selectedCode"
           :options="availableCodes"
           placeholder="Select a coding standard"
         />
-        <UButton class="ml-2" size="lg" @click="selectedCode = undefined" label="Clear" />
+        <UButton class="ml-2" size="lg" label="Clear" @click="selectedCode = undefined" />
       </div>
 
       <UCard :ui="{ body: { padding: '' } }" class="mb-4">

@@ -10,8 +10,8 @@
       <div class="flex-shrink">
         <div v-if="!fetchInProgress">
           <UButton
-            size="sm"
             v-if="group.records.length == 2"
+            size="sm"
             :to="{
               path: '/empi/merge',
               query: {
@@ -22,7 +22,7 @@
             }"
             label="Start Merge"
           />
-          <UButton size="sm" v-else :disabled="true" label="Can't automatically merge more than two records" />
+          <UButton v-else size="sm" :disabled="true" label="Can't automatically merge more than two records" />
         </div>
       </div>
     </div>

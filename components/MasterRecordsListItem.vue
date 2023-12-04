@@ -2,10 +2,10 @@
   <!-- Content container -->
   <div class="grid w-full min-w-0 grid-cols-3 px-4 py-4 text-gray-800 sm:px-6 md:gap-4 lg:grid-cols-4">
     <!-- Name, DoB, gender -->
-    <div>
+    <div class="truncate">
       <span class="truncate">
         <h5 class="sensitive inline capitalize">{{ item.givenname?.toLowerCase() }}</h5>
-        <h5 class="sensitive inline capitalize italic">{{ item.surname?.toLowerCase() }}</h5>
+        <h5 class="sensitive inline truncate capitalize italic">{{ item.surname?.toLowerCase() }}</h5>
       </span>
       <p class="sensitive mt-2 flex items-center">
         {{ formatDate(item.dateOfBirth, false) }}

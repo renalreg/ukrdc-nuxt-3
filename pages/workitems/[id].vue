@@ -66,17 +66,17 @@
       <UButton
         v-if="availableActions.comment"
         color="indigo"
-        @click="updateWorkItemModal?.show()"
         label="Update"
         icon="i-heroicons-pencil-20-solid"
+        @click="updateWorkItemModal?.show()"
       />
 
       <UButton
         v-if="availableActions.close && record.status !== 3"
         color="green"
-        @click="closeModal?.show()"
         label="Close"
         icon="i-heroicons-check-circle-20-solid"
+        @click="closeModal?.show()"
       />
 
       <UTooltip v-if="availableActions.merge && record.status !== 3" text="You will be redirected here after merging">
@@ -190,7 +190,7 @@
             <MasterRecordCard :record="record.destination.masterRecord" label="Destination Master Record" />
           </NuxtLink>
         </div>
-        <UCard :ui="{ body: { padding: '' } }" v-if="record.incoming.masterRecords.length > 1" class="mt-2 pl-4">
+        <UCard v-if="record.incoming.masterRecords.length > 1" :ui="{ body: { padding: '' } }" class="mt-2 pl-4">
           <BaseItemPaginator
             v-model="relatedRecordsIndex"
             :total="record.incoming.masterRecords.length"
@@ -200,7 +200,7 @@
     </div>
 
     <!-- Related messages card -->
-    <UCard :ui="{ body: { padding: '' } }" v-if="messages && messages.length > 0" class="mb-8">
+    <UCard v-if="messages && messages.length > 0" :ui="{ body: { padding: '' } }" class="mb-8">
       <template #header>
         <h2>Related Data Files</h2>
         <h6>
@@ -230,7 +230,7 @@
     </UCard>
 
     <!-- Related Work Items  -->
-    <UCard :ui="{ body: { padding: '' } }" v-if="workItemCollection.length > 0" class="mb-8">
+    <UCard v-if="workItemCollection.length > 0" :ui="{ body: { padding: '' } }" class="mb-8">
       <!-- Card header -->
       <template #header>
         <h2>Related Work Items</h2>
