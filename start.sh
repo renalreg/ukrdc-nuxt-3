@@ -39,4 +39,8 @@ if [ -n "${APP_CLIENT_ID}" ]; then
     export NUXT_PUBLIC_OKTA_CLIENT_ID=${APP_CLIENT_ID}
 fi
 
+if [ -n "${SENTRY_DSN}" ]; then
+    export NUXT_PUBLIC_SENTRY_DSN=${SENTRY_DSN}
+fi
+
 node .output/server/index.mjs
