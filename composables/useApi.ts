@@ -133,9 +133,9 @@ export default function () {
   // If we set it to an empty string then the host defaults to localhost.
   // This is not what we want, so we need to replace these cases with window.location.host.
   if (!runtimeConfig.public.api.host || runtimeConfig.public.api.host === "/") {
-    baseUrl = `${runtimeConfig.public.api.protocol}://${window.location.host}`;
+    baseUrl = `${runtimeConfig.public.api.protocol || "https"}://${window.location.host}`;
   } else {
-    baseUrl = `${runtimeConfig.public.api.protocol}://${runtimeConfig.public.api.host}`;
+    baseUrl = `${runtimeConfig.public.api.protocol || "https"}://${runtimeConfig.public.api.host}`;
   }
 
   // Create API instances
