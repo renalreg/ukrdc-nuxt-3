@@ -50,7 +50,7 @@
                 <div class="min-w-0 flex-1">
                   <span class="absolute inset-0" aria-hidden="true" />
                   <p class="font-medium text-gray-900">{{ key }}</p>
-                  <p class="line-clamp-3 text-gray-500">
+                  <p class="sensitive line-clamp-3 text-gray-500">
                     {{ value }}
                   </p>
                 </div>
@@ -63,6 +63,7 @@
               <BaseCodeReader
                 :content="connectorMessageData.content || ''"
                 :content-type="connectorMessageData.dataType"
+                class="sensitive"
               />
             </UCard>
           </div>

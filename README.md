@@ -8,7 +8,7 @@ Stuff to do before we deploy to production/live
 - [x] Fix BadgePrePost imports
 - [x] Fix VMenu imports
 - [x] Fix message list item info tooltip
-- [ ] Blank Mirth message components with sensitive content
+- [x] Blank Mirth message components with sensitive content
 - [ ] Check all uses of ?? (nullish coalescing) vs || (falsy OR)
 - [ ] Fix (or work around) https://github.com/nathanreyes/v-calendar/issues/1415
 
