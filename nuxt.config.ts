@@ -60,7 +60,12 @@ export default defineNuxtConfig({
   modules: ["@nuxt/ui"],
 
   // Plugins to run before rendering page
-  plugins: ["~/plugins/v-calendar.client.ts", "~/plugins/auth.client.ts"],
+  plugins: [
+    "~/plugins/v-calendar.client.ts",
+    "~/plugins/auth.client.ts",
+    "~/plugins/sentry.client.ts",
+    "~/plugins/sentry-usercontext.client.ts",
+  ],
 
   // Auto import components
   components: false,
@@ -96,6 +101,11 @@ export default defineNuxtConfig({
       okta: {
         issuer: process.env.OAUTH_ISSUER,
         clientId: process.env.APP_CLIENT_ID,
+      },
+      // Sentry runtime config
+      sentry: {
+        dsn: process.env.SENTRY_DSN,
+        environment: process.env.DEPLOYMENT_ENV || "development",
       },
     },
   },

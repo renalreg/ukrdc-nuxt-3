@@ -15,6 +15,7 @@ import {
   WorkItemsApi,
 } from "@ukkidney/ukrdc-axios-ts";
 import axios from "axios";
+
 import useAuth from "./useAuth";
 
 interface PydanticError {
@@ -33,6 +34,7 @@ function decodePydanticErrors(errors: PydanticError[]) {
 }
 
 export default function () {
+  const { $sentryCaptureException } = useNuxtApp();
   const toast = useToast();
   const { $okta } = useAuth();
 
@@ -123,6 +125,10 @@ export default function () {
           });
         }
       }
+
+      // Log unhandled exceptions to Sentry
+      $sentryCaptureException(e);
+
       // Re-throw the error so that the component that triggered the request can handle it
       throw e;
     },
