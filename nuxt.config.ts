@@ -30,6 +30,11 @@ export default defineNuxtConfig({
     },
   },
 
+  // We lack proper dark mode support, so lock to light theme for now at least
+  colorMode: {
+    preference: "light",
+  },
+
   // Vue compiler options
   vue: {
     compilerOptions: {
