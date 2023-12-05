@@ -104,12 +104,12 @@ export default defineComponent({
     // Data refs
 
     const standards = ref<string[]>();
-    const selectedStandard = stringQuery("standard", null, true, true);
+    const selectedStandard = stringQuery("standard", undefined, true, true);
 
     const codes = ref([] as CodeSchema[]);
     const selectedCode = ref<CodeSchema>();
 
-    const searchboxString = stringQuery("search", null, true, true);
+    const searchboxString = stringQuery("search", undefined, true, true);
 
     const fetchInProgress = ref(false);
 

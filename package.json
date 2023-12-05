@@ -7,18 +7,20 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "check": "npm run eslint && npm run prettier",
+    "check": "npm run eslint && npm run prettier && typecheck",
     "fix": "npm run eslint:fix && npm run prettier:fix",
     "eslint": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "eslint:fix": "eslint --ext \".js,.vue\" --ignore-path .gitignore --fix .",
     "prettier": "prettier . --check",
-    "prettier:fix": "prettier . --write"
+    "prettier:fix": "prettier . --write",
+    "typecheck": "nuxt typecheck"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@sentry/vue": "^7.84.0",
+    "@types/dompurify": "^3.0.5",
     "@types/luxon": "^3.3.5",
     "@types/plotly.js-dist-min": "^2.3.4",
     "autoprefixer": "^10.4.16",

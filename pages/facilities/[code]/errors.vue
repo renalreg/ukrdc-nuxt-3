@@ -126,7 +126,7 @@ export default defineComponent({
           errorMessages.value = response.data.items;
           errorMessagesPage.value = response.data.page ?? 0;
           errorMessagesSize.value = response.data.size ?? 0;
-          errorMessagesTotal.value = response.data.total;
+          errorMessagesTotal.value = response.data.total ?? 0;
         });
     }
 

@@ -83,6 +83,7 @@ import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGr
 import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
 import { saveAs } from "~/helpers/fileUtils";
+import { getFirstOrValue } from "~/helpers/queryUtils";
 
 export default defineComponent({
   components: {
@@ -117,7 +118,7 @@ export default defineComponent({
       patientRecordsApi
         .getPatientDocument({
           pid: props.record.pid,
-          documentId: route.params.docid,
+          documentId: getFirstOrValue(route.params.docid),
         })
         .then((response) => {
           patientDocument.value = response.data;
@@ -132,7 +133,7 @@ export default defineComponent({
         .getPatientDocumentDownload(
           {
             pid: props.record.pid,
-            documentId: route.params.docid,
+            documentId: getFirstOrValue(route.params.docid),
           },
           {
             method: "GET",

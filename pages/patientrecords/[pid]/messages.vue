@@ -79,8 +79,8 @@ export default defineComponent({
           page: page.value ?? 1,
           size: size.value,
           orderBy: orderBy.value as OrderBy,
-          since: dateRange.value.start ?? undefined,
-          until: dateRange.value.end ?? undefined,
+          since: dateRange.value.start,
+          until: dateRange.value.end,
         })
         .then((response) => {
           messages.value = response.data.items;
@@ -94,16 +94,9 @@ export default defineComponent({
       fetchMessages();
     });
 
-    watch(
-      [
-        page,
-        orderBy,
-        () => JSON.stringify(dateRange.value), // Stringify to watch for actual value changes
-      ],
-      () => {
-        fetchMessages();
-      },
-    );
+    watch([page, orderBy, dateRange], () => {
+      fetchMessages();
+    });
 
     return {
       page,

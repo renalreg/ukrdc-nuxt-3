@@ -15,6 +15,6 @@ export function datesAreEqual(date1: string, date2: string): boolean {
 }
 
 export interface DateRange {
-  start: string | null;
-  end: string | null;
+  start: string | undefined;
+  end: string | undefined;
 }

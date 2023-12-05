@@ -1,4 +1,4 @@
-import { HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
+import type { HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
 import { DateTime } from "luxon";
 
 export function getPointDateRange(dateString: string) {

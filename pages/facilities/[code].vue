@@ -26,6 +26,7 @@ import DashboardAlerts from "~/components/DashboardAlerts.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
 import { insertIf } from "~/helpers/arrayUtils";
+import { getFirstOrValue } from "~/helpers/queryUtils";
 import { type TabItem } from "~/interfaces/tabs";
 
 export default defineComponent({
@@ -88,14 +89,14 @@ export default defineComponent({
     onMounted(() => {
       facilitiesApi
         .getFacility({
-          code: code.value,
+          code: getFirstOrValue(code.value),
         })
         .then((response) => {
           facility.value = response.data;
         });
       facilitiesApi
         .getFacilityExtracts({
-          code: code.value,
+          code: getFirstOrValue(code.value),
         })
         .then((response) => {
           extracts.value = response.data;

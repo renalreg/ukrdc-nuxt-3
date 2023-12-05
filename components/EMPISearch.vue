@@ -93,7 +93,7 @@ export default defineComponent({
 
         searchApi
           .getSearchMasterrecords({
-            search: searchTermArray.value.filter((n) => n) as string[],
+            search: searchTermArray.value?.filter((n) => n) as string[],
             page: page.value ?? 1,
             size: size.value,
             numberType: props.numberTypes.filter((n) => n) as string[],

@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import PatientRecordSummaryAddresses from "~/components/patientrecord/summary/PatientRecordSummaryAddresses.vue";
 import PatientRecordSummaryDemographics from "~/components/patientrecord/summary/PatientRecordSummaryDemographics.vue";

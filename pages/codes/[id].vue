@@ -93,6 +93,7 @@ import CodeMapItem from "~/components/CodeMapItem.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
 import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
+import { getFirstOrValue } from "~/helpers/queryUtils";
 
 export default defineComponent({
   components: {
@@ -120,8 +121,8 @@ export default defineComponent({
 
       codesApi
         .getCodeDetails({
-          code: route.params.id.split(".")[1],
-          codingStandard: route.params.id.split(".")[0],
+          code: getFirstOrValue(route.params.id).split(".")[1],
+          codingStandard: getFirstOrValue(route.params.id).split(".")[0],
         })
         .then((response) => {
           code.value = response.data;

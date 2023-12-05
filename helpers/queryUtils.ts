@@ -1,10 +1,10 @@
-export function singleQuery(query: string | (string | null)[]): string | null {
-  // Return a single value form a query string
-  // If multiple values are passed as an array,
-  // only the zeroth value is returned
-  if (Array.isArray(query)) {
-    return query[0];
+export function getFirstOrValue(value: any | any[]): any {
+  // Check if the input is an array
+  if (Array.isArray(value)) {
+    // Return the first element if it's an array
+    return value[0];
   } else {
-    return query;
+    // Return the value itself if it's not an array
+    return value;
   }
 }

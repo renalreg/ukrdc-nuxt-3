@@ -134,9 +134,9 @@ export default defineComponent({
 
     // Data refs
 
-    const supersededId = stringQuery("superseded", null, true, false);
-    const supersedingId = stringQuery("superseding", null, true, false);
-    const callbackPath = stringQuery("callback", null);
+    const supersededId = stringQuery("superseded", undefined, true, false);
+    const supersedingId = stringQuery("superseding", undefined, true, false);
+    const callbackPath = stringQuery("callback", undefined);
 
     const superseded = ref<MasterRecordSchema>();
     const superseding = ref<MasterRecordSchema>();
@@ -215,8 +215,12 @@ export default defineComponent({
 
     function switchRecords() {
       const newQuery = Object.assign({}, route.query);
-      newQuery.superseded = [supersedingId.value];
-      newQuery.superseding = [supersededId.value];
+      if (supersedingId.value) {
+        newQuery.superseded = [supersedingId.value];
+      }
+      if (supersededId.value) {
+        newQuery.superseding = [supersededId.value];
+      }
       router.push({
         path: route.path,
         query: newQuery,
@@ -238,13 +242,13 @@ export default defineComponent({
 
     function clearsuperseding() {
       superseding.value = undefined;
-      supersedingId.value = null;
+      supersedingId.value = undefined;
       searchingFor.value = "superseding";
     }
 
     function clearSuperceeded() {
       superseded.value = undefined;
-      supersededId.value = null;
+      supersededId.value = undefined;
       searchingFor.value = "superseded";
     }
 

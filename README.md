@@ -4,16 +4,9 @@
 
 Stuff to do before we deploy to production/live
 
-- [x] Check all `sensitive` class components
-- [x] Fix BadgePrePost imports
-- [x] Fix VMenu imports
-- [x] Fix message list item info tooltip
-- [x] Blank Mirth message components with sensitive content
-- [x] Check all uses of ?? (nullish coalescing) vs || (falsy OR)
 - [ ] Label all unlabelled USelect boxes
-- [ ] Fix URL query composable types
-  - [ ] Fix all lines like `since: dateRange.value.start ?? undefined`,
-- [x] Fix (or work around) https://github.com/nathanreyes/v-calendar/issues/1415
+- [ ] Final full type check
+
 
 ## Developer Installation
 

@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul v-if="record.patient">
     <li
       v-for="item in record.patient.numbers"
       :key="item.numbertype + item.organization + item.patientid"

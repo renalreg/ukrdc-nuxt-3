@@ -94,9 +94,9 @@ export default defineComponent({
     const events = ref<AuditEventSchema[]>();
 
     const availableResources: string[] = Object.values(Resource).sort();
-    const selectedResource = stringQuery("resource", null, true, true);
+    const selectedResource = stringQuery("resource", undefined, true, true);
     const availableOperations: string[] = Object.values(AuditOperation).sort();
-    const selectedOperation = stringQuery("operation", null, true, true);
+    const selectedOperation = stringQuery("operation", undefined, true, true);
 
     function clearSelection() {
       router.replace({
@@ -120,8 +120,8 @@ export default defineComponent({
           page: page.value ?? 1,
           size: size.value,
           orderBy: orderBy.value as OrderBy,
-          since: dateRange.value.start ?? undefined,
-          until: dateRange.value.end ?? undefined,
+          since: dateRange.value.start,
+          until: dateRange.value.end,
           ...(selectedResource.value && { resource: selectedResource.value as Resource }),
           ...(selectedOperation.value && { operation: selectedOperation.value as AuditOperation }),
         })
@@ -140,18 +140,9 @@ export default defineComponent({
       fetchEvents();
     });
 
-    watch(
-      [
-        page,
-        orderBy,
-        selectedResource,
-        selectedOperation,
-        () => JSON.stringify(dateRange.value), // Stringify to watch for actual value changes
-      ],
-      () => {
-        fetchEvents();
-      },
-    );
+    watch([page, orderBy, selectedResource, selectedOperation, dateRange], () => {
+      fetchEvents();
+    });
 
     return {
       page,

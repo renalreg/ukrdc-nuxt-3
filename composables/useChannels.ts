@@ -15,7 +15,7 @@ export default function () {
   const channelLabels = computed(() => {
     return channels.value.map(({ name }) => name);
   });
-  const selectedChannel = stringQuery("channel", null, true);
+  const selectedChannel = stringQuery("channel", undefined, true);
 
   function setChannels() {
     // If we don't already have a list of available facilties, fetch one

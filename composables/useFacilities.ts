@@ -14,7 +14,7 @@ export default function () {
   const facilityLabels = computed(() => {
     return facilities.value.map(({ description }) => description);
   });
-  const selectedFacility = stringQuery("facility", null, true);
+  const selectedFacility = stringQuery("facility", undefined, true);
 
   function setFacilities() {
     // If we don't already have a list of available facilties, fetch one

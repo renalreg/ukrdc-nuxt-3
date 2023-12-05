@@ -51,7 +51,7 @@ export default defineComponent({
   setup(props) {
     const channelName = computed(() => {
       let name = "";
-      for (const msg of Object.values(props.message.connectorMessages)) {
+      for (const msg of Object.values(props.message?.connectorMessages ?? {})) {
         if (!name.includes(msg.channelName)) {
           name = name + "/" + msg.channelName;
         }
@@ -60,7 +60,7 @@ export default defineComponent({
     });
 
     const hasErrors = computed((): boolean => {
-      return messageHasErrors(props.message);
+      return props.message ? messageHasErrors(props.message) : false;
     });
 
     return { channelName, hasErrors, isEmptyObject };

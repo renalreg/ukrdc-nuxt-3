@@ -45,7 +45,7 @@
 
     <!-- Record message banners -->
     <NuxtLink :to="`/patientrecords/${record.pid}/messages`">
-      <LatestMessageAlert :message="latestMessage ?? undefined" :is-loading="latestMessageIsLoading" />
+      <LatestMessageAlert :message="latestMessage" :is-loading="latestMessageIsLoading" />
     </NuxtLink>
 
     <!-- Main content container-->

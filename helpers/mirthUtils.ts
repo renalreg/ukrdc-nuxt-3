@@ -1,4 +1,4 @@
-import { ConnectorMessageModel, ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
+import type { ChannelMessageModel, ConnectorMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
 export function messageHasErrors(message: ChannelMessageModel): boolean {
   for (const msg of Object.values(message.connectorMessages)) {

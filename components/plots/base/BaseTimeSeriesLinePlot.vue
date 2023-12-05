@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import Plotly from "plotly.js-dist-min";
+import Plotly, { type PlotMouseEvent } from "plotly.js-dist-min";
 
 import { tailwindColours } from "~/helpers/colourUtils";
 
@@ -90,8 +90,8 @@ export default defineComponent({
     onMounted(async () => {
       const plot = await Plotly.newPlot(props.id, data, layout, config);
 
-      plot.on("plotly_click", function (data: Plotly.Data) {
-        emit("click", data.points[data.points.length - 1]);
+      plot.on("plotly_click", function (event: PlotMouseEvent) {
+        emit("click", event.points[event.points.length - 1]);
       });
     });
   },

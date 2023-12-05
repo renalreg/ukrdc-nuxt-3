@@ -31,6 +31,7 @@ import PatientRecordExtractSummary from "~/components/patientrecord/PatientRecor
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
 import { insertIf } from "~/helpers/arrayUtils";
+import { getFirstOrValue } from "~/helpers/queryUtils";
 import { firstForename, firstSurname } from "~/helpers/recordUtils";
 import { type TabItem } from "~/interfaces/tabs";
 
@@ -60,7 +61,7 @@ export default defineComponent({
       // Fetch patient record
       patientRecordsApi
         .getPatient({
-          pid: route.params.pid,
+          pid: getFirstOrValue(route.params.pid),
         })
         .then((response) => {
           record.value = response.data;
@@ -75,8 +76,8 @@ export default defineComponent({
 
     const selectedPid = ref(route.params.pid);
 
-    watch(selectedPid, (value: string) => {
-      router.push({ name: route.name!, params: { pid: value } });
+    watch(selectedPid, (value: string | string[]) => {
+      router.push({ name: route.name!, params: { pid: getFirstOrValue(value) } });
     });
 
     // Dynamic UI elements

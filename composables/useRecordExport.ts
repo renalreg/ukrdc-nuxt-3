@@ -1,4 +1,4 @@
-import { PatientRecordSummarySchema, TrackableTaskSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PatientRecordSummarySchema, TrackableTaskSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import useApi from "~/composables/useApi";
 import useTasks from "~/composables/useTasks";

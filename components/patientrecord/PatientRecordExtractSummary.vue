@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
 import { isData, isInformational, isMembership } from "~/helpers/recordUtils";

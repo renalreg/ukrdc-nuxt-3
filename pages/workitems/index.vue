@@ -120,10 +120,10 @@ export default defineComponent({
           page: page.value ?? 1,
           size: size.value,
           orderBy: orderBy.value as OrderBy,
-          status: statuses.value.filter((el) => !isNaN(Number(el))).map(Number),
-          facility: selectedFacility.value ?? undefined,
-          since: dateRange.value.start ?? undefined,
-          until: dateRange.value.end ?? undefined,
+          status: statuses.value?.filter((el) => !isNaN(Number(el))).map(Number),
+          facility: selectedFacility.value,
+          since: dateRange.value.start,
+          until: dateRange.value.end,
         })
         .then((response) => {
           workitems.value = response.data.items;
@@ -140,19 +140,9 @@ export default defineComponent({
       getWorkitems();
     });
 
-    watch(
-      [
-        page,
-        selectedFacility,
-        orderBy,
-        currentTab,
-        () => JSON.stringify(dateRange.value), // Stringify to watch for actual value changes
-        () => JSON.stringify(statuses.value), // Stringify to watch for actual value changes
-      ],
-      () => {
-        getWorkitems();
-      },
-    );
+    watch([page, selectedFacility, orderBy, currentTab, dateRange, statuses], () => {
+      getWorkitems();
+    });
 
     return {
       fetchInProgress,

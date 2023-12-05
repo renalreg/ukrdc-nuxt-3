@@ -85,6 +85,7 @@ import BaseCodeReader from "~/components/base/BaseCodeReader.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
 import { connectorMessageError } from "~/helpers/mirthUtils";
+import { getFirstOrValue } from "~/helpers/queryUtils";
 
 interface ConnectorMessageDataTabs {
   raw: ConnectorMessageData;
@@ -110,7 +111,7 @@ export default defineComponent({
 
     // Data refs
     const connectorMessage = computed(() => {
-      const orderId = parseInt(route.params.orderId);
+      const orderId = parseInt(getFirstOrValue(route.params.orderId));
       return props.message.connectorMessages[orderId] as ConnectorMessageModel;
     });
     const formatconnectorMessage = ref(true);

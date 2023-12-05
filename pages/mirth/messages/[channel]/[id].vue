@@ -17,6 +17,7 @@ import { type ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
 import MirthMessageCard from "~/components/MirthMessageCard.vue";
 import useApi from "~/composables/useApi";
+import { getFirstOrValue } from "~/helpers/queryUtils";
 
 export default defineComponent({
   components: {
@@ -38,8 +39,8 @@ export default defineComponent({
     onMounted(() => {
       mirthApi
         .getMirthChannelMessage({
-          channelId: route.params.channel,
-          messageId: route.params.id,
+          channelId: getFirstOrValue(route.params.channel),
+          messageId: getFirstOrValue(route.params.id),
         })
         .then((response) => {
           message.value = response.data;

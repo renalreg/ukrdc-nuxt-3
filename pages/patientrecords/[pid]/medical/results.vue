@@ -150,8 +150,8 @@ export default defineComponent({
           size: size.value,
           serviceId: selectedService.value ? [selectedService.value] : undefined,
           orderId: selectedOrderId.value ? [selectedOrderId.value] : undefined,
-          since: dateRange.value.start ?? undefined,
-          until: dateRange.value.end ?? undefined,
+          since: dateRange.value.start,
+          until: dateRange.value.end,
         })
         .then((response) => {
           results.value = response.data.items;
@@ -238,7 +238,7 @@ export default defineComponent({
               title: "Success",
               description: "Lab Order deleted",
             });
-            selectedOrderId.value = null;
+            selectedOrderId.value = undefined;
             fetchResults();
             fetchLabOrder();
             deleteOrderAlert.value?.hide();
@@ -249,11 +249,11 @@ export default defineComponent({
     // Result item services
 
     const availableServices = ref([] as ResultItemServiceSchema[]);
-    const selectedService = stringQuery("service_id", null, true, true);
+    const selectedService = stringQuery("service_id", undefined, true, true);
 
     // Lab order filter
 
-    const selectedOrderId = stringQuery("order_id", null, true, true);
+    const selectedOrderId = stringQuery("order_id", undefined, true, true);
 
     // Data lifecycle
 
@@ -262,17 +262,9 @@ export default defineComponent({
       fetchLabOrder();
     });
 
-    watch(
-      [
-        page,
-        selectedService,
-        selectedOrderId,
-        () => JSON.stringify(dateRange.value), // Stringify to watch for actual value changes
-      ],
-      () => {
-        fetchResults();
-      },
-    );
+    watch([page, selectedService, selectedOrderId, dateRange], () => {
+      fetchResults();
+    });
 
     watch(selectedOrderId, () => {
       fetchLabOrder();

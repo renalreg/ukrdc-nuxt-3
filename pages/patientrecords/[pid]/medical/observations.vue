@@ -70,7 +70,7 @@ export default defineComponent({
     const observations = ref<ObservationSchema[]>();
 
     const availableCodes = ref([] as string[]);
-    const selectedCode = stringQuery("code", null, true, true);
+    const selectedCode = stringQuery("code", undefined, true, true);
 
     // Data fetching
 

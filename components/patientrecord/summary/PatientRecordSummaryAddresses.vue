@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul v-if="record.patient">
     <li v-for="item in record.patient.addresses" :key="item.street" class="col-span-1">
       <UCard class="sensitive w-full"> <PatientRecordAddress :address="item" /> </UCard>
     </li>

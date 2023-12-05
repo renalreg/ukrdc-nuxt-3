@@ -133,14 +133,14 @@ export default defineComponent({
 
         searchApi
           .getSearchRecords({
-            search: searchTermArray.value.filter((n) => n) as string[],
+            search: searchTermArray.value?.filter((n) => n) as string[],
             page: page.value ?? 1,
             size: size.value,
             facility: selectedFacility.value ? [selectedFacility.value] : undefined,
-            includeMigrated: extraRecordTypes.value.includes("MIGRATED"),
-            includeMemberships: extraRecordTypes.value.includes("MEMBERSHIPS"),
-            includeInformational: extraRecordTypes.value.includes("INFORMATIONAL"),
-            includeSurvey: extraRecordTypes.value.includes("SURVEY"),
+            includeMigrated: extraRecordTypes.value?.includes("MIGRATED"),
+            includeMemberships: extraRecordTypes.value?.includes("MEMBERSHIPS"),
+            includeInformational: extraRecordTypes.value?.includes("INFORMATIONAL"),
+            includeSurvey: extraRecordTypes.value?.includes("SURVEY"),
           })
           .then((response) => {
             records.value = response.data.items;

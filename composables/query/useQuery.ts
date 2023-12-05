@@ -8,7 +8,7 @@ methods. E.g. boolearQuery will parse the query string
 and return a boolean.
 */
 
-import { singleQuery } from "~/helpers/queryUtils";
+import { getFirstOrValue } from "~/helpers/queryUtils";
 
 export default function () {
   const route = useRoute();
@@ -36,12 +36,12 @@ export default function () {
 
   function arrayQuery(
     queryKey: string,
-    defaultValue: (string | null)[] = [],
+    defaultValue: (string | null)[] | undefined = [],
     history: boolean = true,
     resetPage: boolean = false,
   ) {
     return computed({
-      get: (): (string | null | undefined)[] => {
+      get: (): (string | null)[] | undefined => {
         const val = route.query[queryKey];
         if (val === undefined) {
           return defaultValue;
@@ -52,7 +52,7 @@ export default function () {
           return val;
         }
       },
-      set: (newValue: (string | null | undefined)[]) => {
+      set: (newValue: (string | null)[] | undefined) => {
         const newQuery = Object.assign({}, route.query, {
           [queryKey]: newValue,
         });
@@ -76,10 +76,10 @@ export default function () {
 
   function booleanQuery(queryKey: string, history: boolean = true, resetPage: boolean = false) {
     return computed({
-      get: (): boolean | null | undefined => {
-        return singleQuery(route.query[queryKey]) === "true";
+      get: (): boolean | undefined => {
+        return getFirstOrValue(route.query[queryKey]) === "true";
       },
-      set: (newValue: boolean | null | undefined) => {
+      set: (newValue: boolean | undefined) => {
         pushNewQuery(queryKey, newValue, history, resetPage);
       },
     });
@@ -87,21 +87,21 @@ export default function () {
 
   function stringQuery(
     queryKey: string,
-    defaultValue: string | null = null,
+    defaultValue: string | undefined = undefined,
     history: boolean = true,
     resetPage: boolean = false,
   ) {
     return computed({
-      get: (): string | null | undefined => {
-        const val = singleQuery(route.query[queryKey]);
+      get: (): string | undefined => {
+        const val = getFirstOrValue(route.query[queryKey]);
         if (val === null || val === undefined) {
           return defaultValue;
         }
         return val;
       },
-      set: (newValue: string | null | undefined) => {
+      set: (newValue: string | undefined) => {
         // Check if the query has actually changed
-        const current = singleQuery(route.query[queryKey]);
+        const current = getFirstOrValue(route.query[queryKey]);
         if (current !== null && current !== undefined) {
           // If no change, skip navigation
           if (current === newValue) {
@@ -115,21 +115,21 @@ export default function () {
 
   function integerQuery(
     queryKey: string,
-    defaultValue: number | null = null,
+    defaultValue: number | undefined = undefined,
     history: boolean = true,
     resetPage: boolean = false,
   ) {
     return computed({
-      get: (): number | null | undefined => {
-        const val = singleQuery(route.query[queryKey]);
+      get: (): number | undefined => {
+        const val = getFirstOrValue(route.query[queryKey]);
         if (val === null || val === undefined) {
           return defaultValue;
         }
         return parseInt(val);
       },
-      set: (newValue: number | null | undefined) => {
+      set: (newValue: number | undefined) => {
         // Check if the query has actually changed
-        const current = singleQuery(route.query[queryKey]);
+        const current = getFirstOrValue(route.query[queryKey]);
         if (current !== null && current !== undefined) {
           // If no change, skip navigation
           if (parseInt(current) === newValue) {

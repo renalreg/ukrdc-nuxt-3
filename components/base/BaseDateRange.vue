@@ -69,11 +69,6 @@
 <script lang="ts">
 import { type DateRange, nowString } from "~/helpers/dateUtils";
 
-interface DatePickerRange {
-  start: Date | null;
-  end: Date | null;
-}
-
 export default defineComponent({
   props: {
     modelValue: {
@@ -110,8 +105,8 @@ export default defineComponent({
     function setLastNDays(daysAgo: number): void {
       showCustom.value = false;
       const newRange: DateRange = {
-        start: nowString(-daysAgo),
-        end: nowString(0),
+        start: nowString(-daysAgo) ?? undefined,
+        end: nowString(0) ?? undefined,
       };
       emit("update:modelValue", newRange);
     }

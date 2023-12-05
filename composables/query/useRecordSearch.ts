@@ -11,7 +11,7 @@ export default function () {
   const searchboxString = ref("");
 
   // Check if all terms in an array are empty
-  function arrayIsEmpty(arr: (string | null)[]) {
+  function arrayIsEmpty(arr: (string | null | undefined)[]) {
     return arr.every((t) => {
       return !t;
     });
@@ -20,13 +20,13 @@ export default function () {
   // Check if there are currently any search terms in the URL query
   const searchQueryIsPopulated = computed(() => {
     if (
-      // If searchTermArray is an array (rather than null or undefined)
+      // If searchTermArray is an array (rather than nullish or undefined)
       Array.isArray(searchTermArray.value) &&
       // And a value exists
       searchTermArray.value &&
       // And the value is not an empty array
       searchTermArray.value.length > 0 &&
-      // And the array contains some non-null or empty items
+      // And the array contains some non-nullish or empty items
       !arrayIsEmpty(searchTermArray.value)
     ) {
       return true;
@@ -51,7 +51,7 @@ export default function () {
     // Effectively the inverse of searchSubmit
     if (searchQueryIsPopulated) {
       let q = "";
-      for (const term of searchTermArray.value) {
+      for (const term of searchTermArray.value ?? []) {
         q = q.concat(`${term} & `);
       }
       searchboxString.value = q.slice(0, -3); // Remove trailing ' & '

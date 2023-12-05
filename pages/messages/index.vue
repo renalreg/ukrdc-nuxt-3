@@ -40,7 +40,7 @@
           </UButtonGroup>
         </form>
 
-        <UButton v-show="nationalId" size="sm" @click="nationalId = null">Show Results From All Patients</UButton>
+        <UButton v-show="nationalId" size="sm" @click="nationalId = undefined">Show Results From All Patients</UButton>
 
         <UButton
           class="flex-shrink"
@@ -132,7 +132,7 @@ export default defineComponent({
     const { isAdmin } = usePermissions();
 
     // Set up URL query params for additional filters
-    const nationalId = stringQuery("nationalid", null, true, true);
+    const nationalId = stringQuery("nationalid", undefined, true, true);
     const nationalIdSearchString = ref<string>("");
 
     // Set initial date dateRange
@@ -155,10 +155,10 @@ export default defineComponent({
           page: page.value ?? 1,
           size: size.value,
           orderBy: orderBy.value as OrderBy,
-          status: statuses.value.filter((n) => n) as string[],
-          since: dateRange.value.start ?? undefined,
-          until: dateRange.value.end ?? undefined,
-          facility: selectedFacility.value ?? undefined,
+          status: statuses.value?.filter((n) => n) as string[],
+          since: dateRange.value.start,
+          until: dateRange.value.end,
+          facility: selectedFacility.value,
           channel: [selectedChannel.value].filter((n) => n) as string[],
           ni: [nationalId.value].filter((n) => n) as string[],
         })
@@ -181,20 +181,9 @@ export default defineComponent({
       getMessages();
     });
 
-    watch(
-      [
-        page,
-        orderBy,
-        selectedFacility,
-        selectedChannel,
-        nationalId,
-        () => JSON.stringify(dateRange.value), // Stringify to watch for actual value changes
-        () => JSON.stringify(statuses.value), // Stringify to watch for actual value changes
-      ],
-      () => {
-        getMessages();
-      },
-    );
+    watch([page, orderBy, selectedFacility, selectedChannel, nationalId, dateRange, statuses], () => {
+      getMessages();
+    });
 
     return {
       fetchInProgress,
