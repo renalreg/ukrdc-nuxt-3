@@ -31,7 +31,14 @@
             option-attribute="name"
             value-attribute="value"
             class="w-48"
-          />
+          >
+            <template #label>
+              <span v-if="statuses?.length" class="truncate">
+                {{ statuses?.length }} {{ statuses?.length > 1 ? "statuses" : "status" }} selected
+              </span>
+              <span v-else>Select status</span>
+            </template>
+          </USelectMenu>
         </div>
         <UButton
           class="flex-shrink"

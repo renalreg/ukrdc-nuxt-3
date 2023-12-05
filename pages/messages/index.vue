@@ -26,12 +26,14 @@
       <div class="flex flex-col gap-2 lg:flex-row">
         <BaseCollapseHeader v-model="advancedOpen" class="flex-grow" label="More Options"></BaseCollapseHeader>
 
-        <USelectMenu
-          v-model="statuses"
-          :options="['STORED', 'RECEIVED', 'ERROR', 'RESOLVED']"
-          multiple
-          placeholder="Select status"
-        />
+        <USelectMenu v-model="statuses" :options="['STORED', 'RECEIVED', 'ERROR', 'RESOLVED']" multiple>
+          <template #label>
+            <span v-if="statuses?.length" class="truncate">
+              {{ statuses?.length }} {{ statuses?.length > 1 ? "statuses" : "status" }} selected
+            </span>
+            <span v-else>Select status</span>
+          </template>
+        </USelectMenu>
 
         <form v-show="!nationalId" class="flex" @submit.prevent="nationalId = nationalIdSearchString.trim()">
           <UButtonGroup size="sm" orientation="horizontal">

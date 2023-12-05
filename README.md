@@ -1,13 +1,5 @@
 # ukrdc-nuxt
 
-## Pre-production todo
-
-Stuff to do before we deploy to production/live
-
-- [ ] Label all unlabelled USelect boxes
-- [ ] Final full type check
-
-
 ## Developer Installation
 
 ### Prerequisites

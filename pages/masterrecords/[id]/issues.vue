@@ -18,7 +18,14 @@
             option-attribute="name"
             value-attribute="value"
             class="w-48"
-          />
+          >
+            <template #label>
+              <span v-if="workItemStatuses?.length" class="truncate">
+                {{ workItemStatuses?.length }} {{ workItemStatuses?.length > 1 ? "statuses" : "status" }} selected
+              </span>
+              <span v-else>Select status</span>
+            </template>
+          </USelectMenu>
         </div>
       </template>
       <!-- Skeleton results -->
@@ -53,7 +60,7 @@
       <ul class="divide-y divide-gray-300">
         <li v-for="item in relatedErrors" :key="item.id" :item="item" class="hover:bg-gray-50">
           <NuxtLink :to="`/messages/${item.id}`">
-            <MessagesListItem :item="item" />
+            <MessagesListItem :item="item" :show-patient-filter="false" />
           </NuxtLink>
         </li>
       </ul>
