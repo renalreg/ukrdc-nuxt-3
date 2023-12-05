@@ -142,14 +142,14 @@ export default defineComponent({
 
       codesApi
         .getCodeList({
-          page: page.value || 1,
+          page: page.value ?? 1,
           size: size.value,
           codingStandard: selectedStandard.value ? [selectedStandard.value] : undefined,
-          search: searchboxString.value || undefined,
+          search: searchboxString.value || undefined, // Leave undefined if value is falsey (e.g. empty string)
         })
         .then((response) => {
           codes.value = response.data.items;
-          total.value = response.data.total;
+          total.value = response.data.total ?? 0;
           page.value = response.data.page ?? 0;
           size.value = response.data.size ?? 0;
           fetchInProgress.value = false;

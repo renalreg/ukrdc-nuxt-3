@@ -54,7 +54,7 @@
                   <h1
                     class="flex-grow"
                     :class="
-                      (facility.statistics.patientsReceivingMessageError || 0) > 0 ? 'text-red-600' : 'text-green-700'
+                      (facility.statistics.patientsReceivingMessageError ?? 0) > 0 ? 'text-red-600' : 'text-green-700'
                     "
                   >
                     {{ facility.statistics.patientsReceivingMessageError }}

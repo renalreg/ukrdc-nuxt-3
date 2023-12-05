@@ -120,7 +120,7 @@ export default defineComponent({
     const advancedOpen = ref(false);
 
     const anySearchTermsEntered = computed(() => {
-      return searchQueryIsPopulated.value || selectedFacility.value;
+      return searchQueryIsPopulated.value ?? selectedFacility.value;
     });
 
     // Data fetching
@@ -134,7 +134,7 @@ export default defineComponent({
         searchApi
           .getSearchRecords({
             search: searchTermArray.value.filter((n) => n) as string[],
-            page: page.value || 1,
+            page: page.value ?? 1,
             size: size.value,
             facility: selectedFacility.value ? [selectedFacility.value] : undefined,
             includeMigrated: extraRecordTypes.value.includes("MIGRATED"),
@@ -145,7 +145,7 @@ export default defineComponent({
           .then((response) => {
             records.value = response.data.items;
             page.value = response.data.page ?? 0;
-            total.value = response.data.total;
+            total.value = response.data.total ?? 0;
             size.value = response.data.size ?? 0;
 
             searchInProgress.value = false;

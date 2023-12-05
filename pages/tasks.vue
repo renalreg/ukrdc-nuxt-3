@@ -61,9 +61,9 @@ export default defineComponent({
     // Data fetching
 
     async function getTasks() {
-      const tasksPage = await fetchTasksList(page.value || 1, size.value);
+      const tasksPage = await fetchTasksList(page.value ?? 1, size.value);
       tasks.value = tasksPage.items;
-      total.value = tasksPage.total;
+      total.value = tasksPage.total ?? 0;
       page.value = tasksPage.page ?? 0;
       size.value = tasksPage.size ?? 0;
     }

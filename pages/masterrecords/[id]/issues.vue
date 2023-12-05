@@ -157,7 +157,7 @@ export default defineComponent({
       masterRecordsApi
         .getMasterRecordMessages({
           recordId: props.record.id,
-          page: relatedErrorsPage.value || 1,
+          page: relatedErrorsPage.value ?? 1,
           size: relatedErrorsSize.value,
           orderBy: "desc",
           status: ["ERROR"],
@@ -166,7 +166,7 @@ export default defineComponent({
           relatedErrors.value = response.data.items;
           relatedErrorsPage.value = response.data.page ?? 0;
           relatedErrorsSize.value = response.data.size ?? 0;
-          relatedErrorsTotal.value = response.data.total;
+          relatedErrorsTotal.value = response.data.total ?? 0;
         });
     }
 

@@ -96,7 +96,7 @@ export default defineComponent({
           // Filter by search term
           .filter(
             (option) =>
-              option.id.toLowerCase().includes(searchboxString.value.toLowerCase()) ||
+              option.id.toLowerCase().includes(searchboxString.value.toLowerCase()) ??
               option.description?.toLowerCase().includes(searchboxString.value.toLowerCase()),
           )
           // Filter by additional filters, such as PkbOut

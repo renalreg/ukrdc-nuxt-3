@@ -61,7 +61,7 @@
           <div v-for="(connectorMessageData, type) in availableconnectorMessageData" :key="type">
             <UCard v-if="item.key == type" :ui="{ body: { padding: '' } }">
               <BaseCodeReader
-                :content="connectorMessageData.content || ''"
+                :content="connectorMessageData.content ?? ''"
                 :content-type="connectorMessageData.dataType"
                 class="sensitive"
               />

@@ -1,4 +1,5 @@
 import { type WritableComputedRef } from "vue";
+
 import useQuery from "~/composables/query/useQuery";
 
 export default function () {
@@ -13,7 +14,7 @@ export default function () {
   // fail due to trying to iterate a null.
   const page: WritableComputedRef<number> = computed({
     get(): number {
-      return pageQuery.value || 1;
+      return pageQuery.value ?? 1;
     },
     set(newPage: number): void {
       pageQuery.value = newPage;

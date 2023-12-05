@@ -86,15 +86,15 @@ export default defineComponent({
       masterRecordsApi
         .getMasterRecordMessages({
           recordId: props.record.id,
-          page: page.value || 1,
+          page: page.value ?? 1,
           size: size.value,
           orderBy: orderBy.value as OrderBy,
-          since: dateRange.value.start || undefined,
-          until: dateRange.value.end || undefined,
+          since: dateRange.value.start ?? undefined,
+          until: dateRange.value.end ?? undefined,
         })
         .then((response) => {
           messages.value = response.data.items;
-          total.value = response.data.total;
+          total.value = response.data.total ?? 0;
           page.value = response.data.page ?? 0;
           size.value = response.data.size ?? 0;
         });

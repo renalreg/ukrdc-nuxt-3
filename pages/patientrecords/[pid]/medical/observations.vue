@@ -81,7 +81,7 @@ export default defineComponent({
       patientRecordsApi
         .getPatientObservations({
           pid: props.record.pid,
-          page: page.value || 1,
+          page: page.value ?? 1,
           size: size.value,
           code: selectedCode.value ? [selectedCode.value] : undefined,
         })

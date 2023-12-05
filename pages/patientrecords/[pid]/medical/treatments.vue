@@ -49,17 +49,17 @@
                 <br />
                 <p><b>Admit reason code: </b>{{ row.admitReasonCodeStd }} / {{ row.admitReasonCode }}</p>
                 <p>
-                  <b>Discharge reason code: </b>{{ row.dischargeReasonCodeStd || "None" }} /
-                  {{ row.dischargeReasonCode || "None" }}
+                  <b>Discharge reason code: </b>{{ row.dischargeReasonCodeStd ?? "None" }} /
+                  {{ row.dischargeReasonCode ?? "None" }}
                 </p>
                 <br />
                 <p>
-                  <b>Healthcare facility code: </b>{{ row.healthCareFacilityCodeStd || "None" }} /
-                  {{ row.healthCareFacilityCode || "None" }}
+                  <b>Healthcare facility code: </b>{{ row.healthCareFacilityCodeStd ?? "None" }} /
+                  {{ row.healthCareFacilityCode ?? "None" }}
                 </p>
                 <p>
-                  <b>Discharge location code: </b>{{ row.dischargeLocationCodeStd || "None" }} /
-                  {{ row.dischargeLocationCode || "None" }}
+                  <b>Discharge location code: </b>{{ row.dischargeLocationCodeStd ?? "None" }} /
+                  {{ row.dischargeLocationCode ?? "None" }}
                 </p>
               </div>
             </BaseInfoTooltip>

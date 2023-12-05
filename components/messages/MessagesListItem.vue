@@ -7,7 +7,7 @@
       <div class="flex items-center gap-2">
         <div class="truncate">
           <h5 class="sensitive truncate md:inline">
-            {{ item.filename || "Internal file" }}
+            {{ item.filename ?? "Internal file" }}
           </h5>
           <h5 class="truncate md:inline">
             {{ item.mirthChannel ? `on ${item.mirthChannel}` : "" }}
@@ -47,7 +47,7 @@
       <div class="flex-grow">
         <h5>Patient Number</h5>
         <p class="sensitive mt-2">
-          {{ item.ni || "None Found" }}
+          {{ item.ni ?? "None Found" }}
         </p>
       </div>
     </div>

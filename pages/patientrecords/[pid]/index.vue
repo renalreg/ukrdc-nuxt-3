@@ -1,12 +1,12 @@
 <template>
   <div>
     <!-- Demographics header-->
-    <UCard class="mb-4">
+    <UCard v-if="record.patient" class="mb-4">
       <BaseDescriptionListGrid>
         <BaseDescriptionListGridItem>
           <dt>Names</dt>
           <dd>
-            <p v-for="item in record.patient?.names || []" :key="item.given + item.family" class="sensitive">
+            <p v-for="item in record.patient.names ?? []" :key="item.given + item.family" class="sensitive">
               {{ item.given }} {{ item.family }}
             </p>
           </dd>
@@ -21,7 +21,7 @@
         <BaseDescriptionListGridItem>
           <dt>Ethnicity</dt>
           <dd class="sensitive">
-            {{ record.patient.ethnicGroupDescription || record.patient.ethnicGroupCode || "Unknown" }}
+            {{ record.patient.ethnicGroupDescription ?? record.patient.ethnicGroupCode ?? "Unknown" }}
           </dd>
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
@@ -45,7 +45,7 @@
 
     <!-- Record message banners -->
     <NuxtLink :to="`/patientrecords/${record.pid}/messages`">
-      <LatestMessageAlert :message="latestMessage || undefined" :is-loading="latestMessageIsLoading" />
+      <LatestMessageAlert :message="latestMessage ?? undefined" :is-loading="latestMessageIsLoading" />
     </NuxtLink>
 
     <!-- Main content container-->
@@ -193,7 +193,7 @@ export default defineComponent({
 
     // Demographic comparisons
 
-    const genderMatches = computed<Boolean | null>(() => {
+    const genderMatches = computed<boolean | null>(() => {
       if (related.value) {
         for (const relatedRecord of related.value) {
           // If a gender code is present on the related record,
@@ -212,7 +212,7 @@ export default defineComponent({
       return null;
     });
 
-    const birthTimeMatches = computed<Boolean | null>(() => {
+    const birthTimeMatches = computed<boolean | null>(() => {
       if (related.value) {
         for (const relatedRecord of related.value) {
           if (relatedRecord.patient?.birthTime !== props.record.patient?.birthTime) {
@@ -224,7 +224,7 @@ export default defineComponent({
       return null;
     });
 
-    const deathTimeMatches = computed<Boolean | null>(() => {
+    const deathTimeMatches = computed<boolean | null>(() => {
       if (related.value) {
         for (const relatedRecord of related.value) {
           if (relatedRecord.patient?.deathTime !== props.record.patient?.deathTime) {

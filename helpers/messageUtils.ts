@@ -1,4 +1,4 @@
-import { MessageSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
 
 export const allStatuses = ["STORED", "RECEIVED", "ERROR", "RESOLVED"];
 

@@ -41,7 +41,7 @@
       <template #header>
         <h2>Files</h2>
       </template>
-      <BaseAttachment :filename="message.filename || `${message.facility}-${message.id}.txt`">
+      <BaseAttachment :filename="message.filename ?? `${message.facility}-${message.id}.txt`">
         <UButton variant="link" :to="`/messages/${message.id}/source`"> View </UButton>
         <UButton variant="link" @click="downloadMessageSource"> Download </UButton>
       </BaseAttachment>
@@ -204,7 +204,7 @@ export default defineComponent({
         })
         .then((response) => {
           const blob = new Blob([response.data.content ? response.data.content : ""]);
-          saveAs(blob, props.message.filename || `${props.message.facility}-{message.id}.txt`);
+          saveAs(blob, props.message.filename ?? `${props.message.facility}-{message.id}.txt`);
         });
     }
 

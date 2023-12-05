@@ -9,7 +9,7 @@
       />
       <h5 v-else>Diagnosis Description</h5>
       <p class="sensitive mt-2" :class="[{ 'lg:truncate': !small }]">
-        {{ item.description || item.diagnosisDesc || "Unknown" }}
+        {{ item.description ?? item.diagnosisDesc ?? "Unknown" }}
       </p>
     </div>
     <!-- Entered On-->
@@ -23,14 +23,14 @@
     <div>
       <h5 class="truncate">Diagnosis Type</h5>
       <p class="sensitive mt-2 truncate capitalize">
-        {{ item.diagnosistype || "Unknown" }}
+        {{ item.diagnosistype ?? "Unknown" }}
       </p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { ExtendedCauseOfDeathSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type ExtendedCauseOfDeathSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";
 import { formatDate } from "~/helpers/dateUtils";

@@ -4,7 +4,7 @@
       <template #header>
         <div class="mb-1">
           <h2 v-if="patientDocument">
-            {{ patientDocument.documentname || "Unnamed Document" }}
+            {{ patientDocument.documentname ?? "Unnamed Document" }}
           </h2>
           <USkeleton v-else class="h-6 w-1/2" />
         </div>
@@ -19,21 +19,21 @@
         <BaseDescriptionListGridItem>
           <dt>Entered At</dt>
           <dd v-if="patientDocument">
-            {{ patientDocument.enteredatdesc || patientDocument.enteredatcode || "Unknown Facility" }}
+            {{ patientDocument.enteredatdesc ?? patientDocument.enteredatcode ?? "Unknown Facility" }}
           </dd>
           <USkeleton v-else class="h-6 w-1/2" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Entered By</dt>
           <dd v-if="patientDocument">
-            {{ patientDocument.enteredbydesc || patientDocument.enteredbycode || "Unknown Person" }}
+            {{ patientDocument.enteredbydesc ?? patientDocument.enteredbycode ?? "Unknown Person" }}
           </dd>
           <USkeleton v-else class="h-6 w-1/2" />
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem>
           <dt>Clinician:</dt>
           <dd v-if="patientDocument">
-            {{ patientDocument.cliniciandesc || patientDocument.cliniciancode || "Unknown Clinician" }}
+            {{ patientDocument.cliniciandesc ?? patientDocument.cliniciancode ?? "Unknown Clinician" }}
           </dd>
           <USkeleton v-else class="h-6 w-1/2" />
         </BaseDescriptionListGridItem>
@@ -65,7 +65,7 @@
           </dd>
         </BaseDescriptionListGridItem>
         <UCard v-if="patientDocument" class="mt-2 sm:col-span-2">
-          <BaseAttachment :filename="filename || 'Unknown filename'">
+          <BaseAttachment :filename="filename ?? 'Unknown filename'">
             <UButton variant="link" @click="downloadPatientRecordDocument()"> Download </UButton>
           </BaseAttachment>
         </UCard>
@@ -109,7 +109,7 @@ export default defineComponent({
       if (!patientDocument.value) {
         return undefined;
       }
-      return patientDocument.value.filename || `${patientDocument.value.documentname}.txt`;
+      return patientDocument.value.filename ?? `${patientDocument.value.documentname}.txt`;
     });
 
     // Data fetching
@@ -141,7 +141,7 @@ export default defineComponent({
         )
         .then((response) => {
           const blob = new Blob([response.data]);
-          saveAs(blob, patientDocument.value?.filename || `${patientDocument.value?.documentname}.txt`);
+          saveAs(blob, patientDocument.value?.filename ?? `${patientDocument.value?.documentname}.txt`);
         });
     }
 

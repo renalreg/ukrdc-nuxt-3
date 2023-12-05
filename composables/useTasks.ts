@@ -1,4 +1,4 @@
-import { PageTrackableTaskSchema, TrackableTaskSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PageTrackableTaskSchema, type TrackableTaskSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import useApi from "./useApi";
 

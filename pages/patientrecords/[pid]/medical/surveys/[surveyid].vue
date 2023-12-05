@@ -41,7 +41,7 @@
         <UCard :ui="{ body: { padding: '' } }" class="mb-4">
           <template #header>
             <h3>
-              {{ group || "Ungrouped" }}
+              {{ group ?? "Ungrouped" }}
             </h3>
           </template>
           <UTable :rows="questions" :columns="columns" />
@@ -128,7 +128,7 @@ export default defineComponent({
           groups[question.questionGroup] = [];
         }
         // Add questions to the associated group
-        groups[question.questionGroup || "Ungrouped"].push(question);
+        groups[question.questionGroup ?? "Ungrouped"].push(question);
       }
       return groups;
     });

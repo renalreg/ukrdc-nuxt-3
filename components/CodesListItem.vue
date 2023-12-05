@@ -8,18 +8,18 @@ Single item of the codes list used in the Codes page.
     <div class="col-span-2">
       <CodeTitle :code="code.code" :coding-standard="code.codingStandard" />
       <p class="mt-2 truncate">
-        {{ code.description || "No description found" }}
+        {{ code.description ?? "No description found" }}
       </p>
     </div>
     <!-- Extra fields  -->
     <div class="col-span-1 hidden lg:block">
       <div>
         <h5 class="inline">Type:</h5>
-        <p class="inline">{{ code.objectType || "None" }}</p>
+        <p class="inline">{{ code.objectType ?? "None" }}</p>
       </div>
       <div class="mt-2">
         <h5 class="inline">Units:</h5>
-        <p class="inline">{{ code.units || "None" }}</p>
+        <p class="inline">{{ code.units ?? "None" }}</p>
       </div>
     </div>
   </div>

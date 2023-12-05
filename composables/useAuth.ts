@@ -19,7 +19,7 @@ export default function () {
 
   // When auth state changes, update authState.value
   function _handleAuthStateUpdate(newAuthState: AuthState) {
-    authState.value = Object.assign(authState.value || {}, newAuthState);
+    authState.value = Object.assign(authState.value ?? {}, newAuthState);
   }
 
   // Subscribe to auth state changes

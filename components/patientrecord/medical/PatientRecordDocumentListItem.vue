@@ -5,15 +5,15 @@
       <div class="col-span-1 lg:col-span-2">
         <div class="truncate">
           <h5 class="truncate md:inline">
-            {{ item.documentname || item.id }}
+            {{ item.documentname ?? item.id }}
           </h5>
         </div>
         <div class="mt-2 flex">
           <span class="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
-            {{ item.filetype || "text" }}
+            {{ item.filetype ?? "text" }}
           </span>
           <p class="ml-2 line-clamp-1 flex-grow">
-            {{ item.filename || `${item.documentname}.txt` }}
+            {{ item.filename ?? `${item.documentname}.txt` }}
           </p>
         </div>
       </div>
@@ -21,7 +21,7 @@
       <div class="col-span-1">
         <h5>Entered By</h5>
         <p class="mt-2">
-          {{ item.enteredbydesc || "Unknown author" }}
+          {{ item.enteredbydesc ?? "Unknown author" }}
         </p>
       </div>
       <!-- Origin  -->
@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { DocumentSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import { type DocumentSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import { formatDate } from "~/helpers/dateUtils";
 

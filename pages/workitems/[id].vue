@@ -367,7 +367,7 @@ export default defineComponent({
       updateRelatedMessages();
 
       // Apply existing comment
-      customComment.value = record.value?.updateDescription || "";
+      customComment.value = record.value?.updateDescription ?? "";
 
       // Check if the workitem has already been merged and is ready to be closed
       checkMerged();

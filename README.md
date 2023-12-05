@@ -9,7 +9,10 @@ Stuff to do before we deploy to production/live
 - [x] Fix VMenu imports
 - [x] Fix message list item info tooltip
 - [x] Blank Mirth message components with sensitive content
-- [ ] Check all uses of ?? (nullish coalescing) vs || (falsy OR)
+- [x] Check all uses of ?? (nullish coalescing) vs || (falsy OR)
+- [ ] Label all unlabelled USelect boxes
+- [ ] Fix URL query composable types
+  - [ ] Fix all lines like `since: dateRange.value.start ?? undefined`,
 - [x] Fix (or work around) https://github.com/nathanreyes/v-calendar/issues/1415
 
 ## Developer Installation

@@ -2,7 +2,7 @@
   <NuxtLayout>
     <div class="flex h-full flex-col items-center justify-center">
       <div class="block items-center justify-center sm:flex">
-        <h1 class="sm:mr-8">{{ error.statusCode || "Error" }}</h1>
+        <h1 class="sm:mr-8">{{ error.statusCode ?? "Error" }}</h1>
         <div class="sm:border-l sm:pl-8">
           <h2 class="whitespace-pre">{{ errorTitle }}</h2>
           <div v-if="error.message">
@@ -57,7 +57,7 @@ export default defineComponent({
 
     const errorTitle = computed(() => {
       if (props.error.statusCode && props.error.statusCode in friendlyErrorStatus) {
-        return friendlyErrorStatus[props.error.statusCode] || "Error";
+        return friendlyErrorStatus[props.error.statusCode] ?? "Error";
       }
       return "An unknown error occured";
     });

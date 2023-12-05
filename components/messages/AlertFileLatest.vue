@@ -14,7 +14,7 @@
       <UAlert
         v-else
         icon="i-heroicons-information-circle-20-solid"
-        :title="latestMessageInfo || 'No message information available'"
+        :title="latestMessageInfo ?? 'No message information available'"
       />
     </div>
     <div v-else>

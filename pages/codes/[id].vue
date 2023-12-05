@@ -6,18 +6,18 @@
       <div>
         <CodeTitle :code="code.code" :coding-standard="code.codingStandard" />
         <p class="mt-2">
-          {{ code.description || "No description found" }}
+          {{ code.description ?? "No description found" }}
         </p>
       </div>
       <!-- Extra fields  -->
       <div>
         <div>
           <h5 class="inline">Type:</h5>
-          <p class="inline">{{ code.objectType || "None" }}</p>
+          <p class="inline">{{ code.objectType ?? "None" }}</p>
         </div>
         <div class="mt-2">
           <h5 class="inline">Units:</h5>
-          <p class="inline">{{ code.units || "None" }}</p>
+          <p class="inline">{{ code.units ?? "None" }}</p>
         </div>
       </div>
       <!-- Code lifecycle  -->

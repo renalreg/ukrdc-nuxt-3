@@ -98,17 +98,19 @@ export default defineComponent({
 
   setup(props) {
     function exportData() {
-      const rows: (string | number)[][] = [
-        [props.labelled2d.metadata.axisTitles?.x || "x", props.labelled2d.metadata.axisTitles?.y || "y"],
-      ];
-      for (let i = 0; i < props.labelled2d.data.x.length; i++) {
-        rows.push([props.labelled2d.data.x[i], props.labelled2d.data.y[i] as number]);
-      }
+      if (props.labelled2d) {
+        const rows: (string | number)[][] = [
+          [props.labelled2d.metadata.axisTitles?.x ?? "x", props.labelled2d.metadata.axisTitles?.y ?? "y"],
+        ];
+        for (let i = 0; i < props.labelled2d.data.x.length; i++) {
+          rows.push([props.labelled2d.data.x[i], props.labelled2d.data.y[i] as number]);
+        }
 
-      const blob = new Blob([buildCsv(rows)], {
-        type: "text/plain;charset=utf-8",
-      });
-      saveAs(blob, `${props.exportFileName}.csv`);
+        const blob = new Blob([buildCsv(rows)], {
+          type: "text/plain;charset=utf-8",
+        });
+        saveAs(blob, `${props.exportFileName}.csv`);
+      }
     }
 
     return {

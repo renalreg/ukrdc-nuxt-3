@@ -1,4 +1,4 @@
-import { NumberSchema, PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import { type NumberSchema, type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 const membershipFacilities = ["UKRR", "PV", "PKB"];
 const migratedExtracts = ["PVMIG", "HSMIG"];
@@ -64,11 +64,11 @@ export function isRealSendingFacility(record: PatientRecordSummarySchema): boole
 // General record utilities
 
 export function firstForename(record: PatientRecordSummarySchema): string {
-  return record.patient?.names[0]?.given || "";
+  return record.patient?.names[0]?.given ?? "";
 }
 
 export function firstSurname(record: PatientRecordSummarySchema): string {
-  return record.patient?.names[0]?.family || "";
+  return record.patient?.names[0]?.family ?? "";
 }
 
 export function firstMRN(record: PatientRecordSummarySchema): localNumber | null {
