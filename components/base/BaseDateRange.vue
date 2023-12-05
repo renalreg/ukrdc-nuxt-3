@@ -16,15 +16,13 @@
     </div>
     <div v-show="showCustom" class="flex h-8 w-full flex-1">
       <VDatePicker
+        v-model.range.string="modelValueProxy"
         class="w-full"
-        :model-value="modelValue"
         :is24hr="true"
         :popover="{ visibility: 'hidden', placement: 'bottom' }"
         :step="1"
         mode="dateTime"
         color="indigo"
-        is-range
-        @update:model-value="onInput"
       >
         <template #default="{ inputValue, inputEvents, showPopover }">
           <div class="flex h-full flex-row items-center justify-start" @click="showPopover">
@@ -118,13 +116,18 @@ export default defineComponent({
       emit("update:modelValue", newRange);
     }
 
-    function onInput(value: DatePickerRange) {
-      const emitValue = {
-        start: value.start?.toISOString(),
-        end: value.end?.toISOString(),
-      };
-      emit("update:modelValue", emitValue);
-    }
+    // Proxy object for the v-calendar model value.
+    // This allows us to use v-calendar model modifiers (https://vcalendar.io/datepicker/basics.html#model-modifiers)
+    // specifically v-model.range.string to get a range of ISO formatted dates,
+    // and pass the modified model values back up to the parent component.
+    const modelValueProxy = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(value) {
+        emit("update:modelValue", value);
+      },
+    });
 
     return {
       showCustom,
@@ -132,7 +135,7 @@ export default defineComponent({
       lastNDays,
       setLastNDays,
       clear,
-      onInput,
+      modelValueProxy,
     };
   },
 });
