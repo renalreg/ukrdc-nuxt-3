@@ -23,6 +23,16 @@ export default defineNuxtPlugin((nuxtApp) => {
       new Sentry.BrowserTracing({
         routingInstrumentation: Sentry.vueRouterInstrumentation(router),
       }),
+      new Sentry.Feedback({
+        colorScheme: "light",
+        useSentryUser: {
+          email: "email",
+          name: "fullName",
+        },
+        buttonLabel: "Feedback",
+        submitButtonLabel: "Send Feedback",
+        formTitle: "Send Feedback",
+      }),
     ],
     tracesSampleRate: 1.0, // Lower if traffic substantially increases
   });

@@ -16,6 +16,7 @@ export default defineNuxtPlugin((_) => {
       Sentry.setUser({
         id: idToken?.payload.sub,
         email: idToken?.payload.email,
+        fullName: idToken?.payload.name,
       });
     } else {
       Sentry.setUser(null);
