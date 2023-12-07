@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.11.0",
-    "@okta/okta-auth-js": "^7.4.3",
+    "@okta/okta-auth-js": "^7.5.0",
     "@okta/okta-vue": "^5.7.0",
     "@popperjs/core": "^2.11.8",
     "@ukkidney/ukrdc-axios-ts": "^4.4.0",
