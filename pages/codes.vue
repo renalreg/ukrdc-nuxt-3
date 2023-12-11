@@ -62,13 +62,10 @@
         </UCard>
       </div>
       <!-- Code details -->
-      <div class="sticky top-4 h-screen grow">
-        <UButton
-          v-show="$route.params.id"
-          class="mb-4 w-full lg:hidden"
-          :to="{ path: `/codes/`, query: $route.query }"
-          label="Back to List"
-        />
+      <div class="sticky top-4 grow">
+        <NuxtLink v-show="$route.params.id" class="w-full lg:hidden" :to="{ path: `/codes/`, query: $route.query }">
+          <UButton class="mb-4 w-full">Back to List</UButton>
+        </NuxtLink>
         <UCard :class="$route.params.id ? 'block' : 'hidden lg:block'" :ui="{ body: { padding: '' } }" class="py-4">
           <NuxtPage />
         </UCard>
