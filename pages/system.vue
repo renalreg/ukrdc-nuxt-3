@@ -91,9 +91,15 @@ export default defineComponent({
     // Data fetching
 
     onMounted(() => {
-      systemInfoApi.getSystemInfo().then((response) => {
-        serverInfo.value = response.data;
-      });
+      systemInfoApi
+        .getSystemInfo()
+        .then((response) => {
+          serverInfo.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     });
 
     // Config reports

@@ -169,6 +169,10 @@ export default defineComponent({
           })
           .then((response) => {
             patientRecords.value = response.data;
+          })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
           });
       }
       if (hasPermission("ukrdc:workitems:read")) {
@@ -178,6 +182,10 @@ export default defineComponent({
           })
           .then((response) => {
             workItems.value = response.data;
+          })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
           });
       }
 
@@ -205,6 +213,10 @@ export default defineComponent({
         .then((response) => {
           const blob = new Blob([response.data.content ? response.data.content : ""]);
           saveAs(blob, props.message.filename ?? `${props.message.facility}-{message.id}.txt`);
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     }
 

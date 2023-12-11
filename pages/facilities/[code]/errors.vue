@@ -127,6 +127,10 @@ export default defineComponent({
           errorMessagesPage.value = response.data.page ?? 0;
           errorMessagesSize.value = response.data.size ?? 0;
           errorMessagesTotal.value = response.data.total ?? 0;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     }
 

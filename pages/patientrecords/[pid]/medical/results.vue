@@ -159,6 +159,10 @@ export default defineComponent({
           page.value = response.data.page ?? 0;
           size.value = response.data.size ?? 0;
         })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        })
         .finally(() => {
           loading.value = false;
         });
@@ -171,6 +175,10 @@ export default defineComponent({
           })
           .then((response) => {
             availableServices.value = response.data;
+          })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
           });
       }
     }
@@ -186,6 +194,10 @@ export default defineComponent({
           })
           .then((response) => {
             selectedOrder.value = response.data;
+          })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
           });
       }
     }
@@ -222,6 +234,10 @@ export default defineComponent({
             fetchResults();
             itemToDelete.value = null;
             deleteResultAlert.value?.hide();
+          })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
           });
       }
     }
@@ -242,6 +258,10 @@ export default defineComponent({
             fetchResults();
             fetchLabOrder();
             deleteOrderAlert.value?.hide();
+          })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
           });
       }
     }

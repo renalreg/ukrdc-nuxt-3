@@ -92,6 +92,10 @@ export default defineComponent({
         })
         .then((response) => {
           record.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
 
       // Get basic record statistics
@@ -101,6 +105,10 @@ export default defineComponent({
         })
         .then((response) => {
           stats.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
 
       // Generate issues warning message

@@ -30,9 +30,15 @@ export default defineComponent({
     const dash = ref<DashboardSchema>();
 
     onMounted(() => {
-      dashboardApi.getDashboard().then((response) => {
-        dash.value = response.data;
-      });
+      dashboardApi
+        .getDashboard()
+        .then((response) => {
+          dash.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     });
 
     return {

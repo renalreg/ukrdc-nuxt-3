@@ -59,17 +59,18 @@ export default defineComponent({
     const tasks = ref([] as TrackableTaskSchema[]);
 
     // Data fetching
-
-    async function getTasks() {
-      const tasksPage = await fetchTasksList(page.value ?? 1, size.value);
-      tasks.value = tasksPage.items;
-      total.value = tasksPage.total ?? 0;
-      page.value = tasksPage.page ?? 0;
-      size.value = tasksPage.size ?? 0;
-    }
-
-    onMounted(async () => {
-      await getTasks();
+    onMounted(() => {
+      fetchTasksList(page.value ?? 1, size.value)
+        .then((response) => {
+          tasks.value = response.items;
+          total.value = response.total ?? 0;
+          page.value = response.page ?? 0;
+          size.value = response.size ?? 0;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     });
 
     const columns = [

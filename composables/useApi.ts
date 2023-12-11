@@ -18,6 +18,10 @@ import axios from "axios";
 
 import useAuth from "./useAuth";
 
+interface HTTPException {
+  detail: string;
+}
+
 interface PydanticError {
   loc: string[];
   msg: string;
@@ -76,44 +80,44 @@ export default function () {
 
       // A 401 error from the API means unauthenticated, which usually only happens if the user
       // has started a new session and the API Axios instance has sent a request before Okta has
-      // had chance to refresh. In this case we just want to exit the request early and let Okta
-      // handle the refresh.
-      if (e.response?.status === 401) {
-        // Return early
-        throw e;
+      // had chance to refresh.
+      // In this case we just want to reject the request early and let Okta handle the refresh.
+      // There's no need to report to Sentry.
+      if (e.response?.status === 401 || e.response?.status === 403) {
+        return Promise.reject(e);
       }
 
-      // For API 404 errors a resource is usually missing or unavailable, and is
-      // generally handled by the component that triggered the request. Don't show toasts or log.
-      if (e.response?.status === 404) {
-        // Return early
-        throw e;
-      }
-
-      // For internal API server errors, redirect to 500 without propagating
-      // We're assuming here that the API server will log the related error, and so logging
-      // here just leads to duplicate messages.
+      // For internal API server errors, redirect to error page without reporting
+      // We're assuming here that the API server will log the related error, and so reporting
+      // to Sentry here would just leads to duplicate messages.
       if (e.response?.status === 0 || e.response?.status === 500) {
+        // Redirect to error page
         showError({
           fatal: true,
           statusCode: 500,
           message: "An internal error occured. Our developers have been notified.",
         });
-        throw e;
+        // Resolve the promise
+        return Promise.reject(e);
       }
 
-      // Build message and redirect to 422 without propagating
+      // Build message and redirect to error page without reporting
+      // We're again assuming here that the API server will log the related error, and so reporting
+      // to Sentry here just leads to duplicate messages.
       if (e.response?.status === 422) {
+        // Redirect to error page
         const msg = decodePydanticErrors(e.response.data.detail);
         showError({ fatal: true, statusCode: 422, message: msg });
-        throw e;
+        // Resolve the promise
+        return Promise.reject(e);
       }
 
-      // All other error status codes
+      // For all other error codes
 
       // Compute what message to show in the toast
       if (process.client) {
-        const msgToShow = e.response?.data ? e.response.data.detail : e.message;
+        const responseData = e.response?.data as HTTPException;
+        const msgToShow = responseData.detail ?? e.message;
 
         // If we have no message to show, don't create a toast
         if (msgToShow) {
@@ -121,16 +125,18 @@ export default function () {
             title: "Error Fetching Data",
             description: msgToShow,
             color: "red",
-            timeout: 5,
+            timeout: 5000,
           });
         }
       }
 
-      // Log unhandled exceptions to Sentry
-      $sentryCaptureException(e);
+      // Log unhandled exceptions to Sentry, if Sentry is set up
+      if (typeof $sentryCaptureException === "function") {
+        $sentryCaptureException(e);
+      }
 
-      // Re-throw the error so that the component that triggered the request can handle it
-      throw e;
+      // Reject the promise so the component that triggered the request can handle the error
+      return Promise.reject(e);
     },
   );
 

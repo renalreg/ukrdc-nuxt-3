@@ -343,6 +343,10 @@ export default defineComponent({
           messagesPage.value = response.data.page ?? 0;
           messagesSize.value = response.data.size ?? 0;
           messagesTotal.value = response.data.total ?? 0;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     }
 
@@ -354,6 +358,10 @@ export default defineComponent({
         .then((response) => {
           record.value = response.data;
           isWIP.value = response.data.status === 2;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
 
       workItemsApi
@@ -362,6 +370,10 @@ export default defineComponent({
         })
         .then((response) => {
           workItemCollection.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
 
       updateRelatedMessages();

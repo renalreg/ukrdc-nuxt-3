@@ -19,9 +19,14 @@ export default function () {
   function setFacilities() {
     // If we don't already have a list of available facilties, fetch one
     if (facilities.value.length === 0) {
-      facilitiesApi.getFacilityList().then((response) => {
-        facilities.value = response.data;
-      });
+      facilitiesApi
+        .getFacilityList()
+        .then((response) => {
+          facilities.value = response.data;
+        })
+        .catch(() => {
+          facilities.value = [];
+        });
     }
   }
 
