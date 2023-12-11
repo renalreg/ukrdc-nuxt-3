@@ -1,17 +1,14 @@
 <template>
-  <NuxtLayout>
-    <div class="flex h-full flex-col items-center justify-center">
-      <div class="block items-center justify-center sm:flex">
-        <h1 class="sm:mr-8">{{ error.statusCode ?? "Error" }}</h1>
-        <div class="sm:border-l sm:pl-8">
-          <h2 class="whitespace-pre">{{ errorTitle }}</h2>
-          <div v-if="error.message">
-            <p>{{ error.message }}</p>
-          </div>
-        </div>
+  <div class="flex h-screen flex-col items-center justify-center gap-8 divide-x sm:flex-row">
+    <h1>{{ error.statusCode ?? "Error" }}</h1>
+    <div class="pl-8">
+      <h2 class="whitespace-pre">{{ errorTitle }}</h2>
+      <div v-if="error.message">
+        <p>{{ error.message }}</p>
       </div>
+      <UButton to="/" label="Go back" class="mt-2" />
     </div>
-  </NuxtLayout>
+  </div>
 </template>
 
 <script lang="ts">
