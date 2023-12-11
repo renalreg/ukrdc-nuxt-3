@@ -58,6 +58,10 @@ export default defineComponent({
         })
         .then((response) => {
           medications.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     });
 

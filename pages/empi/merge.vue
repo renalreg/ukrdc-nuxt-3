@@ -168,6 +168,10 @@ export default defineComponent({
           })
           .then((response) => {
             superseded.value = response.data;
+          })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
           });
       }
       if (supersedingId.value) {
@@ -177,6 +181,10 @@ export default defineComponent({
           })
           .then((response) => {
             superseding.value = response.data;
+          })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
           });
       }
     }
@@ -280,6 +288,10 @@ export default defineComponent({
             if (callbackPath.value) {
               router.push(callbackPath.value);
             }
+          })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
           })
           .finally(() => {
             const el = beginMergeAlert.value as ModalInterface;

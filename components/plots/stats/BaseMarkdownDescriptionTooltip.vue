@@ -28,7 +28,7 @@ export default defineComponent({
       if (!props.descriptionMarkdown) {
         return "No description available";
       }
-      return DOMPurify.sanitize(marked.parse(props.descriptionMarkdown));
+      return DOMPurify.sanitize(marked.parse(props.descriptionMarkdown) as string);
     });
 
     return {

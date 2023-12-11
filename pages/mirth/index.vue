@@ -60,9 +60,15 @@ export default defineComponent({
 
     // Data fetching
     onMounted(() => {
-      mirthApi.getMirthGroups().then((response) => {
-        mirthGroups.value = response.data;
-      });
+      mirthApi
+        .getMirthGroups()
+        .then((response) => {
+          mirthGroups.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     });
 
     return {

@@ -20,9 +20,14 @@ export default function () {
   function setChannels() {
     // If we don't already have a list of available facilties, fetch one
     if (channels.value.length === 0) {
-      mirthApi.getMirthChannelMap().then((response) => {
-        channels.value = response.data;
-      });
+      mirthApi
+        .getMirthChannelMap()
+        .then((response) => {
+          channels.value = response.data;
+        })
+        .catch(() => {
+          channels.value = [];
+        });
     }
   }
 

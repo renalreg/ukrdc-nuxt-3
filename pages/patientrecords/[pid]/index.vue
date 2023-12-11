@@ -163,6 +163,10 @@ export default defineComponent({
         })
         .then((response) => {
           related.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
 
       // Get latest message data
@@ -173,6 +177,10 @@ export default defineComponent({
         .then((response) => {
           latestMessage.value = response.data;
           latestMessageIsLoading.value = false;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     }
 

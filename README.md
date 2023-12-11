@@ -1,4 +1,4 @@
-# ukrdc-nuxt
+# ukrdc-nuxt-3
 
 ## Developer Installation
 

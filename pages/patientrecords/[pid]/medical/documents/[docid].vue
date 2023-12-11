@@ -122,6 +122,10 @@ export default defineComponent({
         })
         .then((response) => {
           patientDocument.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     });
 
@@ -143,6 +147,10 @@ export default defineComponent({
         .then((response) => {
           const blob = new Blob([response.data]);
           saveAs(blob, patientDocument.value?.filename ?? `${patientDocument.value?.documentname}.txt`);
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     }
 

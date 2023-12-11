@@ -110,6 +110,10 @@ export default defineComponent({
 
           // Assign data
           survey.value = thisSurvey;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     });
 

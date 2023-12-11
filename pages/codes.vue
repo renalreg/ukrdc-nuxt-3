@@ -62,13 +62,10 @@
         </UCard>
       </div>
       <!-- Code details -->
-      <div class="sticky top-4 h-screen grow">
-        <UButton
-          v-show="$route.params.id"
-          class="mb-4 w-full lg:hidden"
-          :to="{ path: `/codes/`, query: $route.query }"
-          label="Back to List"
-        />
+      <div class="sticky top-4 grow">
+        <NuxtLink v-show="$route.params.id" class="w-full lg:hidden" :to="{ path: `/codes/`, query: $route.query }">
+          <UButton class="mb-4 w-full">Back to List</UButton>
+        </NuxtLink>
         <UCard :class="$route.params.id ? 'block' : 'hidden lg:block'" :ui="{ body: { padding: '' } }" class="py-4">
           <NuxtPage />
         </UCard>
@@ -116,24 +113,42 @@ export default defineComponent({
     // Code exporting
 
     function exportCodeList() {
-      codesApi.getCodeListExport().then(({ data }) => {
-        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "code-list.csv");
-      });
+      codesApi
+        .getCodeListExport()
+        .then(({ data }) => {
+          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+          saveAs(blob, "code-list.csv");
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     }
 
     function exportCodeMaps() {
-      codesApi.getCodeMapsExport().then(({ data }) => {
-        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "code-maps.csv");
-      });
+      codesApi
+        .getCodeMapsExport()
+        .then(({ data }) => {
+          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+          saveAs(blob, "code-maps.csv");
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     }
 
     function exportCodeExclusions() {
-      codesApi.getCodeExclusionsExport().then(({ data }) => {
-        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "code-exclusions.csv");
-      });
+      codesApi
+        .getCodeExclusionsExport()
+        .then(({ data }) => {
+          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+          saveAs(blob, "code-exclusions.csv");
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     }
 
     // Data fetching
@@ -152,6 +167,12 @@ export default defineComponent({
           total.value = response.data.total ?? 0;
           page.value = response.data.page ?? 0;
           size.value = response.data.size ?? 0;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        })
+        .finally(() => {
           fetchInProgress.value = false;
         });
     }
