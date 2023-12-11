@@ -61,7 +61,6 @@ export default defineComponent({
   },
   emits: ["refresh"],
   setup(props) {
-    const toast = useToast();
     const { hasPermission } = usePermissions();
     const { ukrdcRecordGroupApi } = useApi();
 
@@ -93,14 +92,9 @@ export default defineComponent({
         .then(() => {
           createPkbMembershipSuccess.value?.show();
         })
-        .catch((error) => {
-          // Notify of task error
-          toast.add({
-            title: "Error creating PKB membership",
-            description: error.response.data.detail,
-            color: "red",
-            timeout: 10,
-          });
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     }
 

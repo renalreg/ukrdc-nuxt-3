@@ -162,16 +162,35 @@ export default defineComponent({
     // Data fetching
 
     function fetchAdminDashboard() {
-      adminApi.getFullWorkitemHistory().then((response) => {
-        workitemsHistory.value = response.data;
-      });
+      adminApi
+        .getFullWorkitemHistory()
+        .then((response) => {
+          workitemsHistory.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
 
-      adminApi.getFullErrorsHistory().then((response) => {
-        errorsHistory.value = response.data;
-      });
-      adminApi.getAdminCounts().then((response) => {
-        counts.value = response.data;
-      });
+      adminApi
+        .getFullErrorsHistory()
+        .then((response) => {
+          errorsHistory.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
+
+      adminApi
+        .getAdminCounts()
+        .then((response) => {
+          counts.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     }
 
     onMounted(() => {

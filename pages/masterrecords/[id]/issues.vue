@@ -154,6 +154,10 @@ export default defineComponent({
           .then((response) => {
             workItems.value = response.data;
           })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
+          })
           .finally(() => {
             workItemsFetchInProgress.value = false;
           });
@@ -174,6 +178,10 @@ export default defineComponent({
           relatedErrorsPage.value = response.data.page ?? 0;
           relatedErrorsSize.value = response.data.size ?? 0;
           relatedErrorsTotal.value = response.data.total ?? 0;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     }
 
@@ -204,6 +212,10 @@ export default defineComponent({
               });
             }
             ukrdcIdGroup.value = multipleIdsGroup;
+          })
+          .catch(() => {
+            // Error handling is centralized in the Axios interceptor
+            // Handle UI state reset or fallback values here if needed
           });
       }
     }

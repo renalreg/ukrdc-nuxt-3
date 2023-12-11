@@ -113,24 +113,42 @@ export default defineComponent({
     // Code exporting
 
     function exportCodeList() {
-      codesApi.getCodeListExport().then(({ data }) => {
-        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "code-list.csv");
-      });
+      codesApi
+        .getCodeListExport()
+        .then(({ data }) => {
+          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+          saveAs(blob, "code-list.csv");
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     }
 
     function exportCodeMaps() {
-      codesApi.getCodeMapsExport().then(({ data }) => {
-        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "code-maps.csv");
-      });
+      codesApi
+        .getCodeMapsExport()
+        .then(({ data }) => {
+          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+          saveAs(blob, "code-maps.csv");
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     }
 
     function exportCodeExclusions() {
-      codesApi.getCodeExclusionsExport().then(({ data }) => {
-        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "code-exclusions.csv");
-      });
+      codesApi
+        .getCodeExclusionsExport()
+        .then(({ data }) => {
+          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+          saveAs(blob, "code-exclusions.csv");
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
     }
 
     // Data fetching
@@ -149,6 +167,12 @@ export default defineComponent({
           total.value = response.data.total ?? 0;
           page.value = response.data.page ?? 0;
           size.value = response.data.size ?? 0;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        })
+        .finally(() => {
           fetchInProgress.value = false;
         });
     }

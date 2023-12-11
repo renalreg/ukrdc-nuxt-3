@@ -157,6 +157,10 @@ export default defineComponent({
         })
         .then((response) => {
           patientRecords.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
 
       masterRecordsApi
@@ -165,6 +169,10 @@ export default defineComponent({
         })
         .then((response) => {
           relatedRecords.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
 
       masterRecordsApi
@@ -174,6 +182,10 @@ export default defineComponent({
         .then((response) => {
           latestMessage.value = response.data;
           latestMessageIsLoading.value = false;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     }
 

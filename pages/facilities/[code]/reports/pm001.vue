@@ -85,6 +85,13 @@ export default defineComponent({
           size.value = response.data.size ?? 0;
 
           fetchInProgress.value = false;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        })
+        .finally(() => {
+          fetchInProgress.value = false;
         });
     }
 

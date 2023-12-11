@@ -93,6 +93,10 @@ export default defineComponent({
         })
         .then((response) => {
           facility.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
       facilitiesApi
         .getFacilityExtracts({
@@ -100,6 +104,10 @@ export default defineComponent({
         })
         .then((response) => {
           extracts.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     });
 

@@ -95,6 +95,10 @@ export default defineComponent({
         })
         .then((response) => {
           diagnoses.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
 
       patientRecordsApi
@@ -103,6 +107,10 @@ export default defineComponent({
         })
         .then((response) => {
           renalDiagnoses.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
 
       patientRecordsApi
@@ -111,6 +119,10 @@ export default defineComponent({
         })
         .then((response) => {
           causesOfDeath.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
     });
 
