@@ -134,7 +134,7 @@ export default defineComponent({
 
     const records = ref([] as PatientRecordSummarySchema[]);
     const extraRecordTypes = arrayQuery("extraRecordTypes", [], true, true);
-    const sendingExtracts = arrayQuery("extract", undefined, true, true);
+    const sendingExtracts = arrayQuery("extract", [], true, true);
 
     const advancedOpen = ref(false);
 
@@ -147,7 +147,6 @@ export default defineComponent({
 
     function getResults() {
       // If search terms or advanced filters have been set, do the search
-      console.log(anySearchTermsEntered.value);
       if (anySearchTermsEntered.value) {
         searchInProgress.value = true;
 
@@ -181,7 +180,11 @@ export default defineComponent({
 
     onMounted(() => {
       // Open advanced options if any are already set by the URL
-      advancedOpen.value = !!(selectedFacility.value || extraRecordTypes.value || sendingExtracts.value);
+      advancedOpen.value = !!(
+        selectedFacility.value ||
+        (extraRecordTypes.value?.length && extraRecordTypes.value?.length > 0) ||
+        (sendingExtracts.value?.length && sendingExtracts.value?.length > 0)
+      );
       // Fetch results
       getResults();
     });
