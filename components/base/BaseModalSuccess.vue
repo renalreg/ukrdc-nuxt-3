@@ -1,5 +1,5 @@
 <template>
-  <BaseModal ref="confirmModal">
+  <BaseModal ref="successModal">
     <div class="mb-2 flex flex-col gap-6 px-2 py-2 sm:flex-row">
       <div
         class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:mx-0"
