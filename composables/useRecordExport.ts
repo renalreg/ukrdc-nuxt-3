@@ -8,42 +8,24 @@ export default function () {
   const { pollTask } = useTasks();
 
   function exportPV(record: PatientRecordSummarySchema) {
-    return patientRecordsApi
-      .postPatientExportPv({ pid: record.pid })
-      .then((response) => {
-        const task: TrackableTaskSchema = response.data;
-        return pollTask(task, 1);
-      })
-      .catch(() => {
-        // Error handling is centralized in the Axios interceptor
-        // Handle UI state reset or fallback values here if needed
-      });
+    return patientRecordsApi.postPatientExportPv({ pid: record.pid }).then((response) => {
+      const task: TrackableTaskSchema = response.data;
+      return pollTask(task, 1);
+    });
   }
 
   function exportRADAR(record: PatientRecordSummarySchema) {
-    return patientRecordsApi
-      .postPatientExportRadar({ pid: record.pid })
-      .then((response) => {
-        const task: TrackableTaskSchema = response.data;
-        return pollTask(task, 1);
-      })
-      .catch(() => {
-        // Error handling is centralized in the Axios interceptor
-        // Handle UI state reset or fallback values here if needed
-      });
+    return patientRecordsApi.postPatientExportRadar({ pid: record.pid }).then((response) => {
+      const task: TrackableTaskSchema = response.data;
+      return pollTask(task, 1);
+    });
   }
 
   function exportPKB(record: PatientRecordSummarySchema) {
-    return patientRecordsApi
-      .postPatientExportPkb({ pid: record.pid })
-      .then((response) => {
-        const task: TrackableTaskSchema = response.data;
-        return pollTask(task, 1);
-      })
-      .catch(() => {
-        // Error handling is centralized in the Axios interceptor
-        // Handle UI state reset or fallback values here if needed
-      });
+    return patientRecordsApi.postPatientExportPkb({ pid: record.pid }).then((response) => {
+      const task: TrackableTaskSchema = response.data;
+      return pollTask(task, 1);
+    });
   }
 
   return {
