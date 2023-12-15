@@ -20,12 +20,30 @@
           />
           <UButton class="ml-2" size="lg" label="Clear" @click="selectedFacility = undefined" />
         </div>
-        <!-- MasterRecord type filter (will be redundant with new EMPI)-->
-        <div class="flex flex-grow items-center gap-2">
-          <BaseCheckpill v-model="extraRecordTypes" label="MIGRATED" value="MIGRATED" colour="blue" />
-          <BaseCheckpill v-model="extraRecordTypes" label="INFORMATIONAL" value="INFORMATIONAL" colour="purple" />
-          <BaseCheckpill v-model="extraRecordTypes" label="MEMBERSHIPS" value="MEMBERSHIPS" colour="green" />
-          <BaseCheckpill v-model="extraRecordTypes" label="SURVEY" value="SURVEY" colour="red" />
+        <div class="flex items-center">
+          <div class="flex flex-grow">
+            <USelectMenu
+              v-model="sendingExtracts"
+              :options="['UKRDC', 'PV', 'UKRR', 'RADAR']"
+              placeholder="Filter sending extracts"
+              multiple
+            />
+          </div>
+
+          <div class="flex items-center gap-2">
+            <UTooltip text="Include migrated sending extracts">
+              <BaseCheckpill v-model="extraRecordTypes" label="MIGRATED" value="MIGRATED" colour="blue" />
+            </UTooltip>
+            <UTooltip text="Include informational sending facilities">
+              <BaseCheckpill v-model="extraRecordTypes" label="INFORMATIONAL" value="INFORMATIONAL" colour="purple" />
+            </UTooltip>
+            <UTooltip text="Include programme membership sending facilities">
+              <BaseCheckpill v-model="extraRecordTypes" label="MEMBERSHIPS" value="MEMBERSHIPS" colour="green" />
+            </UTooltip>
+            <UTooltip text="Include survey sending extracts">
+              <BaseCheckpill v-model="extraRecordTypes" label="SURVEY" value="SURVEY" colour="red" />
+            </UTooltip>
+          </div>
         </div>
       </div>
     </UCard>
@@ -116,11 +134,12 @@ export default defineComponent({
 
     const records = ref([] as PatientRecordSummarySchema[]);
     const extraRecordTypes = arrayQuery("extraRecordTypes", [], true, true);
+    const sendingExtracts = arrayQuery("extract", undefined, true, true);
 
     const advancedOpen = ref(false);
 
-    const anySearchTermsEntered = computed(() => {
-      return searchQueryIsPopulated.value ?? selectedFacility.value;
+    const anySearchTermsEntered = computed<Boolean>(() => {
+      return !!(searchQueryIsPopulated.value || selectedFacility.value);
     });
 
     // Data fetching
@@ -128,6 +147,7 @@ export default defineComponent({
 
     function getResults() {
       // If search terms or advanced filters have been set, do the search
+      console.log(anySearchTermsEntered.value);
       if (anySearchTermsEntered.value) {
         searchInProgress.value = true;
 
@@ -137,6 +157,7 @@ export default defineComponent({
             page: page.value ?? 1,
             size: size.value,
             facility: selectedFacility.value ? [selectedFacility.value] : undefined,
+            extract: sendingExtracts.value?.filter((n) => n) as string[],
             includeMigrated: extraRecordTypes.value?.includes("MIGRATED"),
             includeMemberships: extraRecordTypes.value?.includes("MEMBERSHIPS"),
             includeInformational: extraRecordTypes.value?.includes("INFORMATIONAL"),
@@ -160,12 +181,12 @@ export default defineComponent({
 
     onMounted(() => {
       // Open advanced options if any are already set by the URL
-      advancedOpen.value = !!selectedFacility.value;
+      advancedOpen.value = !!(selectedFacility.value || extraRecordTypes.value || sendingExtracts.value);
       // Fetch results
       getResults();
     });
 
-    watch([searchTermArray, selectedFacility, page, extraRecordTypes], () => {
+    watch([searchTermArray, selectedFacility, page, extraRecordTypes, sendingExtracts], () => {
       getResults();
     });
 
@@ -184,6 +205,7 @@ export default defineComponent({
       facilityIds,
       facilityLabels,
       selectedFacility,
+      sendingExtracts,
     };
   },
   head: {
