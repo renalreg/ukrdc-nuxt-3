@@ -72,14 +72,14 @@ This will publish a container image tagged with the version number, `edge`, and 
 - Iterate version number of the application to a pre-release (e.g. v1.0.0-beta.1) with `setversion.sh` (see above section), and push.
 - Create a matching pre-release using GitHub releases.
   - This will publish a docker image with a version-numbered tag, as well as the `edge` tag
-- Update and restart containers on staging and live environments. 
+- Update and restart containers on staging and live environments.
   - This will pull the `edge` build and route internal UKKA traffic to that edge build. External users will remain on the latest stable release (tagged `latest`).
 
 Once internal testing is complete:
 
 - Iterate version number of the application to a stable release (e.g. v1.0.0) with `setversion.sh` (see above section), and push.
 - Create a matching pre-release using GitHub releases.
-  - This will publish a docker image with a version-numbered tag, as well as the `edge` tag *and the `latest` tag*.
+  - This will publish a docker image with a version-numbered tag, as well as the `edge` tag _and the `latest` tag_.
 - Update and restart containers on staging and live environments.
   - This will pull the `latest` build and route external traffic to that stable build.
 
