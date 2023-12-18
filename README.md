@@ -64,7 +64,24 @@ Use `./setversion.sh {version_number}` to set the application version. E.g. `./s
 
 Github releases should use tags that follow the application version. E.g. application version 1.0.1 will be tagged with `v1.0.1`.
 
-This will publish a container image tagged with the version number, and `latest` (except pre-release versions e.g. `1.0.1-beta.1`).
+This will publish a container image tagged with the version number, `edge`, and `latest` (except pre-release versions e.g. `1.0.1-beta.1`).
+
+#### Suggested release flow
+
+- Make all changes to bundle into a release
+- Iterate version number of the application to a pre-release (e.g. v1.0.0-beta.1) with `setversion.sh` (see above section), and push.
+- Create a matching pre-release using GitHub releases.
+  - This will publish a docker image with a version-numbered tag, as well as the `edge` tag
+- Update and restart containers on staging and live environments. 
+  - This will pull the `edge` build and route internal UKKA traffic to that edge build. External users will remain on the latest stable release (tagged `latest`).
+
+Once internal testing is complete:
+
+- Iterate version number of the application to a stable release (e.g. v1.0.0) with `setversion.sh` (see above section), and push.
+- Create a matching pre-release using GitHub releases.
+  - This will publish a docker image with a version-numbered tag, as well as the `edge` tag *and the `latest` tag*.
+- Update and restart containers on staging and live environments.
+  - This will pull the `latest` build and route external traffic to that stable build.
 
 ## Suggested Development Environment
 
