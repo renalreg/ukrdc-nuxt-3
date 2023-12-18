@@ -54,8 +54,12 @@ jobs:
         with:
           images: ghcr.io/renalreg/ukrdc-nuxt-3
           tags: |
+            # workflow dispatch tag by branch
             type=ref,event=branch
             type=ref,event=pr
+            # tag all builds with edge
+            type=edge,branch=main
+            # tag semver releases
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
 
