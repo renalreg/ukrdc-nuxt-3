@@ -45,8 +45,8 @@
 import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseModalSuccess from "~/components/base/BaseModalSuccess.vue";
+import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
-import useRecordExport from "~/composables/useRecordExport";
 import { type ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
@@ -66,7 +66,7 @@ export default defineComponent({
   },
   setup(props) {
     const { hasPermission } = usePermissions();
-    const { exportPKB } = useRecordExport();
+    const { patientRecordsApi } = useApi();
 
     // Modals
     const startSyncSuccessModal = ref<ModalInterface>();
@@ -91,7 +91,8 @@ export default defineComponent({
 
       // Create a set of promises, one for each record we're syncing
       const promises = props.records.map((record) => {
-        return exportPKB(record)
+        return patientRecordsApi
+          .postPatientExportPkb({ pid: record.pid })
           .then(() => {
             // Handle individual success if needed
           })

@@ -17,8 +17,8 @@
 import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import PatientRecordDeleteModal from "~/components/patientrecord/PatientRecordDeleteModal.vue";
+import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
-import useRecordExport from "~/composables/useRecordExport";
 import { demographicsUpdateAllowed } from "~/helpers/recordUtils";
 import { type ModalInterface } from "~/interfaces/modal";
 
@@ -46,7 +46,7 @@ export default defineComponent({
   setup(props) {
     const toast = useToast();
     const { hasPermission } = usePermissions();
-    const { exportRADAR, exportPKB } = useRecordExport();
+    const { patientRecordsApi } = useApi();
 
     const deleteModal = ref<ModalInterface>();
 
@@ -81,7 +81,8 @@ export default defineComponent({
     }
 
     function exportRADARandCloseMenu() {
-      exportRADAR(props.item)
+      patientRecordsApi
+        .postPatientExportRadar({ pid: props.item.pid })
         .then(() => {
           showExportSuccessToast();
         })
@@ -91,7 +92,8 @@ export default defineComponent({
     }
 
     function exportPKBandCloseMenu() {
-      exportPKB(props.item)
+      patientRecordsApi
+        .postPatientExportPkb({ pid: props.item.pid })
         .then(() => {
           showExportSuccessToast();
         })

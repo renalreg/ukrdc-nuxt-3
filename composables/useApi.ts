@@ -144,7 +144,7 @@ export default function () {
   // If we actually set the baseUrl to / then request URLs become absolute, e.g. https://api/v1/...
   // If we set it to an empty string then the host defaults to localhost.
   // This is not what we want, so we need to replace these cases with window.location.host.
-  if (!runtimeConfig.public.api.host ?? runtimeConfig.public.api.host === "/") {
+  if (!runtimeConfig.public.api.host || runtimeConfig.public.api.host === "/") {
     baseUrl = `${runtimeConfig.public.api.protocol}://${window.location.host}`;
   } else {
     baseUrl = `${runtimeConfig.public.api.protocol}://${runtimeConfig.public.api.host}`;

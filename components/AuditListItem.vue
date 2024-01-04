@@ -1,7 +1,7 @@
 <template>
   <li>
     <div :class="isChild ? ['bg-gray-100'] : []">
-      <div class="min-h-20 lg:min-h-12 flex w-full min-w-0 items-center gap-2">
+      <div class="flex min-h-20 w-full min-w-0 items-center gap-2 lg:min-h-12">
         <div class="h-full w-8">
           <div
             v-show="item.children && item.children.length > 0"
