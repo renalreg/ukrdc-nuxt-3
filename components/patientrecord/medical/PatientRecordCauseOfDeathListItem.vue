@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2 gap-4 px-4 py-5 sm:p-6" :class="[{ 'lg:grid-cols-4': !small }]">
+  <div class="grid grid-cols-2 gap-4" :class="[{ 'lg:grid-cols-4': !small }]">
     <!-- Code and description-->
     <div class="col-span-2" :class="[{ 'lg:col-span-4': !small }]">
       <CodeTitle
