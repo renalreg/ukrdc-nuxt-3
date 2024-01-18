@@ -18,11 +18,7 @@
       />
     </div>
     <div v-else>
-      <UAlert
-        color="orange"
-        icon="i-heroicons-exclamation-triangle-20-solid"
-        title="No new patient data received in the last year"
-      />
+      <UAlert color="orange" icon="i-heroicons-exclamation-triangle-20-solid" :title="fallbackMessage" />
     </div>
   </div>
 </template>
@@ -46,6 +42,11 @@ export default defineComponent({
       type: Boolean,
       required: true,
     },
+    fallbackMessage: {
+      type: String,
+      required: false,
+      default: "No new patient data received in the last year",
+    },
   },
   setup(props) {
     const { sensitive } = useSensitive();
@@ -56,19 +57,19 @@ export default defineComponent({
       }
       if (props.message.msgStatus === "ERROR") {
         if (props.message.received) {
-          return `Latest file ${sensitive(props.message.filename)} failed from ${
-            props.message.facility
-          } on ${formatDate(props.message.received, false)}`;
+          return `Latest file from ${props.message.facility} was ${sensitive(
+            props.message.filename,
+          )}, failed on ${formatDate(props.message.received, false)}`;
         } else {
-          return `Latest file ${sensitive(props.message.filename)} failed from ${props.message.facility}`;
+          return `Latest file from ${props.message.facility} was ${sensitive(props.message.filename)}, failed`;
         }
       }
       if (props.message.received) {
-        return `Latest file ${sensitive(props.message.filename)} recieved from ${
-          props.message.facility
-        } on ${formatDate(props.message.received, false)}`;
+        return `Latest file from ${props.message.facility} was ${sensitive(
+          props.message.filename,
+        )}, recieved on ${formatDate(props.message.received, false)}`;
       } else {
-        return `Latest file ${sensitive(props.message.filename)} recieved from ${props.message.facility}`;
+        return `Latest file from ${props.message.facility} was ${sensitive(props.message.filename)}`;
       }
     });
 

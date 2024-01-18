@@ -45,7 +45,11 @@
 
     <!-- Record message banners -->
     <NuxtLink :to="`/patientrecords/${record.pid}/messages`">
-      <LatestMessageAlert :message="latestMessage" :is-loading="latestMessageIsLoading" />
+      <LatestMessageAlert
+        :message="latestMessage"
+        :fallback-message="`No new patient data received from ${record.sendingfacility} in the last year`"
+        :is-loading="latestMessageIsLoading"
+      />
     </NuxtLink>
 
     <!-- Main content container-->
