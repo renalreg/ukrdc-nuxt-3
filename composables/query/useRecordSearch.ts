@@ -37,7 +37,7 @@ export default function () {
   function searchSubmit(): void {
     // Populates the 'search' URL query array from the search text box string.
     // e.g. 'john & 1970-03-01' becomes ['john', '1949-03-01']
-    if (searchboxString.value) {
+    if (searchboxString.value && searchboxString.value.length > 1) {
       const sections: string[] = searchboxString.value.split("&");
       searchTermArray.value = sections.map(function (s: string) {
         return s.trim();
