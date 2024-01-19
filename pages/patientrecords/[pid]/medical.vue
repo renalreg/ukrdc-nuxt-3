@@ -10,7 +10,7 @@
         description="Click to check Related Records for available data feed records."
       />
     </NuxtLink>
-    <div class="flex gap-8">
+    <div class="flex flex-col gap-8 lg:flex-row">
       <UVerticalNavigation :links="tabs" />
       <NuxtPage v-if="record" class="flex-1" :record="record" />
     </div>
