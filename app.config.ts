@@ -22,5 +22,8 @@ export default defineAppConfig({
     notifications: {
       position: "top-0 bottom-auto",
     },
+    verticalNavigation: {
+      size: "text-md",
+    },
   },
 });

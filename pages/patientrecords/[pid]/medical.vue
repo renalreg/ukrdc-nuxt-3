@@ -10,22 +10,19 @@
         description="Click to check Related Records for available data feed records."
       />
     </NuxtLink>
-    <BaseTabsNavigation id="medical-tabs" class="mb-6" :tabs="tabs" :mini="true" :eager-to-collapse="true" />
-    <NuxtPage v-if="record" :record="record" />
+    <div class="flex gap-8">
+      <UVerticalNavigation :links="tabs" />
+      <NuxtPage v-if="record" class="flex-1" :record="record" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseTabsNavigation from "~/components/base/BaseTabsNavigation.vue";
 import { isInformational, isMembership } from "~/helpers/recordUtils";
-import { type TabItem } from "~/interfaces/tabs";
 
 export default defineComponent({
-  components: {
-    BaseTabsNavigation,
-  },
   props: {
     record: {
       type: Object as () => PatientRecordSchema,
@@ -58,40 +55,42 @@ export default defineComponent({
 
     const tabs = [
       {
-        name: "Results",
-        href: `/patientrecords/${route.params.pid}/medical/results`,
+        label: "Results",
+        to: `/patientrecords/${route.params.pid}/medical/results`,
       },
       {
-        name: "Observations",
-        href: `/patientrecords/${route.params.pid}/medical/observations`,
+        label: "Observations",
+        to: `/patientrecords/${route.params.pid}/medical/observations`,
       },
       {
-        name: "Diagnoses",
-        href: `/patientrecords/${route.params.pid}/medical/diagnoses`,
+        label: "Diagnoses",
+        to: `/patientrecords/${route.params.pid}/medical/diagnoses`,
       },
       {
-        name: "Medications",
-        href: `/patientrecords/${route.params.pid}/medical/medications`,
+        label: "Medications",
+        to: `/patientrecords/${route.params.pid}/medical/medications`,
       },
       {
-        name: "Treatments",
-        href: `/patientrecords/${route.params.pid}/medical/treatments`,
+        label: "Treatments",
+        to: `/patientrecords/${route.params.pid}/medical/treatments`,
       },
       {
-        name: "Dialysis",
-        href: `/patientrecords/${route.params.pid}/medical/dialysis`,
+        label: "Procedures",
+        to: `/patientrecords/${route.params.pid}/medical/procedures`,
       },
       {
-        name: "Documents",
-        href: `/patientrecords/${route.params.pid}/medical/documents`,
-        hasChildren: true,
+        label: "Dialysis",
+        to: `/patientrecords/${route.params.pid}/medical/dialysis`,
       },
       {
-        name: "Surveys",
-        href: `/patientrecords/${route.params.pid}/medical/surveys`,
-        hasChildren: true,
+        label: "Documents",
+        to: `/patientrecords/${route.params.pid}/medical/documents`,
       },
-    ] as TabItem[];
+      {
+        label: "Surveys",
+        to: `/patientrecords/${route.params.pid}/medical/surveys`,
+      },
+    ];
 
     onMounted(() => {
       // Default to first child tab

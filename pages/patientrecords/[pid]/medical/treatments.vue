@@ -3,41 +3,41 @@
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
       <UTable :loading="loading" :rows="treatments" :columns="columns" class="sensitive">
         <!-- Facility / QBL05 -->
-        <template #healthCareFacilityCode-data="{ row }">
+        <template #healthcarefacilitycode-data="{ row }">
           <span>
-            <SendingFacilityLink class="inline font-medium" :code="row.healthCareFacilityCode" />
+            <SendingFacilityLink class="inline font-medium" :code="row.healthcarefacilitycode" />
             <span v-if="row.qbl05" class="inline">/ {{ row.qbl05 }}</span>
           </span>
         </template>
         <!-- Admit Date -->
-        <template #fromTime-data="{ row }">
-          {{ row.fromTime ? formatDate(row.fromTime, false) : "None" }}
+        <template #fromtime-data="{ row }">
+          {{ row.fromtime ? formatDate(row.fromtime, false) : "None" }}
         </template>
         <!-- Admit Reason -->
-        <template #admitReasonCode-data="{ row }">
+        <template #admitreasoncode-data="{ row }">
           <span class="truncate">
             <CodeTitle
-              v-if="row.admitReasonCodeStd && row.admitReasonCode"
-              :coding-standard="row.admitReasonCodeStd"
-              :code="row.admitReasonCode"
+              v-if="row.admitreasoncodestd && row.admitreasoncode"
+              :coding-standard="row.admitreasoncodestd"
+              :code="row.admitreasoncode"
             />
-            <p v-if="row.admitReasonDesc">{{ row.admitReasonDesc }}</p>
+            <p v-if="row.admitreasondesc">{{ row.admitreasondesc }}</p>
           </span>
         </template>
         <!-- Discharge Date -->
-        <template #toTime-data="{ row }">
-          {{ row.toTime ? formatDate(row.toTime, false) : "None" }}
+        <template #totime-data="{ row }">
+          {{ row.totime ? formatDate(row.totime, false) : "None" }}
         </template>
         <!-- Discharge Reason -->
-        <template #dischargeReasonCode-data="{ row }">
+        <template #dischargereasoncode-data="{ row }">
           <span>
             <CodeTitle
-              v-if="row.dischargeReasonCodeStd && row.dischargeReasonCode"
-              :coding-standard="row.dischargeReasonCodeStd"
-              :code="row.dischargeReasonCode"
+              v-if="row.dischargereasoncodestd && row.dischargereasoncode"
+              :coding-standard="row.dischargereasoncodestd"
+              :code="row.dischargereasoncode"
             />
-            <p v-if="row.dischargeReasonDesc">{{ row.dischargeReasonDesc }}</p>
-            <p v-if="!row.dischargeReasonDesc && !(row.dischargeReasonCodeStd && row.dischargeReasonCode)">None</p>
+            <p v-if="row.dischargereasondesc">{{ row.dischargereasondesc }}</p>
+            <p v-if="!row.dischargereasondesc && !(row.dischargereasoncodestd && row.dischargereasoncode)">None</p>
           </span>
         </template>
         <!-- Extra info -->
@@ -47,19 +47,19 @@
               <div class="sensitive">
                 <p><b>ID: </b>{{ row.id }}</p>
                 <br />
-                <p><b>Admit reason code: </b>{{ row.admitReasonCodeStd }} / {{ row.admitReasonCode }}</p>
+                <p><b>Admit reason code: </b>{{ row.admitreasoncodestd }} / {{ row.admitreasoncode }}</p>
                 <p>
-                  <b>Discharge reason code: </b>{{ row.dischargeReasonCodeStd ?? "None" }} /
-                  {{ row.dischargeReasonCode ?? "None" }}
+                  <b>Discharge reason code: </b>{{ row.dischargereasoncodestd ?? "None" }} /
+                  {{ row.dischargereasoncode ?? "None" }}
                 </p>
                 <br />
                 <p>
-                  <b>Healthcare facility code: </b>{{ row.healthCareFacilityCodeStd ?? "None" }} /
-                  {{ row.healthCareFacilityCode ?? "None" }}
+                  <b>Healthcare facility code: </b>{{ row.healthcarefacilitycodestd ?? "None" }} /
+                  {{ row.healthcarefacilitycode ?? "None" }}
                 </p>
                 <p>
-                  <b>Discharge location code: </b>{{ row.dischargeLocationCodeStd ?? "None" }} /
-                  {{ row.dischargeLocationCode ?? "None" }}
+                  <b>Discharge location code: </b>{{ row.dischargelocationcodestd ?? "None" }} /
+                  {{ row.dischargelocationcode ?? "None" }}
                 </p>
               </div>
             </BaseInfoTooltip>
@@ -120,23 +120,23 @@ export default defineComponent({
 
     const columns = [
       {
-        key: "healthCareFacilityCode",
+        key: "healthcarefacilitycode",
         label: "Facility / QBL05",
       },
       {
-        key: "fromTime",
+        key: "fromtime",
         label: "Admit Date",
       },
       {
-        key: "admitReasonCode",
+        key: "admitreasoncode",
         label: "Admit reason",
       },
       {
-        key: "toTime",
+        key: "totime",
         label: "Discharge Date",
       },
       {
-        key: "dischargeReasonCode",
+        key: "dischargereasoncode",
         label: "Discharge reason",
       },
       {

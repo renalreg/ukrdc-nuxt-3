@@ -6,16 +6,18 @@
           <template #header>
             <h2>Diagnoses</h2>
           </template>
-          <div v-if="diagnoses && diagnoses.length <= 0">
-            <p class="text-center">No diagnoses on record</p>
-          </div>
-          <div v-else class="divide-y divide-gray-300">
-            <PatientRecordDiagnosisListItem v-for="diagnosis in diagnoses" :key="diagnosis.id" :item="diagnosis" />
+          <div class="p-4">
+            <div v-if="diagnoses && diagnoses.length <= 0">
+              <p class="text-center">No diagnoses on record</p>
+            </div>
+            <div v-else class="divide-y divide-gray-300">
+              <PatientRecordDiagnosisListItem v-for="diagnosis in diagnoses" :key="diagnosis.id" :item="diagnosis" />
+            </div>
           </div>
         </UCard>
       </div>
       <div class="col-span-3 flex flex-col gap-4 lg:col-span-1">
-        <UCard :ui="{ body: { padding: '' } }">
+        <UCard>
           <template #header>
             <h2>Renal Diagnoses</h2>
           </template>
@@ -31,12 +33,13 @@
             />
           </div>
         </UCard>
+
         <UCard>
           <template #header>
             <h2>Cause of Death</h2>
           </template>
           <div v-if="causesOfDeath && causesOfDeath.length <= 0">
-            <p>No cause of death on record</p>
+            <p class="text-center">No cause of death on record</p>
           </div>
           <div v-else class="divide-y divide-gray-300">
             <PatientRecordCauseOfDeathListItem

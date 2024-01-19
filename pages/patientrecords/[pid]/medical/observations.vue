@@ -142,6 +142,7 @@ export default defineComponent({
       },
       {
         key: "prePost",
+        label: "Pre/Post-Dialysis",
       },
     ];
 
