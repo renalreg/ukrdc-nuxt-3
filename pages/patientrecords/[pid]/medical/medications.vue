@@ -2,6 +2,13 @@
   <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
       <UTable :loading="loading" :rows="medications" :columns="columns" class="sensitive">
+        <!-- Medication -->
+        <template #drugProductGeneric-data="{ row }">
+          <div class="max-w-64">
+            <p class="truncate">{{ row.drugProductGeneric }}</p>
+          </div>
+        </template>
+
         <!-- Entered At -->
         <template #enteringOrganizationCode-data="{ row }">
           <span>
