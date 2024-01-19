@@ -1,41 +1,62 @@
 <template>
-  <div class="sensitive">
-    <BaseLoadingContainer :loading="!medications">
-      <p v-if="medications && medications.length <= 0" class="text-center">No medications on record</p>
-      <div v-if="activeMedications.length > 0" class="mt-4">
-        <h2 class="text-sm font-medium uppercase tracking-wide text-gray-500">Active</h2>
+  <div>
+    <UCard :ui="{ body: { padding: '' } }" class="mb-4">
+      <UTable :loading="loading" :rows="medications" :columns="columns" class="sensitive">
+        <!-- Entered At -->
+        <template #enteringOrganizationCode-data="{ row }">
+          <span>
+            <SendingFacilityLink class="inline font-medium" :code="row.enteringOrganizationCode" />
+            <p v-if="row.enteringOrganizationDescription">{{ row.enteringOrganizationDescription }}</p>
+          </span>
+        </template>
 
-        <ul class="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-          <li v-for="(item, index) of activeMedications" :key="index" class="col-span-1">
-            <PatientRecordMedicationCard :item="item" />
-          </li>
-        </ul>
-      </div>
+        <!-- Start Date -->
+        <template #fromTime-data="{ row }">
+          {{ row.fromTime ? formatDate(row.fromTime, false) : "None" }}
+        </template>
 
-      <div v-if="inactiveMedications.length > 0" class="mt-4">
-        <h2 class="text-sm font-medium uppercase tracking-wide text-gray-500">Inactive</h2>
+        <!-- End Date -->
+        <template #toTime-data="{ row }">
+          <span v-if="row.toTime">
+            {{ formatDate(row.toTime, false) }}
+          </span>
+          <span v-else class="inline-block rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
+            >Active</span
+          >
+        </template>
 
-        <ul class="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-          <li v-for="(item, index) of inactiveMedications" :key="index" class="col-span-1">
-            <PatientRecordMedicationCard :item="item" />
-          </li>
-        </ul>
-      </div>
-    </BaseLoadingContainer>
+        <!-- Comment -->
+        <template #comment-data="{ row }">
+          <span>
+            <div v-if="row.comment" class="flex items-center gap-2">
+              <div class="w-32 flex-1 truncate">{{ row.comment }}</div>
+              <UPopover>
+                <UButton color="white" label="Show" size="xs" />
+                <template #panel>
+                  <div class="p-4">
+                    {{ row.comment }}
+                  </div>
+                </template>
+              </UPopover>
+            </div>
+            <p v-else>None</p>
+          </span>
+        </template>
+      </UTable>
+    </UCard>
   </div>
 </template>
 
 <script lang="ts">
 import { type MedicationSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
-import PatientRecordMedicationCard from "~/components/patientrecord/medical/PatientRecordMedicationCard.vue";
+import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
 import useApi from "~/composables/useApi";
+import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    BaseLoadingContainer,
-    PatientRecordMedicationCard,
+    SendingFacilityLink,
   },
   props: {
     record: {
@@ -51,7 +72,10 @@ export default defineComponent({
     const medications = ref<MedicationSchema[]>();
 
     // Data fetching
+    const loading = ref(false);
+
     onMounted(() => {
+      loading.value = true;
       patientRecordsApi
         .getPatientMedications({
           pid: props.record.pid,
@@ -62,28 +86,42 @@ export default defineComponent({
         .catch(() => {
           // Error handling is centralized in the Axios interceptor
           // Handle UI state reset or fallback values here if needed
+        })
+        .finally(() => {
+          loading.value = false;
         });
     });
 
-    // Split active and inactive medications
-
-    const activeMedications = computed(() => {
-      if (!medications.value) return [];
-      return medications.value?.filter(function (item: MedicationSchema) {
-        return item.toTime === null;
-      });
-    });
-    const inactiveMedications = computed(() => {
-      if (!medications.value) return [];
-      return medications.value?.filter(function (item: MedicationSchema) {
-        return item.toTime !== null;
-      });
-    });
+    const columns = [
+      {
+        key: "drugProductGeneric",
+        label: "Medication",
+      },
+      {
+        key: "enteringOrganizationCode",
+        label: "Entered At",
+      },
+      {
+        key: "fromTime",
+        label: "Start Date",
+        sortable: true,
+      },
+      {
+        key: "toTime",
+        label: "End Date",
+        sortable: true,
+      },
+      {
+        key: "comment",
+        label: "Comment",
+      },
+    ];
 
     return {
-      activeMedications,
-      inactiveMedications,
+      formatDate,
+      loading,
       medications,
+      columns,
     };
   },
 });
