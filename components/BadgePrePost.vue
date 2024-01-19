@@ -32,7 +32,7 @@ export default defineComponent({
       } else if (props.prePost === "POST") {
         return "Post-Dialysis";
       } else {
-        return "";
+        return "Unknown";
       }
     });
     return { prePostString, TagClass };
