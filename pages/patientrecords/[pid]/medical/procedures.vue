@@ -1,5 +1,5 @@
 <template>
-  <div class="sensitive">
+  <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
       <template #header>
         <h2>Transplants</h2>

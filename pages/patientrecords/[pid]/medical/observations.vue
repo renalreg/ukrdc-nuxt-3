@@ -1,5 +1,5 @@
 <template>
-  <div class="sensitive">
+  <div>
     <BaseLoadingContainer :loading="!observations">
       <!-- Code select -->
       <div class="mb-4 flex">
