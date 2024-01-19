@@ -1,5 +1,5 @@
 <template>
-  <div class="sensitive">
+  <div>
     <BaseModalConfirm
       ref="deleteResultAlert"
       title="Delete Result Item"

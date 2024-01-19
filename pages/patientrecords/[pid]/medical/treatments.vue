@@ -1,5 +1,5 @@
 <template>
-  <div class="sensitive">
+  <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
       <UTable :loading="loading" :rows="treatments" :columns="columns" class="sensitive">
         <!-- Facility / QBL05 -->
