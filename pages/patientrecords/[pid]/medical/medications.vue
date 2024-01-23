@@ -2,12 +2,23 @@
   <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
       <UTable :loading="loading" :rows="medications" :columns="columns" class="sensitive">
-        <!-- Entered At -->
-        <template #enteringOrganizationCode-data="{ row }">
-          <span>
-            <SendingFacilityLink class="inline font-medium" :code="row.enteringOrganizationCode" />
-            <p v-if="row.enteringOrganizationDescription">{{ row.enteringOrganizationDescription }}</p>
-          </span>
+        <!-- Dose -->
+        <template #dosequantity-data="{ row }">
+          <span> {{ row.dosequantity }} {{ row.doseuomcode ?? row.doseuomdesc }} </span>
+        </template>
+
+        <!-- Frequency -->
+        <template #frequency-data="{ row }">
+          {{ row.frequency.replace(/_/g, " ") }}
+        </template>
+
+        <!-- Route -->
+        <template #routecode-data="{ row }">
+          <CodeTitle
+            v-if="row.routecode || row.routecodestd"
+            :code="row.routecode || 'Unknown'"
+            :coding-standard="row.routecodestd"
+          />
         </template>
 
         <!-- Start Date -->
@@ -27,20 +38,16 @@
 
         <!-- Comment -->
         <template #comment-data="{ row }">
-          <span>
-            <div v-if="row.comment" class="flex items-center gap-2">
-              <div class="w-32 flex-1 truncate">{{ row.comment }}</div>
-              <UPopover>
-                <UButton color="white" label="Show" size="xs" />
-                <template #panel>
-                  <div class="p-4">
-                    {{ row.comment }}
-                  </div>
-                </template>
-              </UPopover>
-            </div>
-            <p v-else>None</p>
-          </span>
+          <div v-if="row.comment">
+            <UPopover>
+              <UButton color="white" label="Show" size="xs" />
+              <template #panel>
+                <div class="p-4">
+                  {{ row.comment }}
+                </div>
+              </template>
+            </UPopover>
+          </div>
         </template>
       </UTable>
     </UCard>
@@ -50,13 +57,13 @@
 <script lang="ts">
 import { type MedicationSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
+import CodeTitle from "~/components/CodeTitle.vue";
 import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
-    SendingFacilityLink,
+    CodeTitle,
   },
   props: {
     record: {
@@ -98,8 +105,16 @@ export default defineComponent({
         label: "Medication",
       },
       {
-        key: "enteringOrganizationCode",
-        label: "Entered At",
+        key: "dosequantity",
+        label: "Dose",
+      },
+      {
+        key: "frequency",
+        label: "Frequency",
+      },
+      {
+        key: "routecode",
+        label: "Route",
       },
       {
         key: "fromTime",
