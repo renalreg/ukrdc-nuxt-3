@@ -9,7 +9,7 @@
 
         <!-- Frequency -->
         <template #frequency-data="{ row }">
-          {{ row.frequency.replace(/_/g, " ") }}
+          {{ row.frequency ? row.frequency.replace(/_/g, " ") : "Unknown" }}
         </template>
 
         <!-- Route -->
