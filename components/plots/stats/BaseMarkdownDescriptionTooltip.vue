@@ -1,19 +1,19 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <BaseInfoTooltip>
-    <div class="max-h-96 max-w-2xl [&>ul]:list-inside [&>ul]:list-disc" v-html="sanitisedDescriptionHTML"></div>
-  </BaseInfoTooltip>
+  <BaseInfoModal>
+    <div class="space-y-4 p-4 [&>ul]:list-inside [&>ul]:list-disc" v-html="sanitisedDescriptionHTML"></div>
+  </BaseInfoModal>
 </template>
 
 <script lang="ts">
 import DOMPurify from "dompurify";
 import { marked } from "marked";
 
-import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
+import BaseInfoModal from "~/components/base/BaseInfoModal.vue";
 
 export default defineComponent({
   components: {
-    BaseInfoTooltip,
+    BaseInfoModal,
   },
   props: {
     descriptionMarkdown: {
