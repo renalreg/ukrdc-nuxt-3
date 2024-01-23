@@ -54,42 +54,50 @@ export default defineComponent({
     // Navigation
 
     const tabs = [
-      {
-        label: "Results",
-        to: `/patientrecords/${route.params.pid}/medical/results`,
-      },
-      {
-        label: "Observations",
-        to: `/patientrecords/${route.params.pid}/medical/observations`,
-      },
-      {
-        label: "Diagnoses",
-        to: `/patientrecords/${route.params.pid}/medical/diagnoses`,
-      },
-      {
-        label: "Medications",
-        to: `/patientrecords/${route.params.pid}/medical/medications`,
-      },
-      {
-        label: "Treatments",
-        to: `/patientrecords/${route.params.pid}/medical/treatments`,
-      },
-      {
-        label: "Procedures",
-        to: `/patientrecords/${route.params.pid}/medical/procedures`,
-      },
-      {
-        label: "Dialysis",
-        to: `/patientrecords/${route.params.pid}/medical/dialysis`,
-      },
-      {
-        label: "Documents",
-        to: `/patientrecords/${route.params.pid}/medical/documents`,
-      },
-      {
-        label: "Surveys",
-        to: `/patientrecords/${route.params.pid}/medical/surveys`,
-      },
+      [
+        {
+          label: "Results",
+          to: `/patientrecords/${route.params.pid}/medical/results`,
+        },
+        {
+          label: "Observations",
+          to: `/patientrecords/${route.params.pid}/medical/observations`,
+        },
+      ],
+      [
+        {
+          label: "Diagnoses",
+          to: `/patientrecords/${route.params.pid}/medical/diagnoses`,
+        },
+      ],
+      [
+        {
+          label: "Medications",
+          to: `/patientrecords/${route.params.pid}/medical/medications`,
+        },
+        {
+          label: "Treatments",
+          to: `/patientrecords/${route.params.pid}/medical/treatments`,
+        },
+        {
+          label: "Procedures",
+          to: `/patientrecords/${route.params.pid}/medical/procedures`,
+        },
+        {
+          label: "Dialysis",
+          to: `/patientrecords/${route.params.pid}/medical/dialysis`,
+        },
+      ],
+      [
+        {
+          label: "Documents",
+          to: `/patientrecords/${route.params.pid}/medical/documents`,
+        },
+        {
+          label: "Surveys",
+          to: `/patientrecords/${route.params.pid}/medical/surveys`,
+        },
+      ],
     ];
 
     onMounted(() => {
