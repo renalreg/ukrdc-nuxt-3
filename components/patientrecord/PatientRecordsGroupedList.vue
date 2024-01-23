@@ -14,7 +14,6 @@
       v-for="item in groupedRecords.data"
       :key="item.pid + '_data'"
       :item="item"
-      :show-pv-sync="hasPVMembership"
       :show-radar-sync="hasRADARMembership"
       :show-pkb-sync="hasPKBMembership"
       @deleted="$emit('refresh')"
@@ -27,7 +26,6 @@
       v-for="item in groupedRecords.surveys"
       :key="item.pid + '_survey'"
       :item="item"
-      :show-pv-sync="hasPVMembership"
       :show-radar-sync="hasRADARMembership"
       :show-pkb-sync="hasPKBMembership"
       @deleted="$emit('refresh')"
@@ -40,7 +38,6 @@
       v-for="item in groupedRecords.migrated"
       :key="item.pid + '_mig'"
       :item="item"
-      :show-pv-sync="hasPVMembership"
       :show-radar-sync="hasRADARMembership"
       :show-pkb-sync="hasPKBMembership"
       @deleted="$emit('refresh')"
@@ -144,10 +141,6 @@ export default defineComponent({
       } as PRGroups;
     });
 
-    const hasPVMembership = computed(() => {
-      return props.records.some((r) => r.sendingfacility === "PV");
-    });
-
     const hasPKBMembership = computed(() => {
       return props.records.some((r) => r.sendingfacility === "PKB");
     });
@@ -158,7 +151,6 @@ export default defineComponent({
 
     return {
       groupedRecords,
-      hasPVMembership,
       hasPKBMembership,
       hasRADARMembership,
       hasPermission,

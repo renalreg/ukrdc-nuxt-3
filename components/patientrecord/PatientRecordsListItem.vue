@@ -55,11 +55,19 @@
                 </p>
               </div>
 
-              <!-- UKRDC ID (large breakpoint only) -->
-              <div class="order-4 hidden lg:block">
-                <h5>UKRDC ID</h5>
+              <!-- Created Time (large breakpoint, memberships only) -->
+              <div v-if="isMembership(item)" class="order-4 hidden lg:block">
+                <h5>Membership Created</h5>
                 <p class="sensitive mt-2">
-                  {{ item.ukrdcid }}
+                  {{ formatDate(item.repositoryCreationDate, true) }}
+                </p>
+              </div>
+
+              <!-- Last Updated (large breakpoint, non-memberships only) -->
+              <div v-else class="order-4 hidden lg:block">
+                <h5>Record Updated</h5>
+                <p class="sensitive mt-2">
+                  {{ formatDate(item.repositoryUpdateDate, true) }}
                 </p>
               </div>
 
