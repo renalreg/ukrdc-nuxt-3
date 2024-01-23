@@ -1,20 +1,22 @@
 <template>
-  <UCard v-if="record.pvdata" class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-    <div>
-      <h5>RRT Status</h5>
-      <p>{{ record.pvdata.rrtstatus ?? "Unknown" }}</p>
-    </div>
-    <div>
-      <h5>Transplant Status</h5>
-      <p>{{ record.pvdata.tpstatus ?? "Unknown" }}</p>
-    </div>
-    <div>
-      <h5>Blood Group</h5>
-      <p>{{ record.pvdata.bloodgroup ?? "Unknown" }}</p>
-    </div>
-    <div>
-      <h5>Last Updated</h5>
-      <p>{{ formatDate(record.pvdata.updateDate ?? record.pvdata.creationDate, true) }}</p>
+  <UCard v-if="record.pvdata">
+    <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+      <div>
+        <h5>RRT Status</h5>
+        <p>{{ record.pvdata.rrtstatusDesc ?? record.pvdata.rrtstatus ?? "Unknown" }}</p>
+      </div>
+      <div>
+        <h5>Transplant Status</h5>
+        <p>{{ record.pvdata.tpstatusDesc ?? record.pvdata.tpstatus ?? "Unknown" }}</p>
+      </div>
+      <div>
+        <h5>Blood Group</h5>
+        <p>{{ record.pvdata.bloodgroup ?? "Unknown" }}</p>
+      </div>
+      <div>
+        <h5>Last Updated</h5>
+        <p>{{ formatDate(record.pvdata.updateDate ?? record.pvdata.creationDate, true) }}</p>
+      </div>
     </div>
   </UCard>
 </template>
