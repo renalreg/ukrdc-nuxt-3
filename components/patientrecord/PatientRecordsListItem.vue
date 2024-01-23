@@ -55,11 +55,11 @@
                 </p>
               </div>
 
-              <!-- UKRDC ID (large breakpoint only) -->
+              <!-- Last Updated (large breakpoint only) -->
               <div class="order-4 hidden lg:block">
-                <h5>UKRDC ID</h5>
+                <h5>Last Updated</h5>
                 <p class="sensitive mt-2">
-                  {{ item.ukrdcid }}
+                  {{ formatDate(item.repositoryUpdateDate, true) }}
                 </p>
               </div>
 
