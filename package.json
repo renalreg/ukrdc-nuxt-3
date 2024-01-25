@@ -42,6 +42,7 @@
     "@okta/okta-auth-js": "^7.5.0",
     "@okta/okta-vue": "^5.7.0",
     "@popperjs/core": "^2.11.8",
+    "@sentry/vite-plugin": "^2.10.3",
     "@ukkidney/ukrdc-axios-ts": "^5.2.1",
     "dompurify": "^3.0.6",
     "luxon": "^3.4.4",
