@@ -63,7 +63,7 @@ jobs:
             type=ref,event=pr
             # tag semver releases
             type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}#
+            type=semver,pattern={{major}}.{{minor}}
             # tag all builds with edge, including pre-release releases
             type=raw,value=edge
 
