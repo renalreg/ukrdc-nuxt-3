@@ -64,7 +64,19 @@ Use `./setversion.sh {version_number}` to set the application version. E.g. `./s
 
 Github releases should use tags that follow the application version. E.g. application version 1.0.1 will be tagged with `v1.0.1`.
 
-This will publish a container image tagged with the version number, `edge`, and `latest` (except pre-release versions e.g. `1.0.1-beta.1`).
+### Container Image Tags
+
+Container images are published on either a GitHub Release, or a manual workflow dispatch.
+
+All published images are tagged with `edge`. The `edge` tag will always point to the most recently published image.
+
+Manual workflow dispatch will tag the image with the branch name, e.g. manually running a workflow on the `main` branch will tag the image with `edge` and `main`.
+
+Pre-release GitHub releases (those with semantic version names with a pre-release suffix,  e.g. `1.0.1-beta.1`) publish a container image tagged with the version number, and `edge`.
+
+Stable GitHub releases (those with semantic version names but no pre-release suffix) publish a container image tagged with the version number, `edge`, and `latest`.
+
+See [ukrdc-compose](https://github.com/renalreg/ukrdc-compose?tab=readme-ov-file#instances-and-edge) for more information on how these tags are used in deployments.
 
 #### Suggested release flow
 
