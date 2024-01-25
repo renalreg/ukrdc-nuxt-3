@@ -35,6 +35,13 @@ export default defineNuxtPlugin((nuxtApp) => {
       }),
     ],
     tracesSampleRate: 1.0, // Lower if traffic substantially increases
+    ignoreErrors: [
+      /**
+       * Nuxt internal error seemingly thrown when the user navigates to a missing page.
+       * Due to changes made to stats and login routes, these come up a lot, but can be ignored.
+       */
+      "TypeError: Failed to execute 'removeChild' on 'Node': parameter 1 is not of type 'Node'.",
+    ],
   });
 
   nuxtApp.vueApp.mixin(
