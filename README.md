@@ -72,7 +72,7 @@ All published images are tagged with `edge`. The `edge` tag will always point to
 
 Manual workflow dispatch will tag the image with the branch name, e.g. manually running a workflow on the `main` branch will tag the image with `edge` and `main`.
 
-Pre-release GitHub releases (those with semantic version names with a pre-release suffix,  e.g. `1.0.1-beta.1`) publish a container image tagged with the version number, and `edge`.
+Pre-release GitHub releases (those with semantic version names with a pre-release suffix, e.g. `1.0.1-beta.1`) publish a container image tagged with the version number, and `edge`.
 
 Stable GitHub releases (those with semantic version names but no pre-release suffix) publish a container image tagged with the version number, `edge`, and `latest`.
 
