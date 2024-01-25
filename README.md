@@ -25,7 +25,10 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 - `GITHUB_REF` - GitHub ref for automatic error reporting
 - `GITHUB_SHA` - GitHub SHA for automatic error reporting
-- `SENTRY_DSN` - Sentry DSN for automatic error reporting
+- `SENTRY_DSN` - (Secret) Sentry DSN for automatic error reporting
+- `SENTRY_AUTH_TOKEN` - (Secret) Sentry auth token for release publishing
+- `SENTRY_ORG` - Sentry organisation name
+- `SENTRY_PROJECT` - Sentry project name
 
 ### Run-time
 
