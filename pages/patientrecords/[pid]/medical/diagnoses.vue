@@ -1,6 +1,6 @@
 <template>
   <BaseLoadingContainer :loading="!(diagnoses && renalDiagnoses && causesOfDeath)">
-    <div class="sensitive grid grid-cols-3 gap-4">
+    <div class="grid grid-cols-3 gap-4">
       <div class="col-span-3 lg:col-span-2">
         <UCard :ui="{ body: { padding: '' } }">
           <template #header>
@@ -10,7 +10,7 @@
             <div v-if="diagnoses && diagnoses.length <= 0">
               <p class="text-center">No diagnoses on record</p>
             </div>
-            <div v-else class="divide-y divide-gray-300">
+            <div v-else class="sensitive divide-y divide-gray-300">
               <PatientRecordDiagnosisListItem v-for="diagnosis in diagnoses" :key="diagnosis.id" :item="diagnosis" />
             </div>
           </div>
@@ -24,7 +24,7 @@
           <div v-if="renalDiagnoses && renalDiagnoses.length <= 0">
             <p class="text-center">No renal diagnoses on record</p>
           </div>
-          <div v-else class="divide-y divide-gray-300">
+          <div v-else class="sensitive divide-y divide-gray-300">
             <PatientRecordDiagnosisListItem
               v-for="renalDiagnosis in renalDiagnoses"
               :key="renalDiagnosis.pid"
@@ -41,7 +41,7 @@
           <div v-if="causesOfDeath && causesOfDeath.length <= 0">
             <p class="text-center">No cause of death on record</p>
           </div>
-          <div v-else class="divide-y divide-gray-300">
+          <div v-else class="sensitive divide-y divide-gray-300">
             <PatientRecordCauseOfDeathListItem
               v-for="causeOfDeath in causesOfDeath"
               :key="causeOfDeath.pid"
