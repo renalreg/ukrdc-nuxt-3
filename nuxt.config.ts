@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   // Base app configuration
   app: {
     baseURL: "/app",
-    buildAssetsDir: "/app/_nuxt/",
+    buildAssetsDir: "/_nuxt",
     // Global page headers
     head: {
       title: "UKRDC Web Client",
