@@ -1,3 +1,5 @@
+import { sentryVitePlugin } from "@sentry/vite-plugin";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {
@@ -44,11 +46,22 @@ export default defineNuxtConfig({
     },
   },
 
+  // Generate sourcemap
+  sourcemap: true,
+
   // Vite bundler options
   vite: {
     optimizeDeps: {
       include: ["plotly.js-dist-min"],
     },
+    plugins: [
+      // Put the Sentry vite plugin after all other plugins
+      sentryVitePlugin({
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+      }),
+    ],
   },
 
   // Build Configuration
