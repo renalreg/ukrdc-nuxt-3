@@ -149,9 +149,3 @@ Instead, we disable SSR entirely, and make use of the wealth of client-side JS l
 Removing our reliance on Nuxt modules is an ongoing process, but has already been useful.
 
 Although we disable server-side rendering and build a "traditional" Vue single-page application, we make use of the internal Nuxt server to allow runtime configuration of the application. The Nuxt server essentially populates the SPA with runtime variables before serving it unrendered to the client, just like a normal Vue application.
-
-### Build ARCHITECTURE.md
-
-- Install `pipx`
-- `pipx install archmd`
-- `archmd . --out "ARCHITECTURE.md" --title="UKRDC-Nuxt Architecture"`
