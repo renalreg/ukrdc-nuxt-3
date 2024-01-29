@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-4 flex flex-col">
+    <div class="mb-8 flex flex-col">
       <div class="mb-4 flex flex-row gap-2">
         <BaseDateRange v-model="dateRange" class="flex-1" />
         <UButton
@@ -28,10 +28,22 @@
       </div>
     </div>
 
-    <UCard :ui="{ body: { padding: '' } }">
+    <div class="mb-8 flex w-full justify-center">
+      <UButton
+        block
+        :disabled="loading"
+        size="lg"
+        :label="loading ? 'Loading...' : 'Search Audit Log'"
+        color="primary"
+        variant="soft"
+        @click="fetchEvents"
+      />
+    </div>
+
+    <UCard v-if="hasFetched" :ui="{ body: { padding: '' } }">
       <!-- Skeleton results -->
-      <div v-if="auditFetchInProgress">
-        <ul v-if="auditFetchInProgress" class="divide-y divide-gray-300">
+      <div v-if="loading">
+        <ul v-if="loading" class="divide-y divide-gray-300">
           <BaseSkeleListItem v-for="n in 10" :key="n" />
         </ul>
       </div>
@@ -109,10 +121,15 @@ export default defineComponent({
 
     // Data fetching
 
-    const auditFetchInProgress = ref(false);
+    const hasFetched = ref(false);
+    const loading = ref(false);
 
     function fetchEvents() {
-      auditFetchInProgress.value = true;
+      console.log("fetching events");
+      loading.value = true;
+      if (!hasFetched.value) {
+        hasFetched.value = true;
+      }
 
       patientRecordsApi
         .getPatientAudit({
@@ -136,16 +153,15 @@ export default defineComponent({
           // Handle UI state reset or fallback values here if needed
         })
         .finally(() => {
-          auditFetchInProgress.value = false;
+          loading.value = false;
         });
     }
 
-    onMounted(() => {
-      fetchEvents();
-    });
-
-    watch([page, orderBy, selectedResource, selectedOperation, dateRange], () => {
-      fetchEvents();
+    watch([page], () => {
+      // Only fetch if we have already fetched once and results are visible
+      if (hasFetched.value) {
+        fetchEvents();
+      }
     });
 
     return {
@@ -162,7 +178,9 @@ export default defineComponent({
       selectedResource,
       availableOperations,
       selectedOperation,
-      auditFetchInProgress,
+      loading,
+      hasFetched,
+      fetchEvents,
     };
   },
 });
