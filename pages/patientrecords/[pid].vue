@@ -17,7 +17,9 @@
       </div>
     </div>
 
-    <div class="mb-6"><BaseTabsNavigation :tabs="tabs" /></div>
+    <div class="mb-6">
+      <UHorizontalNavigation :links="links" />
+    </div>
 
     <NuxtPage v-if="record" :record="record" />
   </div>
@@ -26,19 +28,16 @@
 <script lang="ts">
 import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseTabsNavigation from "~/components/base/BaseTabsNavigation.vue";
 import PatientRecordExtractSummary from "~/components/patientrecord/PatientRecordExtractSummary.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
 import { insertIf } from "~/helpers/arrayUtils";
 import { getFirstOrValue } from "~/helpers/queryUtils";
 import { firstForename, firstSurname } from "~/helpers/recordUtils";
-import { type TabItem } from "~/interfaces/tabs";
 
 export default defineComponent({
   components: {
     PatientRecordExtractSummary,
-    BaseTabsNavigation,
   },
   setup() {
     const route = useRoute();
@@ -96,32 +95,35 @@ export default defineComponent({
 
     // Navigation
 
-    const tabs = [
+    const links = [
       {
-        name: "Overview",
-        href: `/patientrecords/${route.params.pid}`,
+        label: "Overview",
+        to: `/patientrecords/${route.params.pid}/overview`,
+        icon: "i-heroicons-home",
       },
       {
-        name: "Medical Record",
-        href: `/patientrecords/${route.params.pid}/medical`,
-        hasChildren: true,
+        label: "Medical Record",
+        to: `/patientrecords/${route.params.pid}/medical`,
+        icon: "i-heroicons-clipboard-document-list",
       },
       {
-        name: "Data Files",
-        href: `/patientrecords/${route.params.pid}/messages`,
+        label: "Data Files",
+        to: `/patientrecords/${route.params.pid}/messages`,
+        icon: "i-heroicons-inbox",
       },
       ...insertIf(hasPermission("ukrdc:audit:records:read"), {
-        name: "Audit",
-        href: `/patientrecords/${route.params.pid}/audit`,
+        label: "Audit",
+        to: `/patientrecords/${route.params.pid}/audit`,
+        icon: "i-heroicons-document-magnifying-glass",
       }),
-    ] as TabItem[];
+    ];
 
     return {
       record,
       selectedPid,
       forename,
       surname,
-      tabs,
+      links,
     };
   },
   head: {

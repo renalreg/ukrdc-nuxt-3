@@ -1,10 +1,7 @@
 <template>
-  <span
-    class="inline-flex h-5 items-center rounded-full px-2.5 py-0.5 text-sm font-medium capitalize"
-    :class="TagClass()"
-  >
+  <UBadge :color="color">
     {{ visibility }}
-  </span>
+  </UBadge>
 </template>
 
 <script lang="ts">
@@ -17,17 +14,17 @@ export default defineComponent({
   },
 
   setup(props) {
-    function TagClass(): string[] {
+    const color = computed(() => {
       if (props.visibility === "public") {
-        return ["bg-green-100", "text-green-800"];
+        return "green";
       } else if (props.visibility === "private") {
-        return ["bg-blue-100", "text-blue-800"];
+        return "blue";
       } else {
-        return ["bg-gray-100", "text-gray-800"];
+        return "gray";
       }
-    }
+    });
 
-    return { TagClass };
+    return { color };
   },
 });
 </script>

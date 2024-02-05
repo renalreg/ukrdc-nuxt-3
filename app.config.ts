@@ -3,6 +3,11 @@ export default defineAppConfig({
   ui: {
     primary: "indigo",
     gray: "cool",
+    badge: {
+      default: {
+        variant: "subtle",
+      },
+    },
     button: {
       base: "inline-flex items-center justify-center",
       default: {
@@ -24,6 +29,9 @@ export default defineAppConfig({
     },
     verticalNavigation: {
       size: "text-md",
+    },
+    horizontalNavigation: {
+      base: "text-md",
     },
   },
 });

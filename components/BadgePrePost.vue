@@ -1,7 +1,7 @@
 <template>
-  <span class="inline-flex h-5 items-center rounded-full px-2.5 py-0.5 text-sm font-medium" :class="TagClass()">
+  <UBadge :color="color">
     {{ prePostString }}
-  </span>
+  </UBadge>
 </template>
 
 <script lang="ts">
@@ -14,28 +14,30 @@ export default defineComponent({
   },
 
   setup(props) {
-    function TagClass(): string[] {
+    const color = computed(() => {
       if (props.prePost === "PRE") {
-        return ["bg-red-100", "text-red-800"];
+        return "red";
       } else if (props.prePost === "POST") {
-        return ["bg-blue-100", "text-blue-800"];
+        return "blue";
       } else if (props.prePost === "NA") {
-        return ["hidden"];
+        return "white";
       } else {
-        return ["bg-gray-100", "text-gray-800"];
+        return "gray";
       }
-    }
+    });
 
     const prePostString = computed(() => {
       if (props.prePost === "PRE") {
         return "Pre-Dialysis";
       } else if (props.prePost === "POST") {
         return "Post-Dialysis";
+      } else if (props.prePost === "NA") {
+        return "N/A";
       } else {
         return "Unknown";
       }
     });
-    return { prePostString, TagClass };
+    return { prePostString, color };
   },
 });
 </script>

@@ -8,15 +8,7 @@
             {{ displayName }}
           </p>
         </div>
-        <div class="flex-0">
-          <svg class="h-6 w-6 text-gray-400 group-hover:text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fill-rule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </div>
+        <UIcon class="flex-0 h-4 w-4" name="i-heroicons-chevron-down-16-solid" />
       </div>
     </UButton>
   </UDropdown>

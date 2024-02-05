@@ -1,10 +1,7 @@
 <template>
-  <span
-    class="inline-flex h-5 items-center rounded-full px-2.5 py-0.5 text-sm font-medium"
-    :class="TagClass(operation)"
-  >
+  <UBadge :color="color">
     {{ operation.trim() }}
-  </span>
+  </UBadge>
 </template>
 
 <script lang="ts">
@@ -16,22 +13,22 @@ export default defineComponent({
     },
   },
 
-  setup() {
-    function TagClass(operation: string): string[] {
-      if (operation.includes("DELETE")) {
-        return ["bg-red-100", "text-red-800"];
-      } else if (operation.includes("READ")) {
-        return ["bg-blue-100", "text-blue-800"];
-      } else if (operation.includes("UPDATE")) {
-        return ["bg-purple-100", "text-purple-800"];
-      } else if (operation.includes("CREATE")) {
-        return ["bg-green-100", "text-green-800"];
+  setup(props) {
+    const color = computed(() => {
+      if (props.operation.includes("DELETE")) {
+        return "red";
+      } else if (props.operation.includes("READ")) {
+        return "blue";
+      } else if (props.operation.includes("UPDATE")) {
+        return "purple";
+      } else if (props.operation.includes("CREATE")) {
+        return "green";
       } else {
-        return ["bg-gray-100", "text-gray-800"];
+        return "gray";
       }
-    }
+    });
 
-    return { TagClass };
+    return { color };
   },
 });
 </script>

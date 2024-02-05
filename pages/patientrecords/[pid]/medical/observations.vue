@@ -24,7 +24,7 @@
           </template>
           <!-- prePost -->
           <template #prePost-data="{ row }">
-            <BadgePrePost v-if="row.prePost" :pre-post="row.prePost" />
+            <BadgePrePost :pre-post="row.prePost" />
           </template>
         </UTable>
 

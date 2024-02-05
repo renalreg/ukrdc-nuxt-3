@@ -35,7 +35,7 @@
         size="lg"
         :label="loading ? 'Loading...' : 'Search Audit Log'"
         color="primary"
-        variant="soft"
+        variant="outline"
         @click="fetchEvents"
       />
     </div>

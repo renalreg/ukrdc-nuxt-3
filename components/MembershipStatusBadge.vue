@@ -1,15 +1,13 @@
 <template>
   <div v-if="badgeStatus !== 0">
-    <BaseBadge v-if="badgeStatus === 1" class="w-14 bg-green-100 text-center text-green-800">Active</BaseBadge>
-    <BaseBadge v-if="badgeStatus === 2" class="w-14 bg-red-100 text-center text-red-800">Closed</BaseBadge>
-    <BaseBadge v-if="badgeStatus === 3" class="w-14 bg-yellow-100 text-center text-yellow-800">Mixed</BaseBadge>
+    <UBadge v-if="badgeStatus === 1" color="green">Active</UBadge>
+    <UBadge v-if="badgeStatus === 2" color="red">Closed</UBadge>
+    <UBadge v-if="badgeStatus === 3" color="amber">Mixed</UBadge>
   </div>
 </template>
 
 <script lang="ts">
 import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
-
-import BaseBadge from "~/components/base/BaseBadge.vue";
 
 enum MembershipStatusEnum {
   Open = 1,
@@ -18,9 +16,6 @@ enum MembershipStatusEnum {
   Unknown = 0,
 }
 export default defineComponent({
-  components: {
-    BaseBadge,
-  },
   props: {
     item: {
       type: Object as () => PatientRecordSummarySchema,
