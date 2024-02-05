@@ -26,7 +26,9 @@
       <h5>{{ record.nationalidType }} record</h5>
     </div>
 
-    <div class="mb-6"><BaseTabsNavigation :tabs="tabs" /></div>
+    <div class="mb-6">
+      <UHorizontalNavigation :links="links" />
+    </div>
 
     <NuxtPage v-if="record" :record="record" :stats="stats" />
   </div>
@@ -35,18 +37,13 @@
 <script lang="ts">
 import { type MasterRecordSchema, type MasterRecordStatisticsSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseTabsNavigation from "~/components/base/BaseTabsNavigation.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
 import { insertIf } from "~/helpers/arrayUtils";
 import { formatGender } from "~/helpers/codeUtils";
 import { formatDate } from "~/helpers/dateUtils";
-import { type TabItem } from "~/interfaces/tabs";
 
 export default defineComponent({
-  components: {
-    BaseTabsNavigation,
-  },
   setup() {
     const route = useRoute();
     const { masterRecordsApi } = useApi();
@@ -59,24 +56,24 @@ export default defineComponent({
 
     // Navigation
 
-    const tabs = [
+    const links = [
       {
-        name: "Overview",
-        href: `/masterrecords/${route.params.id}`,
+        label: "Overview",
+        to: `/masterrecords/${route.params.id}/overview`,
       },
       ...insertIf(hasPermission("ukrdc:messages:read"), {
-        name: "Data Files",
-        href: `/masterrecords/${route.params.id}/messages`,
+        label: "Data Files",
+        to: `/masterrecords/${route.params.id}/messages`,
       }),
       {
-        name: "Link Records",
-        href: `/masterrecords/${route.params.id}/linkrecords`,
+        label: "Link Records",
+        to: `/masterrecords/${route.params.id}/linkrecords`,
       },
       {
-        name: "Issues",
-        href: `/masterrecords/${route.params.id}/issues`,
+        label: "Issues",
+        to: `/masterrecords/${route.params.id}/issues`,
       },
-    ] as TabItem[];
+    ];
 
     // Data refs
 
@@ -157,7 +154,7 @@ export default defineComponent({
     }
 
     return {
-      tabs,
+      links,
       record,
       stats,
       issueMessage,

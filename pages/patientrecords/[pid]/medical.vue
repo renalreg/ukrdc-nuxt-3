@@ -10,8 +10,9 @@
         description="Click to check Related Records for available data feed records."
       />
     </NuxtLink>
+
     <div class="flex gap-8">
-      <UVerticalNavigation :links="tabs" />
+      <UVerticalNavigation :links="links" />
       <NuxtPage v-if="record" class="flex-1" :record="record" />
     </div>
   </div>
@@ -53,7 +54,7 @@ export default defineComponent({
 
     // Navigation
 
-    const tabs = [
+    const links = [
       [
         {
           label: "Results",
@@ -110,7 +111,7 @@ export default defineComponent({
     return {
       recordProbablyContainsData,
       recordDescription,
-      tabs,
+      links,
     };
   },
 });

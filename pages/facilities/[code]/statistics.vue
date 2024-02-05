@@ -1,7 +1,5 @@
 <template>
   <div>
-    <BaseTabsNavigation id="stats-tabs" class="mb-4" :tabs="tabs" :mini="true" />
-
     <UAlert
       class="mb-4"
       title="The data displayed on this page have yet to be fully verified and may be subject to change or correction."
@@ -10,19 +8,17 @@
       icon="i-heroicons-information-circle-20-solid"
     />
 
-    <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" />
+    <div class="flex gap-8">
+      <UVerticalNavigation :links="links" />
+      <NuxtPage v-if="facility && extracts" class="flex-1" :facility="facility" :extracts="extracts" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseTabsNavigation from "~/components/base/BaseTabsNavigation.vue";
-
 export default defineComponent({
-  components: {
-    BaseTabsNavigation,
-  },
   props: {
     facility: {
       type: Object as () => FacilityDetailsSchema,
@@ -40,14 +36,14 @@ export default defineComponent({
 
     // Navigation
 
-    const tabs = [
+    const links = [
       {
-        name: "Demographics",
-        href: `/facilities/${route.params.code}/statistics/demographics`,
+        label: "Demographics",
+        to: `/facilities/${route.params.code}/statistics/demographics`,
       },
       {
-        name: "KRT",
-        href: `/facilities/${route.params.code}/statistics/krt`,
+        label: "KRT",
+        to: `/facilities/${route.params.code}/statistics/krt`,
       },
     ];
 
@@ -59,7 +55,7 @@ export default defineComponent({
     });
 
     return {
-      tabs,
+      links,
     };
   },
 });

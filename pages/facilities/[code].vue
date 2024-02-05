@@ -12,7 +12,9 @@
       <USkeleton v-else class="h-4 w-1/2" />
     </div>
 
-    <div class="mb-6"><BaseTabsNavigation :tabs="tabs" /></div>
+    <div class="mb-6">
+      <UHorizontalNavigation :links="links" />
+    </div>
 
     <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" />
   </div>
@@ -21,18 +23,15 @@
 <script lang="ts">
 import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseTabsNavigation from "~/components/base/BaseTabsNavigation.vue";
 import DashboardAlerts from "~/components/DashboardAlerts.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
 import { insertIf } from "~/helpers/arrayUtils";
 import { getFirstOrValue } from "~/helpers/queryUtils";
-import { type TabItem } from "~/interfaces/tabs";
 
 export default defineComponent({
   components: {
     DashboardAlerts,
-    BaseTabsNavigation,
   },
   setup() {
     const route = useRoute();
@@ -47,31 +46,6 @@ export default defineComponent({
 
     // URL parameters
     const code = computed(() => route.params.code);
-
-    // Navigation
-
-    const tabs = computed<TabItem[]>(() => {
-      return [
-        {
-          name: "Overview",
-          href: `/facilities/${route.params.code}`,
-        },
-        {
-          name: "Errors",
-          href: `/facilities/${route.params.code}/errors`,
-        },
-        ...insertIf(showStats.value, {
-          name: "Statistics",
-          href: `/facilities/${route.params.code}/statistics`,
-          hasChildren: true,
-        }),
-        ...insertIf(hasPermission("ukrdc:reports:read"), {
-          name: "Reports",
-          href: `/facilities/${route.params.code}/reports`,
-          hasChildren: true,
-        }),
-      ];
-    });
 
     // Data refs
     const facility = ref<FacilityDetailsSchema>();
@@ -111,9 +85,36 @@ export default defineComponent({
         });
     });
 
+    // Navigation
+    const links = computed(() => {
+      return [
+        {
+          label: "Overview",
+          to: `/facilities/${route.params.code}/overview`,
+          icon: "i-heroicons-home",
+        },
+        {
+          label: "Errors",
+          to: `/facilities/${route.params.code}/errors`,
+          icon: "i-heroicons-exclamation-triangle",
+          badge: facility.value ? facility.value.statistics.patientsReceivingMessageError : null,
+        },
+        ...insertIf(showStats.value, {
+          label: "Statistics",
+          to: `/facilities/${route.params.code}/statistics`,
+          icon: "i-heroicons-chart-pie",
+        }),
+        ...insertIf(hasPermission("ukrdc:reports:read"), {
+          label: "Reports",
+          to: `/facilities/${route.params.code}/reports`,
+          icon: "i-heroicons-document-chart-bar",
+        }),
+      ];
+    });
+
     return {
       hasMultipleFacilities,
-      tabs,
+      links,
       code,
       facility,
       extracts,
