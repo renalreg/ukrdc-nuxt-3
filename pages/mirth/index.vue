@@ -4,40 +4,42 @@
       <h1>Mirth Channels</h1>
     </div>
 
-    <BaseLoadingIndicator v-if="!mirthGroups"></BaseLoadingIndicator>
-    <div v-else class="mx-auto mb-8 max-w-7xl">
-      <div v-for="group in mirthGroups" :key="group.id" class="mb-6">
-        <div class="mb-4">
-          <h4>
-            {{ group.name }}
-          </h4>
-          <h6>
-            {{ group.description }}
-          </h6>
+    <div class="mx-auto mb-8 max-w-7xl">
+      <UCard :ui="{ body: { padding: '' } }">
+        <div class="flex border-b border-gray-200 px-3 py-3.5 dark:border-gray-700">
+          <UInput v-model="searchQuery" placeholder="Filter channels..." />
         </div>
-
-        <ul class="my-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-          <li v-for="item in group.channels" :key="item.id" class="col-span-1">
-            <UCard>
-              <h3 class="truncate">
-                {{ item.name }}
-              </h3>
-              <h5>Rev. {{ item.revision }}</h5>
-              <p>{{ item.statistics ? item.statistics.received : "Unknown" }} received</p>
-              <span
-                v-if="item.statistics && item.statistics.error === 0"
-                class="mt-2 inline-block rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
-                >No errors</span
-              >
-              <span
-                v-else-if="item.statistics && item.statistics.error > 0"
-                class="mt-2 inline-block rounded-sm bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800"
-                >{{ item.statistics.error }} errors</span
-              >
-            </UCard>
-          </li>
-        </ul>
-      </div>
+        <UTable :rows="filteredRows" :columns="columns" :loading="loading">
+          <!-- Name -->
+          <template #name-data="{ row }">
+            <UPopover v-if="row.description" mode="hover" class="h-5 w-5">
+              {{ row.name }}
+              <template #panel>
+                <div class="p-3 text-xs">
+                  <p>{{ row.description }}</p>
+                </div>
+              </template>
+            </UPopover>
+            <span v-else>{{ row.name }}</span>
+          </template>
+          <!-- Group -->
+          <template #group-data="{ row }">
+            <UPopover v-if="row.groupDescription" mode="hover" class="h-5 w-5">
+              {{ row.group }}
+              <template #panel>
+                <div class="p-3 text-xs">
+                  <p>{{ row.groupDescription }}</p>
+                </div>
+              </template>
+            </UPopover>
+            <span v-else>{{ row.group }}</span>
+          </template>
+          <!-- Errors -->
+          <template #error-data="{ row }">
+            <UBadge v-if="row.error !== null" :color="row.error > 0 ? 'red' : 'green'">{{ row.error }}</UBadge>
+          </template>
+        </UTable>
+      </UCard>
     </div>
   </div>
 </template>
@@ -45,21 +47,58 @@
 <script lang="ts">
 import { type ChannelGroupModel } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import useApi from "~/composables/useApi";
 
+interface ChannelRow {
+  id: string;
+  group: string;
+  groupDescription: string | undefined;
+  name: string;
+  channelDescription: string | undefined;
+  revision: string;
+  received: number | null;
+  sent: number | null;
+  error: number | null;
+  filtered: number | null;
+  queued: number | null;
+}
+
 export default defineComponent({
-  components: {
-    BaseLoadingIndicator,
-  },
   setup() {
     const { mirthApi } = useApi();
 
     // Data refs
     const mirthGroups = ref<ChannelGroupModel[]>();
 
+    const mirthChannels = computed<ChannelRow[]>(() => {
+      const channels: ChannelRow[] = [];
+      if (mirthGroups.value) {
+        mirthGroups.value.forEach((group) => {
+          group.channels.forEach((channel) => {
+            channels.push({
+              id: channel.id,
+              group: group.name,
+              groupDescription: group.description,
+              name: channel.name,
+              channelDescription: channel.description,
+              revision: channel.revision,
+              received: channel.statistics ? channel.statistics.received : null,
+              sent: channel.statistics ? channel.statistics.sent : null,
+              error: channel.statistics ? channel.statistics.error : null,
+              filtered: channel.statistics ? channel.statistics.filtered : null,
+              queued: channel.statistics ? channel.statistics.queued : null,
+            });
+          });
+        });
+      }
+      return channels;
+    });
+
     // Data fetching
+    const loading = ref(false);
+
     onMounted(() => {
+      loading.value = true;
       mirthApi
         .getMirthGroups()
         .then((response) => {
@@ -68,11 +107,75 @@ export default defineComponent({
         .catch(() => {
           // Error handling is centralized in the Axios interceptor
           // Handle UI state reset or fallback values here if needed
+        })
+        .finally(() => {
+          loading.value = false;
         });
     });
 
+    // Table data
+    const columns = [
+      {
+        key: "group",
+        label: "Group",
+        sortable: true,
+      },
+      {
+        key: "name",
+        label: "Name",
+        sortable: true,
+      },
+      {
+        key: "revision",
+        label: "Revision",
+        sortable: true,
+      },
+      {
+        key: "received",
+        label: "Received",
+        sortable: true,
+      },
+      {
+        key: "sent",
+        label: "Sent",
+        sortable: true,
+      },
+      {
+        key: "error",
+        label: "Error",
+        sortable: true,
+      },
+      {
+        key: "filtered",
+        label: "Filtered",
+        sortable: true,
+      },
+      {
+        key: "queued",
+        label: "Queued",
+        sortable: true,
+      },
+    ];
+
+    const searchQuery = ref("");
+
+    const filteredRows = computed(() => {
+      if (!searchQuery.value) {
+        return mirthChannels.value;
+      }
+
+      return mirthChannels.value.filter((channel) => {
+        return Object.values(channel).some((value) => {
+          return String(value).toLowerCase().includes(searchQuery.value.toLowerCase());
+        });
+      });
+    });
+
     return {
-      mirthGroups,
+      filteredRows,
+      searchQuery,
+      columns,
+      loading,
     };
   },
 

@@ -7,7 +7,7 @@ Table of facilities and their basic statistics
     <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
 
     <UCard :ui="{ body: { padding: '' } }">
-      <UTable :rows="filteredFacilities" :columns="columns" @select="$emit('select', $event.id)">
+      <UTable :rows="filteredFacilities" :columns="columns" :loading="loading" @select="$emit('select', $event.id)">
         <!-- Total patients -->
         <template #totalPatients-data="{ row }">
           {{ row.statistics.totalPatients }}
@@ -106,7 +106,11 @@ export default defineComponent({
       );
     });
 
+    // Data fetching
+    const loading = ref(false);
+
     function fetchTable() {
+      loading.value = true;
       facilitiesApi
         .getFacilityList({
           includeInactive: props.includeInactive,
@@ -118,6 +122,9 @@ export default defineComponent({
         .catch(() => {
           // Error handling is centralized in the Axios interceptor
           // Handle UI state reset or fallback values here if needed
+        })
+        .finally(() => {
+          loading.value = false;
         });
     }
 
@@ -167,6 +174,7 @@ export default defineComponent({
     return {
       facilities,
       columns,
+      loading,
       searchboxString,
       filterByPkbOut,
       filterByLastMessageOver48,
