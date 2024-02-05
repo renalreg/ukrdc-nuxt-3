@@ -3,6 +3,11 @@ export default defineAppConfig({
   ui: {
     primary: "indigo",
     gray: "cool",
+    badge: {
+      default: {
+        variant: "subtle",
+      },
+    },
     button: {
       base: "inline-flex items-center justify-center",
       default: {

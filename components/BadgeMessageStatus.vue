@@ -1,7 +1,7 @@
 <template>
-  <span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-medium" :class="classes">
+  <UBadge :color="color">
     {{ message.msgStatus }}
-  </span>
+  </UBadge>
 </template>
 
 <script lang="ts">
@@ -15,15 +15,16 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const classes = computed(() => {
+    const color = computed(() => {
       if (props.message.msgStatus === "ERROR") {
-        return ["bg-red-100", "text-red-800"];
+        return "red";
       } else if (props.message.msgStatus === "RECEIVED") {
-        return ["bg-yellow-100", "text-yellow-800"];
+        return "amber";
       }
-      return ["bg-green-100", "text-green-800"];
+      return "green";
     });
-    return { classes };
+
+    return { color };
   },
 });
 </script>

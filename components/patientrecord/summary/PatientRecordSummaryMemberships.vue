@@ -11,8 +11,8 @@
         </UTooltip>
         <p v-if="item.fromTime">Since {{ formatDate(item.fromTime, false) }}</p>
         <div class="mt-2">
-          <BaseBadge v-if="!item.toTime" class="bg-green-100 text-green-800">Active</BaseBadge>
-          <BaseBadge v-else class="bg-red-100 text-red-800">Closed on {{ formatDate(item.toTime, false) }}</BaseBadge>
+          <UBadge v-if="!item.toTime" color="green">Active</UBadge>
+          <UBadge v-else color="red">Closed on {{ formatDate(item.toTime, false) }}</UBadge>
         </div>
       </UCard>
     </li>
@@ -22,13 +22,9 @@
 <script lang="ts">
 import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseBadge from "~/components/base/BaseBadge.vue";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
-  components: {
-    BaseBadge,
-  },
   props: {
     record: {
       type: Object as () => PatientRecordSchema,
