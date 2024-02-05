@@ -4,10 +4,12 @@
       <h1>Mirth Channels</h1>
     </div>
 
-    <BaseLoadingIndicator v-if="!mirthGroups"></BaseLoadingIndicator>
-    <div v-else class="mx-auto mb-8 max-w-7xl">
+    <div class="mx-auto mb-8 max-w-7xl">
       <UCard :ui="{ body: { padding: '' } }">
-        <UTable :rows="mirthChannels" :columns="columns">
+        <div class="flex border-b border-gray-200 px-3 py-3.5 dark:border-gray-700">
+          <UInput v-model="searchQuery" placeholder="Filter channels..." />
+        </div>
+        <UTable :rows="filteredRows" :columns="columns" :loading="loading">
           <!-- Name -->
           <template #name-data="{ row }">
             <UPopover v-if="row.description" mode="hover" class="h-5 w-5">
@@ -45,7 +47,6 @@
 <script lang="ts">
 import { type ChannelGroupModel } from "@ukkidney/ukrdc-axios-ts";
 
-import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import useApi from "~/composables/useApi";
 
 interface ChannelRow {
@@ -63,9 +64,6 @@ interface ChannelRow {
 }
 
 export default defineComponent({
-  components: {
-    BaseLoadingIndicator,
-  },
   setup() {
     const { mirthApi } = useApi();
 
@@ -97,7 +95,10 @@ export default defineComponent({
     });
 
     // Data fetching
+    const loading = ref(false);
+
     onMounted(() => {
+      loading.value = true;
       mirthApi
         .getMirthGroups()
         .then((response) => {
@@ -106,10 +107,13 @@ export default defineComponent({
         .catch(() => {
           // Error handling is centralized in the Axios interceptor
           // Handle UI state reset or fallback values here if needed
+        })
+        .finally(() => {
+          loading.value = false;
         });
     });
 
-    // Table columns
+    // Table data
     const columns = [
       {
         key: "group",
@@ -153,10 +157,25 @@ export default defineComponent({
       },
     ];
 
+    const searchQuery = ref("");
+
+    const filteredRows = computed(() => {
+      if (!searchQuery.value) {
+        return mirthChannels.value;
+      }
+
+      return mirthChannels.value.filter((channel) => {
+        return Object.values(channel).some((value) => {
+          return String(value).toLowerCase().includes(searchQuery.value.toLowerCase());
+        });
+      });
+    });
+
     return {
-      mirthGroups,
-      mirthChannels,
+      filteredRows,
+      searchQuery,
       columns,
+      loading,
     };
   },
 
