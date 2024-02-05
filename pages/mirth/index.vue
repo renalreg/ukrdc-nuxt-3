@@ -6,38 +6,38 @@
 
     <BaseLoadingIndicator v-if="!mirthGroups"></BaseLoadingIndicator>
     <div v-else class="mx-auto mb-8 max-w-7xl">
-      <div v-for="group in mirthGroups" :key="group.id" class="mb-6">
-        <div class="mb-4">
-          <h4>
-            {{ group.name }}
-          </h4>
-          <h6>
-            {{ group.description }}
-          </h6>
-        </div>
-
-        <ul class="my-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-          <li v-for="item in group.channels" :key="item.id" class="col-span-1">
-            <UCard>
-              <h3 class="truncate">
-                {{ item.name }}
-              </h3>
-              <h5>Rev. {{ item.revision }}</h5>
-              <p>{{ item.statistics ? item.statistics.received : "Unknown" }} received</p>
-              <span
-                v-if="item.statistics && item.statistics.error === 0"
-                class="mt-2 inline-block rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
-                >No errors</span
-              >
-              <span
-                v-else-if="item.statistics && item.statistics.error > 0"
-                class="mt-2 inline-block rounded-sm bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800"
-                >{{ item.statistics.error }} errors</span
-              >
-            </UCard>
-          </li>
-        </ul>
-      </div>
+      <UCard :ui="{ body: { padding: '' } }">
+        <UTable :rows="mirthChannels" :columns="columns">
+          <!-- Name -->
+          <template #name-data="{ row }">
+            <UPopover v-if="row.description" mode="hover" class="h-5 w-5">
+              {{ row.name }}
+              <template #panel>
+                <div class="p-3 text-xs">
+                  <p>{{ row.description }}</p>
+                </div>
+              </template>
+            </UPopover>
+            <span v-else>{{ row.name }}</span>
+          </template>
+          <!-- Group -->
+          <template #group-data="{ row }">
+            <UPopover v-if="row.groupDescription" mode="hover" class="h-5 w-5">
+              {{ row.group }}
+              <template #panel>
+                <div class="p-3 text-xs">
+                  <p>{{ row.groupDescription }}</p>
+                </div>
+              </template>
+            </UPopover>
+            <span v-else>{{ row.group }}</span>
+          </template>
+          <!-- Errors -->
+          <template #error-data="{ row }">
+            <UBadge v-if="row.error !== null" :color="row.error > 0 ? 'red' : 'green'">{{ row.error }}</UBadge>
+          </template>
+        </UTable>
+      </UCard>
     </div>
   </div>
 </template>
@@ -48,6 +48,20 @@ import { type ChannelGroupModel } from "@ukkidney/ukrdc-axios-ts";
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import useApi from "~/composables/useApi";
 
+interface ChannelRow {
+  id: string;
+  group: string;
+  groupDescription: string | undefined;
+  name: string;
+  channelDescription: string | undefined;
+  revision: string;
+  received: number | null;
+  sent: number | null;
+  error: number | null;
+  filtered: number | null;
+  queued: number | null;
+}
+
 export default defineComponent({
   components: {
     BaseLoadingIndicator,
@@ -57,6 +71,30 @@ export default defineComponent({
 
     // Data refs
     const mirthGroups = ref<ChannelGroupModel[]>();
+
+    const mirthChannels = computed<ChannelRow[]>(() => {
+      const channels: ChannelRow[] = [];
+      if (mirthGroups.value) {
+        mirthGroups.value.forEach((group) => {
+          group.channels.forEach((channel) => {
+            channels.push({
+              id: channel.id,
+              group: group.name,
+              groupDescription: group.description,
+              name: channel.name,
+              channelDescription: channel.description,
+              revision: channel.revision,
+              received: channel.statistics ? channel.statistics.received : null,
+              sent: channel.statistics ? channel.statistics.sent : null,
+              error: channel.statistics ? channel.statistics.error : null,
+              filtered: channel.statistics ? channel.statistics.filtered : null,
+              queued: channel.statistics ? channel.statistics.queued : null,
+            });
+          });
+        });
+      }
+      return channels;
+    });
 
     // Data fetching
     onMounted(() => {
@@ -71,8 +109,54 @@ export default defineComponent({
         });
     });
 
+    // Table columns
+    const columns = [
+      {
+        key: "group",
+        label: "Group",
+        sortable: true,
+      },
+      {
+        key: "name",
+        label: "Name",
+        sortable: true,
+      },
+      {
+        key: "revision",
+        label: "Revision",
+        sortable: true,
+      },
+      {
+        key: "received",
+        label: "Received",
+        sortable: true,
+      },
+      {
+        key: "sent",
+        label: "Sent",
+        sortable: true,
+      },
+      {
+        key: "error",
+        label: "Error",
+        sortable: true,
+      },
+      {
+        key: "filtered",
+        label: "Filtered",
+        sortable: true,
+      },
+      {
+        key: "queued",
+        label: "Queued",
+        sortable: true,
+      },
+    ];
+
     return {
       mirthGroups,
+      mirthChannels,
+      columns,
     };
   },
 
