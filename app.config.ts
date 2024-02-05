@@ -25,5 +25,8 @@ export default defineAppConfig({
     verticalNavigation: {
       size: "text-md",
     },
+    horizontalNavigation: {
+      base: "text-md",
+    },
   },
 });
