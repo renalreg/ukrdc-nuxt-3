@@ -2,7 +2,7 @@
 export default defineComponent({
   setup() {
     const route = useRoute();
-    navigateTo(`/patientrecords/${route.params.pid}/overview`);
+    navigateTo(`/patientrecords/${route.params.pid}/overview`, { replace: true });
   },
 });
 </script>
