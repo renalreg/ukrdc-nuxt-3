@@ -11,9 +11,7 @@
         <PatientRecordExtractSummary class="justify-center sm:justify-start" :record="record" />
       </div>
       <div class="flex justify-center sm:justify-start">
-        <div v-if="record.masterId">
-          <UButton size="lg" :to="`/masterrecords/${record.masterId}`"> View Master Record </UButton>
-        </div>
+        <MasterRecordLinkButton v-if="record.masterId" :master-id="record.masterId" />
       </div>
     </div>
 
@@ -28,6 +26,7 @@
 <script lang="ts">
 import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
+import MasterRecordLinkButton from "~/components/MasterRecordLinkButton.vue";
 import PatientRecordExtractSummary from "~/components/patientrecord/PatientRecordExtractSummary.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
@@ -38,6 +37,7 @@ import { firstForename, firstSurname } from "~/helpers/recordUtils";
 export default defineComponent({
   components: {
     PatientRecordExtractSummary,
+    MasterRecordLinkButton,
   },
   setup() {
     const route = useRoute();
