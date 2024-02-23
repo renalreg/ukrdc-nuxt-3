@@ -38,7 +38,7 @@
     "vue-tsc": "^1.8.24"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.13.0",
+    "@nuxt/ui": "^2.14.0",
     "@okta/okta-auth-js": "^7.5.0",
     "@okta/okta-vue": "^5.7.0",
     "@popperjs/core": "^2.11.8",
