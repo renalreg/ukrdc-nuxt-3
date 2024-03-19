@@ -1,7 +1,7 @@
 <template>
   <BaseLoadingIndicator v-if="!code"></BaseLoadingIndicator>
-  <div v-else-if="code" class="flex flex-col gap-4">
-    <div class="flex flex-col gap-4 pl-4 sm:pl-6">
+  <div v-else-if="code" class="flex flex-col">
+    <div class="flex flex-col gap-4 py-4 pl-4 sm:pl-6">
       <!-- Heading -->
       <div>
         <CodeTitle :code="code.code" :coding-standard="code.codingStandard" />
@@ -39,28 +39,30 @@
 
     <!-- Maps to  -->
     <div v-if="code.mapsTo.length > 0">
-      <div class="mb-4 border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
+      <div class="border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
         <h4>Maps To</h4>
       </div>
-      <div class="flex flex-col gap-4 divide-y divide-gray-300">
+      <div class="flex flex-col divide-y divide-gray-300">
         <CodeMapItem
           v-for="mappedCode in code.mapsTo"
           :key="`${mappedCode.destinationCodingStandard}.${mappedCode.destinationCode}`"
           :map="mappedCode"
+          class="py-2"
         />
       </div>
     </div>
 
     <!-- Mapped by  -->
     <div v-if="code.mappedBy.length > 0">
-      <div class="mb-4 border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
+      <div class="border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
         <h4>Mapped By</h4>
       </div>
-      <div class="flex flex-col gap-4 divide-y divide-gray-300">
+      <div class="flex flex-col divide-y divide-gray-300">
         <CodeMapItem
           v-for="mappedCode in code.mappedBy"
           :key="`${mappedCode.sourceCodingStandard}.${mappedCode.sourceCode}`"
           :map="mappedCode"
+          class="py-2"
         />
       </div>
     </div>

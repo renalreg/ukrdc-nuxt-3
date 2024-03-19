@@ -66,7 +66,7 @@
         <NuxtLink v-show="$route.params.id" class="w-full lg:hidden" :to="{ path: `/codes/`, query: $route.query }">
           <UButton class="mb-4 w-full">Back to List</UButton>
         </NuxtLink>
-        <UCard :class="$route.params.id ? 'block' : 'hidden lg:block'" :ui="{ body: { padding: '' } }" class="py-4">
+        <UCard :class="$route.params.id ? 'block' : 'hidden lg:block'" :ui="{ body: { padding: '' } }">
           <NuxtPage />
         </UCard>
       </div>
