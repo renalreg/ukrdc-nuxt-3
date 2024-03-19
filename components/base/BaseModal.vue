@@ -7,11 +7,11 @@
 </template>
 
 <script lang="ts">
-import useModal from "~/composables/useModal";
+import useCustomModal from "~/composables/useCustomModal";
 
 export default defineComponent({
   setup() {
-    const { visible, show, hide, toggle } = useModal();
+    const { visible, show, hide, toggle } = useCustomModal();
 
     return {
       visible,

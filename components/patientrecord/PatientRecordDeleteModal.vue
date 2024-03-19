@@ -194,7 +194,7 @@ import {
 
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import useApi from "~/composables/useApi";
-import useModal from "~/composables/useModal";
+import useModal from "~/composables/useCustomModal";
 import { formatDate } from "~/helpers/dateUtils";
 import { saveAs } from "~/helpers/fileUtils";
 
