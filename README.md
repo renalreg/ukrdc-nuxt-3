@@ -53,6 +53,14 @@ See our [internal Confluence documentation](https://renalregistry.atlassian.net/
 
 ## Developer notes
 
+### Upgrading Nuxt
+
+Nuxt should not be upgraded via `npm`.
+
+Instead, follow [Upgrading Nuxt 3 / Latest release](https://nuxt.com/docs/getting-started/upgrade#latest-release) and use `nuxi`.
+
+To this end, `nuxt` upgrades have been excluded from Dependabot on this repository.
+
 ### Versioning, releases, and deployments
 
 See our [internal Confluence documentation](https://renalregistry.atlassian.net/wiki/spaces/UDF/pages/2516680711/Releases+and+Deployment) for up-to-date guidelines on versioning, releases, and deployment.
