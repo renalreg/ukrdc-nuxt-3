@@ -8,10 +8,6 @@ Table of facilities and their basic statistics
 
     <UCard :ui="{ body: { padding: '' } }">
       <UTable :rows="filteredFacilities" :columns="columns" :loading="loading" @select="$emit('select', $event.id)">
-        <!-- Total patients -->
-        <template #totalPatients-data="{ row }">
-          {{ row.statistics.totalPatients }}
-        </template>
         <!-- Failing records -->
         <template #patientsReceivingMessageError-data="{ row }">
           <span class="flex items-center">
@@ -27,7 +23,8 @@ Table of facilities and their basic statistics
           </span>
         </template>
         <!-- Sending to PKB -->
-        <template #pkbOut-data="{ row }">
+        <!-- eslint-disable-next-line vue/valid-v-slot -->
+        <template #dataFlow.pkbOut-data="{ row }">
           <span class="flex items-center">
             <IconCircle class="inline" :class="row.dataFlow.pkbOut ? 'text-green-600' : 'text-red-700'" />
             <p>{{ row.dataFlow.pkbOut ? "Yes" : "No" }}</p>
@@ -150,7 +147,7 @@ export default defineComponent({
         sortable: true,
       },
       {
-        key: "totalPatients",
+        key: "statistics.totalPatients",
         label: "Total records",
         sortable: true,
       },
@@ -160,7 +157,7 @@ export default defineComponent({
         sortable: true,
       },
       {
-        key: "pkbOut",
+        key: "dataFlow.pkbOut",
         label: "Sending to PKB",
         sortable: true,
       },
