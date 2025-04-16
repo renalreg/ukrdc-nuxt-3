@@ -175,7 +175,7 @@ export default defineComponent({
       menuAvailable,
       menuItems,
       createPkbMembership,
-      createMrcMembership
+      createMrcMembership,
     };
   },
 });
