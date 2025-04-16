@@ -49,6 +49,7 @@
         <PatientRecordMembershipsMenu
           :records="records"
           :show-create-pkb-membership="!hasPKBMembership"
+          :show-create-mrc-membership="!hasMRCMembership"
           @refresh="$emit('refresh')"
         />
       </div>
@@ -145,6 +146,10 @@ export default defineComponent({
       return props.records.some((r) => r.sendingfacility === "PKB");
     });
 
+    const hasMRCMembership = computed(() => {
+      return props.records.some((r) => r.sendingfacility === "MRC");
+    });
+
     const hasRADARMembership = computed(() => {
       return props.records.some((r) => r.sendingextract === "RADAR");
     });
@@ -152,6 +157,7 @@ export default defineComponent({
     return {
       groupedRecords,
       hasPKBMembership,
+      hasMRCMembership,
       hasRADARMembership,
       hasPermission,
     };
