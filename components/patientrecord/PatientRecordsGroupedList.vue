@@ -9,6 +9,13 @@
           @refresh="$emit('refresh')"
         />
       </div>
+      <div class="mr-2 flex-grow-0">
+        <PatientRecordSyncAllMenuMRC
+          :records="groupedRecords.data"
+          :has-mrc-membership="hasMRCMembership"
+          @refresh="$emit('refresh')"
+        />
+      </div>
     </div>
     <PatientRecordsListItem
       v-for="item in groupedRecords.data"
@@ -92,6 +99,7 @@ import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 import PatientRecordMembershipsMenu from "~/components/patientrecord/PatientRecordMembershipsMenu.vue";
 import PatientRecordsListItem from "~/components/patientrecord/PatientRecordsListItem.vue";
 import PatientRecordSyncAllMenu from "~/components/patientrecord/PatientRecordSyncAllMenu.vue";
+import PatientRecordSyncAllMenuMRC from "~/components/patientrecord/PatientRecordSyncAllMenuMRC.vue";
 import usePermissions from "~/composables/usePermissions";
 import { isData, isInformational, isMembership, isMigrated, isSurvey, isUKRR } from "~/helpers/recordUtils";
 
@@ -109,6 +117,7 @@ export default defineComponent({
     PatientRecordsListItem,
     PatientRecordMembershipsMenu,
     PatientRecordSyncAllMenu,
+    PatientRecordSyncAllMenuMRC,
   },
   props: {
     records: {
