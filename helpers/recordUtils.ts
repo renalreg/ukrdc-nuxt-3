@@ -1,6 +1,6 @@
 import { type NumberSchema, type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
-const membershipFacilities = ["UKRR", "PV", "PKB"];
+const membershipFacilities = ["UKRR", "PV", "PKB", "MRC"];
 const migratedExtracts = ["PVMIG", "HSMIG"];
 const informationalFacilities = ["TRACING", "NHSBT"];
 
@@ -96,6 +96,10 @@ export function firstNI(record: PatientRecordSummarySchema): localNumber | null 
 export function demographicsUpdateAllowed(record: PatientRecordSummarySchema) {
   // Allow in-house update of PKB membership demographics
   if (record.sendingfacility === "PKB" && record.sendingextract === "UKRDC") {
+    return true;
+  }
+  // Allow in-house update of PKB membership demographics
+  if (record.sendingfacility === "MRC" && record.sendingextract === "UKRDC") {
     return true;
   }
   // Allow in-house update of PV membership demographics now PV is shut down so no direct updates coming in
