@@ -19,7 +19,7 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
-    "@sentry/vue": "^7.120.0",
+    "@sentry/vue": "^9.40.0",
     "@types/dompurify": "^3.0.5",
     "@types/luxon": "^3.4.1",
     "@types/plotly.js-dist-min": "^2.3.4",
