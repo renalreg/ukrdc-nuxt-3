@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.14.0",
-    "@okta/okta-auth-js": "^7.12.1",
+    "@okta/okta-auth-js": "^7.13.1",
     "@okta/okta-vue": "^5.8.0",
     "@popperjs/core": "^2.11.8",
     "@sentry/vite-plugin": "^4.0.0",
