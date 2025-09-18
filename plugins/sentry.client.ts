@@ -6,8 +6,6 @@ interface SentryRuntimeConfig {
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const router = useRouter();
-
   const runtimeConfig = useRuntimeConfig();
   const runtimeOptions = runtimeConfig.public.sentry as SentryRuntimeConfig;
 
@@ -20,10 +18,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     dsn: runtimeOptions.dsn,
     environment: runtimeOptions.environment,
     integrations: [
-      new Sentry.BrowserTracing({
-        routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-      }),
-      new Sentry.Feedback({
+      Sentry.browserTracingIntegration(),
+      Sentry.feedbackIntegration({
         colorScheme: "light",
         useSentryUser: {
           email: "email",
@@ -32,6 +28,15 @@ export default defineNuxtPlugin((nuxtApp) => {
         buttonLabel: "Feedback",
         submitButtonLabel: "Send Feedback",
         formTitle: "Send Feedback",
+      }),
+      // configure component tracing here (was previously done via attachErrorHandler/createTracingMixins)
+      Sentry.vueIntegration({
+        app: nuxtApp.vueApp,
+        tracingOptions: {
+          trackComponents: true,
+          timeout: 2000,
+          hooks: ["activate", "mount", "update"],
+        },
       }),
     ],
     tracesSampleRate: 1.0, // Lower if traffic substantially increases
@@ -42,17 +47,6 @@ export default defineNuxtPlugin((nuxtApp) => {
        */
       "TypeError: Failed to execute 'removeChild' on 'Node': parameter 1 is not of type 'Node'.",
     ],
-  });
-
-  nuxtApp.vueApp.mixin(
-    Sentry.createTracingMixins({ trackComponents: true, timeout: 2000, hooks: ["activate", "mount", "update"] }),
-  );
-  Sentry.attachErrorHandler(nuxtApp.vueApp, {
-    logErrors: false,
-    attachProps: true,
-    trackComponents: true,
-    timeout: 2000,
-    hooks: ["activate", "mount", "update"],
   });
 
   return {
