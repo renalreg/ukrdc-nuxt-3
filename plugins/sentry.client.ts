@@ -6,7 +6,6 @@ interface SentryRuntimeConfig {
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
-
   const runtimeConfig = useRuntimeConfig();
   const runtimeOptions = runtimeConfig.public.sentry as SentryRuntimeConfig;
 
@@ -30,15 +29,15 @@ export default defineNuxtPlugin((nuxtApp) => {
         submitButtonLabel: "Send Feedback",
         formTitle: "Send Feedback",
       }),
-    // configure component tracing here (was previously done via attachErrorHandler/createTracingMixins)
-    Sentry.vueIntegration({
-      app: nuxtApp.vueApp,
-      tracingOptions: {
-        trackComponents: true,
-        timeout: 2000,
-        hooks: ["activate", "mount", "update"],
-      },
-    }),
+      // configure component tracing here (was previously done via attachErrorHandler/createTracingMixins)
+      Sentry.vueIntegration({
+        app: nuxtApp.vueApp,
+        tracingOptions: {
+          trackComponents: true,
+          timeout: 2000,
+          hooks: ["activate", "mount", "update"],
+        },
+      }),
     ],
     tracesSampleRate: 1.0, // Lower if traffic substantially increases
     ignoreErrors: [
