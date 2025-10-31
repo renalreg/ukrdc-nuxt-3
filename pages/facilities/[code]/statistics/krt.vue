@@ -2,8 +2,7 @@
   <div>
     <UCard class="mb-6">
       <div v-if="facilityStatsDialysis">
-        Statistics calulated from a population of
-        <b>{{ facilityStatsDialysis.all.metadata.population }}</b> patients, from
+        Statistics calculated from
         {{ formatDate(facilityStatsDialysis.all.metadata.fromTime) }} to
         {{ formatDate(facilityStatsDialysis.all.metadata.toTime) }}
       </div>
@@ -12,11 +11,21 @@
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Labelled2dPiePlot
-        id="allPatientsHomeTherapiesPlot"
-        :labelled2d="facilityStatsDialysis?.all.allPatientsHomeTherapies"
+        id="prevalentKRTModalities"
+        :labelled2d="facilityStatsDialysis?.all.prevalentKrt"
         :export-file-name="`incident-initial-access-${facility.id}`"
-        :text="facilityStatsDialysis?.all.allPatientsHomeTherapies?.metadata?.populationSize?.toString()"
+        :text="facilityStatsDialysis?.all.prevalentKrt.metadata?.populationSize?.toString()"
       />
+      <Labelled2dPiePlot
+        :labelled2d="facilityStatsDialysis?.all.incidentKrt"
+        :export-file-name="`incident-initial-access-${facility.id}`"
+        :text="facilityStatsDialysis?.all.incidentKrt.metadata?.populationSize?.toString()"
+      />
+    </div>
+
+    <br />
+
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Labelled2dBarPlot
         id="incentreDialysisFrequencyPlot"
         :labelled2d="facilityStatsDialysis?.all.incentreDialysisFrequency"
@@ -25,33 +34,11 @@
         orientation="h"
         x-type="category"
       />
-    </div>
-
-    <br />
-
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <Labelled2dPiePlot
-        id="incidentHomeTherapiesPlot"
-        :labelled2d="facilityStatsDialysis?.all.incidentHomeTherapies"
-        :export-file-name="`incident-home-therapies-${facility.id}`"
-        :text="facilityStatsDialysis?.all.incidentHomeTherapies?.metadata?.populationSize?.toString()"
-      />
       <Labelled2dPiePlot
         id="incidentInitialAccessPlot"
         :labelled2d="facilityStatsDialysis?.all.incidentInitialAccess"
         :export-file-name="`incident-initial-access-${facility.id}`"
         :text="facilityStatsDialysis?.all.incidentInitialAccess?.metadata?.populationSize?.toString()"
-      />
-    </div>
-
-    <br />
-
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <Labelled2dPiePlot
-        id="prevalentHomeTherapiesPlot"
-        :labelled2d="facilityStatsDialysis?.all.prevalentHomeTherapies"
-        :export-file-name="`prevalent-home-therapies-${facility.id}`"
-        :text="facilityStatsDialysis?.all.prevalentHomeTherapies?.metadata?.populationSize?.toString()"
       />
     </div>
   </div>
@@ -98,6 +85,7 @@ export default defineComponent({
           code: props.facility.id,
         })
         .then((response) => {
+          console.log("facilityStatsDialysis API response:", response.data); 
           facilityStatsDialysis.value = response.data;
         })
         .catch(() => {

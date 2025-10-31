@@ -2,7 +2,7 @@
   <div>
     <UCard class="mb-6">
       <div v-if="facilityStatsDemographics">
-        Demographic statistics calulated from a population of
+        Demographic statistics calculated from a population of
         <b>{{ facilityStatsDemographics.metadata.population }}</b> patients.
       </div>
       <USkeleton v-else class="h-8 w-1/2" />
