@@ -85,7 +85,6 @@ export default defineComponent({
           code: props.facility.id,
         })
         .then((response) => {
-          console.log("facilityStatsDialysis API response:", response.data); 
           facilityStatsDialysis.value = response.data;
         })
         .catch(() => {
