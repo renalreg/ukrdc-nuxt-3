@@ -48,13 +48,12 @@ import {
   type FacilityExtractsSchema,
   type UnitLevelKRTStats,
 } from "@ukkidney/ukrdc-axios-ts";
+import { DateTime } from "luxon";
 
+import DateRangeSelector from "~/components/plots/stats/DateRangeSelector.vue";
 import Labelled2dBarPlot from "~/components/plots/stats/Labelled2dBarPlot.vue";
 import Labelled2dPiePlot from "~/components/plots/stats/Labelled2dPiePlot.vue";
-import DateRangeSelector from "~/components/plots/stats/DateRangeSelector.vue";
-
 import useApi from "~/composables/useApi";
-import { DateTime } from "luxon";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({

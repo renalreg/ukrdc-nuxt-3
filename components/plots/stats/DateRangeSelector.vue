@@ -3,11 +3,11 @@
     <div class="slider">
       <label for="timePeriod">Select Time Period:</label>
       <input
-        type="range"
         id="timePeriod"
+        v-model="timePeriodIndex"
+        type="range"
         min="0"
         max="2"
-        v-model="timePeriodIndex"
       />
       <span>{{ timePeriods[timePeriodIndex] }}</span>
     </div>
@@ -15,9 +15,9 @@
     <div class="slider">
       <label for="dateToggle">Toggle Date Range:</label>
       <input
-        type="checkbox"
         id="dateToggle"
         v-model="isNow"
+        type="checkbox"
       />
       <span>{{ isNow ? 'Now' : 'Most Recent Quarter' }}</span>
     </div>
@@ -28,11 +28,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from 'vue';
 import { DateTime } from 'luxon';
+import { computed, defineComponent, ref, watch } from 'vue';
 
 export default defineComponent({
   name: 'DateRangeSelector',
+  emits: ['date-range-updated', 'time-period-changed', 'date-range-toggled'],
   setup(_, { emit }) {
     const timePeriods = ['30 days', '90 days', '365 days'];
     const timePeriodIndex = ref(1);
@@ -79,7 +80,7 @@ export default defineComponent({
       emit('time-period-changed', timePeriods[newIndex]);
     });
 
-    watch(isNow, (newIsNow) => {
+    watch(isNow, () => {
       emit('date-range-toggled', toTime.value);
     });
 
