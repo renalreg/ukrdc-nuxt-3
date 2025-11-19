@@ -63,7 +63,7 @@ export default defineComponent({
   },
 
   setup(props) {
-    const data: Plotly.Data[] = [
+    const buildData = (): Plotly.Data[] => [
       {
         x: (props.orientation === "h" ? props.y : props.x) as number[] | string[],
         y: (props.orientation === "h" ? props.x : props.y) as number[],
@@ -82,7 +82,7 @@ export default defineComponent({
       },
     ];
 
-    const layout = {
+    const buildLayout = () => ({
       autosize: true,
       bargap: 0.3,
       margin: { t: 10, r: 10, b: 20, l: 20 },
@@ -106,15 +106,44 @@ export default defineComponent({
           color: tailwindColours.gray[600],
         },
       },
-    };
+    });
 
-    const config = {
-      responsive: true,
+    const config = { responsive: true } as Partial<Plotly.Config>;
+    let hasPlotted = false;
+
+    const render = () => {
+      const data = buildData();
+      const layout = buildLayout();
+      if (hasPlotted) {
+        Plotly.react(props.id, data, layout, config);
+      } else {
+        Plotly.newPlot(props.id, data, layout, config);
+        hasPlotted = true;
+      }
     };
 
     onMounted(() => {
-      Plotly.newPlot(props.id, data, layout, config);
+      render();
     });
+
+    watch(
+      [
+        () => props.x,
+        () => props.y,
+        () => props.xLabel,
+        () => props.yLabel,
+        () => props.xType,
+        () => props.yType,
+        () => props.fixedrange,
+        () => props.orientation,
+        () => props.hoverinfo,
+        () => props.hovertemplate,
+      ],
+      () => {
+        render();
+      },
+      { deep: false },
+    );
   },
 });
 </script>

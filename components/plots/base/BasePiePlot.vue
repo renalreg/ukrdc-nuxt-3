@@ -1,5 +1,5 @@
 <template>
-  <div :id="id"></div>
+  <div :id="id" ref="el"></div>
 </template>
 
 <script lang="ts">
@@ -39,7 +39,9 @@ export default defineComponent({
   },
 
   setup(props) {
-    const data: Plotly.Data[] = [
+    const el = ref<HTMLDivElement | null>(null);
+
+    const buildData = (): Plotly.Data[] => [
       {
         values: props.y as number[],
         labels: props.x as string[],
@@ -54,7 +56,7 @@ export default defineComponent({
       },
     ];
 
-    const layout = {
+    const buildLayout = () => ({
       autosize: true,
       margin: { l: 10, t: 10, r: 10, b: 10 },
       showlegend: props.legend,
@@ -70,13 +72,38 @@ export default defineComponent({
           y: 0.5,
         },
       ],
+    });
+
+    const config = { responsive: true } as Partial<Plotly.Config>;
+    let hasPlotted = false;
+
+    const render = () => {
+      if (!el.value) return;
+      const data = buildData();
+      const layout = buildLayout();
+      if (hasPlotted) {
+        Plotly.react(el.value, data, layout, config);
+      } else {
+        Plotly.newPlot(el.value, data, layout, config);
+        hasPlotted = true;
+      }
     };
 
-    const config = { responsive: true };
-
     onMounted(() => {
-      Plotly.newPlot(props.id, data, layout, config);
+      render();
     });
+
+    watchEffect(() => {
+      render();
+    });
+
+    onBeforeUnmount(() => {
+      if (el.value) {
+        Plotly.purge(el.value);
+      }
+    });
+
+    return { el };
   },
 });
 </script>

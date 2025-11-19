@@ -1,25 +1,23 @@
 <template>
   <div>
     <UCard class="mb-6">
-      <div v-if="facilityStatsDialysis">
-        Statistics calculated from
-        {{ formatDate(facilityStatsDialysis.all.metadata.fromTime) }} to
-        {{ formatDate(facilityStatsDialysis.all.metadata.toTime) }}
-      </div>
-      <USkeleton v-else class="h-8 w-2/3" />
+      <DateRangeSelector 
+        class="mr-4" 
+        @date-range-updated="handleDateRangeUpdate"
+      />
     </UCard>
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Labelled2dPiePlot
         id="prevalentKRTModalities"
-        :labelled2d="facilityStatsDialysis?.all.prevalentKrt"
+        :labelled2d="facilityStatsKrt?.all.prevalentKrt"
         :export-file-name="`incident-initial-access-${facility.id}`"
-        :text="facilityStatsDialysis?.all.prevalentKrt.metadata?.populationSize?.toString()"
+        :text="facilityStatsKrt?.all.prevalentKrt.metadata?.populationSize?.toString()"
       />
       <Labelled2dPiePlot
-        :labelled2d="facilityStatsDialysis?.all.incidentKrt"
+        :labelled2d="facilityStatsKrt?.all.incidentKrt"
         :export-file-name="`incident-initial-access-${facility.id}`"
-        :text="facilityStatsDialysis?.all.incidentKrt.metadata?.populationSize?.toString()"
+        :text="facilityStatsKrt?.all.incidentKrt.metadata?.populationSize?.toString()"
       />
     </div>
 
@@ -28,7 +26,7 @@
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Labelled2dBarPlot
         id="incentreDialysisFrequencyPlot"
-        :labelled2d="facilityStatsDialysis?.all.incentreDialysisFrequency"
+        :labelled2d="facilityStatsKrt?.all.incentreDialysisFrequency"
         :export-file-name="`incentre-dialysis-freq-${facility.id}`"
         hovertemplate="Days per week: <b>%{x}</b><br>%{y}<extra></extra>"
         orientation="h"
@@ -36,9 +34,9 @@
       />
       <Labelled2dPiePlot
         id="incidentInitialAccessPlot"
-        :labelled2d="facilityStatsDialysis?.all.incidentInitialAccess"
+        :labelled2d="facilityStatsKrt?.all.incidentInitialAccess"
         :export-file-name="`incident-initial-access-${facility.id}`"
-        :text="facilityStatsDialysis?.all.incidentInitialAccess?.metadata?.populationSize?.toString()"
+        :text="facilityStatsKrt?.all.incidentInitialAccess?.metadata?.populationSize?.toString()"
       />
     </div>
   </div>
@@ -48,18 +46,22 @@
 import {
   type FacilityDetailsSchema,
   type FacilityExtractsSchema,
-  type UnitLevelDialysisStats,
+  type UnitLevelKRTStats,
 } from "@ukkidney/ukrdc-axios-ts";
 
 import Labelled2dBarPlot from "~/components/plots/stats/Labelled2dBarPlot.vue";
 import Labelled2dPiePlot from "~/components/plots/stats/Labelled2dPiePlot.vue";
+import DateRangeSelector from "~/components/plots/stats/DateRangeSelector.vue";
+
 import useApi from "~/composables/useApi";
+import { DateTime } from "luxon";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
   components: {
     Labelled2dBarPlot,
     Labelled2dPiePlot,
+    DateRangeSelector
   },
   props: {
     facility: {
@@ -76,25 +78,50 @@ export default defineComponent({
     const { facilitiesApi } = useApi();
 
     // Data refs
-    const facilityStatsDialysis = ref<UnitLevelDialysisStats>();
-
-    // Data fetching
-    onMounted(() => {
-      facilitiesApi
-        .getFacilityStatsKrt({
-          code: props.facility.id,
-        })
-        .then((response) => {
-          facilityStatsDialysis.value = response.data;
-        })
-        .catch(() => {
-          // Error handling is centralized in the Axios interceptor
-          // Handle UI state reset or fallback values here if needed
-        });
+    const facilityStatsKrt = ref<UnitLevelKRTStats>();
+    const dateRange = ref({
+      fromTime: new Date(),
+      toTime: new Date(),
+      timePeriod: '90 days',
+      isNow: true
     });
 
+    // Data fetching function
+    let requestSeq = 0;
+    const fetchFacilityStats = async (fromDate?: Date, toDate?: Date) => {
+      const seq = ++requestSeq;
+      try {
+        const response = await facilitiesApi.getFacilityStatsKrt({
+          code: props.facility.id,
+          since: fromDate ? DateTime.fromJSDate(fromDate).toISODate()! : undefined,
+          until: toDate ? DateTime.fromJSDate(toDate).toISODate()! : undefined,
+        });
+        if (seq === requestSeq) {
+          facilityStatsKrt.value = response.data;
+        }
+      } catch (error) {
+        console.error('Failed to fetch facility stats:', error);
+      }
+    };
+
+    // Handle date range updates from the selector
+    const handleDateRangeUpdate = (newDateRange: {
+      fromTime: Date;
+      toTime: Date;
+      timePeriod: string;
+      isNow: boolean;
+    }) => {
+      dateRange.value = newDateRange;
+      fetchFacilityStats(newDateRange.fromTime, newDateRange.toTime);
+    };
+
+    // Initial data fetch handled by DateRangeSelector's immediate emit
+    onMounted(() => {});
+
     return {
-      facilityStatsDialysis,
+      facilityStatsKrt,
+      dateRange,
+      handleDateRangeUpdate,
       formatDate,
     };
   },
