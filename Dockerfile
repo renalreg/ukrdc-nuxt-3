@@ -1,4 +1,4 @@
-FROM node:21-alpine as builder
+FROM node:22-alpine as builder
 
 # Environment variables used for building and Sentry release
 ARG SENTRY_DSN
