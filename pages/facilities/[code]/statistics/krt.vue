@@ -1,10 +1,7 @@
 <template>
   <div>
     <UCard class="mb-6">
-      <DateRangeSelector 
-        class="mr-4" 
-        @date-range-updated="handleDateRangeUpdate"
-      />
+      <DateRangeSelector class="mr-4" @date-range-updated="handleDateRangeUpdate" />
     </UCard>
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -60,7 +57,7 @@ export default defineComponent({
   components: {
     Labelled2dBarPlot,
     Labelled2dPiePlot,
-    DateRangeSelector
+    DateRangeSelector,
   },
   props: {
     facility: {
@@ -81,8 +78,8 @@ export default defineComponent({
     const dateRange = ref({
       fromTime: new Date(),
       toTime: new Date(),
-      timePeriod: '90 days',
-      isNow: true
+      timePeriod: "90 days",
+      isNow: true,
     });
 
     // Data fetching function
@@ -99,7 +96,7 @@ export default defineComponent({
           facilityStatsKrt.value = response.data;
         }
       } catch (error) {
-        console.error('Failed to fetch facility stats:', error);
+        console.error("Failed to fetch facility stats:", error);
       }
     };
 
