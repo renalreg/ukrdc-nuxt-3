@@ -28,7 +28,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "nuxt": "^3.11.1",
     "postcss": "^8.4.31",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
@@ -47,6 +46,7 @@
     "dompurify": "^3.2.6",
     "luxon": "^3.7.1",
     "marked": "^16.1.1",
+    "nuxt": "^3.20.1",
     "plotly.js-dist-min": "^3.0.3",
     "v-calendar": "^3.1.2",
     "xml-formatter": "^3.6.0"
