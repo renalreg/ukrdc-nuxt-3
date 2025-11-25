@@ -43,7 +43,7 @@
     "@okta/okta-vue": "^5.8.0",
     "@popperjs/core": "^2.11.8",
     "@sentry/vite-plugin": "^4.0.0",
-    "@ukkidney/ukrdc-axios-ts": "^5.4.1",
+    "@ukkidney/ukrdc-axios-ts": "^6.4.2",
     "dompurify": "^3.2.6",
     "luxon": "^3.7.1",
     "marked": "^16.1.1",
