@@ -1,4 +1,4 @@
-FROM node:24-alpine as builder
+FROM node:25-alpine as builder
 
 # Environment variables used for building and Sentry release
 ARG SENTRY_DSN
@@ -18,7 +18,7 @@ COPY . .
 RUN npm run build
 
 # Start a fresh image
-FROM node:24-alpine
+FROM node:25-alpine
 
 # Set production environment variables
 ENV HOST="0.0.0.0"
