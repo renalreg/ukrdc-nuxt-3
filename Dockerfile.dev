@@ -9,6 +9,8 @@ ARG SENTRY_PROJECT
 ARG GITHUB_SHA
 ARG GITHUB_REF
 
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
 # Install all dependencies, including dev, and build
 WORKDIR /app
 
