@@ -1,4 +1,4 @@
-FROM node:25-alpine as builder
+FROM node:25-alpine AS builder
 
 # Environment variables used for building and Sentry release
 ARG SENTRY_DSN
@@ -9,11 +9,11 @@ ARG SENTRY_PROJECT
 ARG GITHUB_SHA
 ARG GITHUB_REF
 
-# Install all dependencies, including dev, and build
 WORKDIR /app
 
+# Install all dependencies, including dev, and build
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm ci
 COPY . .
 RUN npm run build
 
@@ -21,16 +21,19 @@ RUN npm run build
 FROM node:25-alpine
 
 # Set production environment variables
+ENV NODE_ENV=production
 ENV HOST="0.0.0.0"
 
 # Install production dependencies
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm install --omit=dev
+RUN npm ci --omit=dev --ignore-scripts
 
 # Copy build output from previous step
-COPY . .
 COPY --from=builder /app/.output ./.output/
+COPY ./start.sh ./start.sh
+
+RUN chmod +x ./start.sh
 
 CMD [ "./start.sh" ]
