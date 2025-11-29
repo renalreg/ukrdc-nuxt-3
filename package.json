@@ -32,7 +32,7 @@
     "postcss": "^8.4.31",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
-    "tailwindcss": "^3.3.5",
+    "tailwindcss": "^4.1.17",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3",
     "vue-tsc": "^3.1.2"
