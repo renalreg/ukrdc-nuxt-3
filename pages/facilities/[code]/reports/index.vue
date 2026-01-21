@@ -17,6 +17,12 @@
         icon="i-heroicons-table-cells"
         href="./reports/cc001"
       />
+      <QuickLink
+        title="Missing Radar Patient Report"
+        description="List of patients with no ukrdc record whose presence in radar implies that they should have one"
+        icon="i-heroicons-table-cells"
+        href="./reports/radarmissing"
+      />
     </div>
   </div>
 </template>
