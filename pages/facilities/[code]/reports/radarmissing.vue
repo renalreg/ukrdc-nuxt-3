@@ -2,9 +2,7 @@
   <div>
     <div class="mx-auto mb-4 max-w-7xl">
       <h2 class="mb-2">RADAR Missing Data Report</h2>
-      <p>
-        List of patients with missing RADAR data elements required for national reporting.
-      </p>
+      <p>List of patients with missing RADAR data elements required for national reporting.</p>
       <p v-if="records" class="mt-2">
         <b>{{ total }}</b> records currently match this condition.
       </p>
@@ -42,11 +40,7 @@
 </template>
 
 <script lang="ts">
-import { 
-  type FacilityDetailsSchema, 
-  type PatientRecordSummarySchema,
-  type RadarMissingPagePatientRecordSummarySchema
-} from "@ukkidney/ukrdc-axios-ts";
+import { type FacilityDetailsSchema, type RadarMissingPagePatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
