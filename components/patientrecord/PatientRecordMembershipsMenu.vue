@@ -156,13 +156,13 @@ export default defineComponent({
           },
           disabled: !props.showCreatePkbMembership,
         },
-        {
-          label: "Create MRC Membership",
-          click: () => {
-            showCreateMrcMembershipConfirm();
-          },
-          disabled: !props.showCreateMrcMembership,
-        },
+        // {
+        //   label: "Create MRC Membership",
+        //   click: () => {
+        //     showCreateMrcMembershipConfirm();
+        //   },
+        //   disabled: !props.showCreateMrcMembership,
+        // },
       ],
     ];
 
