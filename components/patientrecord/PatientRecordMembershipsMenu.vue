@@ -115,9 +115,9 @@ export default defineComponent({
       createPkbMembershipConfirm.value?.show();
     }
 
-    function showCreateMrcMembershipConfirm() {
-      createMrcMembershipConfirm.value?.show();
-    }
+    // function showCreateMrcMembershipConfirm() {
+    //   createMrcMembershipConfirm.value?.show();
+    // }
 
     function createPkbMembership() {
       ukrdcRecordGroupApi
