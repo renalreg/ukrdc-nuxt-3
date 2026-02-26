@@ -115,9 +115,9 @@ export default defineComponent({
       createPkbMembershipConfirm.value?.show();
     }
 
-    function showCreateMrcMembershipConfirm() {
-      createMrcMembershipConfirm.value?.show();
-    }
+    // function showCreateMrcMembershipConfirm() {
+    //   createMrcMembershipConfirm.value?.show();
+    // }
 
     function createPkbMembership() {
       ukrdcRecordGroupApi
@@ -156,13 +156,13 @@ export default defineComponent({
           },
           disabled: !props.showCreatePkbMembership,
         },
-        {
-          label: "Create MRC Membership",
-          click: () => {
-            showCreateMrcMembershipConfirm();
-          },
-          disabled: !props.showCreateMrcMembership,
-        },
+        // {
+        //   label: "Create MRC Membership",
+        //   click: () => {
+        //     showCreateMrcMembershipConfirm();
+        //   },
+        //   disabled: !props.showCreateMrcMembership,
+        // },
       ],
     ];
 
