@@ -26,7 +26,7 @@
       <p class="mt-3 font-mono">exportAllToMRC.fail {{ failedPIDs }}</p>
     </BaseModalSuccess>
 
-    <UTooltip
+    <!-- <UTooltip
       :text="!hasMrcMembership ? 'Patient does not have a MRC membership record' : undefined"
       :prevent="hasMrcMembership"
     >
@@ -37,7 +37,7 @@
         :disabled="!hasMrcMembership || syncInProgress"
         @click="exportAllToMRC"
       />
-    </UTooltip>
+    </UTooltip> -->
   </div>
 </template>
 
