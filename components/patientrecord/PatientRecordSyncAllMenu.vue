@@ -26,7 +26,11 @@
       <p class="mt-3 font-mono">exportAllToPKB.fail {{ failedPIDs }}</p>
     </BaseModalSuccess>
 
-    <BaseModalSuccess ref="startSyncPartialSuccessModal" title="Partial PKB Sync completed" confirm-label="Go back to records">
+    <BaseModalSuccess
+      ref="startSyncPartialSuccessModal"
+      title="Partial PKB Sync completed"
+      confirm-label="Go back to records"
+    >
       <p class="mb-4"><b>Some feeds were synced to PKB.</b></p>
       <p>
         Synced: <span class="font-mono">{{ succeededExtracts.join(", ") }}</span>
@@ -34,7 +38,9 @@
       <p class="mt-2">
         Not synced: <span class="font-mono">{{ failedExtracts.join(", ") }}</span>
       </p>
-      <p class="mt-3">If you need any of these feeds synced to PKB, please contact the UK Kidney Association Help Center.</p>
+      <p class="mt-3">
+        If you need any of these feeds synced to PKB, please contact the UK Kidney Association Help Center.
+      </p>
     </BaseModalSuccess>
 
     <UTooltip
@@ -102,15 +108,13 @@ export default defineComponent({
       ...new Set(
         props.records
           .filter((r) => succeededPIDs.value.includes(r.pid))
-          .map((r) => extractDisplayName(r.sendingextract))
+          .map((r) => extractDisplayName(r.sendingextract)),
       ),
     ]);
 
     const failedExtracts = computed(() => [
       ...new Set(
-        props.records
-          .filter((r) => failedPIDs.value.includes(r.pid))
-          .map((r) => extractDisplayName(r.sendingextract))
+        props.records.filter((r) => failedPIDs.value.includes(r.pid)).map((r) => extractDisplayName(r.sendingextract)),
       ),
     ]);
 
