@@ -26,6 +26,23 @@
       <p class="mt-3 font-mono">exportAllToPKB.fail {{ failedPIDs }}</p>
     </BaseModalSuccess>
 
+    <BaseModalSuccess
+      ref="startSyncPartialSuccessModal"
+      title="Partial PKB Sync completed"
+      confirm-label="Go back to records"
+    >
+      <p class="mb-4"><b>Some feeds were synced to PKB.</b></p>
+      <p>
+        Synced: <span class="font-mono">{{ succeededExtracts.join(", ") }}</span>
+      </p>
+      <p class="mt-2">
+        Not synced: <span class="font-mono">{{ failedExtracts.join(", ") }}</span>
+      </p>
+      <p class="mt-3">
+        If you need any of these feeds synced to PKB, please contact the UK Kidney Association Help Center.
+      </p>
+    </BaseModalSuccess>
+
     <UTooltip
       :text="!hasPkbMembership ? 'Patient does not have a PKB membership record' : undefined"
       :prevent="hasPkbMembership"
@@ -70,6 +87,7 @@ export default defineComponent({
 
     // Modals
     const startSyncSuccessModal = ref<ModalInterface>();
+    const startSyncPartialSuccessModal = ref<ModalInterface>();
     const startSyncFailureModal = ref<ModalInterface>();
 
     // Data refs
@@ -78,7 +96,27 @@ export default defineComponent({
     });
 
     const syncInProgress = ref(false);
+    const succeededPIDs = ref<string[]>([]);
     const failedPIDs = ref<string[]>([]);
+
+    // Convert UKRDC -> "RDA" to match the display convention used elsewhere
+    function extractDisplayName(extract: string): string {
+      return extract === "UKRDC" ? "RDA" : extract;
+    }
+
+    const succeededExtracts = computed(() => [
+      ...new Set(
+        props.records
+          .filter((r) => succeededPIDs.value.includes(r.pid))
+          .map((r) => extractDisplayName(r.sendingextract)),
+      ),
+    ]);
+
+    const failedExtracts = computed(() => [
+      ...new Set(
+        props.records.filter((r) => failedPIDs.value.includes(r.pid)).map((r) => extractDisplayName(r.sendingextract)),
+      ),
+    ]);
 
     // Sync functionality
     function exportAllToPKB() {
@@ -88,13 +126,15 @@ export default defineComponent({
       }
 
       syncInProgress.value = true;
+      succeededPIDs.value = [];
+      failedPIDs.value = [];
 
       // Create a set of promises, one for each record we're syncing
       const promises = props.records.map((record) => {
         return patientRecordsApi
           .postPatientExportPkb({ pid: record.pid })
           .then(() => {
-            // Handle individual success if needed
+            succeededPIDs.value.push(record.pid);
           })
           .catch(() => {
             // Append failed PID
@@ -102,11 +142,16 @@ export default defineComponent({
           });
       });
 
-      // Execute all promises, and show an error modal if any fail, or success if all succeed
+      // Execute all promises, and show success, partial success, or failure modal
       Promise.allSettled(promises)
         .then(() => {
-          if (failedPIDs.value.length === 0) {
+          const total = props.records.length;
+          const failed = failedPIDs.value.length;
+
+          if (failed === 0) {
             startSyncSuccessModal.value?.show();
+          } else if (failed < total) {
+            startSyncPartialSuccessModal.value?.show();
           } else {
             startSyncFailureModal.value?.show();
           }
@@ -119,9 +164,12 @@ export default defineComponent({
 
     return {
       startSyncSuccessModal,
+      startSyncPartialSuccessModal,
       startSyncFailureModal,
       buttonAvailable,
       syncInProgress,
+      succeededExtracts,
+      failedExtracts,
       failedPIDs,
       exportAllToPKB,
     };
