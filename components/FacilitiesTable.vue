@@ -7,7 +7,7 @@ Table of facilities and their basic statistics
     <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
 
     <UCard :ui="{ body: { padding: '' } }">
-      <UTable :rows="filteredFacilities" :columns="columns" :loading="loading" @select="$emit('select', $event.id)">
+      <UTable :rows="filteredFacilities" :columns="columns" :ui="ui" :loading="loading" @select="$emit('select', $event.id)">
         <!-- Failing records -->
         <template #patientsReceivingMessageError-data="{ row }">
           <span class="flex items-center">
@@ -136,6 +136,15 @@ export default defineComponent({
       },
     );
 
+    const ui = {
+          th: {
+            base: "px-4 py-3"
+          },
+          td: {
+            base: "px-4 py-4 whitespace-nowrap"
+          }
+        };
+
     const columns = [
       {
         key: "id",
@@ -178,16 +187,9 @@ export default defineComponent({
       filteredFacilities,
       facilityLastMessageOver48,
       formatDate,
+      ui
     };
   },
 });
 </script>
 
-<style scoped lang="postcss">
-th {
-  @apply px-4 py-3;
-}
-td {
-  @apply whitespace-nowrap px-4 py-4;
-}
-</style>

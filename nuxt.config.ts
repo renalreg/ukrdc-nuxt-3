@@ -75,7 +75,7 @@ export default defineNuxtConfig({
   css: ["@/assets/css/main.css"],
 
   // Modules
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui", "@nuxt/eslint"],
 
   // Plugins to run before rendering page
   plugins: [
@@ -91,8 +91,7 @@ export default defineNuxtConfig({
   // PostCSS config
   postcss: {
     plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
+      "@tailwindcss/postcss": {},
     },
   },
 

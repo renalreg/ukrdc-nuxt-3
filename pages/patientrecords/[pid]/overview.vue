@@ -63,7 +63,7 @@
         <!-- Record numbers -->
         <div class="mb-4">
           <h4 class="mb-3">Patient Numbers</h4>
-          <PatientRecordSummaryNumbers class="patient-infocard-ul" :record="record" />
+          <PatientRecordSummaryNumbers class="patient-infocard-ul-pid-overview" :record="record" />
         </div>
         <!-- PV Data -->
         <div v-if="record.pvdata" class="col-span-3 mb-4 sm:col-span-2">
@@ -73,17 +73,17 @@
         <!-- Addresses-->
         <div v-if="record.patient && record.patient.addresses && record.patient.addresses.length > 0" class="mb-4">
           <h4 class="mb-3">Addresses</h4>
-          <PatientRecordSummaryAddresses class="patient-infocard-ul" :record="record" />
+          <PatientRecordSummaryAddresses class="patient-infocard-ul-pid-overview" :record="record" />
         </div>
         <!-- Programme memberships-->
         <div v-if="record.programMemberships && record.programMemberships.length > 0" class="mb-4">
           <h4 class="mb-3">Program Memberships</h4>
-          <PatientRecordSummaryMemberships class="patient-infocard-ul" :record="record" />
+          <PatientRecordSummaryMemberships class="patient-infocard-ul-pid-overview" :record="record" />
         </div>
         <!-- Family doctor-->
         <div v-if="record.patient && record.patient.familydoctor" class="mb-4">
           <h4 class="mb-3">Family Doctor</h4>
-          <PatientRecordSummaryFamilyDoctor class="patient-infocard-ul" :record="record" />
+          <PatientRecordSummaryFamilyDoctor class="patient-infocard-ul-pid-overview" :record="record" />
         </div>
       </div>
       <!-- Related records -->
@@ -264,8 +264,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="postcss" scoped>
-.patient-infocard-ul {
-  @apply grid grid-cols-1 gap-4 xl:grid-cols-2;
-}
-</style>
+

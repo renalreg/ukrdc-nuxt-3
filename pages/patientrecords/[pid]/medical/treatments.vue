@@ -1,7 +1,7 @@
 <template>
   <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :loading="loading" :rows="treatments" :columns="columns" class="sensitive">
+      <UTable :loading="loading" :rows="treatments" :columns="columns" class="sensitive" :ui="ui">
         <!-- Facility / QBL05 -->
         <template #healthcarefacilitycode-data="{ row }">
           <span>
@@ -144,21 +144,24 @@ export default defineComponent({
       },
     ];
 
+    const ui = {
+      th: {
+        base: "px-6 py-3"
+      },
+      td: {
+        base: "px-6 py-4 whitespace-nowrap"
+      }
+    };
+
     return {
       formatDate,
       loading,
       treatments,
       columns,
+      ui
     };
   },
 });
 </script>
 
-<style scoped lang="postcss">
-th {
-  @apply px-6 py-3;
-}
-td {
-  @apply whitespace-nowrap px-6 py-4;
-}
-</style>
+

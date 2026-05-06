@@ -102,16 +102,16 @@
       <div class="mb-8">
         <p>
           This work item was raised because demographic attributes on
-          <span class="personrecord-label">{{
+          <span class="font-medium text-yellow-700">{{
             record.type === 9 ? "one of the incoming data files" : "the Person Record"
           }}</span>
           below did not match the
-          <span class="masterrecord-label">Master Record</span> it is linked to.
+          <span class="font-medium text-indigo-800">Master Record</span> it is linked to.
         </p>
         <p v-if="record.type !== 9 && messages && messages.length > 0">
           This may be because a <b>Related Data File</b> below updated the
-          <span class="masterrecord-label">Master Record</span>, and this update means that it no longer matches the
-          <span class="personrecord-label">Person Record</span> below.
+          <span class="font-medium text-indigo-800">Master Record</span>, and this update means that it no longer matches the
+          <span class="font-medium text-yellow-700">Person Record</span> below.
         </p>
       </div>
 
@@ -121,7 +121,7 @@
           <em>at the time this work item was first raised.</em>
         </p>
         <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-          <UTable :rows="attributesRows" :columns="attributesCols" class="sensitive"> </UTable>
+          <UTable :rows="attributesRows" :columns="attributesCols" class="sensitive" :ui="ui"> </UTable>
         </UCard>
       </div>
 
@@ -585,6 +585,16 @@ export default defineComponent({
       }
     });
 
+    const ui = {
+      th: {
+        base: "px-4 py-3"
+      },
+      td: {
+        base: "px-4 py-4 whitespace-nowrap"
+      }
+    };
+
+
     return {
       record,
       highlightedAttributes,
@@ -612,6 +622,7 @@ export default defineComponent({
       updateWorkItem,
       handleCloseWorkItem,
       hasPermission,
+      ui
     };
   },
   head: {
@@ -620,19 +631,3 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="postcss">
-th {
-  @apply px-4 py-3;
-}
-td {
-  @apply whitespace-nowrap px-4 py-4;
-}
-
-.masterrecord-label {
-  @apply font-medium text-indigo-800;
-}
-
-.personrecord-label {
-  @apply font-medium text-yellow-700;
-}
-</style>

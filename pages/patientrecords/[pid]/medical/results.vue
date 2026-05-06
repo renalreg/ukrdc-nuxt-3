@@ -56,7 +56,7 @@
         </div>
 
         <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-          <UTable :loading="loading" :rows="results" :columns="columns" class="sensitive">
+          <UTable :loading="loading" :rows="results" :columns="columns" class="sensitive" :ui="ui">
             <!-- Value -->
             <template #value-data="{ row }"> {{ row.value }} {{ row.valueUnits }} </template>
             <!-- observationTime -->
@@ -331,6 +331,12 @@ export default defineComponent({
       ],
     ];
 
+    const ui = {
+      th: {
+        base: "px-6 py-3"
+      },
+    };
+
     return {
       page,
       size,
@@ -352,13 +358,8 @@ export default defineComponent({
       selectedOrderId,
       selectedOrder,
       formatDate,
+      ui
     };
   },
 });
 </script>
-
-<style scoped lang="postcss">
-th {
-  @apply px-6 py-3;
-}
-</style>

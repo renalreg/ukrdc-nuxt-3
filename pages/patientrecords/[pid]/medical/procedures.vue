@@ -5,7 +5,7 @@
         <h2>Transplants</h2>
       </template>
 
-      <UTable :loading="loadingTransplants" :rows="transplants" :columns="transplantColumns" class="sensitive">
+      <UTable :loading="loadingTransplants" :rows="transplants" :columns="transplantColumns" class="sensitive" :ui="ui">
         <!-- Admit Reason -->
         <template #proceduretypecode-data="{ row }">
           <span class="truncate">
@@ -125,21 +125,24 @@ export default defineComponent({
       },
     ];
 
+    const ui = {
+      th: {
+        base: "px-6 py-3"
+      },
+      td: {
+        base: "px-6 py-4 whitespace-nowrap"
+      }
+    };
+
     return {
       formatDate,
       loadingTransplants,
       transplants,
       transplantColumns,
+      ui
     };
   },
 });
 </script>
 
-<style scoped lang="postcss">
-th {
-  @apply px-6 py-3;
-}
-td {
-  @apply whitespace-nowrap px-6 py-4;
-}
-</style>
+

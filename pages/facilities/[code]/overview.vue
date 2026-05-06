@@ -79,7 +79,7 @@
 
         <!-- Record types -->
         <UCard :ui="{ body: { padding: '' } }">
-          <UTable :rows="feedTableItems" :columns="feedTableColumns">
+          <UTable :rows="feedTableItems" :columns="feedTableColumns" :ui="ui">
             <template #historic-data="{ row }">
               <div v-if="row.historic" class="flex items-center">
                 <IconCircle v-if="row.historic" class="inline text-orange-400" />
@@ -277,6 +277,15 @@ export default defineComponent({
       },
     ];
 
+    const ui = {
+      th: {
+        base: "px-6 py-3"
+      },
+      td: {
+        base: "px-6 py-4 whitespace-nowrap"
+      }
+    };
+
     return {
       hasPermission,
       facilityLastMessageOver48,
@@ -284,16 +293,8 @@ export default defineComponent({
       latestDataInfo,
       feedTableItems,
       feedTableColumns,
+      ui
     };
   },
 });
 </script>
-
-<style scoped lang="postcss">
-th {
-  @apply px-6 py-3;
-}
-td {
-  @apply whitespace-nowrap px-6 py-4;
-}
-</style>

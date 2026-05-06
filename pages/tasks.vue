@@ -3,7 +3,7 @@
     <h1 class="mb-4">Background Tasks</h1>
 
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :rows="tasks" :columns="columns">
+      <UTable :rows="tasks" :columns="columns" :ui="ui">
         <template #visibility-data="{ row }">
           <BadgePublicPrivate :visibility="row.visibility" />
         </template>
@@ -72,6 +72,14 @@ export default defineComponent({
           // Handle UI state reset or fallback values here if needed
         });
     });
+    const ui = {
+        th: {
+          base: "px-6 py-3"
+        },
+        td: {
+          base: "px-6 py-3 whitespace-nowrap"
+        }
+    };
 
     const columns = [
       {
@@ -107,6 +115,7 @@ export default defineComponent({
       size,
       tasks,
       columns,
+      ui
     };
   },
   head: {
@@ -114,12 +123,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped lang="postcss">
-th {
-  @apply px-6 py-3;
-}
-td {
-  @apply whitespace-nowrap px-6 py-3;
-}
-</style>

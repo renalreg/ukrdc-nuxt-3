@@ -1,7 +1,7 @@
 <template>
   <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :loading="loading" :rows="sessions" :columns="columns" class="sensitive">
+      <UTable :loading="loading" :rows="sessions" :columns="columns" class="sensitive" :ui="ui">
         <!-- Procedure time-->
         <template #proceduretime-data="{ row }">
           {{ row.proceduretime ? formatDate(row.proceduretime) : "None" }}
@@ -162,6 +162,15 @@ export default defineComponent({
       },
     ];
 
+    const ui = {
+      th: {
+        base: "px-6 py-3"
+      },
+      td: {
+        base: "px-6 py-4 whitespace-nowrap"
+      }
+    };
+
     return {
       page,
       size,
@@ -170,16 +179,8 @@ export default defineComponent({
       loading,
       sessions,
       columns,
+      ui
     };
   },
 });
 </script>
-
-<style scoped lang="postcss">
-th {
-  @apply px-6 py-3;
-}
-td {
-  @apply whitespace-nowrap px-6 py-4;
-}
-</style>

@@ -173,9 +173,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="postcss" scoped>
-.patientrecords-list-header {
-  @apply flex h-10 items-center bg-gray-50 py-1 pl-4 sm:pl-6;
-}
-</style>
