@@ -120,26 +120,32 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "healthcarefacilitycode",
         key: "healthcarefacilitycode",
         label: "Facility / QBL05",
       },
       {
+        id: "fromtime",
         key: "fromtime",
         label: "Admit Date",
       },
       {
+        id: "admitreasoncode",
         key: "admitreasoncode",
         label: "Admit reason",
       },
       {
+        id: "totime",
         key: "totime",
         label: "Discharge Date",
       },
       {
+        id: "dischargereasoncode",
         key: "dischargereasoncode",
         label: "Discharge reason",
       },
       {
+        id: "info",
         key: "info",
       },
     ];

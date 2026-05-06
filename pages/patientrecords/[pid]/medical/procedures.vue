@@ -105,22 +105,27 @@ export default defineComponent({
 
     const transplantColumns = [
       {
+        id: "proceduretypecode",
         key: "proceduretypecode",
         label: "Procedure Type",
       },
       {
+        id: "proceduretime",
         key: "proceduretime",
         label: "Procedure Time",
       },
       {
+        id: "enteredatcode",
         key: "enteredatcode",
         label: "Entered At",
       },
       {
+        id: "tra77",
         key: "tra77",
         label: "TRA77",
       },
       {
+        id: "info",
         key: "info",
       },
     ];

@@ -114,50 +114,62 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "proceduretime",
         key: "proceduretime",
         label: "Procedure Time",
       },
       {
+        id: "proceduretypecode",
         key: "proceduretypecode",
         label: "Type",
       },
       {
+        id: "enteredatcode",
         key: "enteredatcode",
         label: "Entered At",
       },
       {
+        id: "qhd19",
         key: "qhd19",
         label: "QHD19",
       },
       {
+        id: "qhd20",
         key: "qhd20",
         label: "QHD20",
       },
       {
+        id: "qhd21",
         key: "qhd21",
         label: "QHD21",
       },
       {
+        id: "qhd22",
         key: "qhd22",
         label: "QHD22",
       },
       {
+        id: "qhd30",
         key: "qhd30",
         label: "QHD30",
       },
       {
+        id: "qhd31",
         key: "qhd31",
         label: "QHD31",
       },
       {
+        id: "qhd32",
         key: "qhd32",
         label: "QHD32",
       },
       {
+        id: "qhd33",
         key: "qhd33",
         label: "QHD33",
       },
       {
+        id: "info",
         key: "info",
       },
     ];

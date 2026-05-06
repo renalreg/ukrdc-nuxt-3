@@ -147,30 +147,36 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "id",
         key: "id",
         label: "ID",
       },
       {
+        id: "description",
         key: "description",
         label: "Name",
         sortable: true,
       },
       {
+        id: "statistics.totalPatients",
         key: "statistics.totalPatients",
         label: "Total records",
         sortable: true,
       },
       {
+        id: "statistics.patientsReceivingMessageError",
         key: "statistics.patientsReceivingMessageError",
         label: "Failing records",
         sortable: true,
       },
       {
+        id: "dataFlow.pkbOut",
         key: "dataFlow.pkbOut",
         label: "Sending to PKB",
         sortable: true,
       },
       {
+        id: "lastMessageReceivedAt",
         key: "lastMessageReceivedAt",
         label: "Last received",
         sortable: true,

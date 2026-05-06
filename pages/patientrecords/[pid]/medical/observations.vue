@@ -125,22 +125,27 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "observationCode",
         key: "observationCode",
         label: "Type",
       },
       {
+        id: "observationValue",
         key: "observationValue",
         label: "Value",
       },
       {
+        id: "enteredAt",
         key: "enteredAt",
         label: "Entered at",
       },
       {
+        id: "observationTime",
         key: "observationTime",
         label: "Entered on",
       },
       {
+        id: "prePost",
         key: "prePost",
         label: "Pre/Post-Dialysis",
       },

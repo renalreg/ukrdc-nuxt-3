@@ -88,10 +88,12 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "id",
         key: "id",
         label: "Order ID",
       },
       {
+        id: "specimenCollectedTime",
         key: "specimenCollectedTime",
         label: "Collection Time",
       },

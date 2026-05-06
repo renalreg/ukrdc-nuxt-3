@@ -83,26 +83,32 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "name",
         key: "name",
         label: "Name",
       },
       {
+        id: "visibility",
         key: "visibility",
         label: "Visibility",
       },
       {
+        id: "owner",
         key: "owner",
         label: "Started by",
       },
       {
+        id: "started",
         key: "started",
         label: "Started",
       },
       {
+        id: "finished",
         key: "finished",
         label: "Finished",
       },
       {
+        id: "status",
         key: "status",
         label: "Status",
       },

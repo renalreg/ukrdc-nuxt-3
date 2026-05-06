@@ -78,7 +78,7 @@ export default defineComponent({
       } else if (nationalidType.trim() === "HSC") {
         return ["bg-green-100", "text-green-800"];
       } else {
-        return ["bg-gray-100", "text-gray-800"];
+        return ["bg-neutral-100", "text-neutral-800"];
       }
     }
 

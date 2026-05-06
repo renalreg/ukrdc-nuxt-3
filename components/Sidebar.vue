@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-64 flex-1 flex-col bg-gray-50">
+  <div class="flex w-64 flex-1 flex-col bg-neutral-50">
     <div class="h-0 flex-1 overflow-y-auto pb-4 pt-6">
       <div class="mb-2 flex flex-shrink-0 items-center px-4">
         <img class="h-auto w-full" src="~/assets/UKKA_UKRDC.svg" alt="Workflow" />

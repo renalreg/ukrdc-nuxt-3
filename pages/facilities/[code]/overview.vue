@@ -264,14 +264,17 @@ export default defineComponent({
 
     const feedTableColumns = [
       {
+        id: "name",
         key: "name",
         label: "Name",
       },
       {
+        id: "historic",
         key: "historic",
         label: "historic",
       },
       {
+        id: "totalPatients",
         key: "totalPatients",
         label: "Total records",
       },

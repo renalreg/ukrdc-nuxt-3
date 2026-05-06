@@ -116,41 +116,49 @@ export default defineComponent({
     // Table data
     const columns = [
       {
+        id: "group",
         key: "group",
         label: "Group",
         sortable: true,
       },
       {
+        id: "name",
         key: "name",
         label: "Name",
         sortable: true,
       },
       {
+        id: "revision",
         key: "revision",
         label: "Revision",
         sortable: true,
       },
       {
+        id: "received",
         key: "received",
         label: "Received",
         sortable: true,
       },
       {
+        id: "sent",
         key: "sent",
         label: "Sent",
         sortable: true,
       },
       {
+        id: "error",
         key: "error",
         label: "Error",
         sortable: true,
       },
       {
+        id: "filtered",
         key: "filtered",
         label: "Filtered",
         sortable: true,
       },
       {
+        id: "queued",
         key: "queued",
         label: "Queued",
         sortable: true,

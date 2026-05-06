@@ -292,26 +292,32 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "serviceId",
         key: "serviceId",
         label: "Type",
       },
       {
+        id: "value",
         key: "value",
         label: "Value",
       },
       {
+        id: "orderId",
         key: "orderId",
         label: "Order ID",
       },
       {
+        id: "observationTime",
         key: "observationTime",
         label: "Observation time",
       },
       {
+        id: "prePost",
         key: "prePost",
         label: "Pre/Post-Dialysis",
       },
       {
+        id: "actions",
         key: "actions",
       },
     ];
