@@ -568,14 +568,17 @@ export default defineComponent({
       if (record.value) {
         return [
           {
+            id: "key",
             key: "key",
             label: "Mismatched attribute",
           },
           {
+            id: "incomingValue",
             key: "incomingValue",
             label: record.value.type === 9 ? "Incoming" : "Person Record",
           },
           {
+            id: "destinationValue",
             key: "destinationValue",
             label: "Master Record Value",
           },

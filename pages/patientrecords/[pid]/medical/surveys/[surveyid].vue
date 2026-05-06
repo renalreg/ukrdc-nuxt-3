@@ -139,19 +139,23 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "questiontypecode",
         key: "questiontypecode",
         label: "Question code",
         sortable: true,
       },
       {
+        id: "questionType",
         key: "questionType",
         label: "Question type",
       },
       {
+        id: "response",
         key: "response",
         label: "Response code",
       },
       {
+        id: "responseText",
         key: "responseText",
         label: "Response text",
       },
