@@ -34,9 +34,9 @@
 
 <script lang="ts">
 import type {
-  type MasterRecordSchema,
-  type MasterRecordStatisticsSchema,
-  type MessageSchema,
+  MasterRecordSchema,
+  MasterRecordStatisticsSchema,
+  MessageSchema,
   OrderBy,
 } from "@ukkidney/ukrdc-axios-ts";
 
