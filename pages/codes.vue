@@ -5,9 +5,9 @@
         <h1>Codes List</h1>
       </div>
       <div>
-        <UDropdown :items="exportMenuItems">
-          <UButton color="white" label="Export codes" trailing-icon="i-heroicons-chevron-down-20-solid" />
-        </UDropdown>
+        <UDropdownMenu :items="exportMenuItems">
+          <UButton color="neutral" label="Export codes" trailing-icon="i-heroicons-chevron-down-20-solid" />
+        </UDropdownMenu>
       </div>
     </div>
 

@@ -12,7 +12,7 @@
     </NuxtLink>
 
     <div class="flex gap-8">
-      <UVerticalNavigation :links="links" />
+      <UNavigationMenu orientation="vertical" :items="links" />
       <NuxtPage v-if="record" class="flex-1" :record="record" />
     </div>
   </div>

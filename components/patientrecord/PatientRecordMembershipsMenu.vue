@@ -46,14 +46,14 @@
       <p class="inline">from the Data Feeds section.</p>
     </BaseModalSuccess>
 
-    <UDropdown :items="menuItems" :popper="{ placement: 'bottom-end' }">
+    <UDropdownMenu :items="menuItems" :popper="{ placement: 'bottom-end' }">
       <UButton
         :disabled="!menuAvailable"
         size="sm"
         label="Add Memberships"
         trailing-icon="i-heroicons-chevron-down-20-solid"
       />
-    </UDropdown>
+    </UDropdownMenu>
   </div>
 </template>
 

@@ -68,9 +68,9 @@
               <BadgePrePost :pre-post="row.prePost" />
             </template>
             <template #actions-data="{ row }">
-              <UDropdown :items="menuItems(row)">
-                <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
-              </UDropdown>
+              <UDropdownMenu :items="menuItems(row)">
+                <UButton color="neutral" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
+              </UDropdownMenu>
             </template>
           </UTable>
           <template #footer>

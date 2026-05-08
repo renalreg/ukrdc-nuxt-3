@@ -2,14 +2,14 @@
   <div>
     <PatientRecordDeleteModal ref="deleteModal" :item="item" @deleted="$emit('deleted')" />
 
-    <UDropdown :items="menuItems" class="h-full" :popper="{ placement: 'right-start' }">
+    <UDropdownMenu :items="menuItems" class="h-full" :popper="{ placement: 'right-start' }">
       <UButton
-        color="gray"
+        color="neutral"
         variant="ghost"
         class="z-0 flex h-full items-center hover:bg-gray-50"
         icon="i-heroicons-ellipsis-vertical"
       />
-    </UDropdown>
+    </UDropdownMenu>
   </div>
 </template>
 

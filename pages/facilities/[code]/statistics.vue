@@ -9,7 +9,7 @@
     />
 
     <div class="flex gap-8">
-      <UVerticalNavigation :links="links" />
+      <UNavigationMenu orientation="vertical" :items="links" />
       <NuxtPage v-if="facility && extracts" class="flex-1" :facility="facility" :extracts="extracts" />
     </div>
   </div>

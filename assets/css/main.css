@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@nuxt/ui";
 
 /* other tailwinds classes */
 @import "./components/demoographics.css";

@@ -13,7 +13,7 @@
     </div>
 
     <div class="mb-6">
-      <UHorizontalNavigation :links="links" />
+      <UNavigationMenu orientation="horizontal" :items="links" />
     </div>
 
     <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" />

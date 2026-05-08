@@ -24,7 +24,7 @@ export default defineComponent({
       } else if (props.nationalidType.includes("HSC")) {
         return "green";
       } else {
-        return "gray";
+        return "neutral";
       }
     });
 

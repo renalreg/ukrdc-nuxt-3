@@ -28,13 +28,13 @@
           id="closeModalComments"
           v-model="customComment"
           :rows="3"
-          :color="customComment.length > 100 ? 'red' : 'primary'"
+          :color="customComment.length > 100 ? 'error' : 'primary'"
         />
       </div>
 
       <div class="flex justify-end">
         <UButton @click="closeModal?.hide()"> Cancel </UButton>
-        <UButton :disabled="!customComment" type="submit" class="ml-3" color="red" @click="handleCloseWorkItem()">
+        <UButton :disabled="!customComment" type="submit" class="ml-3" color="error" @click="handleCloseWorkItem()">
           Close Work Item
         </UButton>
       </div>
