@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { type TrackableTaskSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { TrackableTaskSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgePublicPrivate from "~/components/BadgePublicPrivate.vue";
 import BadgeTaskStatus from "~/components/BadgeTaskStatus.vue";
@@ -73,12 +73,12 @@ export default defineComponent({
         });
     });
     const ui = {
-        th: {
-          base: "px-6 py-3"
-        },
-        td: {
-          base: "px-6 py-3 whitespace-nowrap"
-        }
+      th: {
+        base: "px-6 py-3",
+      },
+      td: {
+        base: "px-6 py-3 whitespace-nowrap",
+      },
     };
 
     const columns = [
@@ -121,7 +121,7 @@ export default defineComponent({
       size,
       tasks,
       columns,
-      ui
+      ui,
     };
   },
   head: {

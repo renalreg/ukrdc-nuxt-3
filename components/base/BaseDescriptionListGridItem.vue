@@ -6,6 +6,6 @@ Allowed under the spec, see https://developer.mozilla.org/en-US/docs/Web/HTML/El
 
 <template>
   <div class="sm:col-span-1">
-    <slot></slot>
+    <slot />
   </div>
 </template>

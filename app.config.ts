@@ -3,14 +3,15 @@ export default defineAppConfig({
     colors: {
       primary: "indigo",
       neutral: "zinc", // replaces "gray" + "cool"
-      red:'red',
-      purple:'purple',
-      blue:'blue',
-      green:'green', // legacy colours should use errorr success where possible going forward
-      amber:'amber',
-      black:'black',
-      white:'white',
-      gray:"zinc"
+      red: "red",
+      purple: "purple",
+      blue: "blue",
+      green: "green", // legacy colours should use errorr success where possible going forward
+      amber: "amber",
+      black: "black",
+      white: "white",
+      gray: "zinc",
+      indigo: "indigo",
     },
 
     badge: {

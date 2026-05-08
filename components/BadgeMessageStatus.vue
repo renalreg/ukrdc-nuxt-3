@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MessageSchema } from "@ukkidney/ukrdc-axios-ts";
 
 export default defineComponent({
   props: {

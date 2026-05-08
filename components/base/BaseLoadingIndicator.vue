@@ -1,8 +1,8 @@
 <template>
   <div class="spinner">
-    <div class="bounce1" :class="[`spinner-${colour}`]"></div>
-    <div class="bounce2" :class="[`spinner-${colour}`]"></div>
-    <div class="bounce3" :class="[`spinner-${colour}`]"></div>
+    <div class="bounce1" :class="[`spinner-${colour}`]" />
+    <div class="bounce2" :class="[`spinner-${colour}`]" />
+    <div class="bounce3" :class="[`spinner-${colour}`]" />
   </div>
 </template>
 

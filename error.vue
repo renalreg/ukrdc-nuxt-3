@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { type NuxtError } from "#app";
+import type { NuxtError } from "#app";
 
 export default defineComponent({
   layout: "default",
@@ -63,4 +63,3 @@ export default defineComponent({
   },
 });
 </script>
-

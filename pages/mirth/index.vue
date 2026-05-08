@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { type ChannelGroupModel } from "@ukkidney/ukrdc-axios-ts";
+import type { ChannelGroupModel } from "@ukkidney/ukrdc-axios-ts";
 
 import useApi from "~/composables/useApi";
 

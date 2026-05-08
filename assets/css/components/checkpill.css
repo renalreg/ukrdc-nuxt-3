@@ -15,30 +15,30 @@
   }
 
   .checkpill-white {
-    @apply border-gray-500 text-gray-700 focus:ring-indigo-500 peer-checked:border-transparent peer-checked:bg-gray-500 peer-checked:text-white peer-checked:peer-hover:bg-gray-700 peer-focus:ring-indigo-500;
+    @apply border-gray-500 text-gray-700 peer-checked:border-transparent peer-checked:bg-gray-500 peer-checked:text-white peer-checked:peer-hover:bg-gray-700 peer-focus:ring-indigo-500 focus:ring-indigo-500;
   }
 
   .checkpill-indigo {
-    @apply border-indigo-500 text-indigo-700 focus:ring-indigo-500 peer-checked:border-transparent peer-checked:bg-indigo-600 peer-checked:text-white peer-checked:peer-hover:bg-indigo-700 peer-focus:ring-indigo-500;
+    @apply border-indigo-500 text-indigo-700 peer-checked:border-transparent peer-checked:bg-indigo-600 peer-checked:text-white peer-checked:peer-hover:bg-indigo-700 peer-focus:ring-indigo-500 focus:ring-indigo-500;
   }
 
   .checkpill-blue {
-    @apply border-blue-500 text-blue-700 focus:ring-blue-500 peer-checked:border-transparent peer-checked:bg-blue-600 peer-checked:text-white peer-checked:peer-hover:bg-blue-700 peer-focus:ring-blue-500;
+    @apply border-blue-500 text-blue-700 peer-checked:border-transparent peer-checked:bg-blue-600 peer-checked:text-white peer-checked:peer-hover:bg-blue-700 peer-focus:ring-blue-500 focus:ring-blue-500;
   }
 
   .checkpill-purple {
-    @apply border-purple-500 text-purple-700 focus:ring-purple-500 peer-checked:border-transparent peer-checked:bg-purple-600 peer-checked:text-white peer-checked:peer-hover:bg-purple-700 peer-focus:ring-purple-500;
+    @apply border-purple-500 text-purple-700 peer-checked:border-transparent peer-checked:bg-purple-600 peer-checked:text-white peer-checked:peer-hover:bg-purple-700 peer-focus:ring-purple-500 focus:ring-purple-500;
   }
 
   .checkpill-green {
-    @apply border-green-500 text-green-700 focus:ring-green-500 peer-checked:border-transparent peer-checked:bg-green-600 peer-checked:text-white peer-checked:peer-hover:bg-green-700 peer-focus:ring-green-500;
+    @apply border-green-500 text-green-700 peer-checked:border-transparent peer-checked:bg-green-600 peer-checked:text-white peer-checked:peer-hover:bg-green-700 peer-focus:ring-green-500 focus:ring-green-500;
   }
 
   .checkpill-yellow {
-    @apply border-yellow-500 text-yellow-700 focus:ring-yellow-500 peer-checked:border-transparent peer-checked:bg-yellow-600 peer-checked:text-white peer-checked:peer-hover:bg-yellow-700 peer-focus:ring-yellow-500;
+    @apply border-yellow-500 text-yellow-700 peer-checked:border-transparent peer-checked:bg-yellow-600 peer-checked:text-white peer-checked:peer-hover:bg-yellow-700 peer-focus:ring-yellow-500 focus:ring-yellow-500;
   }
 
   .checkpill-red {
-    @apply border-red-500 text-red-700 focus:ring-red-500 peer-checked:border-transparent peer-checked:bg-red-600 peer-checked:text-white peer-checked:peer-hover:bg-red-700 peer-focus:ring-red-500;
+    @apply border-red-500 text-red-700 peer-checked:border-transparent peer-checked:bg-red-600 peer-checked:text-white peer-checked:peer-hover:bg-red-700 peer-focus:ring-red-500 focus:ring-red-500;
   }
 }

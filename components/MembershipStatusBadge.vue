@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 enum MembershipStatusEnum {
   Open = 1,

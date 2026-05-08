@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { FacilityDetailsSchema, FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 export default defineComponent({
   props: {

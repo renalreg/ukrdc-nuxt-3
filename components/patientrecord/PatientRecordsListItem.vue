@@ -119,7 +119,7 @@
 </template>
 
 <script lang="ts">
-import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import MembershipStatusBadge from "~/components/MembershipStatusBadge.vue";
 import PatientRecordManageMenu from "~/components/patientrecord/PatientRecordManageMenu.vue";

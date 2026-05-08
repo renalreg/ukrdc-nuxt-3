@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { type WorkItemExtendedSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { WorkItemExtendedSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";

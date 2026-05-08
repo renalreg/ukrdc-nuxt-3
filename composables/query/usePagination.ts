@@ -1,4 +1,4 @@
-import { type WritableComputedRef } from "vue";
+import type { WritableComputedRef } from "vue";
 
 import useQuery from "~/composables/query/useQuery";
 

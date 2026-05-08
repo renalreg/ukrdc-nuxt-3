@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { type MasterRecordSchema, type MasterRecordStatisticsSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MasterRecordSchema, MasterRecordStatisticsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";

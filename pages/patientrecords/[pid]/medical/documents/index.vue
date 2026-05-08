@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { type DocumentSummarySchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { DocumentSummarySchema, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";

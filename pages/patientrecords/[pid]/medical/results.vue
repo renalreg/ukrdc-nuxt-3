@@ -90,11 +90,11 @@
 </template>
 
 <script lang="ts">
-import {
-  type LabOrderSchema,
-  type PatientRecordSchema,
-  type ResultItemSchema,
-  type ResultItemServiceSchema,
+import type {
+  LabOrderSchema,
+  PatientRecordSchema,
+  ResultItemSchema,
+  ResultItemServiceSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgePrePost from "~/components/BadgePrePost.vue";
@@ -107,7 +107,7 @@ import usePagination from "~/composables/query/usePagination";
 import useQuery from "~/composables/query/useQuery";
 import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
-import { type ModalInterface } from "~/interfaces/modal";
+import type { ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {
@@ -339,7 +339,7 @@ export default defineComponent({
 
     const ui = {
       th: {
-        base: "px-6 py-3"
+        base: "px-6 py-3",
       },
     };
 
@@ -364,7 +364,7 @@ export default defineComponent({
       selectedOrderId,
       selectedOrder,
       formatDate,
-      ui
+      ui,
     };
   },
 });

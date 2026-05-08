@@ -77,30 +77,28 @@ export default defineNuxtConfig({
   // Modules
   modules: ["@nuxt/ui", "@nuxt/eslint"],
 
-
   // this fixes 2.0 codes that are in use still, consider switching to defaults until nuxt fixes typehints
   ui: {
     theme: {
       colors: [
-        'primary',
-        'secondary',
-        'info',
-        'success',
-        'warning',
-        'error',
-        'red',
-        'purple',
-        'blue',
-        'green',
-        'amber',
-        'white',
-        'black',
-        'gray'
-      ]
-    }
+        "primary",
+        "secondary",
+        "info",
+        "success",
+        "warning",
+        "error",
+        "red",
+        "purple",
+        "blue",
+        "green",
+        "amber",
+        "white",
+        "black",
+        "gray",
+        "indigo",
+      ],
+    },
   },
-
-
 
   // Plugins to run before rendering page
   plugins: [

@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { type DocumentSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import type { DocumentSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import { formatDate } from "~/helpers/dateUtils";
 

@@ -58,13 +58,13 @@
 </template>
 
 <script lang="ts">
-import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import BaseModalSuccess from "~/components/base/BaseModalSuccess.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
-import { type ModalInterface } from "~/interfaces/modal";
+import type { ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {

@@ -13,7 +13,7 @@
       </UButton>
       <UButton
         size="sm"
-        :color="showCustom ? 'primary' :  'neutral'"
+        :color="showCustom ? 'primary' : 'neutral'"
         :variant="showCustom ? 'outline' : 'outline'"
         @click="showCustom = true"
       >

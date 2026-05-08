@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { type Labelled2d } from "@ukkidney/ukrdc-axios-ts";
+import type { Labelled2d } from "@ukkidney/ukrdc-axios-ts";
 
 import BasePiePlot from "~/components/plots/base/BasePiePlot.vue";
 import BaseMarkdownDescriptionTooltip from "~/components/plots/stats/BaseMarkdownDescriptionTooltip.vue";

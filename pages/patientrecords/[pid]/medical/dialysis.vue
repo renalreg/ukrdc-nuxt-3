@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import { type DialysisSessionSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { DialysisSessionSchema, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
@@ -176,11 +176,11 @@ export default defineComponent({
 
     const ui = {
       th: {
-        base: "px-6 py-3"
+        base: "px-6 py-3",
       },
       td: {
-        base: "px-6 py-4 whitespace-nowrap"
-      }
+        base: "px-6 py-4 whitespace-nowrap",
+      },
     };
 
     return {
@@ -191,7 +191,7 @@ export default defineComponent({
       loading,
       sessions,
       columns,
-      ui
+      ui,
     };
   },
 });

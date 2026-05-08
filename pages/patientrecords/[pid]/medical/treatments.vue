@@ -71,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import { type PatientRecordSchema, type TreatmentSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PatientRecordSchema, TreatmentSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
@@ -152,11 +152,11 @@ export default defineComponent({
 
     const ui = {
       th: {
-        base: "px-6 py-3"
+        base: "px-6 py-3",
       },
       td: {
-        base: "px-6 py-4 whitespace-nowrap"
-      }
+        base: "px-6 py-4 whitespace-nowrap",
+      },
     };
 
     return {
@@ -164,10 +164,8 @@ export default defineComponent({
       loading,
       treatments,
       columns,
-      ui
+      ui,
     };
   },
 });
 </script>
-
-

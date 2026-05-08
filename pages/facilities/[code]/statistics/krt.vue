@@ -40,11 +40,7 @@
 </template>
 
 <script lang="ts">
-import {
-  type FacilityDetailsSchema,
-  type FacilityExtractsSchema,
-  type UnitLevelKRTStats,
-} from "@ukkidney/ukrdc-axios-ts";
+import type { FacilityDetailsSchema, FacilityExtractsSchema, UnitLevelKRTStats } from "@ukkidney/ukrdc-axios-ts";
 import { DateTime } from "luxon";
 
 import DateRangeSelector from "~/components/plots/stats/DateRangeSelector.vue";

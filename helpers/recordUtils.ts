@@ -1,4 +1,4 @@
-import { type NumberSchema, type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import type { NumberSchema, PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 const membershipFacilities = ["UKRR", "PV", "PKB", "MRC"];
 const migratedExtracts = ["PVMIG", "HSMIG"];

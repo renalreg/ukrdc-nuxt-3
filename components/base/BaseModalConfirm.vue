@@ -12,7 +12,7 @@
         />
       </div>
       <div class="text-center sm:text-left">
-        <h3 id="modal-headline" class="mb-4 text-lg font-medium leading-6 text-gray-900">
+        <h3 id="modal-headline" class="mb-4 text-lg leading-6 font-medium text-gray-900">
           {{ title }}
         </h3>
         <div>
@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import BaseModal from "~/components/base/BaseModal.vue";
-import { type ModalInterface } from "~/interfaces/modal";
+import type { ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {

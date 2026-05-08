@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" ref="el"></div>
+  <div :id="id" ref="el" />
 </template>
 
 <script lang="ts">

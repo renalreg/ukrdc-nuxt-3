@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { type LabOrderShortSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { LabOrderShortSchema, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import usePagination from "~/composables/query/usePagination";

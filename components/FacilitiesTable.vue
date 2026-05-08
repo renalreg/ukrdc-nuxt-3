@@ -7,7 +7,13 @@ Table of facilities and their basic statistics
     <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
 
     <UCard :ui="{ body: { padding: '' } }">
-      <UTable :rows="filteredFacilities" :columns="columns" :ui="ui" :loading="loading" @select="$emit('select', $event.id)">
+      <UTable
+        :rows="filteredFacilities"
+        :columns="columns"
+        :ui="ui"
+        :loading="loading"
+        @select="$emit('select', $event.id)"
+      >
         <!-- Failing records -->
         <template #patientsReceivingMessageError-data="{ row }">
           <span class="flex items-center">
@@ -47,7 +53,7 @@ Table of facilities and their basic statistics
 </template>
 
 <script lang="ts">
-import { type FacilityDetailsSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { FacilityDetailsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import IconCircle from "~/components/icons/IconCircle.vue";
 import SearchBar from "~/components/SearchBar.vue";
@@ -137,13 +143,13 @@ export default defineComponent({
     );
 
     const ui = {
-          th: {
-            base: "px-4 py-3"
-          },
-          td: {
-            base: "px-4 py-4 whitespace-nowrap"
-          }
-        };
+      th: {
+        base: "px-4 py-3",
+      },
+      td: {
+        base: "px-4 py-4 whitespace-nowrap",
+      },
+    };
 
     const columns = [
       {
@@ -193,9 +199,8 @@ export default defineComponent({
       filteredFacilities,
       facilityLastMessageOver48,
       formatDate,
-      ui
+      ui,
     };
   },
 });
 </script>
-

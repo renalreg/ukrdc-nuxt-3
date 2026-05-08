@@ -8,7 +8,7 @@
             {{ displayName }}
           </p>
         </div>
-        <UIcon class="flex-0 h-4 w-4" name="i-heroicons-chevron-down-16-solid" />
+        <UIcon class="h-4 w-4 flex-0" name="i-heroicons-chevron-down-16-solid" />
       </div>
     </UButton>
   </UDropdownMenu>

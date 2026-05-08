@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { type WorkItemGroup } from "@ukkidney/ukrdc-axios-ts";
+import type { WorkItemGroup } from "@ukkidney/ukrdc-axios-ts";
 
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";

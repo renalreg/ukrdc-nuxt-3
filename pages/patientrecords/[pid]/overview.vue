@@ -102,11 +102,7 @@
 </template>
 
 <script lang="ts">
-import {
-  type MinimalMessageSchema,
-  type PatientRecordSchema,
-  type PatientRecordSummarySchema,
-} from "@ukkidney/ukrdc-axios-ts";
+import type { MinimalMessageSchema, PatientRecordSchema, PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
@@ -263,5 +259,3 @@ export default defineComponent({
   },
 });
 </script>
-
-

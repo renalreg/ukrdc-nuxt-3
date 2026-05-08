@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import {
+import type {
   type MasterRecordSchema,
   type MasterRecordStatisticsSchema,
   type MessageSchema,

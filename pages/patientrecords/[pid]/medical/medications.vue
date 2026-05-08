@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import { type MedicationSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MedicationSchema, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";
 import useApi from "~/composables/useApi";

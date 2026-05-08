@@ -5,10 +5,9 @@ import simpleImportSort from "eslint-plugin-simple-import-sort";
 import vue from "eslint-plugin-vue";
 import vueParser from "vue-eslint-parser";
 
-import withNuxt from './.nuxt/eslint.config.mjs'
+import withNuxt from "./.nuxt/eslint.config.mjs";
 
-export default withNuxt ([
-  // Base JS config
+export default withNuxt([
   js.configs.recommended,
 
   // Vue files
@@ -28,6 +27,9 @@ export default withNuxt ([
       "@typescript-eslint": tseslint,
     },
     rules: {
+      // ✅ IMPORTANT: disable base rule
+      "no-unused-vars": "off",
+
       // Import sorting
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
@@ -36,10 +38,18 @@ export default withNuxt ([
       "no-console": "off",
       "vue/multi-word-component-names": "off",
 
-      // Let Nuxt/Vue handle this better in modern setup
       "import/first": "error",
       "import/no-duplicates": "error",
       "import/order": "off",
+
+      // TS version of unused vars
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
     },
   },
 
@@ -56,9 +66,20 @@ export default withNuxt ([
       "simple-import-sort": simpleImportSort,
     },
     rules: {
+      // ✅ IMPORTANT: disable base rule here too
+      "no-unused-vars": "off",
+
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "no-console": "off",
+
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
     },
   },
 ]);

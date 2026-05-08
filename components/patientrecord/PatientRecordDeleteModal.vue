@@ -5,8 +5,8 @@
         <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0">
           <UIcon name="i-heroicons-exclamation-circle" class="h-6 w-6 text-red-600" />
         </div>
-        <div class="ml-8 mt-3 text-left sm:ml-4 sm:mt-0">
-          <h3 id="modal-headline" class="text-lg font-medium leading-6 text-gray-900">
+        <div class="mt-3 ml-8 text-left sm:mt-0 sm:ml-4">
+          <h3 id="modal-headline" class="text-lg leading-6 font-medium text-gray-900">
             {{ previewErrorMessage ? "Unable to delete patient record" : "Delete patient record" }}
           </h3>
           <div class="mt-2">
@@ -164,7 +164,7 @@
         </div>
       </div>
       <div v-if="(!previewErrorMessage && !previewResponse) || deleteInProgress" class="w-full">
-        <BaseLoadingIndicator></BaseLoadingIndicator>
+        <BaseLoadingIndicator />
       </div>
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
         <UButton
@@ -183,13 +183,13 @@
 </template>
 
 <script lang="ts">
-import {
-  type LinkRecordSchema,
-  type MasterRecordSchema,
-  type PatientRecordSchema,
-  type PersonSchema,
-  type PidXRefSchema,
-  type WorkItemSchema,
+import type {
+  LinkRecordSchema,
+  MasterRecordSchema,
+  PatientRecordSchema,
+  PersonSchema,
+  PidXRefSchema,
+  WorkItemSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
@@ -209,7 +209,7 @@ interface DeletePIDFromEMPISchema {
 interface DeletePIDResponseSchema {
   hash: string;
   committed: boolean;
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   patientRecord: any;
   empi: DeletePIDFromEMPISchema;
 }

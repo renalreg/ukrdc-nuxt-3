@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { type PatientRecordSchema, type TransplantSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PatientRecordSchema, TransplantSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
@@ -132,11 +132,11 @@ export default defineComponent({
 
     const ui = {
       th: {
-        base: "px-6 py-3"
+        base: "px-6 py-3",
       },
       td: {
-        base: "px-6 py-4 whitespace-nowrap"
-      }
+        base: "px-6 py-4 whitespace-nowrap",
+      },
     };
 
     return {
@@ -144,10 +144,8 @@ export default defineComponent({
       loadingTransplants,
       transplants,
       transplantColumns,
-      ui
+      ui,
     };
   },
 });
 </script>
-
-

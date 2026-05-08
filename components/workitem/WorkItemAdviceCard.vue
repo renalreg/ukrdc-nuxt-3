@@ -77,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import { type WorkItemExtendedSchema, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { WorkItemExtendedSchema, WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import {
   collectionIsUnresolved,
@@ -158,5 +158,3 @@ export default defineComponent({
   },
 });
 </script>
-
-

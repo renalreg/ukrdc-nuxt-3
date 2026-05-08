@@ -2,7 +2,7 @@
 
 <template>
   <dl class="grid grid-cols-1 gap-4" :class="[{ 'lg:grid-cols-3': cols >= 3 }, { 'sm:grid-cols-2': cols >= 2 }]">
-    <slot></slot>
+    <slot />
   </dl>
 </template>
 

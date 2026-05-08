@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { type ConnectorMessageModel } from "@ukkidney/ukrdc-axios-ts";
+import type { ConnectorMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
 import { connectorMessageError } from "~/helpers/mirthUtils";
 

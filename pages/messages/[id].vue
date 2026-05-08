@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MessageSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import useApi from "~/composables/useApi";
 import useSensitive from "~/composables/useSensitive";

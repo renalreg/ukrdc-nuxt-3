@@ -110,8 +110,8 @@
         </p>
         <p v-if="record.type !== 9 && messages && messages.length > 0">
           This may be because a <b>Related Data File</b> below updated the
-          <span class="font-medium text-indigo-800">Master Record</span>, and this update means that it no longer matches the
-          <span class="font-medium text-yellow-700">Person Record</span> below.
+          <span class="font-medium text-indigo-800">Master Record</span>, and this update means that it no longer
+          matches the <span class="font-medium text-yellow-700">Person Record</span> below.
         </p>
       </div>
 
@@ -121,7 +121,7 @@
           <em>at the time this work item was first raised.</em>
         </p>
         <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-          <UTable :rows="attributesRows" :columns="attributesCols" class="sensitive" :ui="ui"> </UTable>
+          <UTable :rows="attributesRows" :columns="attributesCols" class="sensitive" :ui="ui" />
         </UCard>
       </div>
 
@@ -249,7 +249,7 @@
 </template>
 
 <script lang="ts">
-import { type MessageSchema, type WorkItemExtendedSchema, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MessageSchema, WorkItemExtendedSchema, WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseItemPaginator from "~/components/base/BaseItemPaginator.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
@@ -267,7 +267,7 @@ import { formatDate } from "~/helpers/dateUtils";
 import { isEmptyObject } from "~/helpers/objectUtils";
 import { delay } from "~/helpers/timeUtils";
 import { workItemIsMergable } from "~/helpers/workItemUtils";
-import { type ModalInterface } from "~/interfaces/modal";
+import type { ModalInterface } from "~/interfaces/modal";
 
 interface AvailableActions {
   close: boolean;
@@ -440,7 +440,7 @@ export default defineComponent({
       } as AvailableActions;
     });
 
-    const closeMessageOverride = ref<String>();
+    const closeMessageOverride = ref<string>();
 
     // Template refs
     const updateWorkItemModal = ref<ModalInterface>();
@@ -527,8 +527,8 @@ export default defineComponent({
     // Table data
     interface AttributeRow {
       key: string;
-      incomingValue: any;
-      destinationValue: any;
+      incomingValue: string;
+      destinationValue: string;
     }
 
     const attributesRows = computed<AttributeRow[]>(() => {
@@ -590,13 +590,12 @@ export default defineComponent({
 
     const ui = {
       th: {
-        base: "px-4 py-3"
+        base: "px-4 py-3",
       },
       td: {
-        base: "px-4 py-4 whitespace-nowrap"
-      }
+        base: "px-4 py-4 whitespace-nowrap",
+      },
     };
-
 
     return {
       record,
@@ -625,7 +624,7 @@ export default defineComponent({
       updateWorkItem,
       handleCloseWorkItem,
       hasPermission,
-      ui
+      ui,
     };
   },
   head: {
@@ -633,4 +632,3 @@ export default defineComponent({
   },
 });
 </script>
-

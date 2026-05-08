@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { type ObservationSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts/api";
+import type { ObservationSchema, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts/api";
 
 import BadgePrePost from "~/components/BadgePrePost.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
@@ -153,7 +153,7 @@ export default defineComponent({
 
     const ui = {
       th: {
-        base: "px-6 py-3"
+        base: "px-6 py-3",
       },
     };
 
@@ -167,9 +167,8 @@ export default defineComponent({
       availableCodes,
       selectedCode,
       formatDate,
-      ui
+      ui,
     };
   },
 });
 </script>
-

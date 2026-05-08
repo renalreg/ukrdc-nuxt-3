@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { type MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgeNationalID from "~/components/BadgeNationalID.vue";
 import { formatGenderCharacter } from "~/helpers/codeUtils";

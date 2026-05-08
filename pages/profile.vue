@@ -23,7 +23,7 @@
                   />
                 </svg>
               </span>
-              <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></span>
+              <span class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true" />
             </div>
           </div>
           <div v-if="user">
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div
-          class="mb-8 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse lg:mt-0 lg:flex-row lg:space-x-3"
+          class="mb-8 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse lg:mt-0 lg:flex-row lg:space-x-3"
         >
           <UButton to="manageAccountUrl" target="_blank"> Manage Account</UButton>
           <UButton @click="signOutAuto()"> Sign out </UButton>
@@ -51,7 +51,7 @@
         <h2 class="mb-4">Permissions</h2>
         <div v-for="group in perms" :key="group" class="inline">
           <span
-            class="mb-2 mr-2 inline-flex items-center rounded-full px-3 py-0.5 font-medium"
+            class="mr-2 mb-2 inline-flex items-center rounded-full px-3 py-0.5 font-medium"
             :class="classesForPermissions(group)"
           >
             {{ group }}

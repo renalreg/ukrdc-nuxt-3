@@ -2,7 +2,7 @@
   <div>
     <UCard class="mb-4 !overflow-visible">
       <SearchBar v-model="searchboxString" :focus="true" @submit="searchSubmit" />
-      <BaseCollapseHeader v-model="advancedOpen" label="More Options"></BaseCollapseHeader>
+      <BaseCollapseHeader v-model="advancedOpen" label="More Options" />
       <!-- More Options -->
       <div v-show="advancedOpen" class="mt-4">
         <!-- Facility select -->
@@ -100,7 +100,7 @@
 </template>
 
 <script lang="ts">
-import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseCheckpill from "~/components/base/BaseCheckpill.vue";
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
@@ -138,7 +138,7 @@ export default defineComponent({
 
     const advancedOpen = ref(false);
 
-    const anySearchTermsEntered = computed<Boolean>(() => {
+    const anySearchTermsEntered = computed<boolean>(() => {
       return !!(searchQueryIsPopulated.value || selectedFacility.value);
     });
 

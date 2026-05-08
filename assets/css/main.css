@@ -21,7 +21,7 @@ html {
   }
 
   h2 {
-    @apply text-lg font-medium leading-6;
+    @apply text-lg leading-6 font-medium;
   }
 
   h3 {
@@ -29,7 +29,7 @@ html {
   }
 
   h4 {
-    @apply text-sm font-medium uppercase tracking-wide text-gray-600;
+    @apply text-sm font-medium tracking-wide text-gray-600 uppercase;
   }
 
   h5 {
@@ -45,7 +45,7 @@ html {
   }
 
   th {
-    @apply text-left text-sm font-medium uppercase tracking-wider text-gray-600;
+    @apply text-left text-sm font-medium tracking-wider text-gray-600 uppercase;
   }
 
   label {
@@ -72,11 +72,9 @@ html {
   }
 
   .patient-infocard-ul-record-peek {
-  @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3;
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3;
   }
   .patientrecords-list-header {
-  @apply flex h-10 items-center bg-gray-50 py-1 pl-4 sm:pl-6;
+    @apply flex h-10 items-center bg-gray-50 py-1 pl-4 sm:pl-6;
   }
-
-
 }
