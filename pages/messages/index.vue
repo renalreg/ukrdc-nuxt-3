@@ -95,7 +95,7 @@
 </template>
 
 <script lang="ts">
-import type { type MessageSchema, OrderBy } from "@ukkidney/ukrdc-axios-ts";
+import type { MessageSchema, OrderBy } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";

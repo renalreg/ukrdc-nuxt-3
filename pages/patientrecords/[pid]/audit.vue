@@ -64,12 +64,7 @@
 </template>
 
 <script lang="ts">
-import type {
-  type AuditEventSchema,
-  AuditOperation,
-  OrderBy,
-  type PatientRecordSchema,
-} from "@ukkidney/ukrdc-axios-ts";
+import type { AuditEventSchema, AuditOperation, OrderBy, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 import { Resource } from "@ukkidney/ukrdc-axios-ts/api";
 
 import AuditListItem from "~/components/AuditListItem.vue";

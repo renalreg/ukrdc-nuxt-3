@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import type { type MessageSchema, OrderBy, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MessageSchema, OrderBy, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
