@@ -18,7 +18,7 @@
       />
     </div>
 
-    <br>
+    <br />
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Labelled2dBarPlot

@@ -46,13 +46,13 @@
             <BaseInfoTooltip>
               <div class="sensitive">
                 <p><b>ID: </b>{{ row.id }}</p>
-                <br>
+                <br />
                 <p><b>Admit reason code: </b>{{ row.admitreasoncodestd }} / {{ row.admitreasoncode }}</p>
                 <p>
                   <b>Discharge reason code: </b>{{ row.dischargereasoncodestd ?? "None" }} /
                   {{ row.dischargereasoncode ?? "None" }}
                 </p>
-                <br>
+                <br />
                 <p>
                   <b>Healthcare facility code: </b>{{ row.healthcarefacilitycodestd ?? "None" }} /
                   {{ row.healthcarefacilitycode ?? "None" }}

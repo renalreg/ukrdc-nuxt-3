@@ -29,7 +29,7 @@
             <BaseInfoTooltip>
               <div class="sensitive">
                 <p><b>ID: </b>{{ row.id }}</p>
-                <br>
+                <br />
                 <p><b>Clinician: </b>{{ row.cliniciandesc ?? row.cliniciancode }}</p>
                 <p><b>Entered by: </b>{{ row.enteredbydesc ?? row.enteredbycode }}</p>
               </div>

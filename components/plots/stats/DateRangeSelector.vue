@@ -2,13 +2,13 @@
   <div class="date-range-selector">
     <div class="slider">
       <label for="timePeriod">Select Time Period:</label>
-      <input id="timePeriod" v-model="timePeriodIndex" type="range" min="0" max="2">
+      <input id="timePeriod" v-model="timePeriodIndex" type="range" min="0" max="2" />
       <span>{{ timePeriods[timePeriodIndex] }}</span>
     </div>
 
     <div class="slider">
       <label for="dateToggle">Toggle Date Range:</label>
-      <input id="dateToggle" v-model="isNow" type="checkbox">
+      <input id="dateToggle" v-model="isNow" type="checkbox" />
       <span>{{ isNow ? "Now" : "Most Recent Quarter" }}</span>
     </div>
     <div>

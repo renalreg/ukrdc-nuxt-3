@@ -42,6 +42,19 @@ export default withNuxt([
       "import/no-duplicates": "error",
       "import/order": "off",
 
+      "vue/html-self-closing": [
+        "error",
+        {
+          html: {
+            void: "always",
+            normal: "always",
+            component: "always",
+          },
+          svg: "always",
+          math: "always",
+        },
+      ],
+
       // TS version of unused vars
       "@typescript-eslint/no-unused-vars": [
         "error",

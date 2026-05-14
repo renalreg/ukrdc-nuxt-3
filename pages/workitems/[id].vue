@@ -144,7 +144,7 @@
           <div v-else class="rounded-md bg-yellow-50 p-4 font-medium text-yellow-800">
             <span v-if="record.type === 9">
               Incoming file was rejected, so no Person record exists for this work item yet.
-              <br>
+              <br />
               See Related Data Files below to identify the rejected file.
             </span>
             <span v-else> Person record associated with this work item is missing, and may have been deleted. </span>
