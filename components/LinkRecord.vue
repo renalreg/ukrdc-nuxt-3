@@ -19,7 +19,7 @@ Includes a header with the Link Record ID and functionality to Unlink the record
 </template>
 
 <script lang="ts">
-import { type LinkRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { LinkRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import MasterRecordCard from "~/components/MasterRecordCard.vue";
 import PersonRecordCard from "~/components/PersonRecordCard.vue";

@@ -76,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import { OrderBy, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { OrderBy, WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";

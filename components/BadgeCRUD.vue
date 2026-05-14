@@ -16,15 +16,15 @@ export default defineComponent({
   setup(props) {
     const color = computed(() => {
       if (props.operation.includes("DELETE")) {
-        return "red";
+        return "error";
       } else if (props.operation.includes("READ")) {
         return "blue";
       } else if (props.operation.includes("UPDATE")) {
         return "purple";
       } else if (props.operation.includes("CREATE")) {
-        return "green";
+        return "success";
       } else {
-        return "gray";
+        return "neutral";
       }
     });
 

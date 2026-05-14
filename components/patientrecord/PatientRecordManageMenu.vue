@@ -2,25 +2,25 @@
   <div>
     <PatientRecordDeleteModal ref="deleteModal" :item="item" @deleted="$emit('deleted')" />
 
-    <UDropdown :items="menuItems" class="h-full" :popper="{ placement: 'right-start' }">
+    <UDropdownMenu :items="menuItems" class="h-full" :popper="{ placement: 'right-start' }">
       <UButton
-        color="gray"
+        color="neutral"
         variant="ghost"
         class="z-0 flex h-full items-center hover:bg-gray-50"
         icon="i-heroicons-ellipsis-vertical"
       />
-    </UDropdown>
+    </UDropdownMenu>
   </div>
 </template>
 
 <script lang="ts">
-import { type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import PatientRecordDeleteModal from "~/components/patientrecord/PatientRecordDeleteModal.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
 import { demographicsUpdateAllowed } from "~/helpers/recordUtils";
-import { type ModalInterface } from "~/interfaces/modal";
+import type { ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {

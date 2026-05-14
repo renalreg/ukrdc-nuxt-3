@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { type AddressSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { AddressSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import PostCodeLink from "~/components/PostCodeLink.vue";
 import { formatDate } from "~/helpers/dateUtils";

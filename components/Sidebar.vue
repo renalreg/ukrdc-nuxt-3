@@ -1,10 +1,10 @@
 <template>
-  <div class="flex w-64 flex-1 flex-col bg-gray-50">
-    <div class="h-0 flex-1 overflow-y-auto pb-4 pt-6">
+  <div class="flex w-64 flex-1 flex-col bg-neutral-50">
+    <div class="h-0 flex-1 overflow-y-auto pt-6 pb-4">
       <div class="mb-2 flex flex-shrink-0 items-center px-4">
         <img class="h-auto w-full" src="~/assets/UKKA_UKRDC.svg" alt="Workflow" />
       </div>
-      <div v-if="deploymentEnv !== 'production'" class="bg-yellow-700 py-2 text-center capitalize text-white">
+      <div v-if="deploymentEnv !== 'production'" class="bg-yellow-700 py-2 text-center text-white capitalize">
         {{ deploymentEnv }}
       </div>
       <nav class="mt-6 space-y-1 px-2">
@@ -27,7 +27,7 @@
           <div v-else-if="item.visible">
             <h3
               :id="item.title + '_Heading'"
-              class="mb-3 mt-5 px-3 text-sm font-semibold uppercase tracking-wider text-gray-500"
+              class="mt-5 mb-3 px-3 text-sm font-semibold tracking-wider text-gray-500 uppercase"
             >
               {{ item.title }}
             </h3>

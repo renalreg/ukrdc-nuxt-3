@@ -56,7 +56,7 @@
         </div>
 
         <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-          <UTable :loading="loading" :rows="results" :columns="columns" class="sensitive">
+          <UTable :loading="loading" :rows="results" :columns="columns" class="sensitive" :ui="ui">
             <!-- Value -->
             <template #value-data="{ row }"> {{ row.value }} {{ row.valueUnits }} </template>
             <!-- observationTime -->
@@ -68,9 +68,9 @@
               <BadgePrePost :pre-post="row.prePost" />
             </template>
             <template #actions-data="{ row }">
-              <UDropdown :items="menuItems(row)">
-                <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
-              </UDropdown>
+              <UDropdownMenu :items="menuItems(row)">
+                <UButton color="neutral" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
+              </UDropdownMenu>
             </template>
           </UTable>
           <template #footer>
@@ -90,11 +90,11 @@
 </template>
 
 <script lang="ts">
-import {
-  type LabOrderSchema,
-  type PatientRecordSchema,
-  type ResultItemSchema,
-  type ResultItemServiceSchema,
+import type {
+  LabOrderSchema,
+  PatientRecordSchema,
+  ResultItemSchema,
+  ResultItemServiceSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgePrePost from "~/components/BadgePrePost.vue";
@@ -107,7 +107,7 @@ import usePagination from "~/composables/query/usePagination";
 import useQuery from "~/composables/query/useQuery";
 import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
-import { type ModalInterface } from "~/interfaces/modal";
+import type { ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: {
@@ -292,26 +292,32 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "serviceId",
         key: "serviceId",
         label: "Type",
       },
       {
+        id: "value",
         key: "value",
         label: "Value",
       },
       {
+        id: "orderId",
         key: "orderId",
         label: "Order ID",
       },
       {
+        id: "observationTime",
         key: "observationTime",
         label: "Observation time",
       },
       {
+        id: "prePost",
         key: "prePost",
         label: "Pre/Post-Dialysis",
       },
       {
+        id: "actions",
         key: "actions",
       },
     ];
@@ -330,6 +336,12 @@ export default defineComponent({
         },
       ],
     ];
+
+    const ui = {
+      th: {
+        base: "px-6 py-3",
+      },
+    };
 
     return {
       page,
@@ -352,13 +364,8 @@ export default defineComponent({
       selectedOrderId,
       selectedOrder,
       formatDate,
+      ui,
     };
   },
 });
 </script>
-
-<style scoped lang="postcss">
-th {
-  @apply px-6 py-3;
-}
-</style>

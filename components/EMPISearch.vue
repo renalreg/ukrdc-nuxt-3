@@ -39,7 +39,7 @@ Mini (half-width) search bar and results pages used in the EMPI Merge page.
       </UCard>
     </div>
     <div v-else class="mt-2 text-center text-gray-500">
-      <BaseLoadingIndicator v-if="searchQueryIsPopulated && searchInProgress"></BaseLoadingIndicator>
+      <BaseLoadingIndicator v-if="searchQueryIsPopulated && searchInProgress" />
       <div v-else-if="searchQueryIsPopulated && !searchInProgress">No results found</div>
       <div v-else>
         <p class="mb-4">Search by name, date of birth, national ID, or local ID</p>
@@ -49,7 +49,7 @@ Mini (half-width) search bar and results pages used in the EMPI Merge page.
 </template>
 
 <script lang="ts">
-import { type MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";

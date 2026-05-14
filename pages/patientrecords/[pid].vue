@@ -16,7 +16,7 @@
     </div>
 
     <div class="mb-6">
-      <UHorizontalNavigation :links="links" />
+      <UNavigationMenu orientation="horizontal" :items="links" />
     </div>
 
     <NuxtPage v-if="record" :record="record" />
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import MasterRecordLinkButton from "~/components/MasterRecordLinkButton.vue";
 import PatientRecordExtractSummary from "~/components/patientrecord/PatientRecordExtractSummary.vue";

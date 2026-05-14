@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import { type MedicationSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MedicationSchema, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";
 import useApi from "~/composables/useApi";
@@ -101,32 +101,39 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "drugProductGeneric",
         key: "drugProductGeneric",
         label: "Medication",
       },
       {
+        id: "dosequantity",
         key: "dosequantity",
         label: "Dose",
       },
       {
+        id: "frequency",
         key: "frequency",
         label: "Frequency",
       },
       {
+        id: "routecode",
         key: "routecode",
         label: "Route",
       },
       {
+        id: "fromTime",
         key: "fromTime",
         label: "Start Date",
         sortable: true,
       },
       {
+        id: "toTime",
         key: "toTime",
         label: "End Date",
         sortable: true,
       },
       {
+        id: "comment",
         key: "comment",
         label: "Comment",
       },

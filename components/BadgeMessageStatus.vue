@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MessageSchema } from "@ukkidney/ukrdc-axios-ts";
 
 export default defineComponent({
   props: {
@@ -17,11 +17,11 @@ export default defineComponent({
   setup(props) {
     const color = computed(() => {
       if (props.message.msgStatus === "ERROR") {
-        return "red";
+        return "error";
       } else if (props.message.msgStatus === "RECEIVED") {
         return "amber";
       }
-      return "green";
+      return "success";
     });
 
     return { color };

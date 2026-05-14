@@ -8,7 +8,7 @@
           <div class="flex-grow">
             <h5>Records where the most recent message received failed to process due to errors.</h5>
           </div>
-          <BaseCollapseHeader v-model="advancedOpen" label="More Options"></BaseCollapseHeader>
+          <BaseCollapseHeader v-model="advancedOpen" label="More Options" />
         </div>
         <!-- More Options -->
         <div v-show="advancedOpen" class="mt-4 flex">
@@ -21,8 +21,7 @@
             value-attribute="id"
             option-attribute="name"
             placeholder="Select a message channel"
-          >
-          </USelectMenu>
+          />
           <UButton class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>
         </div>
       </template>
@@ -59,8 +58,8 @@
 </template>
 
 <script lang="ts">
-import { type FacilityDetailsSchema, type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
-import { type PlotDatum } from "plotly.js-dist-min";
+import type { FacilityDetailsSchema, MessageSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PlotDatum } from "plotly.js-dist-min";
 
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";

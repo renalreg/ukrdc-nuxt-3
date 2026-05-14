@@ -7,8 +7,7 @@
         color="red"
         icon="i-heroicons-exclamation-triangle-20-solid"
         class="mb-4"
-      >
-      </UAlert>
+      />
     </ULink>
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
@@ -79,7 +78,7 @@
 
         <!-- Record types -->
         <UCard :ui="{ body: { padding: '' } }">
-          <UTable :rows="feedTableItems" :columns="feedTableColumns">
+          <UTable :rows="feedTableItems" :columns="feedTableColumns" :ui="ui">
             <template #historic-data="{ row }">
               <div v-if="row.historic" class="flex items-center">
                 <IconCircle v-if="row.historic" class="inline text-orange-400" />
@@ -173,7 +172,7 @@
 </template>
 
 <script lang="ts">
-import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { FacilityDetailsSchema, FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import FacilityErrorsHistoryPlot from "~/components/FacilityErrorsHistoryPlot.vue";
 import IconCircle from "~/components/icons/IconCircle.vue";
@@ -264,18 +263,30 @@ export default defineComponent({
 
     const feedTableColumns = [
       {
+        id: "name",
         key: "name",
         label: "Name",
       },
       {
+        id: "historic",
         key: "historic",
         label: "historic",
       },
       {
+        id: "totalPatients",
         key: "totalPatients",
         label: "Total records",
       },
     ];
+
+    const ui = {
+      th: {
+        base: "px-6 py-3",
+      },
+      td: {
+        base: "px-6 py-4 whitespace-nowrap",
+      },
+    };
 
     return {
       hasPermission,
@@ -284,16 +295,8 @@ export default defineComponent({
       latestDataInfo,
       feedTableItems,
       feedTableColumns,
+      ui,
     };
   },
 });
 </script>
-
-<style scoped lang="postcss">
-th {
-  @apply px-6 py-3;
-}
-td {
-  @apply whitespace-nowrap px-6 py-4;
-}
-</style>

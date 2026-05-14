@@ -31,11 +31,7 @@
 </template>
 
 <script lang="ts">
-import {
-  type DemographicsStats,
-  type FacilityDetailsSchema,
-  type FacilityExtractsSchema,
-} from "@ukkidney/ukrdc-axios-ts";
+import type { DemographicsStats, FacilityDetailsSchema, FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import Labelled2dBarPlot from "~/components/plots/stats/Labelled2dBarPlot.vue";
 import Labelled2dPiePlot from "~/components/plots/stats/Labelled2dPiePlot.vue";

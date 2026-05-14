@@ -1,7 +1,7 @@
 /*
 Automatically set and clear the Sentry usercontext based on auth status.
 */
-import { type AuthState } from "@okta/okta-auth-js";
+import type { AuthState } from "@okta/okta-auth-js";
 import { useAuth } from "@okta/okta-vue";
 import * as Sentry from "@sentry/vue";
 

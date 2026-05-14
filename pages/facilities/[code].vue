@@ -13,7 +13,7 @@
     </div>
 
     <div class="mb-6">
-      <UHorizontalNavigation :links="links" />
+      <UNavigationMenu orientation="horizontal" :items="links" />
     </div>
 
     <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" />
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { FacilityDetailsSchema, FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import DashboardAlerts from "~/components/DashboardAlerts.vue";
 import useApi from "~/composables/useApi";

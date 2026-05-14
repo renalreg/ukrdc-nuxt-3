@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { type ChannelMessageModel, type ConnectorMessageModel } from "@ukkidney/ukrdc-axios-ts";
+import type { ChannelMessageModel, ConnectorMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
 import MirthConnectorMessageCard from "~/components/MirthConnectorMessageCard.vue";
 import { isEmptyObject } from "~/helpers/objectUtils";

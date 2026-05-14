@@ -1,4 +1,4 @@
-import { type ChannelMapModel } from "@ukkidney/ukrdc-axios-ts";
+import type { ChannelMapModel } from "@ukkidney/ukrdc-axios-ts";
 
 import useQuery from "~/composables/query/useQuery";
 import useApi from "~/composables/useApi";

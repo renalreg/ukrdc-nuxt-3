@@ -7,7 +7,13 @@ Table of facilities and their basic statistics
     <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
 
     <UCard :ui="{ body: { padding: '' } }">
-      <UTable :rows="filteredFacilities" :columns="columns" :loading="loading" @select="$emit('select', $event.id)">
+      <UTable
+        :rows="filteredFacilities"
+        :columns="columns"
+        :ui="ui"
+        :loading="loading"
+        @select="$emit('select', $event.id)"
+      >
         <!-- Failing records -->
         <template #patientsReceivingMessageError-data="{ row }">
           <span class="flex items-center">
@@ -47,7 +53,7 @@ Table of facilities and their basic statistics
 </template>
 
 <script lang="ts">
-import { type FacilityDetailsSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { FacilityDetailsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import IconCircle from "~/components/icons/IconCircle.vue";
 import SearchBar from "~/components/SearchBar.vue";
@@ -136,32 +142,47 @@ export default defineComponent({
       },
     );
 
+    const ui = {
+      th: {
+        base: "px-4 py-3",
+      },
+      td: {
+        base: "px-4 py-4 whitespace-nowrap",
+      },
+    };
+
     const columns = [
       {
+        id: "id",
         key: "id",
         label: "ID",
       },
       {
+        id: "description",
         key: "description",
         label: "Name",
         sortable: true,
       },
       {
+        id: "statistics.totalPatients",
         key: "statistics.totalPatients",
         label: "Total records",
         sortable: true,
       },
       {
+        id: "statistics.patientsReceivingMessageError",
         key: "statistics.patientsReceivingMessageError",
         label: "Failing records",
         sortable: true,
       },
       {
+        id: "dataFlow.pkbOut",
         key: "dataFlow.pkbOut",
         label: "Sending to PKB",
         sortable: true,
       },
       {
+        id: "lastMessageReceivedAt",
         key: "lastMessageReceivedAt",
         label: "Last received",
         sortable: true,
@@ -178,16 +199,8 @@ export default defineComponent({
       filteredFacilities,
       facilityLastMessageOver48,
       formatDate,
+      ui,
     };
   },
 });
 </script>
-
-<style scoped lang="postcss">
-th {
-  @apply px-4 py-3;
-}
-td {
-  @apply whitespace-nowrap px-4 py-4;
-}
-</style>

@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { type MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgeNationalID from "~/components/BadgeNationalID.vue";
 import { formatGenderCharacter } from "~/helpers/codeUtils";
@@ -78,7 +78,7 @@ export default defineComponent({
       } else if (nationalidType.trim() === "HSC") {
         return ["bg-green-100", "text-green-800"];
       } else {
-        return ["bg-gray-100", "text-gray-800"];
+        return ["bg-neutral-100", "text-neutral-800"];
       }
     }
 

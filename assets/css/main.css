@@ -1,61 +1,80 @@
-/*Basic elements*/
+@import "tailwindcss";
+@import "@nuxt/ui";
 
+/* other tailwinds classes */
+@import "./components/demoographics.css";
+@import "./components/checkpill.css";
+@import "./components/loading.css";
+
+/* Basic elements */
 html {
   font-size: 14px;
 }
 
-b {
-  @apply font-medium;
+@layer base {
+  b {
+    @apply font-medium;
+  }
+
+  h1 {
+    @apply text-2xl font-bold;
+  }
+
+  h2 {
+    @apply text-lg leading-6 font-medium;
+  }
+
+  h3 {
+    @apply font-medium;
+  }
+
+  h4 {
+    @apply text-sm font-medium tracking-wide text-gray-600 uppercase;
+  }
+
+  h5 {
+    @apply font-medium;
+  }
+
+  h6 {
+    @apply text-sm font-medium;
+  }
+
+  dt {
+    @apply font-medium;
+  }
+
+  th {
+    @apply text-left text-sm font-medium tracking-wider text-gray-600 uppercase;
+  }
+
+  label {
+    @apply font-medium;
+  }
 }
 
-h1 {
-  @apply text-2xl font-bold;
-}
-
-h2 {
-  @apply text-lg font-medium leading-6;
-}
-
-h3 {
-  @apply font-medium;
-}
-
-h4 {
-  @apply text-sm font-medium uppercase tracking-wide text-gray-600;
-}
-
-h5 {
-  @apply font-medium;
-}
-
-h6 {
-  @apply text-sm font-medium;
-}
-
-dt {
-  @apply font-medium;
-}
-
-th {
-  @apply text-left text-sm font-medium uppercase tracking-wider text-gray-600;
-}
-
-label {
-  @apply font-medium;
-}
-
-/*Plugin styles*/
-
+/* Plugin styles */
 .v-popper__popper {
   font-size: 12px;
 }
 
-.v-popper--theme-dropdown .v-popper__inner {
-  @apply rounded-md border border-gray-300 p-4 shadow-lg;
-}
+@layer components {
+  .v-popper--theme-dropdown .v-popper__inner {
+    @apply rounded-md border border-gray-300 p-4 shadow-lg;
+  }
 
-/*Common component styles*/
+  .borderless-card {
+    @apply overflow-hidden rounded-md bg-white shadow-sm;
+  }
 
-.borderless-card {
-  @apply overflow-hidden rounded-md bg-white shadow-sm;
+  .patient-infocard-ul-pid-overview {
+    @apply grid grid-cols-1 gap-4 xl:grid-cols-2;
+  }
+
+  .patient-infocard-ul-record-peek {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  .patientrecords-list-header {
+    @apply flex h-10 items-center bg-gray-50 py-1 pl-4 sm:pl-6;
+  }
 }

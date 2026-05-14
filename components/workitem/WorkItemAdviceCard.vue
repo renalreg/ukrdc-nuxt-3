@@ -41,6 +41,7 @@
           <a
             href="https://renalregistry.atlassian.net/wiki/spaces/TNG/pages/1986232419/Person+matched+by+facility+extract+and+national+id+-+not+matched+by+demographics"
             target="_blank"
+            class="text-indigo-600"
           >
             documentation on Confluence
           </a>
@@ -76,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import { type WorkItemExtendedSchema, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { WorkItemExtendedSchema, WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import {
   collectionIsUnresolved,
@@ -157,9 +158,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="postcss">
-a {
-  @apply text-indigo-600;
-}
-</style>

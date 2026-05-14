@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseLoadingIndicator v-if="!linkRecords"></BaseLoadingIndicator>
+    <BaseLoadingIndicator v-if="!linkRecords" />
     <div v-else class="grid grid-cols-1 gap-6">
       <LinkRecord v-for="link in linkRecords" :key="link.id" :record="link" />
     </div>
@@ -8,11 +8,7 @@
 </template>
 
 <script lang="ts">
-import {
-  type LinkRecordSchema,
-  type MasterRecordSchema,
-  type MasterRecordStatisticsSchema,
-} from "@ukkidney/ukrdc-axios-ts";
+import type { LinkRecordSchema, MasterRecordSchema, MasterRecordStatisticsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import LinkRecord from "~/components/LinkRecord.vue";

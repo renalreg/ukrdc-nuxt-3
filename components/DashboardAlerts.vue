@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { type DashboardSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { DashboardSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import useApi from "~/composables/useApi";
 

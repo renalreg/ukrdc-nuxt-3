@@ -1,5 +1,5 @@
 <template>
-  <BaseLoadingIndicator v-if="!code"></BaseLoadingIndicator>
+  <BaseLoadingIndicator v-if="!code" />
   <div v-else-if="code" class="flex flex-col">
     <div class="flex flex-col gap-4 py-4 pl-4 sm:pl-6">
       <!-- Heading -->
@@ -39,7 +39,7 @@
 
     <!-- Maps to  -->
     <div v-if="code.mapsTo.length > 0">
-      <div class="border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
+      <div class="border-t border-b bg-gray-50 py-1 pl-4 sm:pl-6">
         <h4>Maps To</h4>
       </div>
       <div class="flex flex-col divide-y divide-gray-300">
@@ -54,7 +54,7 @@
 
     <!-- Mapped by  -->
     <div v-if="code.mappedBy.length > 0">
-      <div class="border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
+      <div class="border-t border-b bg-gray-50 py-1 pl-4 sm:pl-6">
         <h4>Mapped By</h4>
       </div>
       <div class="flex flex-col divide-y divide-gray-300">
@@ -69,7 +69,7 @@
 
     <!-- PKB Attributes  -->
     <div v-if="code.pkbReferenceRange || code.pkbComment">
-      <div class="border-b border-t bg-gray-50 py-1 pl-4 sm:pl-6">
+      <div class="border-t border-b bg-gray-50 py-1 pl-4 sm:pl-6">
         <h4>PKB Attributes</h4>
       </div>
       <div class="px-4 py-4 sm:px-6">
@@ -84,11 +84,11 @@
       </div>
     </div>
   </div>
-  <div v-else></div>
+  <div v-else />
 </template>
 
 <script lang="ts">
-import { type ExtendedCodeSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { ExtendedCodeSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
 import CodeMapItem from "~/components/CodeMapItem.vue";

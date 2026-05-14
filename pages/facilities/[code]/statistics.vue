@@ -9,14 +9,14 @@
     />
 
     <div class="flex gap-8">
-      <UVerticalNavigation :links="links" />
+      <UNavigationMenu orientation="vertical" :items="links" />
       <NuxtPage v-if="facility && extracts" class="flex-1" :facility="facility" :extracts="extracts" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { type FacilityDetailsSchema, type FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { FacilityDetailsSchema, FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 export default defineComponent({
   props: {

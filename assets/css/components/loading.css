@@ -1,0 +1,21 @@
+@layer components {
+  .spinner-white {
+    @apply bg-white;
+  }
+
+  .spinner-indigo {
+    @apply bg-indigo-700;
+  }
+
+  .spinner-green {
+    @apply bg-green-500;
+  }
+
+  .spinner-yellow {
+    @apply bg-yellow-500;
+  }
+
+  .spinner-red {
+    @apply bg-red-600;
+  }
+}

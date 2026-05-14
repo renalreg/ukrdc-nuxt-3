@@ -2,7 +2,7 @@
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="flex h-screen overflow-hidden bg-white">
     <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-    <USlideover v-model="sbOpen" class="flex-0 w-64 md:hidden" side="left">
+    <USlideover v-model="sbOpen" class="w-64 flex-0 md:hidden" side="left">
       <Sidebar :show-close-button="true" :show-profile="false" class="relative" @toggle="toggle()" />
     </USlideover>
 
@@ -20,7 +20,7 @@
         <!-- Sidebar menu button -->
         <div class="justify-left inline-flex flex-grow items-center">
           <button
-            class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+            class="-mt-0.5 -ml-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-inset"
             @click="toggle()"
           >
             <span class="sr-only">Open sidebar</span>
@@ -35,7 +35,7 @@
 
       <!-- Main page content -->
       <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none" tabindex="0">
-        <div class="mx-auto max-w-7xl px-4 pb-24 pt-6 sm:px-6 md:px-8">
+        <div class="mx-auto max-w-7xl px-4 pt-6 pb-24 sm:px-6 md:px-8">
           <slot />
         </div>
       </main>

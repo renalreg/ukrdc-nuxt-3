@@ -1,7 +1,7 @@
 <template>
   <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :loading="loading" :rows="treatments" :columns="columns" class="sensitive">
+      <UTable :loading="loading" :rows="treatments" :columns="columns" class="sensitive" :ui="ui">
         <!-- Facility / QBL05 -->
         <template #healthcarefacilitycode-data="{ row }">
           <span>
@@ -71,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import { type PatientRecordSchema, type TreatmentSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { PatientRecordSchema, TreatmentSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
@@ -120,45 +120,52 @@ export default defineComponent({
 
     const columns = [
       {
+        id: "healthcarefacilitycode",
         key: "healthcarefacilitycode",
         label: "Facility / QBL05",
       },
       {
+        id: "fromtime",
         key: "fromtime",
         label: "Admit Date",
       },
       {
+        id: "admitreasoncode",
         key: "admitreasoncode",
         label: "Admit reason",
       },
       {
+        id: "totime",
         key: "totime",
         label: "Discharge Date",
       },
       {
+        id: "dischargereasoncode",
         key: "dischargereasoncode",
         label: "Discharge reason",
       },
       {
+        id: "info",
         key: "info",
       },
     ];
+
+    const ui = {
+      th: {
+        base: "px-6 py-3",
+      },
+      td: {
+        base: "px-6 py-4 whitespace-nowrap",
+      },
+    };
 
     return {
       formatDate,
       loading,
       treatments,
       columns,
+      ui,
     };
   },
 });
 </script>
-
-<style scoped lang="postcss">
-th {
-  @apply px-6 py-3;
-}
-td {
-  @apply whitespace-nowrap px-6 py-4;
-}
-</style>

@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { type ExtendedCauseOfDeathSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { ExtendedCauseOfDeathSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";
 import { formatDate } from "~/helpers/dateUtils";

@@ -99,11 +99,11 @@
 </template>
 
 <script lang="ts">
-import {
-  type MasterRecordSchema,
-  type MasterRecordStatisticsSchema,
-  type MinimalMessageSchema,
-  type PatientRecordSummarySchema,
+import type {
+  MasterRecordSchema,
+  MasterRecordStatisticsSchema,
+  MinimalMessageSchema,
+  PatientRecordSummarySchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";

@@ -75,7 +75,30 @@ export default defineNuxtConfig({
   css: ["@/assets/css/main.css"],
 
   // Modules
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui", "@nuxt/eslint"],
+
+  // this fixes 2.0 codes that are in use still, consider switching to defaults until nuxt fixes typehints
+  ui: {
+    theme: {
+      colors: [
+        "primary",
+        "secondary",
+        "info",
+        "success",
+        "warning",
+        "error",
+        "red",
+        "purple",
+        "blue",
+        "green",
+        "amber",
+        "white",
+        "black",
+        "gray",
+        "indigo",
+      ],
+    },
+  },
 
   // Plugins to run before rendering page
   plugins: [
@@ -91,8 +114,7 @@ export default defineNuxtConfig({
   // PostCSS config
   postcss: {
     plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
+      "@tailwindcss/postcss": {},
     },
   },
 

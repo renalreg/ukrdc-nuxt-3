@@ -24,12 +24,12 @@
         <USkeleton v-else class="h-6 w-full" />
       </BaseDescriptionListGridItem>
     </BaseDescriptionListGrid>
-    <slot></slot>
+    <slot />
   </UCard>
 </template>
 
 <script lang="ts">
-import { type ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
+import type { ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";

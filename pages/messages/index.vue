@@ -24,7 +24,7 @@
       </div>
 
       <div class="flex flex-col gap-2 lg:flex-row">
-        <BaseCollapseHeader v-model="advancedOpen" class="flex-grow" label="More Options"></BaseCollapseHeader>
+        <BaseCollapseHeader v-model="advancedOpen" class="flex-grow" label="More Options" />
 
         <USelectMenu v-model="statuses" :options="['STORED', 'RECEIVED', 'ERROR', 'RESOLVED']" multiple>
           <template #label>
@@ -65,8 +65,7 @@
         value-attribute="id"
         option-attribute="name"
         placeholder="Select a message channel"
-      >
-      </USelectMenu>
+      />
       <UButton class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>
     </div>
 
@@ -96,7 +95,7 @@
 </template>
 
 <script lang="ts">
-import { type MessageSchema, OrderBy } from "@ukkidney/ukrdc-axios-ts";
+import type { MessageSchema, OrderBy } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";

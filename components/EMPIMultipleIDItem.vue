@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { type MultipleUKRDCIDGroup } from "@ukkidney/ukrdc-axios-ts";
+import type { MultipleUKRDCIDGroup } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import MasterRecordsListItem from "~/components/MasterRecordsListItem.vue";

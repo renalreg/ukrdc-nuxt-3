@@ -11,7 +11,7 @@ Basic code map description, used in the maps sections of a Code pane.
 </template>
 
 <script lang="ts">
-import { type CodeMapSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { CodeMapSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";
 

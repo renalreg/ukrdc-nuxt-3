@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { type MinimalMessageSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { MinimalMessageSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import useSensitive from "~/composables/useSensitive";
 import { formatDate } from "~/helpers/dateUtils";
