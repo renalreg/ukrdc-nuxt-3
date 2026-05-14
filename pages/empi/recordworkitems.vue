@@ -5,7 +5,7 @@
       <h3 class="mb-1">Quickly identifies Master Records with the largest number of open Work Items.</h3>
       <p>
         Note that this does not attempt to group Master Records by their link records.
-        <br />
+        <br>
         For example, both the UKRDC and NHS Master Records for a patient will appear here separately.
       </p>
     </div>

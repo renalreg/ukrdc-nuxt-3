@@ -12,7 +12,7 @@ or an array of values when multiple instances are v-model'd onto the same array.
       type="checkbox"
       :disabled="disabled"
       :value="value"
-    />
+    >
     <div :class="['peer', `checkpill-${colour}`]">
       {{ label }}
     </div>
