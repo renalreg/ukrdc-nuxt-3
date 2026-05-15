@@ -11,7 +11,7 @@
     "fix": "npm run eslint:fix && npm run prettier:fix",
     "eslint": "eslint --ext \".js,.ts,.vue\" .",
     "eslint:fix": "eslint --ext \".js,.ts,.vue\" --fix .",
-    "prettier": "prettier . --check --ignore-pattern CHANGELOG.md",
+    "prettier": "prettier . --check",
     "prettier:fix": "prettier . --write",
     "typecheck": "nuxt typecheck"
   },
