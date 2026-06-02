@@ -1,4 +1,4 @@
-import type { PageTrackableTaskSchema, TrackableTaskSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PageTrackableTaskSchema, type TrackableTaskSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import useApi from "./useApi";
 
@@ -25,7 +25,7 @@ export default function () {
   function pollTask(task: TrackableTaskSchema, interval: number) {
     interval = interval * 1000 || 500;
 
-    const checkCondition = (resolve: (value: TrackableTaskSchema) => void, reject: (reason?: Error) => void) => {
+    const checkCondition = (resolve: any, reject: any) => {
       // If the condition is met, we're done!
       fetchTask(task).then((response) => {
         const status = response.status;

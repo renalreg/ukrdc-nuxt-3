@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import type { AuditEventSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type AuditEventSchema } from "@ukkidney/ukrdc-axios-ts";
 
 export default defineComponent({
   props: {

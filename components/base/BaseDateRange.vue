@@ -5,21 +5,21 @@
         v-for="preset in presetDateRanges"
         :key="preset.label"
         size="sm"
-        :color="isLastNDays(preset.days) ? 'primary' : 'neutral'"
-        :variant="isLastNDays(preset.days) ? 'outline' : 'outline'"
+        :color="isLastNDays(preset.days) ? 'primary' : 'white'"
+        :variant="isLastNDays(preset.days) ? 'outline' : 'solid'"
         @click="setLastNDays(preset.days)"
       >
         {{ preset.label }}
       </UButton>
       <UButton
         size="sm"
-        :color="showCustom ? 'primary' : 'neutral'"
-        :variant="showCustom ? 'outline' : 'outline'"
+        :color="showCustom ? 'primary' : 'white'"
+        :variant="showCustom ? 'outline' : 'solid'"
         @click="showCustom = true"
       >
         Custom
       </UButton>
-      <UButton variant="outline" size="sm" color="error" @click="clear()"> Clear </UButton>
+      <UButton variant="outline" size="sm" color="red" @click="clear()"> Clear </UButton>
     </div>
     <div v-show="showCustom" class="flex h-8 w-full flex-1">
       <VDatePicker

@@ -14,8 +14,8 @@
 </template>
 
 <script lang="ts">
-import type { FacilityDetailsSchema, HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
-import type { PlotDatum } from "plotly.js-dist-min";
+import { type FacilityDetailsSchema, type HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
+import { type PlotDatum } from "plotly.js-dist-min";
 
 import BaseTimeSeriesLinePlot from "~/components/plots/base/BaseTimeSeriesLinePlot.vue";
 import useApi from "~/composables/useApi";

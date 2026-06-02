@@ -1,8 +1,8 @@
 <template>
   <div class="spinner">
-    <div class="bounce1" :class="[`spinner-${colour}`]" />
-    <div class="bounce2" :class="[`spinner-${colour}`]" />
-    <div class="bounce3" :class="[`spinner-${colour}`]" />
+    <div class="bounce1" :class="[`spinner-${colour}`]"></div>
+    <div class="bounce2" :class="[`spinner-${colour}`]"></div>
+    <div class="bounce3" :class="[`spinner-${colour}`]"></div>
   </div>
 </template>
 
@@ -19,6 +19,26 @@ export default defineComponent({
 </script>
 
 <style lang="postcss" scoped>
+.spinner-white {
+  @apply bg-white;
+}
+
+.spinner-indigo {
+  @apply bg-indigo-700;
+}
+
+.spinner-green {
+  @apply bg-green-500;
+}
+
+.spinner-yellow {
+  @apply bg-yellow-500;
+}
+
+.spinner-red {
+  @apply bg-red-600;
+}
+
 .spinner {
   margin: 0 auto 0;
   width: 70px;

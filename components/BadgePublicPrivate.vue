@@ -20,7 +20,7 @@ export default defineComponent({
       } else if (props.visibility === "private") {
         return "blue";
       } else {
-        return "neutral";
+        return "gray";
       }
     });
 

@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import type { MessageSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type MessageSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgeMessageStatus from "~/components/BadgeMessageStatus.vue";
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";

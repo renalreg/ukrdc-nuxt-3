@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import type { PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import PostCodeLink from "~/components/PostCodeLink.vue";
 

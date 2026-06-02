@@ -96,7 +96,7 @@
               </div>
               <div>
                 <h5>Source</h5>
-                <p class="sensitive truncate overflow-hidden">
+                <p class="sensitive overflow-hidden truncate">
                   {{ name.source }}
                 </p>
               </div>
@@ -122,7 +122,7 @@
               </div>
               <div>
                 <h5>Source</h5>
-                <p class="sensitive truncate overflow-hidden">
+                <p class="sensitive overflow-hidden truncate">
                   {{ birthTime.source }}
                 </p>
               </div>
@@ -146,7 +146,7 @@
               </div>
               <div>
                 <h5>Source</h5>
-                <p class="sensitive truncate overflow-hidden">
+                <p class="sensitive overflow-hidden truncate">
                   {{ gender.source }}
                 </p>
               </div>
@@ -170,7 +170,7 @@
               </div>
               <div>
                 <h5>Source</h5>
-                <p class="sensitive truncate overflow-hidden">
+                <p class="sensitive overflow-hidden truncate">
                   {{ address.source }}
                 </p>
               </div>
@@ -186,11 +186,11 @@
 </template>
 
 <script lang="ts">
-import type {
-  AddressSchema,
-  NameSchema,
-  PatientRecordSchema,
-  PatientRecordSummarySchema,
+import {
+  type AddressSchema,
+  type NameSchema,
+  type PatientRecordSchema,
+  type PatientRecordSummarySchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
@@ -201,7 +201,7 @@ import usePermissions from "~/composables/usePermissions";
 import { formatGender } from "~/helpers/codeUtils";
 import { formatDate } from "~/helpers/dateUtils";
 import { isEmptyObject, shallowEqual } from "~/helpers/objectUtils";
-import type { ModalInterface } from "~/interfaces/modal";
+import { type ModalInterface } from "~/interfaces/modal";
 
 type SelectableBlock = "name" | "dob" | "gender" | "address";
 type GenderEnum = "1" | "2" | "9";
@@ -437,3 +437,18 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="postcss">
+.demo-section-card-inactive {
+  @apply border border-gray-300 bg-white shadow-sm;
+}
+.demo-section-card-active {
+  @apply border-2 border-indigo-500 bg-white shadow-sm;
+}
+.demo-section-card-selected {
+  @apply border-2 border-green-500 bg-white shadow-sm;
+}
+.demo-section-card-base {
+  @apply grid cursor-pointer grid-cols-1 overflow-hidden rounded-md p-4 md:grid-cols-2 lg:grid-cols-3;
+}
+</style>

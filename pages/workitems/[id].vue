@@ -28,13 +28,13 @@
           id="closeModalComments"
           v-model="customComment"
           :rows="3"
-          :color="customComment.length > 100 ? 'error' : 'primary'"
+          :color="customComment.length > 100 ? 'red' : 'primary'"
         />
       </div>
 
       <div class="flex justify-end">
         <UButton @click="closeModal?.hide()"> Cancel </UButton>
-        <UButton :disabled="!customComment" type="submit" class="ml-3" color="error" @click="handleCloseWorkItem()">
+        <UButton :disabled="!customComment" type="submit" class="ml-3" color="red" @click="handleCloseWorkItem()">
           Close Work Item
         </UButton>
       </div>
@@ -102,16 +102,16 @@
       <div class="mb-8">
         <p>
           This work item was raised because demographic attributes on
-          <span class="font-medium text-yellow-700">{{
+          <span class="personrecord-label">{{
             record.type === 9 ? "one of the incoming data files" : "the Person Record"
           }}</span>
           below did not match the
-          <span class="font-medium text-indigo-800">Master Record</span> it is linked to.
+          <span class="masterrecord-label">Master Record</span> it is linked to.
         </p>
         <p v-if="record.type !== 9 && messages && messages.length > 0">
           This may be because a <b>Related Data File</b> below updated the
-          <span class="font-medium text-indigo-800">Master Record</span>, and this update means that it no longer
-          matches the <span class="font-medium text-yellow-700">Person Record</span> below.
+          <span class="masterrecord-label">Master Record</span>, and this update means that it no longer matches the
+          <span class="personrecord-label">Person Record</span> below.
         </p>
       </div>
 
@@ -121,7 +121,7 @@
           <em>at the time this work item was first raised.</em>
         </p>
         <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-          <UTable :rows="attributesRows" :columns="attributesCols" class="sensitive" :ui="ui" />
+          <UTable :rows="attributesRows" :columns="attributesCols" class="sensitive"> </UTable>
         </UCard>
       </div>
 
@@ -249,7 +249,7 @@
 </template>
 
 <script lang="ts">
-import type { MessageSchema, WorkItemExtendedSchema, WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type MessageSchema, type WorkItemExtendedSchema, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseItemPaginator from "~/components/base/BaseItemPaginator.vue";
 import BaseModal from "~/components/base/BaseModal.vue";
@@ -267,7 +267,7 @@ import { formatDate } from "~/helpers/dateUtils";
 import { isEmptyObject } from "~/helpers/objectUtils";
 import { delay } from "~/helpers/timeUtils";
 import { workItemIsMergable } from "~/helpers/workItemUtils";
-import type { ModalInterface } from "~/interfaces/modal";
+import { type ModalInterface } from "~/interfaces/modal";
 
 interface AvailableActions {
   close: boolean;
@@ -440,7 +440,7 @@ export default defineComponent({
       } as AvailableActions;
     });
 
-    const closeMessageOverride = ref<string>();
+    const closeMessageOverride = ref<String>();
 
     // Template refs
     const updateWorkItemModal = ref<ModalInterface>();
@@ -527,8 +527,8 @@ export default defineComponent({
     // Table data
     interface AttributeRow {
       key: string;
-      incomingValue: string;
-      destinationValue: string;
+      incomingValue: any;
+      destinationValue: any;
     }
 
     const attributesRows = computed<AttributeRow[]>(() => {
@@ -568,17 +568,14 @@ export default defineComponent({
       if (record.value) {
         return [
           {
-            id: "key",
             key: "key",
             label: "Mismatched attribute",
           },
           {
-            id: "incomingValue",
             key: "incomingValue",
             label: record.value.type === 9 ? "Incoming" : "Person Record",
           },
           {
-            id: "destinationValue",
             key: "destinationValue",
             label: "Master Record Value",
           },
@@ -587,15 +584,6 @@ export default defineComponent({
         return [];
       }
     });
-
-    const ui = {
-      th: {
-        base: "px-4 py-3",
-      },
-      td: {
-        base: "px-4 py-4 whitespace-nowrap",
-      },
-    };
 
     return {
       record,
@@ -624,7 +612,6 @@ export default defineComponent({
       updateWorkItem,
       handleCloseWorkItem,
       hasPermission,
-      ui,
     };
   },
   head: {
@@ -632,3 +619,20 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped lang="postcss">
+th {
+  @apply px-4 py-3;
+}
+td {
+  @apply whitespace-nowrap px-4 py-4;
+}
+
+.masterrecord-label {
+  @apply font-medium text-indigo-800;
+}
+
+.personrecord-label {
+  @apply font-medium text-yellow-700;
+}
+</style>

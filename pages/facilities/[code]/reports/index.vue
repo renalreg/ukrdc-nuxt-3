@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import type { FacilityDetailsSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type FacilityDetailsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import QuickLink from "~/components/QuickLink.vue";
 

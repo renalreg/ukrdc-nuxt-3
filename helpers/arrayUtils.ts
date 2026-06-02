@@ -1,3 +1,3 @@
-export function insertIf<T>(condition: boolean, ...elements: T[]): T[] {
+export function insertIf(condition: boolean, ...elements: any[]) {
   return condition ? elements : [];
 }

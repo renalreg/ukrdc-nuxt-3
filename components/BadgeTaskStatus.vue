@@ -20,11 +20,11 @@ export default defineComponent({
       } else if (props.status === "running") {
         return "amber";
       } else if (props.status === "finished") {
-        return "success";
+        return "green";
       } else if (props.status === "failed") {
-        return "error";
+        return "red";
       } else {
-        return "neutral";
+        return "gray";
       }
     });
 

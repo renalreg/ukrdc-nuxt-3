@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseLoadingIndicator v-if="fetchSourceInProgress" />
+    <BaseLoadingIndicator v-if="fetchSourceInProgress"></BaseLoadingIndicator>
     <UCard v-else-if="source && source.content" :ui="{ body: { padding: '' } }">
       <BaseCodeReader
         :content="source.content"
@@ -10,13 +10,13 @@
     </UCard>
 
     <div v-else class="flex h-full w-full">
-      <div class="mt-auto mb-auto w-full text-center">Missing or empty source file</div>
+      <div class="mb-auto mt-auto w-full text-center">Missing or empty source file</div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import type { MessageSchema, MessageSourceSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type MessageSchema, type MessageSourceSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseCodeReader from "~/components/base/BaseCodeReader.vue";
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";

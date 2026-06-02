@@ -51,7 +51,7 @@
       <template #header>
         <h2>Error message</h2>
       </template>
-      <div class="font-mono whitespace-pre-wrap">
+      <div class="whitespace-pre-wrap font-mono">
         {{ messageText }}
       </div>
     </UCard>
@@ -102,11 +102,11 @@
 </template>
 
 <script lang="ts">
-import type {
-  ChannelMessageModel,
-  MessageSchema,
-  PatientRecordSummarySchema,
-  WorkItemSchema,
+import {
+  type ChannelMessageModel,
+  type MessageSchema,
+  type PatientRecordSummarySchema,
+  type WorkItemSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgeMessageStatus from "~/components/BadgeMessageStatus.vue";

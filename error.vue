@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-screen flex-col items-center justify-center gap-8 divide-x sm:flex-row">
-    <h1 class="text-6xl font-bold text-indigo-600">{{ error.statusCode ?? "Error" }}</h1>
+    <h1>{{ error.statusCode ?? "Error" }}</h1>
     <div class="pl-8">
       <h2 class="whitespace-pre">{{ errorTitle }}</h2>
       <div v-if="error.message">
@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import type { NuxtError } from "#app";
+import { type NuxtError } from "#app";
 
 export default defineComponent({
   layout: "default",
@@ -63,3 +63,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="postcss" scoped>
+h1 {
+  @apply text-6xl font-bold text-indigo-600;
+}
+</style>

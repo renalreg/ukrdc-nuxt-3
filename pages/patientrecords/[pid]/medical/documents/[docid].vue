@@ -60,7 +60,7 @@
         </BaseDescriptionListGridItem>
         <BaseDescriptionListGridItem v-if="patientDocument && patientDocument.notetext" class="sm:col-span-3">
           <dt>Note</dt>
-          <dd class="font-mono whitespace-pre-wrap">
+          <dd class="whitespace-pre-wrap font-mono">
             {{ patientDocument.notetext }}
           </dd>
         </BaseDescriptionListGridItem>
@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import type { DocumentSchema, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type DocumentSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseAttachment from "~/components/base/BaseAttachment.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";

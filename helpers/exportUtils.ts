@@ -1,11 +1,10 @@
-export function buildCsv<T>(rows: T[][]): string {
-  const processRow = (row: T[]) => {
+export function buildCsv(rows: any[][]): string {
+  const processRow = function (row: any[]) {
     let finalVal = "";
     for (let j = 0; j < row.length; j++) {
-      let innerValue = row[j] == null ? "" : String(row[j]);
-
+      let innerValue = row[j] === null ? "" : row[j].toString();
       if (row[j] instanceof Date) {
-        innerValue = (row[j] as unknown as Date).toLocaleString();
+        innerValue = row[j].toLocaleString();
       }
       let result = innerValue.replace(/"/g, '""');
       if (result.search(/("|,|\n)/g) >= 0) result = '"' + result + '"';
@@ -17,10 +16,7 @@ export function buildCsv<T>(rows: T[][]): string {
 
   let csvFile = "";
   for (let i = 0; i < rows.length; i++) {
-    const row = rows[i];
-    if (!row) continue;
-
-    csvFile += processRow(row);
+    csvFile += processRow(rows[i]);
   }
 
   return csvFile;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="contentType === 'XML'" class="border-b border-gray-200 pt-3 pb-3 pl-8">
+    <div v-if="contentType === 'XML'" class="border-b border-gray-200 pb-3 pl-8 pt-3">
       <div class="flex gap-2">
         <UToggle v-model="formatMessage" name="Format XML" size="lg" color="green" />
         <span class="font-medium text-gray-900">Format XML </span>

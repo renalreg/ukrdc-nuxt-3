@@ -13,7 +13,7 @@ import { getFirstOrValue } from "~/helpers/queryUtils";
 export default function () {
   const route = useRoute();
   const router = useRouter();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   function pushNewQuery(queryKey: string, newValue: any, history: boolean = true, resetPage: boolean = false) {
     const newQuery = Object.assign({}, route.query, {
       [queryKey]: [newValue],

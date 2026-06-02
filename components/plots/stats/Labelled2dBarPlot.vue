@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import type { Labelled2d } from "@ukkidney/ukrdc-axios-ts";
+import { type Labelled2d } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseBarPlot from "~/components/plots/base/BaseBarPlot.vue";
 import BaseMarkdownDescriptionTooltip from "~/components/plots/stats/BaseMarkdownDescriptionTooltip.vue";

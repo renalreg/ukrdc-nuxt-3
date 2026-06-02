@@ -18,9 +18,9 @@
         <span v-if="item.masterRecord" class="sensitive capitalize italic">
           {{ item.masterRecord.surname?.toLowerCase() }}
         </span>
-        <span v-else class="truncate text-red-800 capitalize">Missing Record</span>
+        <span v-else class="truncate capitalize text-red-800">Missing Record</span>
       </h5>
-      <h5 v-else class="truncate text-red-800 capitalize">Missing Record</h5>
+      <h5 v-else class="truncate capitalize text-red-800">Missing Record</h5>
       <p class="mt-2 truncate">{{ item.type }}: {{ item.description }}</p>
     </div>
     <!-- National ID -->
@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import type { WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BadgeNationalID from "~/components/BadgeNationalID.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";

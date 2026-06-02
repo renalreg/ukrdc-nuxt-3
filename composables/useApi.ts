@@ -115,7 +115,7 @@ export default function () {
       // For all other error codes
 
       // Compute what message to show in the toast
-      if (import.meta.client) {
+      if (process.client) {
         const responseData = e.response?.data as HTTPException;
         const msgToShow = responseData.detail ?? e.message;
 

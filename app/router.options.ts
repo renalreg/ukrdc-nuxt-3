@@ -4,7 +4,7 @@ import { LoginCallback } from "@okta/okta-vue";
 export default <RouterConfig>{
   // https://router.vuejs.org/api/interfaces/routeroptions.html#routes
   routes: (_routes) => {
-    for (const route of _routes) {
+    for (let route of _routes) {
       // Protect all non-callback routes by default
       if (route.meta === undefined) {
         route.meta = {};

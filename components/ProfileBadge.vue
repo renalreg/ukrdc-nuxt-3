@@ -1,5 +1,5 @@
 <template>
-  <UDropdownMenu :items="menuItems" class="w-full">
+  <UDropdown :items="menuItems" class="w-full">
     <UButton variant="ghost" class="my-1 w-full sm:my-0" label="Manage profile">
       <div class="flex w-full items-center gap-4">
         <UAvatar icon="i-heroicons-user-circle" size="md" class="flex-0" />
@@ -8,10 +8,10 @@
             {{ displayName }}
           </p>
         </div>
-        <UIcon class="h-4 w-4 flex-0" name="i-heroicons-chevron-down-16-solid" />
+        <UIcon class="flex-0 h-4 w-4" name="i-heroicons-chevron-down-16-solid" />
       </div>
     </UButton>
-  </UDropdownMenu>
+  </UDropdown>
 </template>
 
 <script lang="ts">

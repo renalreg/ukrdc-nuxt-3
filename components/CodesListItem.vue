@@ -26,7 +26,7 @@ Single item of the codes list used in the Codes page.
 </template>
 
 <script lang="ts">
-import type { CodeSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type CodeSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";
 
