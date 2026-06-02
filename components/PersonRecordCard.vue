@@ -68,7 +68,7 @@
 </template>
 
 <script lang="ts">
-import type { PersonSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PersonSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseCardDescriptionItem from "~/components/base/BaseCardDescriptionItem.vue";
 import BaseCardDescriptionList from "~/components/base/BaseCardDescriptionList.vue";

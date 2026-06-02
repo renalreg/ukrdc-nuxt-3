@@ -1,56 +1,37 @@
 export default defineAppConfig({
+  // NuxtUI styling
   ui: {
-    colors: {
-      primary: "indigo",
-      neutral: "zinc", // replaces "gray" + "cool"
-      red: "red",
-      purple: "purple",
-      blue: "blue",
-      green: "green", // legacy colours should use errorr success where possible going forward
-      amber: "amber",
-      black: "black",
-      white: "white",
-      gray: "zinc",
-      indigo: "indigo",
-    },
-
+    primary: "indigo",
+    gray: "cool",
     badge: {
-      defaultVariants: {
+      default: {
         variant: "subtle",
       },
     },
-
     button: {
-      base: "inline-flex items-center justify-center rounded-md", // rounded must be explicit now
-      defaultVariants: {
+      base: "inline-flex items-center justify-center",
+      default: {
         size: "md",
-        color: "neutral",
-        variant: "outline",
+        color: "white",
+        variant: "solid",
       },
     },
-
     alert: {
-      slots: {
-        title: "truncate",
-        description: "truncate",
-      },
-      defaultVariants: {
+      title: "truncate",
+      description: "truncate",
+      default: {
         variant: "subtle",
         color: "primary",
       },
     },
-
     notifications: {
-      slots: {
-        root: "top-0 bottom-auto", // position is now a slot class
-      },
+      position: "top-0 bottom-auto",
     },
-
-    // verticalNavigation → NavigationMenu in v3
-    navigationMenu: {
-      slots: {
-        link: "text-md",
-      },
+    verticalNavigation: {
+      size: "text-md",
+    },
+    horizontalNavigation: {
+      base: "text-md",
     },
   },
 });

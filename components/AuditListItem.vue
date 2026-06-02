@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import type { AuditEventSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type AuditEventSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import AuditResourceCard from "~/components/AuditResourceCard.vue";
 import BadgeCRUD from "~/components/BadgeCRUD.vue";

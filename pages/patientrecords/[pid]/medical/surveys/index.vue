@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import type { PatientRecordSchema, SurveySchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PatientRecordSchema, type SurveySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import useApi from "~/composables/useApi";

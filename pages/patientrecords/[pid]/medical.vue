@@ -12,14 +12,14 @@
     </NuxtLink>
 
     <div class="flex gap-8">
-      <UNavigationMenu orientation="vertical" :items="links" />
+      <UVerticalNavigation :links="links" />
       <NuxtPage v-if="record" class="flex-1" :record="record" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import type { PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import { isInformational, isMembership } from "~/helpers/recordUtils";
 

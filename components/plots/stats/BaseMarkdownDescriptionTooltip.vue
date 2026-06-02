@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <BaseInfoModal>
-    <div class="space-y-4 p-4 [&>ul]:list-inside [&>ul]:list-disc" v-html="sanitisedDescriptionHTML" />
+    <div class="space-y-4 p-4 [&>ul]:list-inside [&>ul]:list-disc" v-html="sanitisedDescriptionHTML"></div>
   </BaseInfoModal>
 </template>
 
@@ -18,13 +18,13 @@ export default defineComponent({
   props: {
     descriptionMarkdown: {
       type: String,
-      required: false,
+      required: true,
       default: undefined,
     },
   },
 
   setup(props) {
-    const sanitisedDescriptionHTML = computed<string>(() => {
+    const sanitisedDescriptionHTML = computed<String>(() => {
       if (!props.descriptionMarkdown) {
         return "No description available";
       }

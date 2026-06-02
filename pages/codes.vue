@@ -5,9 +5,9 @@
         <h1>Codes List</h1>
       </div>
       <div>
-        <UDropdownMenu :items="exportMenuItems">
-          <UButton color="neutral" label="Export codes" trailing-icon="i-heroicons-chevron-down-20-solid" />
-        </UDropdownMenu>
+        <UDropdown :items="exportMenuItems">
+          <UButton color="white" label="Export codes" trailing-icon="i-heroicons-chevron-down-20-solid" />
+        </UDropdown>
       </div>
     </div>
 
@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import type { CodeSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type CodeSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";

@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" :class="{ 'mb-2': !!xLabel }" />
+  <div :id="id" :class="{ 'mb-2': !!xLabel }"></div>
 </template>
 
 <script lang="ts">

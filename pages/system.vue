@@ -63,7 +63,7 @@
 </template>
 
 <script lang="ts">
-import type { SystemInfoSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type SystemInfoSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseCardDescriptionItem from "~/components/base/BaseCardDescriptionItem.vue";
 import BaseCardDescriptionList from "~/components/base/BaseCardDescriptionList.vue";

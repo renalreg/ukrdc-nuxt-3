@@ -4,7 +4,7 @@ Re-usable formatted code title component.
 
 <template>
   <div>
-    <p class="inline truncate font-medium text-gray-500 capitalize">{{ codingStandard }} /</p>
+    <p class="inline truncate font-medium capitalize text-gray-500">{{ codingStandard }} /</p>
     <p class="inline truncate font-medium text-gray-800">
       {{ code }}
     </p>

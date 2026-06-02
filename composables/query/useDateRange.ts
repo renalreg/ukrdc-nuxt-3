@@ -1,4 +1,4 @@
-import type { DateRange } from "~/helpers/dateUtils";
+import { type DateRange } from "~/helpers/dateUtils";
 import { getFirstOrValue } from "~/helpers/queryUtils";
 
 export default function () {

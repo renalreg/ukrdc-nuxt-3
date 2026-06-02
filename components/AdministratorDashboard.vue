@@ -101,8 +101,8 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
 </template>
 
 <script lang="ts">
-import type { AdminCountsSchema, HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
-import type { PlotDatum } from "plotly.js-dist-min";
+import { type AdminCountsSchema, type HistoryPoint } from "@ukkidney/ukrdc-axios-ts";
+import { type PlotDatum } from "plotly.js-dist-min";
 
 import BaseTimeSeriesLinePlot from "~/components/plots/base/BaseTimeSeriesLinePlot.vue";
 import useApi from "~/composables/useApi";

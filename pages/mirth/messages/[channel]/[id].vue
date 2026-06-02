@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import type { ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
+import { type ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
 import MirthMessageCard from "~/components/MirthMessageCard.vue";
 import useApi from "~/composables/useApi";

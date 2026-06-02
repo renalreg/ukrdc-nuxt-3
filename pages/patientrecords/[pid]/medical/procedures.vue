@@ -5,7 +5,7 @@
         <h2>Transplants</h2>
       </template>
 
-      <UTable :loading="loadingTransplants" :rows="transplants" :columns="transplantColumns" class="sensitive" :ui="ui">
+      <UTable :loading="loadingTransplants" :rows="transplants" :columns="transplantColumns" class="sensitive">
         <!-- Admit Reason -->
         <template #proceduretypecode-data="{ row }">
           <span class="truncate">
@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import type { PatientRecordSchema, TransplantSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PatientRecordSchema, type TransplantSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
@@ -105,47 +105,41 @@ export default defineComponent({
 
     const transplantColumns = [
       {
-        id: "proceduretypecode",
         key: "proceduretypecode",
         label: "Procedure Type",
       },
       {
-        id: "proceduretime",
         key: "proceduretime",
         label: "Procedure Time",
       },
       {
-        id: "enteredatcode",
         key: "enteredatcode",
         label: "Entered At",
       },
       {
-        id: "tra77",
         key: "tra77",
         label: "TRA77",
       },
       {
-        id: "info",
         key: "info",
       },
     ];
-
-    const ui = {
-      th: {
-        base: "px-6 py-3",
-      },
-      td: {
-        base: "px-6 py-4 whitespace-nowrap",
-      },
-    };
 
     return {
       formatDate,
       loadingTransplants,
       transplants,
       transplantColumns,
-      ui,
     };
   },
 });
 </script>
+
+<style scoped lang="postcss">
+th {
+  @apply px-6 py-3;
+}
+td {
+  @apply whitespace-nowrap px-6 py-4;
+}
+</style>

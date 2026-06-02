@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseLoadingIndicator v-if="loading" />
+    <BaseLoadingIndicator v-if="loading"></BaseLoadingIndicator>
     <slot v-else />
   </div>
 </template>

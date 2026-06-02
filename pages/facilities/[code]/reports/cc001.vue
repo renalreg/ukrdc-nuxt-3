@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import type { FacilityDetailsSchema, PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
+import { type FacilityDetailsSchema, type PatientRecordSummarySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BasePaginator from "~/components/base/BasePaginator.vue";
 import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";

@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import type { ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
+import { type ChannelMessageModel } from "@ukkidney/ukrdc-axios-ts";
 
 import { messageHasErrors } from "~/helpers/mirthUtils";
 import { isEmptyObject } from "~/helpers/objectUtils";

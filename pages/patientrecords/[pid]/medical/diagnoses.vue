@@ -56,11 +56,11 @@
 </template>
 
 <script lang="ts">
-import type {
-  ExtendedCauseOfDeathSchema,
-  ExtendedDiagnosisSchema,
-  ExtendedRenalDiagnosisSchema,
-  PatientRecordSchema,
+import {
+  type ExtendedCauseOfDeathSchema,
+  type ExtendedDiagnosisSchema,
+  type ExtendedRenalDiagnosisSchema,
+  type PatientRecordSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";

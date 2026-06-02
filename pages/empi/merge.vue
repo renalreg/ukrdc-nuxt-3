@@ -104,14 +104,14 @@
 </template>
 
 <script lang="ts">
-import type { MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type MasterRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import EMPISearch from "~/components/EMPISearch.vue";
 import MasterRecordCard from "~/components/MasterRecordCard.vue";
 import useQuery from "~/composables/query/useQuery";
 import useApi from "~/composables/useApi";
-import type { ModalInterface } from "~/interfaces/modal";
+import { type ModalInterface } from "~/interfaces/modal";
 
 type Direction = "superseding" | "superseded";
 

@@ -37,11 +37,11 @@ by the same event, which can be resolved without the others.
 
 */
 
-import type { WorkItemExtendedSchema, WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type WorkItemExtendedSchema, type WorkItemSchema } from "@ukkidney/ukrdc-axios-ts";
 
-import type { ModelTabItem } from "~/interfaces/tabs";
+import { type ModelTabItem } from "~/interfaces/tabs";
 
-export function workItemIsOpen(item: WorkItemSchema): boolean {
+export function workItemIsOpen(item: WorkItemSchema): Boolean {
   return item?.status !== 3;
 }
 
@@ -49,7 +49,7 @@ export function workItemIsUKRDC(item: WorkItemSchema) {
   return item?.type === 3 || item?.type === 6;
 }
 
-export function workItemIsMergable(item: WorkItemExtendedSchema): boolean {
+export function workItemIsMergable(item: WorkItemExtendedSchema): Boolean {
   // Check if a workitem can be merged (incoming and destination UKRDC records)
   return (
     workItemIsUKRDC(item) &&

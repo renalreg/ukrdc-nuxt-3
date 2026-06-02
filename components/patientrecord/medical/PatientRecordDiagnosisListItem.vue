@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import type { ExtendedDiagnosisSchema, ExtendedRenalDiagnosisSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type ExtendedDiagnosisSchema, type ExtendedRenalDiagnosisSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";
 import { formatDate } from "~/helpers/dateUtils";

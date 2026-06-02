@@ -33,10 +33,10 @@
 </template>
 
 <script lang="ts">
-import type {
-  MasterRecordSchema,
-  MasterRecordStatisticsSchema,
-  MessageSchema,
+import {
+  type MasterRecordSchema,
+  type MasterRecordStatisticsSchema,
+  type MessageSchema,
   OrderBy,
 } from "@ukkidney/ukrdc-axios-ts";
 

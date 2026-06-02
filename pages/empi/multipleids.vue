@@ -54,12 +54,12 @@
         />
       </UCard>
     </div>
-    <BaseLoadingIndicator v-else />
+    <BaseLoadingIndicator v-else></BaseLoadingIndicator>
   </div>
 </template>
 
 <script lang="ts">
-import type { MultipleUKRDCIDGroup } from "@ukkidney/ukrdc-axios-ts";
+import { type MultipleUKRDCIDGroup } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";

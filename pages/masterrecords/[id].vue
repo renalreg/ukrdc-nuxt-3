@@ -27,7 +27,7 @@
     </div>
 
     <div class="mb-6">
-      <UNavigationMenu orientation="horizontal" :items="links" />
+      <UHorizontalNavigation :links="links" />
     </div>
 
     <NuxtPage v-if="record" :record="record" :stats="stats" />
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import type { MasterRecordSchema, MasterRecordStatisticsSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type MasterRecordSchema, type MasterRecordStatisticsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";

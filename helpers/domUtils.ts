@@ -6,7 +6,7 @@ export function removeElement(el: HTMLElement) {
 }
 
 // add the component w/ the specified props
-export function spawn(id: string, propsData: Record<string, unknown>, component: Component) {
+export function spawn(id: string, propsData: Record<string, unknown>, component: any) {
   const mountEl = document.createElement("div");
   document.getElementById(id)?.appendChild(mountEl);
 

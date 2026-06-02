@@ -2,7 +2,7 @@
 Utility functions to simplify interacting with a reactive Okta Auth state.
 */
 
-import type { AuthState, JWTObject, JWTPayload } from "@okta/okta-auth-js";
+import { type AuthState, type JWTObject, type JWTPayload } from "@okta/okta-auth-js";
 import { useAuth } from "@okta/okta-vue";
 
 export declare type UKRDCClaims = JWTPayload & {

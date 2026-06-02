@@ -3,7 +3,7 @@
     <div v-if="survey" class="sensitive">
       <UCard class="mb-4">
         <template #header>
-          <h3 class="text-lg leading-6 font-medium text-gray-900">Survey Information</h3>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Survey Information</h3>
           <p class="mt-1 max-w-2xl text-gray-500">
             {{ survey.id }}
           </p>
@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import type { PatientRecordSchema, SurveyQuestionSchema, SurveySchema } from "@ukkidney/ukrdc-axios-ts";
+import { type PatientRecordSchema, type SurveyQuestionSchema, type SurveySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
 import BaseDescriptionListGridItem from "~/components/base/BaseDescriptionListGridItem.vue";
@@ -139,23 +139,19 @@ export default defineComponent({
 
     const columns = [
       {
-        id: "questiontypecode",
         key: "questiontypecode",
         label: "Question code",
         sortable: true,
       },
       {
-        id: "questionType",
         key: "questionType",
         label: "Question type",
       },
       {
-        id: "response",
         key: "response",
         label: "Response code",
       },
       {
-        id: "responseText",
         key: "responseText",
         label: "Response text",
       },

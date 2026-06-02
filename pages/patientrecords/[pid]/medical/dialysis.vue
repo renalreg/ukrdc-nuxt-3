@@ -1,7 +1,7 @@
 <template>
   <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :loading="loading" :rows="sessions" :columns="columns" class="sensitive" :ui="ui">
+      <UTable :loading="loading" :rows="sessions" :columns="columns" class="sensitive">
         <!-- Procedure time-->
         <template #proceduretime-data="{ row }">
           {{ row.proceduretime ? formatDate(row.proceduretime) : "None" }}
@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import type { DialysisSessionSchema, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import { type DialysisSessionSchema, type PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
@@ -114,74 +114,53 @@ export default defineComponent({
 
     const columns = [
       {
-        id: "proceduretime",
         key: "proceduretime",
         label: "Procedure Time",
       },
       {
-        id: "proceduretypecode",
         key: "proceduretypecode",
         label: "Type",
       },
       {
-        id: "enteredatcode",
         key: "enteredatcode",
         label: "Entered At",
       },
       {
-        id: "qhd19",
         key: "qhd19",
         label: "QHD19",
       },
       {
-        id: "qhd20",
         key: "qhd20",
         label: "QHD20",
       },
       {
-        id: "qhd21",
         key: "qhd21",
         label: "QHD21",
       },
       {
-        id: "qhd22",
         key: "qhd22",
         label: "QHD22",
       },
       {
-        id: "qhd30",
         key: "qhd30",
         label: "QHD30",
       },
       {
-        id: "qhd31",
         key: "qhd31",
         label: "QHD31",
       },
       {
-        id: "qhd32",
         key: "qhd32",
         label: "QHD32",
       },
       {
-        id: "qhd33",
         key: "qhd33",
         label: "QHD33",
       },
       {
-        id: "info",
         key: "info",
       },
     ];
-
-    const ui = {
-      th: {
-        base: "px-6 py-3",
-      },
-      td: {
-        base: "px-6 py-4 whitespace-nowrap",
-      },
-    };
 
     return {
       page,
@@ -191,8 +170,16 @@ export default defineComponent({
       loading,
       sessions,
       columns,
-      ui,
     };
   },
 });
 </script>
+
+<style scoped lang="postcss">
+th {
+  @apply px-6 py-3;
+}
+td {
+  @apply whitespace-nowrap px-6 py-4;
+}
+</style>

@@ -81,12 +81,12 @@
 </template>
 
 <script lang="ts">
-import type {
-  MasterRecordSchema,
-  MasterRecordStatisticsSchema,
-  MessageSchema,
-  MultipleUKRDCIDGroup,
-  WorkItemSchema,
+import {
+  type MasterRecordSchema,
+  type MasterRecordStatisticsSchema,
+  type MessageSchema,
+  type MultipleUKRDCIDGroup,
+  type WorkItemSchema,
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BasePaginator from "~/components/base/BasePaginator.vue";

@@ -33,7 +33,7 @@
           <USkeleton v-else class="h-6 w-full" />
         </BaseDescriptionListGridItem>
       </BaseDescriptionListGrid>
-      <slot />
+      <slot></slot>
     </UCard>
 
     <UTabs :items="tabs">
@@ -75,7 +75,11 @@
 
 <script lang="ts">
 import type { TabItem } from "@nuxt/ui/dist/runtime/types/tabs";
-import type { ChannelMessageModel, ConnectorMessageData, ConnectorMessageModel } from "@ukkidney/ukrdc-axios-ts";
+import {
+  type ChannelMessageModel,
+  type ConnectorMessageData,
+  type ConnectorMessageModel,
+} from "@ukkidney/ukrdc-axios-ts";
 
 import BaseCodeReader from "~/components/base/BaseCodeReader.vue";
 import BaseDescriptionListGrid from "~/components/base/BaseDescriptionListGrid.vue";
