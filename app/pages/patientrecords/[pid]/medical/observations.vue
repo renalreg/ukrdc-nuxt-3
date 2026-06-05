@@ -5,10 +5,9 @@
       <div class="mb-4 flex">
         <USelectMenu
           v-model="selectedCode"
-          searchable
           class="flex-1"
           size="lg"
-          :options="availableCodes"
+          :items="availableCodes"
           placeholder="Select a coding standard"
         />
         <UButton class="ml-2" size="lg" label="Clear" @click="selectedCode = undefined" />

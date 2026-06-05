@@ -9,12 +9,11 @@
         <div v-if="facilities.length > 1" class="mb-4 flex">
           <USelectMenu
             v-model="selectedFacility"
-            searchable
             class="flex-1"
             size="lg"
-            :options="facilities"
+            :items="facilities"
             value-attribute="id"
-            option-attribute="description"
+            label-attribute="description"
             :search-attributes="['description', 'id']"
             placeholder="Select a sending facility"
           />
@@ -24,7 +23,7 @@
           <div class="flex flex-grow">
             <USelectMenu
               v-model="sendingExtracts"
-              :options="['UKRDC', 'PV', 'UKRR', 'RADAR']"
+              :items="['UKRDC', 'PV', 'UKRR', 'RADAR']"
               placeholder="Filter sending extracts"
               multiple
             />

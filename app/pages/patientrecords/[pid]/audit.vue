@@ -14,13 +14,13 @@
       <div class="flex gap-4">
         <USelect
           v-model="selectedResource"
-          :options="availableResources"
+          :items="availableResources"
           placeholder="Select a resource type"
           class="w-64"
         />
         <USelect
           v-model="selectedOperation"
-          :options="availableOperations"
+          :items="availableOperations"
           placeholder="Select an operation"
           class="w-64"
         />

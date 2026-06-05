@@ -10,12 +10,11 @@
       <div v-if="facilities.length > 1" class="mb-4 flex">
         <USelectMenu
           v-model="selectedFacility"
-          searchable
           class="flex-1"
           size="lg"
-          :options="facilities"
+          :items="facilities"
           value-attribute="id"
-          option-attribute="description"
+          label-attribute="description"
           :search-attributes="['description', 'id']"
           placeholder="Select a sending facility"
         />
@@ -25,10 +24,10 @@
         <div class="flex-grow">
           <USelectMenu
             v-model="statuses"
-            :options="workItemStatusTabs"
+            :items="workItemStatusTabs"
             multiple
             placeholder="Select status"
-            option-attribute="name"
+            label-attribute="name"
             value-attribute="value"
             class="w-48"
           >

@@ -14,9 +14,9 @@
           searchable
           class="flex-1"
           size="lg"
-          :options="facilities"
+          :items="facilities"
           value-attribute="id"
-          option-attribute="description"
+          label-attribute="description"
           :search-attributes="['description', 'id']"
           placeholder="Select a sending facility"
         />
@@ -26,7 +26,7 @@
       <div class="flex flex-col gap-2 lg:flex-row">
         <BaseCollapseHeader v-model="advancedOpen" class="flex-grow" label="More Options" />
 
-        <USelectMenu v-model="statuses" :options="['STORED', 'RECEIVED', 'ERROR', 'RESOLVED']" multiple>
+        <USelectMenu v-model="statuses" :items="['STORED', 'RECEIVED', 'ERROR', 'RESOLVED']" multiple>
           <template #label>
             <span v-if="statuses?.length" class="truncate">
               {{ statuses?.length }} {{ statuses?.length > 1 ? "statuses" : "status" }} selected
@@ -58,12 +58,11 @@
     <div v-show="advancedOpen" class="mb-4 flex">
       <USelectMenu
         v-model="selectedChannel"
-        searchable
         class="flex-1"
         size="lg"
-        :options="channels"
+        :items="channels"
         value-attribute="id"
-        option-attribute="name"
+        label-attribute="name"
         placeholder="Select a message channel"
       />
       <UButton class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>

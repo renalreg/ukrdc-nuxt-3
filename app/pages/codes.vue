@@ -14,10 +14,9 @@
     <div v-if="standards && standards.length > 1" :class="$route.params.id ? 'hidden lg:flex' : 'flex'" class="mb-4">
       <USelectMenu
         v-model="selectedStandard"
-        searchable
         class="flex-1"
         size="lg"
-        :options="standards"
+        :items="standards"
         placeholder="Select a coding standard"
       />
       <UButton class="ml-2" size="lg" label="Clear" @click="selectedStandard = undefined" />

@@ -14,12 +14,11 @@
         <div v-show="advancedOpen" class="mt-4 flex">
           <USelectMenu
             v-model="selectedChannel"
-            searchable
             class="flex-1"
             size="lg"
-            :options="channels"
+            :items="channels"
             value-attribute="id"
-            option-attribute="name"
+            label-attribute="name"
             placeholder="Select a message channel"
           />
           <UButton class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>

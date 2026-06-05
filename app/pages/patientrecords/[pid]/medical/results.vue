@@ -26,12 +26,11 @@
       <div class="mb-4 flex">
         <USelectMenu
           v-model="selectedService"
-          searchable
           class="flex-1"
           size="lg"
-          :options="availableServices"
+          :items="availableServices"
           value-attribute="id"
-          option-attribute="description"
+          label-attribute="description"
           :search-attributes="['description', 'id']"
           placeholder="Select a result type"
         />

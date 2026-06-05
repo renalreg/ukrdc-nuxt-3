@@ -12,10 +12,10 @@
           <h2 class="flex-grow">Work Items</h2>
           <USelectMenu
             v-model="workItemStatuses"
-            :options="workItemStatusTabs"
+            :items="workItemStatusTabs"
             multiple
             placeholder="Select status"
-            option-attribute="name"
+            label-attribute="name"
             value-attribute="value"
             class="w-48"
           >
