@@ -114,7 +114,7 @@ export default defineComponent({
 
     function exportCodeList() {
       codesApi
-        .getCodeListExport()
+        .getCodeListExport({ responseType: "text" } as any)
         .then(({ data }) => {
           const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
           saveAs(blob, "code-list.csv");
@@ -127,9 +127,9 @@ export default defineComponent({
 
     function exportCodeMaps() {
       codesApi
-        .getCodeMapsExport()
+        .getCodeMapsExport({ responseType: "text" } as any)
         .then(({ data }) => {
-          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+          const blob = new Blob([data], { type: "text/csv;charset=utf-8" });
           saveAs(blob, "code-maps.csv");
         })
         .catch(() => {
@@ -140,9 +140,9 @@ export default defineComponent({
 
     function exportCodeExclusions() {
       codesApi
-        .getCodeExclusionsExport()
+        .getCodeExclusionsExport({ responseType: "text" } as any)
         .then(({ data }) => {
-          const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+          const blob = new Blob([data], { type: "text/csv;charset=utf-8" });
           saveAs(blob, "code-exclusions.csv");
         })
         .catch(() => {
@@ -189,29 +189,21 @@ export default defineComponent({
     });
 
     const exportMenuItems = [
-      [
-        {
-          label: "Export Code List",
-          icon: "i-heroicons-list-bullet-20-solid",
-          click: () => {
-            exportCodeList();
-          },
-        },
-        {
-          label: "Export Code Maps",
-          icon: "i-heroicons-map-20-solid",
-          click: () => {
-            exportCodeMaps();
-          },
-        },
-        {
-          label: "Export Code Exclusions",
-          icon: "i-heroicons-x-circle-20-solid",
-          click: () => {
-            exportCodeExclusions();
-          },
-        },
-      ],
+      {
+        label: "Export Code List",
+        icon: "i-heroicons-list-bullet-20-solid",
+        onSelect: () => exportCodeList(),
+      },
+      {
+        label: "Export Code Maps",
+        icon: "i-heroicons-map-20-solid",
+        onSelect: () => exportCodeMaps(),
+      },
+      {
+        label: "Export Code Exclusions",
+        icon: "i-heroicons-x-circle-20-solid",
+        onSelect: () => exportCodeExclusions(),
+      },
     ];
 
     return {

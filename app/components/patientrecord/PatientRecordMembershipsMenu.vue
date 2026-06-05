@@ -46,7 +46,7 @@
       <p class="inline">from the Data Feeds section.</p>
     </BaseModalSuccess>
 
-    <UDropdownMenu :items="menuItems" :popper="{ placement: 'bottom-end' }">
+    <UDropdownMenu :items="menuItems">
       <UButton
         :disabled="!menuAvailable"
         size="sm"
@@ -147,24 +147,13 @@ export default defineComponent({
         });
     }
 
-    const menuItems = [
-      [
-        {
-          label: "Create PKB Membership",
-          click: () => {
-            showCreatePkbMembershipConfirm();
-          },
-          disabled: !props.showCreatePkbMembership,
-        },
-        // {
-        //   label: "Create MRC Membership",
-        //   click: () => {
-        //     showCreateMrcMembershipConfirm();
-        //   },
-        //   disabled: !props.showCreateMrcMembership,
-        // },
-      ],
-    ];
+    const menuItems = computed(() => [
+    {
+      label: "Create PKB Membership",
+      onSelect: () => showCreatePkbMembershipConfirm(),
+      disabled: !props.showCreatePkbMembership,
+      },
+    ]);
 
     return {
       createPkbMembershipConfirm,

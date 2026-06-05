@@ -40,41 +40,34 @@ export default defineComponent({
     const manageAccountUrl = runtimeConfig.public.manageAccountUrl;
 
     const menuItems = [
-      [
-        {
-          label: "Profile and Settings",
-          icon: "i-heroicons-user-circle-20-solid",
-          to: "/profile",
-        },
-        {
-          label: "Manage Account",
-          icon: "i-heroicons-arrow-top-right-on-square-20-solid",
-          to: manageAccountUrl,
-        },
-      ],
-      [
-        {
-          label: "Support",
-          icon: "i-heroicons-lifebuoy-20-solid",
-          to: "/system",
-        },
-      ],
-      [
-        {
-          label: "Background Tasks",
-          icon: "i-heroicons-command-line-20-solid",
-          to: "/tasks",
-        },
-      ],
-      [
-        {
-          label: "Logout",
-          icon: "i-heroicons-arrow-left-on-rectangle-20-solid",
-          click: () => {
-            signOutAuto();
-          },
-        },
-      ],
+      {
+        label: "Profile and Settings",
+        icon: "i-heroicons-user-circle-20-solid",
+        to: "/profile",
+      },
+      {
+        label: "Manage Account",
+        icon: "i-heroicons-arrow-top-right-on-square-20-solid",
+        to: manageAccountUrl,
+      },
+      { type: "separator" },
+      {
+        label: "Support",
+        icon: "i-heroicons-lifebuoy-20-solid",
+        to: "/system",
+      },
+      { type: "separator" },
+      {
+        label: "Background Tasks",
+        icon: "i-heroicons-command-line-20-solid",
+        to: "/tasks",
+      },
+      { type: "separator" },
+      {
+        label: "Logout",
+        icon: "i-heroicons-arrow-left-on-rectangle-20-solid",
+        onSelect: () => signOutAuto(),
+      },
     ];
 
     return {

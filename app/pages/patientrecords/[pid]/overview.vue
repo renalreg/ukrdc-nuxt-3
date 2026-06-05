@@ -87,7 +87,7 @@
         </div>
       </div>
       <!-- Related records -->
-      <UCard :ui="{ body: { padding: '' } }" class="col-span-3 h-fit !overflow-visible md:col-span-2">
+      <UCard :ui="{ body: 'p-0' }" class="col-span-3 h-fit !overflow-visible md:col-span-2">
         <template #header>
           <h2>Related Records</h2>
           <p class="label">All records, including data feeds and memberships, for this patient</p>
@@ -175,12 +175,15 @@ export default defineComponent({
           pid: props.record.pid,
         })
         .then((response) => {
-          latestMessage.value = response.data;
-          latestMessageIsLoading.value = false;
+          // API can return "" when no message exists, treat as null
+          latestMessage.value = response.data || null;
         })
         .catch(() => {
           // Error handling is centralized in the Axios interceptor
           // Handle UI state reset or fallback values here if needed
+        })
+        .finally(() => {
+          latestMessageIsLoading.value = false; // always stop loading
         });
     }
 

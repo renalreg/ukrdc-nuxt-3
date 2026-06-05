@@ -1,5 +1,5 @@
 <template>
-  <UModal v-model="visible" :transition="false">
+  <BaseModal ref="modal">
     <div class="p-4">
       <div class="sm:flex sm:items-start">
         <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0">
@@ -179,7 +179,7 @@
         <UButton @click="cancel()"> Cancel </UButton>
       </div>
     </div>
-  </UModal>
+  </BaseModal>
 </template>
 
 <script lang="ts">
@@ -197,6 +197,8 @@ import useApi from "~/composables/useApi";
 import useModal from "~/composables/useCustomModal";
 import { formatDate } from "~/helpers/dateUtils";
 import { saveAs } from "~/helpers/fileUtils";
+import BaseModal from "~/components/base/BaseModal.vue";
+import type { ModalInterface } from "~/interfaces/modal";
 
 interface DeletePIDFromEMPISchema {
   persons: PersonSchema[];
@@ -216,6 +218,7 @@ interface DeletePIDResponseSchema {
 
 export default defineComponent({
   components: {
+    BaseModal,
     BaseLoadingIndicator,
   },
   props: {
@@ -227,43 +230,41 @@ export default defineComponent({
   emits: ["cancel", "confirm", "deleted"],
   setup(props, { emit }) {
     const toast = useToast();
-    const { visible, show, hide, toggle } = useModal();
     const { patientRecordsApi } = useApi();
 
     const confirmChecked = ref(false);
     const previewResponse = ref<DeletePIDResponseSchema>();
     const deleteResponse = ref<DeletePIDResponseSchema>();
+    const modal = ref<ModalInterface>();
     const previewErrorMessage = ref<string>();
     const deleteInProgress = ref(false);
 
     function cancel(): void {
       emit("cancel");
-      hide();
+      modal.value?.hide();
     }
 
-    watch(visible, () => {
-      // If the modal becomes visible
-      if (visible.value) {
-        // Reset the modal each time it's is shown.
-        confirmChecked.value = false;
-        previewResponse.value = undefined;
-        deleteResponse.value = undefined;
+    function show(): void {
+      // Reset the modal each time it's shown
+      confirmChecked.value = false;
+      previewResponse.value = undefined;
+      deleteResponse.value = undefined;
+      previewErrorMessage.value = undefined;
 
-        patientRecordsApi
-          .postPatientDelete({
-            pid: props.item.pid,
-            deletePidRequest: {
-              hash: undefined,
-            },
-          })
-          .then((response) => {
-            previewResponse.value = response.data;
-          })
-          .catch((error) => {
-            previewErrorMessage.value = error.response.data.detail;
-          });
-      }
-    });
+      patientRecordsApi
+        .postPatientDelete({
+          pid: props.item.pid,
+          deletePidRequest: { hash: undefined },
+        })
+        .then((response) => {
+          previewResponse.value = response.data;
+        })
+        .catch((error) => {
+          previewErrorMessage.value = error.response.data.detail;
+        });
+
+      modal.value?.show();
+    }
 
     function downloadSummary() {
       const blob = new Blob([JSON.stringify(previewResponse.value)]);
@@ -287,7 +288,7 @@ export default defineComponent({
           })
           .then(() => {
             // Hide the modal
-            hide();
+            modal.value?.hide();
             // Emit an event notifying parents that a record has been deleted
             emit("deleted");
             // Show success toast
@@ -307,7 +308,7 @@ export default defineComponent({
     }
 
     return {
-      visible,
+      modal,
       confirmChecked,
       previewResponse,
       deleteResponse,
@@ -317,8 +318,6 @@ export default defineComponent({
       doRealDelete,
       cancel,
       show,
-      hide,
-      toggle,
       formatDate,
     };
   },

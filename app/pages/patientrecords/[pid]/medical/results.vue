@@ -323,18 +323,16 @@ export default defineComponent({
     ];
 
     const menuItems = (row: ResultItemSchema) => [
-      [
-        {
-          label: "Filter by this lab order",
-          icon: "i-heroicons-funnel-20-solid",
-          to: { query: { order_id: row.orderId } },
-        },
-        {
-          label: "Delete this result item",
-          icon: "i-heroicons-trash-20-solid",
-          click: () => showDeleteResultItemModal(row),
-        },
-      ],
+      {
+        label: "Filter by this lab order",
+        icon: "i-heroicons-funnel-20-solid",
+        to: { query: { order_id: row.orderId } },
+      },
+      {
+        label: "Delete this result item",
+        icon: "i-heroicons-trash-20-solid",
+        onSelect: () => showDeleteResultItemModal(row),
+      },
     ];
 
     const ui = {

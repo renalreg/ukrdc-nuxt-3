@@ -2,7 +2,7 @@
   <div>
     <PatientRecordDeleteModal ref="deleteModal" :item="item" @deleted="$emit('deleted')" />
 
-    <UDropdownMenu :items="menuItems" class="h-full" :popper="{ placement: 'right-start' }">
+    <UDropdownMenu :items="menuItems" class="h-full" :content="{ side: 'right', align: 'start' }">
       <UButton
         color="neutral"
         variant="ghost"
@@ -103,51 +103,38 @@ export default defineComponent({
     }
 
     const menuItems = [
-      [
-        {
-          label: "Copy PID",
-          icon: "i-heroicons-document-duplicate-20-solid",
-          click: () => {
-            copyPID();
-          },
-        },
-      ],
-      [
-        {
-          label: "Sync record to PKB",
-          icon: "i-heroicons-cloud-arrow-up-20-solid",
-          click: () => {
-            exportPKBandCloseMenu();
-          },
-          disabled: !(hasPermission("ukrdc:records:export") && (props.showRadarSync || props.showPkbSync)),
-        },
-        {
-          label: "Sync record to RADAR",
-          icon: "i-heroicons-cloud-arrow-up-20-solid",
-          click: () => {
-            exportRADARandCloseMenu();
-          },
-          disabled: !(hasPermission("ukrdc:records:export") && (props.showRadarSync || props.showPkbSync)),
-        },
-      ],
-      [
-        {
-          label: "Edit demographics",
-          icon: "i-heroicons-pencil-20-solid",
-          to: `/patientrecords/${props.item.pid}/update/demographics`,
-          disabled: !(hasPermission("ukrdc:records:write") && demographicsUpdateAllowed(props.item)),
-        },
-        {
-          label: "Delete record",
-          icon: "i-heroicons-trash-20-solid",
-          click: () => {
-            showDeleteModal();
-          },
-          disabled: !hasPermission("ukrdc:records:delete"),
-        },
-      ],
+      {
+        label: "Copy PID",
+        icon: "i-heroicons-document-duplicate-20-solid",
+        onSelect: () => copyPID(),
+      },
+      { type: "separator" },
+      {
+        label: "Sync record to PKB",
+        icon: "i-heroicons-cloud-arrow-up-20-solid",
+        onSelect: () => exportPKBandCloseMenu(),
+        disabled: !(hasPermission("ukrdc:records:export") && (props.showRadarSync || props.showPkbSync)),
+      },
+      {
+        label: "Sync record to RADAR",
+        icon: "i-heroicons-cloud-arrow-up-20-solid",
+        onSelect: () => exportRADARandCloseMenu(),
+        disabled: !(hasPermission("ukrdc:records:export") && (props.showRadarSync || props.showPkbSync)),
+      },
+      { type: "separator" },
+      {
+        label: "Edit demographics",
+        icon: "i-heroicons-pencil-20-solid",
+        to: `/patientrecords/${props.item.pid}/update/demographics`,
+        disabled: !(hasPermission("ukrdc:records:write") && demographicsUpdateAllowed(props.item)),
+      },
+      {
+        label: "Delete record",
+        icon: "i-heroicons-trash-20-solid",
+        onSelect: () => showDeleteModal(),
+        disabled: !hasPermission("ukrdc:records:delete"),
+      },
     ];
-
     return {
       deleteModal,
       menuItems,

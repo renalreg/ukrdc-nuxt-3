@@ -1,9 +1,15 @@
 <template>
-  <UModal v-model="visible" :transition="false">
-    <div class="p-4">
-      <slot />
+  <Teleport to="body">
+    <div v-if="visible">
+      <UModal v-model:open="visible">
+        <template #content>
+          <div class="p-4">
+            <slot />
+          </div>
+        </template>
+      </UModal>
     </div>
-  </UModal>
+  </Teleport>
 </template>
 
 <script lang="ts">
@@ -12,13 +18,7 @@ import useCustomModal from "~/composables/useCustomModal";
 export default defineComponent({
   setup() {
     const { visible, show, hide, toggle } = useCustomModal();
-
-    return {
-      visible,
-      show,
-      hide,
-      toggle,
-    };
+    return { visible, show, hide, toggle };
   },
 });
 </script>
