@@ -97,17 +97,41 @@ export default defineComponent({
     const { stringQuery } = useQuery();
     const { codesApi } = useApi();
 
+    // ─── Pagination tuning ────────────────────────────────────────────────────
+    // To change how many items are fetched per backend request, update
+    // BACKEND_PAGE_SIZE. Must be a multiple of UI_PAGE_SIZE, and must not
+    // exceed the server-side `le` cap (currently le=40 in paginate.py).
+    //
+    //   UI_PAGE_SIZE=20, BACKEND_PAGE_SIZE=20  → 1 UI page per fetch (no batching)
+    //   UI_PAGE_SIZE=20, BACKEND_PAGE_SIZE=40  → 2 UI pages per fetch  ← current
+    //   UI_PAGE_SIZE=20, BACKEND_PAGE_SIZE=60  → 3 UI pages per fetch  (needs le≥60)
+    // ─────────────────────────────────────────────────────────────────────────
+    const UI_PAGE_SIZE = 20;
+    const BACKEND_PAGE_SIZE = 40;
+    const pagesPerFetch = BACKEND_PAGE_SIZE / UI_PAGE_SIZE;
+
     // Data refs
 
     const standards = ref<string[]>();
     const selectedStandard = stringQuery("standard", undefined, true, true);
 
-    const codes = ref([] as CodeSchema[]);
+    const allCodes = ref([] as CodeSchema[]);
     const selectedCode = ref<CodeSchema>();
 
     const searchboxString = stringQuery("search", undefined, true, true);
 
     const fetchInProgress = ref(false);
+
+    // The backend page currently loaded in memory
+    const loadedBackendPage = ref<number | null>(null);
+
+    // Codes slice shown for the current UI page
+    const codes = computed(() => {
+      if (!allCodes.value.length) return [];
+      const uiPage = page.value ?? 1;
+      const offsetWithinBatch = ((uiPage - 1) % pagesPerFetch) * UI_PAGE_SIZE;
+      return allCodes.value.slice(offsetWithinBatch, offsetWithinBatch + UI_PAGE_SIZE);
+    });
 
     // Code exporting
 
@@ -150,26 +174,36 @@ export default defineComponent({
         });
     }
 
-    // Data fetching
-    function getCodes() {
+    // Data fetching — only fires a network request when the backend page changes.
+    function getBackendPageForUiPage(uiPage: number): number {
+      return Math.ceil(uiPage / pagesPerFetch);
+    }
+
+    function getCodes(forceRefetch = false) {
+      const uiPage = page.value ?? 1;
+      const backendPage = getBackendPageForUiPage(uiPage);
+
+      // Skip the network call if we already have this backend page cached
+      if (!forceRefetch && loadedBackendPage.value === backendPage) return;
+
       fetchInProgress.value = true;
 
       codesApi
         .getCodeList({
-          page: page.value ?? 1,
-          size: size.value,
+          page: backendPage,
+          size: BACKEND_PAGE_SIZE,
           codingStandard: selectedStandard.value ? [selectedStandard.value] : undefined,
-          search: searchboxString.value || undefined, // Leave undefined if value is falsey (e.g. empty string)
+          search: searchboxString.value || undefined,
         })
         .then((response) => {
-          codes.value = response.data.items;
+          allCodes.value = response.data.items;
           total.value = response.data.total ?? 0;
-          page.value = response.data.page ?? 0;
-          size.value = response.data.size ?? 0;
+          loadedBackendPage.value = backendPage;
+          // Keep `size` at UI_PAGE_SIZE so BasePaginator renders correctly
+          size.value = UI_PAGE_SIZE;
         })
         .catch(() => {
           // Error handling is centralized in the Axios interceptor
-          // Handle UI state reset or fallback values here if needed
         })
         .finally(() => {
           fetchInProgress.value = false;
@@ -183,8 +217,15 @@ export default defineComponent({
       getCodes();
     });
 
-    watch([page, selectedStandard, searchboxString], () => {
+    watch([page], () => {
       getCodes();
+    });
+
+    // When filters change, reset to page 1 and force a fresh fetch
+    watch([selectedStandard, searchboxString], () => {
+      page.value = 1;
+      loadedBackendPage.value = null;
+      getCodes(true);
     });
 
     const exportMenuItems = [
