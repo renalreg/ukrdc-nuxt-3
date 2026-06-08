@@ -2,7 +2,7 @@
 @import "@nuxt/ui";
 
 /* other tailwinds classes */
-@import "./components/demoographics.css";
+@import "components/demographics.css";
 @import "./components/checkpill.css";
 @import "./components/loading.css";
 
