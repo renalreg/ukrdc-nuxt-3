@@ -3,7 +3,7 @@
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
       <UTable
         :loading="loading"
-        :rows="orders"
+        :data="orders"
         :columns="columns"
         class="sensitive"
         @select="
@@ -13,8 +13,8 @@
         <!-- specimenCollectedTime -->
         <template #specimenCollectedTime-data="{ row }">
           {{
-            row.specimenCollectedTime
-              ? `Collected ${formatDate(row.specimenCollectedTime, true)}`
+            row.original.specimenCollectedTime
+              ? `Collected ${formatDate(row.original.specimenCollectedTime, true)}`
               : "No collection time found"
           }}
         </template>
@@ -89,13 +89,13 @@ export default defineComponent({
     const columns = [
       {
         id: "id",
-        key: "id",
-        label: "Order ID",
+        accessorKey: "id",
+        header: "Order ID",
       },
       {
         id: "specimenCollectedTime",
-        key: "specimenCollectedTime",
-        label: "Collection Time",
+        accessorKey: "specimenCollectedTime",
+        header: "Collection Time",
       },
     ];
 

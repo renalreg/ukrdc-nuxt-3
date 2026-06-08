@@ -5,35 +5,35 @@
         <h2>Transplants</h2>
       </template>
 
-      <UTable :loading="loadingTransplants" :rows="transplants" :columns="transplantColumns" class="sensitive" :ui="ui">
+      <UTable :loading="loadingTransplants" :data="transplants" :columns="transplantColumns" class="sensitive" :ui="ui">
         <!-- Admit Reason -->
         <template #proceduretypecode-data="{ row }">
           <span class="truncate">
             <CodeTitle
-              v-if="row.proceduretypecodestd && row.proceduretypecode"
-              :coding-standard="row.proceduretypecodestd"
-              :code="row.proceduretypecode"
+              v-if="row.original.proceduretypecodestd && row.original.proceduretypecode"
+              :coding-standard="row.original.proceduretypecodestd"
+              :code="row.original.proceduretypecode"
             />
-            <p v-if="row.proceduretypedesc">{{ row.proceduretypedesc }}</p>
+            <p v-if="row.original.proceduretypedesc">{{ row.original.proceduretypedesc }}</p>
           </span>
         </template>
 
         <!-- Procedure Time -->
         <template #proceduretime-data="{ row }">
-          {{ row.proceduretime ? formatDate(row.proceduretime, true) : "None" }}
+          {{ row.original.proceduretime ? formatDate(row.original.proceduretime, true) : "None" }}
         </template>
 
         <!-- Entered At -->
         <template #enteredatcode-data="{ row }">
           <span>
-            <SendingFacilityLink class="inline font-medium" :code="row.enteredatcode" />
-            <p v-if="row.enteredatdesc">{{ row.enteredatdesc }}</p>
+            <SendingFacilityLink class="inline font-medium" :code="row.original.enteredatcode" />
+            <p v-if="row.original.enteredatdesc">{{ row.original.enteredatdesc }}</p>
           </span>
         </template>
 
         <!-- TRA77 -->
         <template #tra77-data="{ row }">
-          {{ row.tra77 ?? "Unknown" }}
+          {{ row.original.tra77 ?? "Unknown" }}
         </template>
 
         <!-- Extra info -->
@@ -41,9 +41,9 @@
           <span>
             <BaseInfoTooltip>
               <div class="sensitive">
-                <p><b>ID: </b>{{ row.id }}</p>
+                <p><b>ID: </b>{{ row.original.id }}</p>
                 <br />
-                <p><b>Entered by: </b>{{ row.enteredbycodestd }} / {{ row.enteredbycode }} ({{ row.enteredbydesc }})</p>
+                <p><b>Entered by: </b>{{ row.original.enteredbycodestd }} / {{ row.original.enteredbycode }} ({{ row.original.enteredbydesc }})</p>
               </div>
             </BaseInfoTooltip>
           </span>
@@ -106,27 +106,27 @@ export default defineComponent({
     const transplantColumns = [
       {
         id: "proceduretypecode",
-        key: "proceduretypecode",
-        label: "Procedure Type",
+        accessorKey: "proceduretypecode",
+        header: "Procedure Type",
       },
       {
         id: "proceduretime",
-        key: "proceduretime",
-        label: "Procedure Time",
+        accessorKey: "proceduretime",
+        header: "Procedure Time",
       },
       {
         id: "enteredatcode",
-        key: "enteredatcode",
-        label: "Entered At",
+        accessorKey: "enteredatcode",
+        header: "Entered At",
       },
       {
         id: "tra77",
-        key: "tra77",
-        label: "TRA77",
+        accessorKey: "tra77",
+        header: "TRA77",
       },
       {
         id: "info",
-        key: "info",
+        accessorKey: "info",
       },
     ];
 

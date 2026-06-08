@@ -36,10 +36,10 @@
         </USelectMenu>
 
         <form v-show="!nationalId" class="flex" @submit.prevent="nationalId = nationalIdSearchString.trim()">
-          <UButtonGroup size="sm" orientation="horizontal">
+          <UFieldGroup size="sm" orientation="horizontal">
             <UInput v-model="nationalIdSearchString" placeholder="Filter by Patient Number" />
             <UButton type="submit" label="Go" />
-          </UButtonGroup>
+          </UFieldGroup>
         </form>
 
         <UButton v-show="nationalId" size="sm" @click="nationalId = undefined">Show Results From All Patients</UButton>

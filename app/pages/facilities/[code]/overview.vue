@@ -78,15 +78,15 @@
 
         <!-- Record types -->
         <UCard :ui="{ body: { padding: '' } }">
-          <UTable :rows="feedTableItems" :columns="feedTableColumns" :ui="ui">
+          <UTable :data="feedTableItems" :columns="feedTableColumns" :ui="ui">
             <template #historic-data="{ row }">
-              <div v-if="row.historic" class="flex items-center">
-                <IconCircle v-if="row.historic" class="inline text-orange-400" />
+              <div v-if="row.original.historic" class="flex items-center">
+                <IconCircle v-if="row.original.historic" class="inline text-orange-400" />
                 <p>Historic</p>
               </div>
               <div v-else class="flex items-center">
-                <IconCircle class="inline" :class="row.totalPatients > 0 ? 'text-green-600' : 'text-red-700'" />
-                <p>{{ row.totalPatients > 0 ? "Enabled" : "Unused" }}</p>
+                <IconCircle class="inline" :class="row.original.totalPatients > 0 ? 'text-green-600' : 'text-red-700'" />
+                <p>{{ row.original.totalPatients > 0 ? "Enabled" : "Unused" }}</p>
               </div>
             </template>
           </UTable>
@@ -263,19 +263,16 @@ export default defineComponent({
 
     const feedTableColumns = [
       {
-        id: "name",
-        key: "name",
-        label: "Name",
+        accessorKey: "name",
+        header: "Name",
       },
       {
-        id: "historic",
-        key: "historic",
-        label: "historic",
+        accessorKey: "historic",
+        header: "Historic",
       },
       {
-        id: "totalPatients",
-        key: "totalPatients",
-        label: "Total records",
+        accessorKey: "totalPatients",
+        header: "Total records",
       },
     ];
 

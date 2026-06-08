@@ -1,26 +1,26 @@
 <template>
   <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :loading="loading" :rows="sessions" :columns="columns" class="sensitive" :ui="ui">
+      <UTable :loading="loading" :data="sessions" :columns="columns" class="sensitive" :ui="ui">
         <!-- Procedure time-->
         <template #proceduretime-data="{ row }">
-          {{ row.proceduretime ? formatDate(row.proceduretime) : "None" }}
+          {{ row.original.proceduretime ? formatDate(row.original.proceduretime) : "None" }}
         </template>
         <!-- Procedure type-->
         <template #proceduretypecode-data="{ row }">
           <span class="truncate">
             <CodeTitle
-              v-if="row.proceduretypecodestd && row.proceduretypecode"
-              :coding-standard="row.proceduretypecodestd"
-              :code="row.proceduretypecode"
+              v-if="row.original.proceduretypecodestd && row.original.proceduretypecode"
+              :coding-standard="row.original.proceduretypecodestd"
+              :code="row.original.proceduretypecode"
             />
-            <p v-if="row.proceduretypedesc">{{ row.proceduretypedesc }}</p>
+            <p v-if="row.original.proceduretypedesc">{{ row.original.proceduretypedesc }}</p>
           </span>
         </template>
         <!-- Procedure type-->
         <template #enteredatcode-data="{ row }">
           <span>
-            <SendingFacilityLink class="font-medium" :code="row.enteredatcode" />
+            <SendingFacilityLink class="font-medium" :code="row.original.enteredatcode" />
           </span>
         </template>
         <!-- Extra info -->
@@ -28,10 +28,10 @@
           <span>
             <BaseInfoTooltip>
               <div class="sensitive">
-                <p><b>ID: </b>{{ row.id }}</p>
+                <p><b>ID: </b>{{ row.original.id }}</p>
                 <br />
-                <p><b>Clinician: </b>{{ row.cliniciandesc ?? row.cliniciancode }}</p>
-                <p><b>Entered by: </b>{{ row.enteredbydesc ?? row.enteredbycode }}</p>
+                <p><b>Clinician: </b>{{ row.original.cliniciandesc ?? row.original.cliniciancode }}</p>
+                <p><b>Entered by: </b>{{ row.original.enteredbydesc ?? row.original.enteredbycode }}</p>
               </div>
             </BaseInfoTooltip>
           </span>
@@ -115,62 +115,62 @@ export default defineComponent({
     const columns = [
       {
         id: "proceduretime",
-        key: "proceduretime",
-        label: "Procedure Time",
+        accessorKey: "proceduretime",
+        header: "Procedure Time",
       },
       {
         id: "proceduretypecode",
-        key: "proceduretypecode",
-        label: "Type",
+        accessorKey: "proceduretypecode",
+        header: "Type",
       },
       {
         id: "enteredatcode",
-        key: "enteredatcode",
-        label: "Entered At",
+        accessorKey: "enteredatcode",
+        header: "Entered At",
       },
       {
         id: "qhd19",
-        key: "qhd19",
-        label: "QHD19",
+        accessorKey: "qhd19",
+        header: "QHD19",
       },
       {
         id: "qhd20",
-        key: "qhd20",
-        label: "QHD20",
+        accessorKey: "qhd20",
+        header: "QHD20",
       },
       {
         id: "qhd21",
-        key: "qhd21",
-        label: "QHD21",
+        accessorKey: "qhd21",
+        header: "QHD21",
       },
       {
         id: "qhd22",
-        key: "qhd22",
-        label: "QHD22",
+        accessorKey: "qhd22",
+        header: "QHD22",
       },
       {
         id: "qhd30",
-        key: "qhd30",
-        label: "QHD30",
+        accessorKey: "qhd30",
+        header: "QHD30",
       },
       {
         id: "qhd31",
-        key: "qhd31",
-        label: "QHD31",
+        accessorKey: "qhd31",
+        header: "QHD31",
       },
       {
         id: "qhd32",
-        key: "qhd32",
-        label: "QHD32",
+        accessorKey: "qhd32",
+        header: "QHD32",
       },
       {
         id: "qhd33",
-        key: "qhd33",
-        label: "QHD33",
+        accessorKey: "qhd33",
+        header: "QHD33",
       },
       {
         id: "info",
-        key: "info",
+        accessorKey: "info",
       },
     ];
 

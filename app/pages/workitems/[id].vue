@@ -121,7 +121,7 @@
           <em>at the time this work item was first raised.</em>
         </p>
         <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-          <UTable :rows="attributesRows" :columns="attributesCols" class="sensitive" :ui="ui" />
+          <UTable :data="attributesRows" :columns="attributesCols" class="sensitive" :ui="ui" />
         </UCard>
       </div>
 
@@ -569,18 +569,18 @@ export default defineComponent({
         return [
           {
             id: "key",
-            key: "key",
-            label: "Mismatched attribute",
+            accessorKey: "key",
+            header: "Mismatched attribute",
           },
           {
             id: "incomingValue",
-            key: "incomingValue",
-            label: record.value.type === 9 ? "Incoming" : "Person Record",
+            accessorKey: "incomingValue",
+            header: record.value.type === 9 ? "Incoming" : "Person Record",
           },
           {
             id: "destinationValue",
-            key: "destinationValue",
-            label: "Master Record Value",
+            accessorKey: "destinationValue",
+            header: "Master Record Value",
           },
         ];
       } else {

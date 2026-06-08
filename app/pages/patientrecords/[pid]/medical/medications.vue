@@ -1,35 +1,35 @@
 <template>
   <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :loading="loading" :rows="medications" :columns="columns" class="sensitive">
+      <UTable :loading="loading" :data="medications" :columns="columns" class="sensitive">
         <!-- Dose -->
         <template #dosequantity-data="{ row }">
-          <span> {{ row.dosequantity }} {{ row.doseuomcode ?? row.doseuomdesc }} </span>
+          <span> {{ row.original.dosequantity }} {{ row.original.doseuomcode ?? row.original.doseuomdesc }} </span>
         </template>
 
         <!-- Frequency -->
         <template #frequency-data="{ row }">
-          {{ row.frequency ? row.frequency.replace(/_/g, " ") : "Unknown" }}
+          {{ row.original.frequency ? row.original.frequency.replace(/_/g, " ") : "Unknown" }}
         </template>
 
         <!-- Route -->
         <template #routecode-data="{ row }">
           <CodeTitle
-            v-if="row.routecode || row.routecodestd"
-            :code="row.routecode || 'Unknown'"
-            :coding-standard="row.routecodestd"
+            v-if="row.original.routecode || row.original.routecodestd"
+            :code="row.original.routecode || 'Unknown'"
+            :coding-standard="row.original.routecodestd"
           />
         </template>
 
         <!-- Start Date -->
         <template #fromTime-data="{ row }">
-          {{ row.fromTime ? formatDate(row.fromTime, false) : "None" }}
+          {{ row.original.fromTime ? formatDate(row.original.fromTime, false) : "None" }}
         </template>
 
         <!-- End Date -->
         <template #toTime-data="{ row }">
-          <span v-if="row.toTime">
-            {{ formatDate(row.toTime, false) }}
+          <span v-if="row.original.toTime">
+            {{ formatDate(row.original.toTime, false) }}
           </span>
           <span v-else class="inline-block rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
             >Active</span
@@ -38,12 +38,12 @@
 
         <!-- Comment -->
         <template #comment-data="{ row }">
-          <div v-if="row.comment">
+          <div v-if="row.original.comment">
             <UPopover>
               <UButton color="white" label="Show" size="xs" />
               <template #panel>
                 <div class="p-4">
-                  {{ row.comment }}
+                  {{ row.original.comment }}
                 </div>
               </template>
             </UPopover>
@@ -102,40 +102,40 @@ export default defineComponent({
     const columns = [
       {
         id: "drugProductGeneric",
-        key: "drugProductGeneric",
-        label: "Medication",
+        accessorKey: "drugProductGeneric",
+        header: "Medication",
       },
       {
         id: "dosequantity",
-        key: "dosequantity",
-        label: "Dose",
+        accessorKey: "dosequantity",
+        header: "Dose",
       },
       {
         id: "frequency",
-        key: "frequency",
-        label: "Frequency",
+        accessorKey: "frequency",
+        header: "Frequency",
       },
       {
         id: "routecode",
-        key: "routecode",
-        label: "Route",
+        accessorKey: "routecode",
+        header: "Route",
       },
       {
         id: "fromTime",
-        key: "fromTime",
-        label: "Start Date",
-        sortable: true,
+        accessorKey: "fromTime",
+        header: "Start Date",
+        enableSorting: true,
       },
       {
         id: "toTime",
-        key: "toTime",
-        label: "End Date",
-        sortable: true,
+        accessorKey: "toTime",
+        header: "End Date",
+        enableSorting: true,
       },
       {
         id: "comment",
-        key: "comment",
-        label: "Comment",
+        accessorKey: "comment",
+        header: "Comment",
       },
     ];
 

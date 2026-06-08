@@ -9,34 +9,34 @@
         <div class="flex border-b border-gray-200 px-3 py-3.5 dark:border-gray-700">
           <UInput v-model="searchQuery" placeholder="Filter channels..." />
         </div>
-        <UTable :rows="filteredRows" :columns="columns" :loading="loading">
+        <UTable :data="filteredRows" :columns="columns" :loading="loading">
           <!-- Name -->
           <template #name-data="{ row }">
-            <UPopover v-if="row.description" mode="hover" class="h-5 w-5">
-              {{ row.name }}
+            <UPopover v-if="row.original.channelDescription" mode="hover" class="h-5 w-5">
+              {{ row.original.name }}
               <template #panel>
                 <div class="p-3 text-xs">
-                  <p>{{ row.description }}</p>
+                  <p>{{ row.original.channelDescription }}</p>
                 </div>
               </template>
             </UPopover>
-            <span v-else>{{ row.name }}</span>
+            <span v-else>{{ row.original.name }}</span>
           </template>
           <!-- Group -->
           <template #group-data="{ row }">
-            <UPopover v-if="row.groupDescription" mode="hover" class="h-5 w-5">
-              {{ row.group }}
+            <UPopover v-if="row.original.groupDescription" mode="hover" class="h-5 w-5">
+              {{ row.original.group }}
               <template #panel>
                 <div class="p-3 text-xs">
-                  <p>{{ row.groupDescription }}</p>
+                  <p>{{ row.original.groupDescription }}</p>
                 </div>
               </template>
             </UPopover>
-            <span v-else>{{ row.group }}</span>
+            <span v-else>{{ row.original.group }}</span>
           </template>
           <!-- Errors -->
           <template #error-data="{ row }">
-            <UBadge v-if="row.error !== null" :color="row.error > 0 ? 'red' : 'green'">{{ row.error }}</UBadge>
+            <UBadge v-if="row.original.error !== null" :color="row.original.error > 0 ? 'red' : 'green'">{{ row.original.error }}</UBadge>
           </template>
         </UTable>
       </UCard>
@@ -117,51 +117,51 @@ export default defineComponent({
     const columns = [
       {
         id: "group",
-        key: "group",
-        label: "Group",
-        sortable: true,
+        accessorKey: "group",
+        header: "Group",
+        enableSorting: true,
       },
       {
         id: "name",
-        key: "name",
-        label: "Name",
-        sortable: true,
+        accessorKey: "name",
+        header: "Name",
+        enableSorting: true,
       },
       {
         id: "revision",
-        key: "revision",
-        label: "Revision",
-        sortable: true,
+        accessorKey: "revision",
+        header: "Revision",
+        enableSorting: true,
       },
       {
         id: "received",
-        key: "received",
-        label: "Received",
-        sortable: true,
+        accessorKey: "received",
+        header: "Received",
+        enableSorting: true,
       },
       {
         id: "sent",
-        key: "sent",
-        label: "Sent",
-        sortable: true,
+        accessorKey: "sent",
+        header: "Sent",
+        enableSorting: true,
       },
       {
         id: "error",
-        key: "error",
-        label: "Error",
-        sortable: true,
+        accessorKey: "error",
+        header: "Error",
+        enableSorting: true,
       },
       {
         id: "filtered",
-        key: "filtered",
-        label: "Filtered",
-        sortable: true,
+        accessorKey: "filtered",
+        header: "Filtered",
+        enableSorting: true,
       },
       {
         id: "queued",
-        key: "queued",
-        label: "Queued",
-        sortable: true,
+        accessorKey: "queued",
+        header: "Queued",
+        enableSorting: true,
       },
     ];
 

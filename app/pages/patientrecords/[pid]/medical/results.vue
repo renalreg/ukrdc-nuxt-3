@@ -47,27 +47,27 @@
           </NuxtLink>
           <UButton
             v-if="selectedOrderId && selectedOrder"
-            color="red"
+            color="error"
             variant="outline"
             @click="deleteOrderAlert?.show()"
-            >Delete Lab Order</UButton
-          >
+            >Delete Lab Order
+          </UButton>
         </div>
 
         <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-          <UTable :loading="loading" :rows="results" :columns="columns" class="sensitive" :ui="ui">
+          <UTable :loading="loading" :data="results" :columns="columns" class="sensitive" :ui="ui">
             <!-- Value -->
-            <template #value-data="{ row }"> {{ row.value }} {{ row.valueUnits }} </template>
+            <template #value-cell="{ row }"> {{ row.original.value }} {{ row.original.valueUnits }} </template>
             <!-- observationTime -->
-            <template #observationTime-data="{ row }">
-              {{ row.observationTime ? formatDate(row.observationTime) : "No observation time" }}
+            <template #observationTime-cell="{ row }">
+              {{ row.original.observationTime ? formatDate(row.original.observationTime) : "No observation time" }}
             </template>
             <!-- prePost -->
-            <template #prePost-data="{ row }">
-              <BadgePrePost :pre-post="row.prePost" />
+            <template #prePost-cell="{ row }">
+              <BadgePrePost :pre-post="row.original.prePost" />
             </template>
-            <template #actions-data="{ row }">
-              <UDropdownMenu :items="menuItems(row)">
+            <template #actions-cell="{ row }">
+              <UDropdownMenu :items="menuItems(row.original)">
                 <UButton color="neutral" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
               </UDropdownMenu>
             </template>
@@ -88,240 +88,187 @@
   </div>
 </template>
 
-<script lang="ts">
-import type {
-  LabOrderSchema,
-  PatientRecordSchema,
-  ResultItemSchema,
-  ResultItemServiceSchema,
-} from "@ukkidney/ukrdc-axios-ts";
+  <script setup lang="ts">
+  import type {
+    LabOrderSchema,
+    PatientRecordSchema,
+    ResultItemSchema,
+    ResultItemServiceSchema,
+  } from "@ukkidney/ukrdc-axios-ts";
+  import type { TableColumn } from "@nuxt/ui";
 
-import BadgePrePost from "~/components/BadgePrePost.vue";
-import BaseDateRange from "~/components/base/BaseDateRange.vue";
-import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
-import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
-import BasePaginator from "~/components/base/BasePaginator.vue";
-import useDateRange from "~/composables/query/useDateRange";
-import usePagination from "~/composables/query/usePagination";
-import useQuery from "~/composables/query/useQuery";
-import useApi from "~/composables/useApi";
-import { formatDate } from "~/helpers/dateUtils";
-import type { ModalInterface } from "~/interfaces/modal";
+  import BadgePrePost from "~/components/BadgePrePost.vue";
+  import BaseDateRange from "~/components/base/BaseDateRange.vue";
+  import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
+  import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
+  import BasePaginator from "~/components/base/BasePaginator.vue";
+  import useDateRange from "~/composables/query/useDateRange";
+  import usePagination from "~/composables/query/usePagination";
+  import useQuery from "~/composables/query/useQuery";
+  import useApi from "~/composables/useApi";
+  import { formatDate } from "~/helpers/dateUtils";
+  import type { ModalInterface } from "~/interfaces/modal";
 
-export default defineComponent({
-  components: {
-    BaseLoadingContainer,
-    BasePaginator,
-    BaseDateRange,
-    BaseModalConfirm,
-    BadgePrePost,
-  },
-  props: {
-    record: {
-      type: Object as () => PatientRecordSchema,
-      required: true,
-    },
-  },
-  setup(props) {
-    const toast = useToast();
-    const { page, total, size } = usePagination();
-    const { makeDateRange } = useDateRange();
-    const { stringQuery } = useQuery();
-    const { patientRecordsApi } = useApi();
+  const props = defineProps<{
+    record: PatientRecordSchema;
+  }>();
 
-    // Set initial date dateRange
-    const dateRange = makeDateRange(null, null, true, false);
+  const toast = useToast();
+  const { page, total, size } = usePagination();
+  const { makeDateRange } = useDateRange();
+  const { stringQuery } = useQuery();
+  const { patientRecordsApi } = useApi();
 
-    // Data refs
+  // Set initial date range
+  const dateRange = makeDateRange(null, null, true, false);
 
-    const results = ref<ResultItemSchema[]>();
+  // Data refs
+  const results = ref<ResultItemSchema[]>();
+  const loading = ref(false);
 
-    // Data fetching
+  // Template refs
+  const deleteResultAlert = ref<ModalInterface>();
+  const deleteOrderAlert = ref<ModalInterface>();
+  const itemToDelete = ref<ResultItemSchema | null>(null);
 
-    const loading = ref(false);
+  // Result item services
+  const availableServices = ref<ResultItemServiceSchema[]>([]);
+  const selectedService = stringQuery("service_id", undefined, true, true);
 
-    function fetchResults() {
-      loading.value = true;
+  // Lab order filter
+  const selectedOrderId = stringQuery("order_id", undefined, true, true);
+  const selectedOrder = ref<LabOrderSchema>();
+
+  // Data fetching
+  function fetchResults() {
+    loading.value = true;
+    patientRecordsApi
+      .getPatientResults({
+        pid: props.record.pid,
+        page: page.value ?? 1,
+        size: size.value,
+        serviceId: selectedService.value ? [selectedService.value] : undefined,
+        orderId: selectedOrderId.value ? [selectedOrderId.value] : undefined,
+        since: dateRange.value.start,
+        until: dateRange.value.end,
+      })
+      .then((response) => {
+        results.value = response.data.items;
+        total.value = response.data.total ?? 0;
+        page.value = response.data.page ?? 0;
+        size.value = response.data.size ?? 0;
+      })
+      .catch(() => {
+        // Error handling is centralized in the Axios interceptor
+      })
+      .finally(() => {
+        loading.value = false;
+      });
+
+    if (availableServices.value.length === 0) {
       patientRecordsApi
-        .getPatientResults({
-          pid: props.record.pid,
-          page: page.value ?? 1,
-          size: size.value,
-          serviceId: selectedService.value ? [selectedService.value] : undefined,
-          orderId: selectedOrderId.value ? [selectedOrderId.value] : undefined,
-          since: dateRange.value.start,
-          until: dateRange.value.end,
-        })
+        .getPatientResultServices({ pid: props.record.pid })
         .then((response) => {
-          results.value = response.data.items;
-          total.value = response.data.total ?? 0;
-          page.value = response.data.page ?? 0;
-          size.value = response.data.size ?? 0;
+          availableServices.value = response.data;
         })
         .catch(() => {
           // Error handling is centralized in the Axios interceptor
-          // Handle UI state reset or fallback values here if needed
-        })
-        .finally(() => {
-          loading.value = false;
         });
-
-      // If we don't already have a list of available codes, fetch one
-      if (availableServices.value.length === 0) {
-        patientRecordsApi
-          .getPatientResultServices({
-            pid: props.record.pid,
-          })
-          .then((response) => {
-            availableServices.value = response.data;
-          })
-          .catch(() => {
-            // Error handling is centralized in the Axios interceptor
-            // Handle UI state reset or fallback values here if needed
-          });
-      }
     }
+  }
 
-    const selectedOrder = ref<LabOrderSchema>();
-
-    function fetchLabOrder() {
-      if (selectedOrderId.value) {
-        patientRecordsApi
-          .getPatientLaborder({
-            pid: props.record.pid,
-            orderId: selectedOrderId.value,
-          })
-          .then((response) => {
-            selectedOrder.value = response.data;
-          })
-          .catch(() => {
-            // Error handling is centralized in the Axios interceptor
-            // Handle UI state reset or fallback values here if needed
-          });
-      }
+  function fetchLabOrder() {
+    if (selectedOrderId.value) {
+      patientRecordsApi
+        .getPatientLaborder({
+          pid: props.record.pid,
+          orderId: selectedOrderId.value,
+        })
+        .then((response) => {
+          selectedOrder.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+        });
     }
+  }
 
-    // Data deletion
+  // Data deletion
+  function showDeleteResultItemModal(item: ResultItemSchema) {
+    itemToDelete.value = item;
+    deleteResultAlert.value?.show();
+  }
 
-    const deleteResultAlert = ref<ModalInterface>();
-    const deleteOrderAlert = ref<ModalInterface>();
+  function cancelDeleteResultItem() {
+    itemToDelete.value = null;
+    deleteResultAlert.value?.hide();
+  }
 
-    const itemToDelete = ref<ResultItemSchema | null>(null);
-
-    function showDeleteResultItemModal(item: ResultItemSchema) {
-      itemToDelete.value = item;
-      deleteResultAlert.value?.show();
+  function deleteResultItem() {
+    if (itemToDelete.value) {
+      patientRecordsApi
+        .deletePatientResultDelete({
+          pid: props.record.pid,
+          resultitemId: itemToDelete.value.id,
+        })
+        .then(() => {
+          toast.add({ title: "Success", description: "Result Item deleted" });
+          fetchResults();
+          itemToDelete.value = null;
+          deleteResultAlert.value?.hide();
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+        });
     }
+  }
 
-    function cancelDeleteResultItem() {
-      itemToDelete.value = null;
-      deleteResultAlert.value?.hide();
+  function deleteLabOrder() {
+    if (selectedOrder.value) {
+      patientRecordsApi
+        .deletePatientLaborderDelete({
+          pid: props.record.pid,
+          orderId: selectedOrder.value.id,
+        })
+        .then(() => {
+          toast.add({ title: "Success", description: "Lab Order deleted" });
+          selectedOrderId.value = undefined;
+          fetchResults();
+          fetchLabOrder();
+          deleteOrderAlert.value?.hide();
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+        });
     }
+  }
 
-    function deleteResultItem() {
-      if (itemToDelete.value) {
-        patientRecordsApi
-          .deletePatientResultDelete({
-            pid: props.record.pid,
-            resultitemId: itemToDelete.value.id,
-          })
-          .then(() => {
-            toast.add({
-              title: "Success",
-              description: "Result Item deleted",
-            });
-            fetchResults();
-            itemToDelete.value = null;
-            deleteResultAlert.value?.hide();
-          })
-          .catch(() => {
-            // Error handling is centralized in the Axios interceptor
-            // Handle UI state reset or fallback values here if needed
-          });
-      }
-    }
+  // Data lifecycle
+  onMounted(() => {
+    fetchResults();
+    fetchLabOrder();
+  });
 
-    function deleteLabOrder() {
-      if (selectedOrder.value) {
-        patientRecordsApi
-          .deletePatientLaborderDelete({
-            pid: props.record.pid,
-            orderId: selectedOrder.value.id,
-          })
-          .then(() => {
-            toast.add({
-              title: "Success",
-              description: "Lab Order deleted",
-            });
-            selectedOrderId.value = undefined;
-            fetchResults();
-            fetchLabOrder();
-            deleteOrderAlert.value?.hide();
-          })
-          .catch(() => {
-            // Error handling is centralized in the Axios interceptor
-            // Handle UI state reset or fallback values here if needed
-          });
-      }
-    }
+  watch([page, selectedService, selectedOrderId, dateRange], () => {
+    fetchResults();
+  });
 
-    // Result item services
+  watch(selectedOrderId, () => {
+    fetchLabOrder();
+  });
 
-    const availableServices = ref([] as ResultItemServiceSchema[]);
-    const selectedService = stringQuery("service_id", undefined, true, true);
+  // Table
+  const columns: TableColumn<ResultItemSchema>[] = [
+    { id: "serviceId", accessorKey: "serviceId", header: "Type" },
+    { id: "value", accessorKey: "value", header: "Value" },
+    { id: "orderId", accessorKey: "orderId", header: "Order ID" },
+    { id: "observationTime", accessorKey: "observationTime", header: "Observation time" },
+    { id: "prePost", accessorKey: "prePost", header: "Pre/Post-Dialysis" },
+    { id: "actions", header: "" },
+  ];
 
-    // Lab order filter
-
-    const selectedOrderId = stringQuery("order_id", undefined, true, true);
-
-    // Data lifecycle
-
-    onMounted(() => {
-      fetchResults();
-      fetchLabOrder();
-    });
-
-    watch([page, selectedService, selectedOrderId, dateRange], () => {
-      fetchResults();
-    });
-
-    watch(selectedOrderId, () => {
-      fetchLabOrder();
-    });
-
-    const columns = [
-      {
-        id: "serviceId",
-        key: "serviceId",
-        label: "Type",
-      },
-      {
-        id: "value",
-        key: "value",
-        label: "Value",
-      },
-      {
-        id: "orderId",
-        key: "orderId",
-        label: "Order ID",
-      },
-      {
-        id: "observationTime",
-        key: "observationTime",
-        label: "Observation time",
-      },
-      {
-        id: "prePost",
-        key: "prePost",
-        label: "Pre/Post-Dialysis",
-      },
-      {
-        id: "actions",
-        key: "actions",
-      },
-    ];
-
-    const menuItems = (row: ResultItemSchema) => [
+  const menuItems = (row: ResultItemSchema) => [
+    [
       {
         label: "Filter by this lab order",
         icon: "i-heroicons-funnel-20-solid",
@@ -332,37 +279,10 @@ export default defineComponent({
         icon: "i-heroicons-trash-20-solid",
         onSelect: () => showDeleteResultItemModal(row),
       },
-    ];
+    ],
+  ];
 
-    const ui = {
-      th: {
-        base: "px-6 py-3",
-      },
-    };
-
-    return {
-      page,
-      size,
-      total,
-      dateRange,
-      loading,
-      results,
-      columns,
-      menuItems,
-      deleteResultAlert,
-      deleteOrderAlert,
-      itemToDelete,
-      showDeleteResultItemModal,
-      cancelDeleteResultItem,
-      deleteResultItem,
-      deleteLabOrder,
-      availableServices,
-      selectedService,
-      selectedOrderId,
-      selectedOrder,
-      formatDate,
-      ui,
-    };
-  },
-});
+  const ui = {
+    th: { base: "px-6 py-3" },
+  };
 </script>

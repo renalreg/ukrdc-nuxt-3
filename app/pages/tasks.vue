@@ -3,25 +3,25 @@
     <h1 class="mb-4">Background Tasks</h1>
 
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :rows="tasks" :columns="columns" :ui="ui">
-        <template #visibility-data="{ row }">
-          <BadgePublicPrivate :visibility="row.visibility" />
+      <UTable :data="tasks" :columns="columns" :ui="ui">
+        <template #visibility-cell="{ row }">
+          <BadgePublicPrivate :visibility="row.original.visibility" />
         </template>
-        <template #started-data="{ row }">
+        <template #started-cell="{ row }">
           <span>
-            {{ row.started ? formatDate(row.started) : "Unknown start time" }}
+            {{ row.original.started ? formatDate(row.original.started) : "Unknown start time" }}
           </span>
         </template>
-        <template #finished-data="{ row }">
+        <template #finished-cell="{ row }">
           <span>
-            {{ row.finished ? formatDate(row.finished) : "" }}
+            {{ row.original.finished ? formatDate(row.original.finished) : "" }}
           </span>
         </template>
-        <template #status-data="{ row }">
+        <template #status-cell="{ row }">
           <span class="flex gap-1">
-            <BadgeTaskStatus :status="row.status" />
-            <BaseInfoTooltip v-if="row.error" class="inline">
-              <p><b>Task failed with error: </b>{{ row.error }}</p>
+            <BadgeTaskStatus :status="row.original.status" />
+            <BaseInfoTooltip v-if="row.original.error" class="inline">
+              <p><b>Task failed with error: </b>{{ row.original.error }}</p>
             </BaseInfoTooltip>
           </span>
         </template>
@@ -84,33 +84,33 @@ export default defineComponent({
     const columns = [
       {
         id: "name",
-        key: "name",
-        label: "Name",
+        accessorKey: "name",
+        header: "Name",
       },
       {
         id: "visibility",
-        key: "visibility",
-        label: "Visibility",
+        accessorKey: "visibility",
+        header: "Visibility",
       },
       {
         id: "owner",
-        key: "owner",
-        label: "Started by",
+        accessorKey: "owner",
+        header: "Started by",
       },
       {
         id: "started",
-        key: "started",
-        label: "Started",
+        accessorKey: "started",
+        header: "Started",
       },
       {
         id: "finished",
-        key: "finished",
-        label: "Finished",
+        accessorKey: "finished",
+        header: "Finished",
       },
       {
         id: "status",
-        key: "status",
-        label: "Status",
+        accessorKey: "status",
+        header: "Status",
       },
     ];
 

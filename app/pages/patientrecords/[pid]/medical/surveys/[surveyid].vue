@@ -44,7 +44,7 @@
               {{ group ?? "Ungrouped" }}
             </h3>
           </template>
-          <UTable :rows="questions" :columns="columns" />
+          <UTable :data="questions" :columns="columns" />
         </UCard>
       </div>
     </div>
@@ -85,10 +85,6 @@ export default defineComponent({
     const survey = ref<SurveySchema>();
 
     // Data fetching
-    // NOTE: I know it's not very efficient to fetch all surveys just to show one here,
-    // but right now the API has no route to get a specific survey, and it's used so
-    // infrequently anyway that it's not been worth doing something smarter yet.
-    // There may be a way to pass a specific survey object to this page in Nuxt?
     onMounted(() => {
       patientRecordsApi
         .getPatientSurveys({
@@ -97,10 +93,8 @@ export default defineComponent({
         .then((response) => {
           const surveys: SurveySchema[] = response.data;
 
-          // Find this specific survey
           const thisSurvey = surveys.find((element) => element.id === route.params.surveyid);
 
-          // If no matching survey is found, throw a 404 error
           if (!thisSurvey) {
             throw createError({
               statusCode: 404,
@@ -108,7 +102,6 @@ export default defineComponent({
             });
           }
 
-          // Assign data
           survey.value = thisSurvey;
         })
         .catch(() => {
@@ -123,15 +116,12 @@ export default defineComponent({
       }
       const groups = {} as GroupedQuestions;
       for (const question of survey.value.questions) {
-        // Move ungrouped questions to the Ungrouped group
         if (!question.questionGroup) {
           question.questionGroup = "Ungrouped";
         }
-        // If group doesn't appear yet in groups, add it
         if (question.questionGroup && !(question.questionGroup in groups)) {
           groups[question.questionGroup] = [];
         }
-        // Add questions to the associated group
         groups[question.questionGroup ?? "Ungrouped"].push(question);
       }
       return groups;
@@ -140,24 +130,23 @@ export default defineComponent({
     const columns = [
       {
         id: "questiontypecode",
-        key: "questiontypecode",
-        label: "Question code",
-        sortable: true,
+        accessorKey: "questiontypecode",
+        header: "Question code",
       },
       {
         id: "questionType",
-        key: "questionType",
-        label: "Question type",
+        accessorKey: "questionType",
+        header: "Question type",
       },
       {
         id: "response",
-        key: "response",
-        label: "Response code",
+        accessorKey: "response",
+        header: "Response code",
       },
       {
         id: "responseText",
-        key: "responseText",
-        label: "Response text",
+        accessorKey: "responseText",
+        header: "Response text",
       },
     ];
 

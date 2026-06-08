@@ -8,11 +8,11 @@ Table of facilities and their basic statistics
 
     <UCard :ui="{ body: { padding: '' } }">
       <UTable
-        :rows="filteredFacilities"
+        :data="filteredFacilities"
         :columns="columns"
         :ui="ui"
         :loading="loading"
-        @select="$emit('select', $event.id)"
+        @select="(_, row) => navigateTo(`/facilities/${row.original.id}`)"
       >
         <!-- Failing records -->
         <template #patientsReceivingMessageError-data="{ row }">
@@ -20,29 +20,29 @@ Table of facilities and their basic statistics
             <IconCircle
               class="inline"
               :class="
-                row.statistics.patientsReceivingMessageError && row.statistics.patientsReceivingMessageError > 0
+                row.original.statistics.patientsReceivingMessageError && row.original.statistics.patientsReceivingMessageError > 0
                   ? 'text-red-700'
                   : 'text-green-600'
               "
             />
-            <p>{{ row.statistics.patientsReceivingMessageError }}</p>
+            <p>{{ row.original.statistics.patientsReceivingMessageError }}</p>
           </span>
         </template>
         <!-- Sending to PKB -->
         <!-- eslint-disable-next-line vue/valid-v-slot -->
         <template #dataFlow.pkbOut-data="{ row }">
           <span class="flex items-center">
-            <IconCircle class="inline" :class="row.dataFlow.pkbOut ? 'text-green-600' : 'text-red-700'" />
-            <p>{{ row.dataFlow.pkbOut ? "Yes" : "No" }}</p>
+            <IconCircle class="inline" :class="row.original.dataFlow.pkbOut ? 'text-green-600' : 'text-red-700'" />
+            <p>{{ row.original.dataFlow.pkbOut ? "Yes" : "No" }}</p>
           </span>
         </template>
         <!-- Last received -->
         <template #lastMessageReceivedAt-data="{ row }">
           <span class="flex items-center gap-2">
             <div>
-              {{ row.lastMessageReceivedAt ? formatDate(row.lastMessageReceivedAt, false) : "> Year Ago" }}
+              {{ row.original.lastMessageReceivedAt ? formatDate(row.original.lastMessageReceivedAt, false) : "> Year Ago" }}
             </div>
-            <UTooltip v-if="facilityLastMessageOver48(row)" text="No files received in over 48 hours">
+            <UTooltip v-if="facilityLastMessageOver48(row.original)" text="No files received in over 48 hours">
               <UIcon name="i-heroicons-exclamation-triangle" class="inline h-6 w-6 text-yellow-600" />
             </UTooltip>
           </span>
@@ -131,6 +131,7 @@ export default defineComponent({
         });
     }
 
+
     onMounted(() => {
       fetchTable();
     });
@@ -154,38 +155,38 @@ export default defineComponent({
     const columns = [
       {
         id: "id",
-        key: "id",
-        label: "ID",
+         accessorKey: "id",
+        header: "ID",
       },
       {
         id: "description",
-        key: "description",
-        label: "Name",
-        sortable: true,
+         accessorKey: "description",
+        header: "Name",
+        enableSorting: true,
       },
       {
         id: "statistics.totalPatients",
-        key: "statistics.totalPatients",
-        label: "Total records",
-        sortable: true,
+         accessorKey: "statistics.totalPatients",
+        header: "Total records",
+        enableSorting: true,
       },
       {
         id: "statistics.patientsReceivingMessageError",
-        key: "statistics.patientsReceivingMessageError",
-        label: "Failing records",
-        sortable: true,
+         accessorKey: "statistics.patientsReceivingMessageError",
+        header: "Failing records",
+        enableSorting: true,
       },
       {
         id: "dataFlow.pkbOut",
-        key: "dataFlow.pkbOut",
-        label: "Sending to PKB",
-        sortable: true,
+         accessorKey: "dataFlow.pkbOut",
+        header: "Sending to PKB",
+        enableSorting: true,
       },
       {
         id: "lastMessageReceivedAt",
-        key: "lastMessageReceivedAt",
-        label: "Last received",
-        sortable: true,
+         accessorKey: "lastMessageReceivedAt",
+        header: "Last received",
+        enableSorting: true,
       },
     ];
 

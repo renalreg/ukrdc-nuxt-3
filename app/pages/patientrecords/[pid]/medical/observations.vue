@@ -14,16 +14,16 @@
       </div>
 
       <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-        <UTable :loading="loading" :rows="observations" :columns="columns" class="sensitive" :ui="ui">
+        <UTable :loading="loading" :data="observations" :columns="columns" class="sensitive" :ui="ui">
           <!-- Value -->
-          <template #value-data="{ row }"> {{ row.value }} {{ row.valueUnits }} </template>
+          <template #value-data="{ row }"> {{ row.original.value }} {{ row.original.valueUnits }} </template>
           <!-- observationTime -->
           <template #observationTime-data="{ row }">
-            {{ row.observationTime ? formatDate(row.observationTime) : "No observation time" }}
+            {{ row.original.observationTime ? formatDate(row.original.observationTime) : "No observation time" }}
           </template>
           <!-- prePost -->
           <template #prePost-data="{ row }">
-            <BadgePrePost :pre-post="row.prePost" />
+            <BadgePrePost :pre-post="row.original.prePost" />
           </template>
         </UTable>
 
@@ -125,28 +125,28 @@ export default defineComponent({
     const columns = [
       {
         id: "observationCode",
-        key: "observationCode",
-        label: "Type",
+        accessorKey: "observationCode",
+        header: "Type",
       },
       {
         id: "observationValue",
-        key: "observationValue",
-        label: "Value",
+        accessorKey: "observationValue",
+        header: "Value",
       },
       {
         id: "enteredAt",
-        key: "enteredAt",
-        label: "Entered at",
+        accessorKey: "enteredAt",
+        header: "Entered at",
       },
       {
         id: "observationTime",
-        key: "observationTime",
-        label: "Entered on",
+        accessorKey: "observationTime",
+        header: "Entered on",
       },
       {
         id: "prePost",
-        key: "prePost",
-        label: "Pre/Post-Dialysis",
+        accessorKey: "prePost",
+        header: "Pre/Post-Dialysis",
       },
     ];
 

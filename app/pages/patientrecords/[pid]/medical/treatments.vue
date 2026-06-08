@@ -1,65 +1,65 @@
 <template>
   <div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :loading="loading" :rows="treatments" :columns="columns" class="sensitive" :ui="ui">
+      <UTable :loading="loading" :data="treatments" :columns="columns" class="sensitive" :ui="ui">
         <!-- Facility / QBL05 -->
-        <template #healthcarefacilitycode-data="{ row }">
+        <template #healthcarefacilitycode-cell="{ row }">
           <span>
-            <SendingFacilityLink class="inline font-medium" :code="row.healthcarefacilitycode" />
-            <span v-if="row.qbl05" class="inline">/ {{ row.qbl05 }}</span>
+            <SendingFacilityLink class="inline font-medium" :code="row.original.healthcarefacilitycode" />
+            <span v-if="row.original.qbl05" class="inline">/ {{ row.original.qbl05 }}</span>
           </span>
         </template>
         <!-- Admit Date -->
-        <template #fromtime-data="{ row }">
-          {{ row.fromtime ? formatDate(row.fromtime, false) : "None" }}
+        <template #fromtime-cell="{ row }">
+          {{ row.original.fromtime ? formatDate(row.original.fromtime, false) : "None" }}
         </template>
         <!-- Admit Reason -->
-        <template #admitreasoncode-data="{ row }">
+        <template #admitreasoncode-cell="{ row }">
           <span class="truncate">
             <CodeTitle
-              v-if="row.admitreasoncodestd && row.admitreasoncode"
-              :coding-standard="row.admitreasoncodestd"
-              :code="row.admitreasoncode"
+              v-if="row.original.admitreasoncodestd && row.original.admitreasoncode"
+              :coding-standard="row.original.admitreasoncodestd"
+              :code="row.original.admitreasoncode"
             />
-            <p v-if="row.admitreasondesc">{{ row.admitreasondesc }}</p>
+            <p v-if="row.original.admitreasondesc">{{ row.original.admitreasondesc }}</p>
           </span>
         </template>
         <!-- Discharge Date -->
-        <template #totime-data="{ row }">
-          {{ row.totime ? formatDate(row.totime, false) : "None" }}
+        <template #totime-cell="{ row }">
+          {{ row.original.totime ? formatDate(row.original.totime, false) : "None" }}
         </template>
         <!-- Discharge Reason -->
-        <template #dischargereasoncode-data="{ row }">
+        <template #dischargereasoncode-cell="{ row }">
           <span>
             <CodeTitle
-              v-if="row.dischargereasoncodestd && row.dischargereasoncode"
-              :coding-standard="row.dischargereasoncodestd"
-              :code="row.dischargereasoncode"
+              v-if="row.original.dischargereasoncodestd && row.original.dischargereasoncode"
+              :coding-standard="row.original.dischargereasoncodestd"
+              :code="row.original.dischargereasoncode"
             />
-            <p v-if="row.dischargereasondesc">{{ row.dischargereasondesc }}</p>
-            <p v-if="!row.dischargereasondesc && !(row.dischargereasoncodestd && row.dischargereasoncode)">None</p>
+            <p v-if="row.original.dischargereasondesc">{{ row.original.dischargereasondesc }}</p>
+            <p v-if="!row.original.dischargereasondesc && !(row.original.dischargereasoncodestd && row.original.dischargereasoncode)">None</p>
           </span>
         </template>
         <!-- Extra info -->
-        <template #info-data="{ row }">
+        <template #info-cell="{ row }">
           <span>
             <BaseInfoTooltip>
               <div class="sensitive">
-                <p><b>ID: </b>{{ row.id }}</p>
+                <p><b>ID: </b>{{ row.original.id }}</p>
                 <br />
-                <p><b>Admit reason code: </b>{{ row.admitreasoncodestd }} / {{ row.admitreasoncode }}</p>
+                <p><b>Admit reason code: </b>{{ row.original.admitreasoncodestd }} / {{ row.original.admitreasoncode }}</p>
                 <p>
-                  <b>Discharge reason code: </b>{{ row.dischargereasoncodestd ?? "None" }} /
-                  {{ row.dischargereasoncode ?? "None" }}
+                  <b>Discharge reason code: </b>{{ row.original.dischargereasoncodestd ?? "None" }} /
+                  {{ row.original.dischargereasoncode ?? "None" }}
                 </p>
                 <br />
                 <p>
-                  <b>Healthcare facility code: </b>{{ row.healthcarefacilitycodestd ?? "None" }} /
-                  {{ row.healthcarefacilitycode ?? "None" }}
+                  <b>Healthcare facility code: </b>{{ row.original.healthcarefacilitycodestd ?? "None" }} /
+                  {{ row.original.healthcarefacilitycode ?? "None" }}
                 </p>
                 <p>
-                  <b>Discharge location code: </b>{{ row.dischargelocationcodestd ?? "None" }} /
-                  {{ row.dischargelocationcode ?? "None" }}
+                  <b>Discharge location code: </b>{{ row.original.dischargelocationcodestd ?? "None" }} /
+                  {{ row.original.dischargelocationcode ?? "None" }}
                 </p>
               </div>
             </BaseInfoTooltip>
@@ -121,32 +121,32 @@ export default defineComponent({
     const columns = [
       {
         id: "healthcarefacilitycode",
-        key: "healthcarefacilitycode",
-        label: "Facility / QBL05",
+        accessorKey: "healthcarefacilitycode",
+        header: "Facility / QBL05",
       },
       {
         id: "fromtime",
-        key: "fromtime",
-        label: "Admit Date",
+        accessorKey: "fromtime",
+        header: "Admit Date",
       },
       {
         id: "admitreasoncode",
-        key: "admitreasoncode",
-        label: "Admit reason",
+        accessorKey: "admitreasoncode",
+        header: "Admit reason",
       },
       {
         id: "totime",
-        key: "totime",
-        label: "Discharge Date",
+        accessorKey: "totime",
+        header: "Discharge Date",
       },
       {
         id: "dischargereasoncode",
-        key: "dischargereasoncode",
-        label: "Discharge reason",
+        accessorKey: "dischargereasoncode",
+        header: "Discharge reason",
       },
       {
         id: "info",
-        key: "info",
+        accessorKey: "info",
       },
     ];
 
