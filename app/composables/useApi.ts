@@ -125,7 +125,7 @@ export default function () {
             title: "Error Fetching Data",
             description: msgToShow,
             color: "red",
-            timeout: 5000,
+            duration: 5000,
           });
         }
       }
