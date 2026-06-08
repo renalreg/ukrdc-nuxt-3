@@ -41,7 +41,7 @@
           <div v-if="row.original.comment">
             <UPopover>
               <UButton color="white" label="Show" size="xs" />
-              <template #panel>
+              <template #content>
                 <div class="p-4">
                   {{ row.original.comment }}
                 </div>

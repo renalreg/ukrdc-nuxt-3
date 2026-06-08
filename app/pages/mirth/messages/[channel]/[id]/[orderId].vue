@@ -37,7 +37,7 @@
     </UCard>
 
     <UTabs :items="tabs">
-      <template #item="{ item }">
+      <template #content="{ item }">
         <div class="flex-1">
           <div v-if="item.key == 'metadata'" id="viewerMetadata">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">

@@ -14,7 +14,7 @@
           <template #name-data="{ row }">
             <UPopover v-if="row.original.channelDescription" mode="hover" class="h-5 w-5">
               {{ row.original.name }}
-              <template #panel>
+              <template #content>
                 <div class="p-3 text-xs">
                   <p>{{ row.original.channelDescription }}</p>
                 </div>
@@ -26,7 +26,7 @@
           <template #group-data="{ row }">
             <UPopover v-if="row.original.groupDescription" mode="hover" class="h-5 w-5">
               {{ row.original.group }}
-              <template #panel>
+              <template #content>
                 <div class="p-3 text-xs">
                   <p>{{ row.original.groupDescription }}</p>
                 </div>
