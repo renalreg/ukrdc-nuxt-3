@@ -36,7 +36,9 @@
           </template>
           <!-- Errors -->
           <template #error-data="{ row }">
-            <UBadge v-if="row.original.error !== null" :color="row.original.error > 0 ? 'red' : 'green'">{{ row.original.error }}</UBadge>
+            <UBadge v-if="row.original.error !== null" :color="row.original.error > 0 ? 'red' : 'green'">{{
+              row.original.error
+            }}</UBadge>
           </template>
         </UTable>
       </UCard>

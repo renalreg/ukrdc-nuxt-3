@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
-import type { ModalInterface } from "~/interfaces/modal";
 import BaseModal from "~/components/base/BaseModal.vue";
+import type { ModalInterface } from "~/interfaces/modal";
 
 export default defineComponent({
   components: { BaseModal },

@@ -43,7 +43,11 @@
               <div class="sensitive">
                 <p><b>ID: </b>{{ row.original.id }}</p>
                 <br />
-                <p><b>Entered by: </b>{{ row.original.enteredbycodestd }} / {{ row.original.enteredbycode }} ({{ row.original.enteredbydesc }})</p>
+                <p>
+                  <b>Entered by: </b>{{ row.original.enteredbycodestd }} / {{ row.original.enteredbycode }} ({{
+                    row.original.enteredbydesc
+                  }})
+                </p>
               </div>
             </BaseInfoTooltip>
           </span>

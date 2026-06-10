@@ -193,11 +193,10 @@ import type {
 } from "@ukkidney/ukrdc-axios-ts";
 
 import BaseLoadingIndicator from "~/components/base/BaseLoadingIndicator.vue";
+import BaseModal from "~/components/base/BaseModal.vue";
 import useApi from "~/composables/useApi";
-import useModal from "~/composables/useCustomModal";
 import { formatDate } from "~/helpers/dateUtils";
 import { saveAs } from "~/helpers/fileUtils";
-import BaseModal from "~/components/base/BaseModal.vue";
 import type { ModalInterface } from "~/interfaces/modal";
 
 interface DeletePIDFromEMPISchema {

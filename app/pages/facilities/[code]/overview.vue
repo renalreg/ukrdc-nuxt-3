@@ -85,7 +85,10 @@
                 <p>Historic</p>
               </div>
               <div v-else class="flex items-center">
-                <IconCircle class="inline" :class="row.original.totalPatients > 0 ? 'text-green-600' : 'text-red-700'" />
+                <IconCircle
+                  class="inline"
+                  :class="row.original.totalPatients > 0 ? 'text-green-600' : 'text-red-700'"
+                />
                 <p>{{ row.original.totalPatients > 0 ? "Enabled" : "Unused" }}</p>
               </div>
             </template>

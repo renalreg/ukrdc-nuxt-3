@@ -148,10 +148,10 @@ export default defineComponent({
     }
 
     const menuItems = computed(() => [
-    {
-      label: "Create PKB Membership",
-      onSelect: () => showCreatePkbMembershipConfirm(),
-      disabled: !props.showCreatePkbMembership,
+      {
+        label: "Create PKB Membership",
+        onSelect: () => showCreatePkbMembershipConfirm(),
+        disabled: !props.showCreatePkbMembership,
       },
     ]);
 

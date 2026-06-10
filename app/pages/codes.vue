@@ -137,7 +137,7 @@ export default defineComponent({
 
     function exportCodeList() {
       codesApi
-        .getCodeListExport({ responseType: "text" } as any)
+        .getCodeListExport({}, { responseType: "text" })
         .then(({ data }) => {
           const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
           saveAs(blob, "code-list.csv");
@@ -150,7 +150,7 @@ export default defineComponent({
 
     function exportCodeMaps() {
       codesApi
-        .getCodeMapsExport({ responseType: "text" } as any)
+        .getCodeMapsExport({}, { responseType: "text" })
         .then(({ data }) => {
           const blob = new Blob([data], { type: "text/csv;charset=utf-8" });
           saveAs(blob, "code-maps.csv");
@@ -163,7 +163,7 @@ export default defineComponent({
 
     function exportCodeExclusions() {
       codesApi
-        .getCodeExclusionsExport({ responseType: "text" } as any)
+        .getCodeExclusionsExport({}, { responseType: "text" })
         .then(({ data }) => {
           const blob = new Blob([data], { type: "text/csv;charset=utf-8" });
           saveAs(blob, "code-exclusions.csv");

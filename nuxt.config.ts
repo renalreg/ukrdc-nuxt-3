@@ -9,9 +9,6 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
 
-
-
-
   // Disable SSR, and build as an SPA
   ssr: false,
 
@@ -81,7 +78,7 @@ export default defineNuxtConfig({
   css: ["@/assets/css/main.css"],
 
   // Modules
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui", "@nuxt/eslint"],
 
   // Plugins to run before rendering page
   plugins: [
@@ -94,13 +91,12 @@ export default defineNuxtConfig({
   // Auto import components
   components: false,
 
-
   // PostCSS config
   postcss: {
     plugins: {
-      '@tailwindcss/postcss': {},
-      autoprefixer: {}
-    }
+      "@tailwindcss/postcss": {},
+      autoprefixer: {},
+    },
   },
 
   // Runtime configuration variables

@@ -20,7 +20,8 @@ Table of facilities and their basic statistics
             <IconCircle
               class="inline"
               :class="
-                row.original.statistics.patientsReceivingMessageError && row.original.statistics.patientsReceivingMessageError > 0
+                row.original.statistics.patientsReceivingMessageError &&
+                row.original.statistics.patientsReceivingMessageError > 0
                   ? 'text-red-700'
                   : 'text-green-600'
               "
@@ -40,7 +41,11 @@ Table of facilities and their basic statistics
         <template #lastMessageReceivedAt-data="{ row }">
           <span class="flex items-center gap-2">
             <div>
-              {{ row.original.lastMessageReceivedAt ? formatDate(row.original.lastMessageReceivedAt, false) : "> Year Ago" }}
+              {{
+                row.original.lastMessageReceivedAt
+                  ? formatDate(row.original.lastMessageReceivedAt, false)
+                  : "> Year Ago"
+              }}
             </div>
             <UTooltip v-if="facilityLastMessageOver48(row.original)" text="No files received in over 48 hours">
               <UIcon name="i-heroicons-exclamation-triangle" class="inline h-6 w-6 text-yellow-600" />
@@ -131,7 +136,6 @@ export default defineComponent({
         });
     }
 
-
     onMounted(() => {
       fetchTable();
     });
@@ -155,36 +159,36 @@ export default defineComponent({
     const columns = [
       {
         id: "id",
-         accessorKey: "id",
+        accessorKey: "id",
         header: "ID",
       },
       {
         id: "description",
-         accessorKey: "description",
+        accessorKey: "description",
         header: "Name",
         enableSorting: true,
       },
       {
         id: "statistics.totalPatients",
-         accessorKey: "statistics.totalPatients",
+        accessorKey: "statistics.totalPatients",
         header: "Total records",
         enableSorting: true,
       },
       {
         id: "statistics.patientsReceivingMessageError",
-         accessorKey: "statistics.patientsReceivingMessageError",
+        accessorKey: "statistics.patientsReceivingMessageError",
         header: "Failing records",
         enableSorting: true,
       },
       {
         id: "dataFlow.pkbOut",
-         accessorKey: "dataFlow.pkbOut",
+        accessorKey: "dataFlow.pkbOut",
         header: "Sending to PKB",
         enableSorting: true,
       },
       {
         id: "lastMessageReceivedAt",
-         accessorKey: "lastMessageReceivedAt",
+        accessorKey: "lastMessageReceivedAt",
         header: "Last received",
         enableSorting: true,
       },

@@ -37,7 +37,14 @@
               :code="row.original.dischargereasoncode"
             />
             <p v-if="row.original.dischargereasondesc">{{ row.original.dischargereasondesc }}</p>
-            <p v-if="!row.original.dischargereasondesc && !(row.original.dischargereasoncodestd && row.original.dischargereasoncode)">None</p>
+            <p
+              v-if="
+                !row.original.dischargereasondesc &&
+                !(row.original.dischargereasoncodestd && row.original.dischargereasoncode)
+              "
+            >
+              None
+            </p>
           </span>
         </template>
         <!-- Extra info -->
@@ -47,7 +54,9 @@
               <div class="sensitive">
                 <p><b>ID: </b>{{ row.original.id }}</p>
                 <br />
-                <p><b>Admit reason code: </b>{{ row.original.admitreasoncodestd }} / {{ row.original.admitreasoncode }}</p>
+                <p>
+                  <b>Admit reason code: </b>{{ row.original.admitreasoncodestd }} / {{ row.original.admitreasoncode }}
+                </p>
                 <p>
                   <b>Discharge reason code: </b>{{ row.original.dischargereasoncodestd ?? "None" }} /
                   {{ row.original.dischargereasoncode ?? "None" }}

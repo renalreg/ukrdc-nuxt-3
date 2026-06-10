@@ -88,201 +88,201 @@
   </div>
 </template>
 
-  <script setup lang="ts">
-  import type {
-    LabOrderSchema,
-    PatientRecordSchema,
-    ResultItemSchema,
-    ResultItemServiceSchema,
-  } from "@ukkidney/ukrdc-axios-ts";
-  import type { TableColumn } from "@nuxt/ui";
+<script setup lang="ts">
+import type { TableColumn } from "@nuxt/ui";
+import type {
+  LabOrderSchema,
+  PatientRecordSchema,
+  ResultItemSchema,
+  ResultItemServiceSchema,
+} from "@ukkidney/ukrdc-axios-ts";
 
-  import BadgePrePost from "~/components/BadgePrePost.vue";
-  import BaseDateRange from "~/components/base/BaseDateRange.vue";
-  import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
-  import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
-  import BasePaginator from "~/components/base/BasePaginator.vue";
-  import useDateRange from "~/composables/query/useDateRange";
-  import usePagination from "~/composables/query/usePagination";
-  import useQuery from "~/composables/query/useQuery";
-  import useApi from "~/composables/useApi";
-  import { formatDate } from "~/helpers/dateUtils";
-  import type { ModalInterface } from "~/interfaces/modal";
+import BadgePrePost from "~/components/BadgePrePost.vue";
+import BaseDateRange from "~/components/base/BaseDateRange.vue";
+import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
+import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
+import BasePaginator from "~/components/base/BasePaginator.vue";
+import useDateRange from "~/composables/query/useDateRange";
+import usePagination from "~/composables/query/usePagination";
+import useQuery from "~/composables/query/useQuery";
+import useApi from "~/composables/useApi";
+import { formatDate } from "~/helpers/dateUtils";
+import type { ModalInterface } from "~/interfaces/modal";
 
-  const props = defineProps<{
-    record: PatientRecordSchema;
-  }>();
+const props = defineProps<{
+  record: PatientRecordSchema;
+}>();
 
-  const toast = useToast();
-  const { page, total, size } = usePagination();
-  const { makeDateRange } = useDateRange();
-  const { stringQuery } = useQuery();
-  const { patientRecordsApi } = useApi();
+const toast = useToast();
+const { page, total, size } = usePagination();
+const { makeDateRange } = useDateRange();
+const { stringQuery } = useQuery();
+const { patientRecordsApi } = useApi();
 
-  // Set initial date range
-  const dateRange = makeDateRange(null, null, true, false);
+// Set initial date range
+const dateRange = makeDateRange(null, null, true, false);
 
-  // Data refs
-  const results = ref<ResultItemSchema[]>();
-  const loading = ref(false);
+// Data refs
+const results = ref<ResultItemSchema[]>();
+const loading = ref(false);
 
-  // Template refs
-  const deleteResultAlert = ref<ModalInterface>();
-  const deleteOrderAlert = ref<ModalInterface>();
-  const itemToDelete = ref<ResultItemSchema | null>(null);
+// Template refs
+const deleteResultAlert = ref<ModalInterface>();
+const deleteOrderAlert = ref<ModalInterface>();
+const itemToDelete = ref<ResultItemSchema | null>(null);
 
-  // Result item services
-  const availableServices = ref<ResultItemServiceSchema[]>([]);
-  const selectedService = stringQuery("service_id", undefined, true, true);
+// Result item services
+const availableServices = ref<ResultItemServiceSchema[]>([]);
+const selectedService = stringQuery("service_id", undefined, true, true);
 
-  // Lab order filter
-  const selectedOrderId = stringQuery("order_id", undefined, true, true);
-  const selectedOrder = ref<LabOrderSchema>();
+// Lab order filter
+const selectedOrderId = stringQuery("order_id", undefined, true, true);
+const selectedOrder = ref<LabOrderSchema>();
 
-  // Data fetching
-  function fetchResults() {
-    loading.value = true;
+// Data fetching
+function fetchResults() {
+  loading.value = true;
+  patientRecordsApi
+    .getPatientResults({
+      pid: props.record.pid,
+      page: page.value ?? 1,
+      size: size.value,
+      serviceId: selectedService.value ? [selectedService.value] : undefined,
+      orderId: selectedOrderId.value ? [selectedOrderId.value] : undefined,
+      since: dateRange.value.start,
+      until: dateRange.value.end,
+    })
+    .then((response) => {
+      results.value = response.data.items;
+      total.value = response.data.total ?? 0;
+      page.value = response.data.page ?? 0;
+      size.value = response.data.size ?? 0;
+    })
+    .catch(() => {
+      // Error handling is centralized in the Axios interceptor
+    })
+    .finally(() => {
+      loading.value = false;
+    });
+
+  if (availableServices.value.length === 0) {
     patientRecordsApi
-      .getPatientResults({
-        pid: props.record.pid,
-        page: page.value ?? 1,
-        size: size.value,
-        serviceId: selectedService.value ? [selectedService.value] : undefined,
-        orderId: selectedOrderId.value ? [selectedOrderId.value] : undefined,
-        since: dateRange.value.start,
-        until: dateRange.value.end,
-      })
+      .getPatientResultServices({ pid: props.record.pid })
       .then((response) => {
-        results.value = response.data.items;
-        total.value = response.data.total ?? 0;
-        page.value = response.data.page ?? 0;
-        size.value = response.data.size ?? 0;
+        availableServices.value = response.data;
       })
       .catch(() => {
         // Error handling is centralized in the Axios interceptor
-      })
-      .finally(() => {
-        loading.value = false;
       });
-
-    if (availableServices.value.length === 0) {
-      patientRecordsApi
-        .getPatientResultServices({ pid: props.record.pid })
-        .then((response) => {
-          availableServices.value = response.data;
-        })
-        .catch(() => {
-          // Error handling is centralized in the Axios interceptor
-        });
-    }
   }
+}
 
-  function fetchLabOrder() {
-    if (selectedOrderId.value) {
-      patientRecordsApi
-        .getPatientLaborder({
-          pid: props.record.pid,
-          orderId: selectedOrderId.value,
-        })
-        .then((response) => {
-          selectedOrder.value = response.data;
-        })
-        .catch(() => {
-          // Error handling is centralized in the Axios interceptor
-        });
-    }
+function fetchLabOrder() {
+  if (selectedOrderId.value) {
+    patientRecordsApi
+      .getPatientLaborder({
+        pid: props.record.pid,
+        orderId: selectedOrderId.value,
+      })
+      .then((response) => {
+        selectedOrder.value = response.data;
+      })
+      .catch(() => {
+        // Error handling is centralized in the Axios interceptor
+      });
   }
+}
 
-  // Data deletion
-  function showDeleteResultItemModal(item: ResultItemSchema) {
-    itemToDelete.value = item;
-    deleteResultAlert.value?.show();
+// Data deletion
+function showDeleteResultItemModal(item: ResultItemSchema) {
+  itemToDelete.value = item;
+  deleteResultAlert.value?.show();
+}
+
+function cancelDeleteResultItem() {
+  itemToDelete.value = null;
+  deleteResultAlert.value?.hide();
+}
+
+function deleteResultItem() {
+  if (itemToDelete.value) {
+    patientRecordsApi
+      .deletePatientResultDelete({
+        pid: props.record.pid,
+        resultitemId: itemToDelete.value.id,
+      })
+      .then(() => {
+        toast.add({ title: "Success", description: "Result Item deleted" });
+        fetchResults();
+        itemToDelete.value = null;
+        deleteResultAlert.value?.hide();
+      })
+      .catch(() => {
+        // Error handling is centralized in the Axios interceptor
+      });
   }
+}
 
-  function cancelDeleteResultItem() {
-    itemToDelete.value = null;
-    deleteResultAlert.value?.hide();
+function deleteLabOrder() {
+  if (selectedOrder.value) {
+    patientRecordsApi
+      .deletePatientLaborderDelete({
+        pid: props.record.pid,
+        orderId: selectedOrder.value.id,
+      })
+      .then(() => {
+        toast.add({ title: "Success", description: "Lab Order deleted" });
+        selectedOrderId.value = undefined;
+        fetchResults();
+        fetchLabOrder();
+        deleteOrderAlert.value?.hide();
+      })
+      .catch(() => {
+        // Error handling is centralized in the Axios interceptor
+      });
   }
+}
 
-  function deleteResultItem() {
-    if (itemToDelete.value) {
-      patientRecordsApi
-        .deletePatientResultDelete({
-          pid: props.record.pid,
-          resultitemId: itemToDelete.value.id,
-        })
-        .then(() => {
-          toast.add({ title: "Success", description: "Result Item deleted" });
-          fetchResults();
-          itemToDelete.value = null;
-          deleteResultAlert.value?.hide();
-        })
-        .catch(() => {
-          // Error handling is centralized in the Axios interceptor
-        });
-    }
-  }
+// Data lifecycle
+onMounted(() => {
+  fetchResults();
+  fetchLabOrder();
+});
 
-  function deleteLabOrder() {
-    if (selectedOrder.value) {
-      patientRecordsApi
-        .deletePatientLaborderDelete({
-          pid: props.record.pid,
-          orderId: selectedOrder.value.id,
-        })
-        .then(() => {
-          toast.add({ title: "Success", description: "Lab Order deleted" });
-          selectedOrderId.value = undefined;
-          fetchResults();
-          fetchLabOrder();
-          deleteOrderAlert.value?.hide();
-        })
-        .catch(() => {
-          // Error handling is centralized in the Axios interceptor
-        });
-    }
-  }
+watch([page, selectedService, selectedOrderId, dateRange], () => {
+  fetchResults();
+});
 
-  // Data lifecycle
-  onMounted(() => {
-    fetchResults();
-    fetchLabOrder();
-  });
+watch(selectedOrderId, () => {
+  fetchLabOrder();
+});
 
-  watch([page, selectedService, selectedOrderId, dateRange], () => {
-    fetchResults();
-  });
+// Table
+const columns: TableColumn<ResultItemSchema>[] = [
+  { id: "serviceId", accessorKey: "serviceId", header: "Type" },
+  { id: "value", accessorKey: "value", header: "Value" },
+  { id: "orderId", accessorKey: "orderId", header: "Order ID" },
+  { id: "observationTime", accessorKey: "observationTime", header: "Observation time" },
+  { id: "prePost", accessorKey: "prePost", header: "Pre/Post-Dialysis" },
+  { id: "actions", header: "" },
+];
 
-  watch(selectedOrderId, () => {
-    fetchLabOrder();
-  });
+const menuItems = (row: ResultItemSchema) => [
+  [
+    {
+      label: "Filter by this lab order",
+      icon: "i-heroicons-funnel-20-solid",
+      to: { query: { order_id: row.orderId } },
+    },
+    {
+      label: "Delete this result item",
+      icon: "i-heroicons-trash-20-solid",
+      onSelect: () => showDeleteResultItemModal(row),
+    },
+  ],
+];
 
-  // Table
-  const columns: TableColumn<ResultItemSchema>[] = [
-    { id: "serviceId", accessorKey: "serviceId", header: "Type" },
-    { id: "value", accessorKey: "value", header: "Value" },
-    { id: "orderId", accessorKey: "orderId", header: "Order ID" },
-    { id: "observationTime", accessorKey: "observationTime", header: "Observation time" },
-    { id: "prePost", accessorKey: "prePost", header: "Pre/Post-Dialysis" },
-    { id: "actions", header: "" },
-  ];
-
-  const menuItems = (row: ResultItemSchema) => [
-    [
-      {
-        label: "Filter by this lab order",
-        icon: "i-heroicons-funnel-20-solid",
-        to: { query: { order_id: row.orderId } },
-      },
-      {
-        label: "Delete this result item",
-        icon: "i-heroicons-trash-20-solid",
-        onSelect: () => showDeleteResultItemModal(row),
-      },
-    ],
-  ];
-
-  const ui = {
-    th: { base: "px-6 py-3" },
-  };
+const ui = {
+  th: { base: "px-6 py-3" },
+};
 </script>
