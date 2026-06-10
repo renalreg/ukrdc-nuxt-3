@@ -3,3 +3,4 @@ dist/
 .nuxt/
 .vscode/
 .github/
+CHANGELOG.md
