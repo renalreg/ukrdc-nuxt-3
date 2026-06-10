@@ -18,7 +18,7 @@
               <div class="mt-4 grid grid-cols-2 gap-2">
                 <!-- Patient record -->
                 <UAlert
-                  color="red"
+                  color="error"
                   variant="subtle"
                   :title="`Patient record ${previewResponse.patientRecord.pid}`"
                   :description="`Created ${formatDate(previewResponse.patientRecord.repositoryCreationDate, false)}`"
@@ -27,117 +27,117 @@
 
                 <UAlert
                   v-if="previewResponse.patientRecord.programMemberships.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.programMemberships.length"
+                  :title="String(previewResponse.patientRecord.programMemberships.length)"
                   description="Program memberships"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.resultItems.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.resultItems.length"
+                  :title="String(previewResponse.patientRecord.resultItems.length)"
                   description="Result items"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.observations.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.observations.length"
+                  :title="String(previewResponse.patientRecord.observations.length)"
                   description="Observations"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.medications.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.medications.length"
+                  :title="String(previewResponse.patientRecord.medications.length)"
                   description="Medications"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.documents.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.documents.length"
+                  :title="String(previewResponse.patientRecord.documents.length)"
                   description="Documents"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.diagnoses.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.diagnoses.length"
+                  :title="String(previewResponse.patientRecord.diagnoses.length)"
                   description="Diagnoses"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.renaldiagnoses.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.renaldiagnoses.length"
+                  :title="String(previewResponse.patientRecord.renaldiagnoses.length)"
                   description="Renal diagnoses"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.procedures.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.procedures.length"
+                  :title="String(previewResponse.patientRecord.procedures.length)"
                   description="Procedures"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.encounters.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.encounters.length"
+                  :title="String(previewResponse.patientRecord.encounters.length)"
                   description="Clinical encounters"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.clinicalRelationships.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.clinicalRelationships.length"
+                  :title="String(previewResponse.patientRecord.clinicalRelationships.length)"
                   description="Clinical relationships"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.surveys.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.surveys.length"
+                  :title="String(previewResponse.patientRecord.surveys.length)"
                   description="Surveys"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.socialHistories.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.socialHistories.length"
+                  :title="String(previewResponse.patientRecord.socialHistories.length)"
                   description="Social histories"
                   class="text-center"
                 />
 
                 <UAlert
                   v-if="previewResponse.patientRecord.familyHistories.length > 0"
-                  color="red"
+                  color="error"
                   variant="subtle"
-                  :title="previewResponse.patientRecord.familyHistories.length"
+                  :title="String(previewResponse.patientRecord.familyHistories.length)"
                   description="Family histories"
                   class="text-center"
                 />
@@ -170,7 +170,7 @@
         <UButton
           v-if="previewResponse && !previewErrorMessage"
           class="ml-2"
-          color="red"
+          color="error"
           :disabled="!confirmChecked || deleteInProgress"
           @click="doRealDelete()"
         >
