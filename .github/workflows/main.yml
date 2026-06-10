@@ -31,7 +31,7 @@ jobs:
 
       # Note: Test build will not generate or deploy sourcemap.
       # Since we don't pass SENTRY_AUTH_TOKEN here, that step
-      # will be skipped. 
+      # will be skipped.
       # SENTRY_AUTH_TOKEN only passed in publish job.
       - name: Test build
         run: npm run build
@@ -54,7 +54,7 @@ jobs:
 
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ghcr.io/renalreg/ukrdc-nuxt-3
           tags: |
@@ -68,16 +68,16 @@ jobs:
             type=raw,value=edge
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
-          # Use path context instead of Git context since we need .git 
+          # Use path context instead of Git context since we need .git
           # in the build step for automatic Sentry versioning
           context: .
           push: ${{ github.event_name != 'pull_request' }}
