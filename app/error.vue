@@ -1,0 +1,65 @@
+<template>
+  <div class="flex h-screen flex-col items-center justify-center gap-8 divide-x sm:flex-row">
+    <h1 class="text-6xl font-bold text-indigo-600">{{ error.statusCode ?? "Error" }}</h1>
+    <div class="pl-8">
+      <h2 class="whitespace-pre">{{ errorTitle }}</h2>
+      <div v-if="error.message">
+        <p>{{ error.message }}</p>
+      </div>
+      <UButton to="/" label="Go back" class="mt-2" />
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import type { NuxtError } from "#app";
+
+export default defineComponent({
+  layout: "default",
+  props: {
+    error: {
+      type: Object as () => NuxtError,
+      required: true,
+    },
+  },
+  setup(props) {
+    const friendlyErrorStatus: { [key: number]: string } = {
+      400: "Bad Request",
+      401: "Unauthorized",
+      402: "Payment Required",
+      403: "Forbidden",
+      404: "Not Found",
+      405: "Method Not Allowed",
+      406: "Not Acceptable",
+      407: "Proxy Authentication Required",
+      408: "Request Timeout",
+      409: "Conflict",
+      410: "Gone",
+      411: "Length Required",
+      412: "Precondition Required",
+      413: "Request Entry Too Large",
+      414: "Request-URI Too Long",
+      415: "Unsupported Media Type",
+      416: "Requested Range Not Satisfiable",
+      417: "Expectation Failed",
+      418: "I'm a teapot",
+      429: "Too Many Requests",
+      500: "Internal Server Error",
+      501: "Not Implemented",
+      502: "Bad Gateway",
+      503: "Service Unavailable",
+      504: "Gateway Timeout",
+      505: "HTTP Version Not Supported",
+    };
+
+    const errorTitle = computed(() => {
+      if (props.error.statusCode && props.error.statusCode in friendlyErrorStatus) {
+        return friendlyErrorStatus[props.error.statusCode] ?? "Error";
+      }
+      return "An unknown error occured";
+    });
+
+    return { errorTitle };
+  },
+});
+</script>
