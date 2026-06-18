@@ -37,7 +37,7 @@
     "vue-router": "^4.6.4"
   },
   "dependencies": {
-    "@nuxt/ui": "^4.7.1",
+    "@nuxt/ui": "^4.9.0",
     "@okta/okta-auth-js": "^8.0.0",
     "@okta/okta-vue": "^5.9.0",
     "@popperjs/core": "^2.11.8",
