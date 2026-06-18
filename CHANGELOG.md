@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.2](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.1...v7.0.2) (2026-06-18)
+
+
+### Bug Fixes
+
+* Search and Table Sorting ([3e30967](https://github.com/renalreg/ukrdc-nuxt-3/commit/3e30967cc6a91eda241cf5cc9ac3031697a4b77c))
+
 ## [7.0.1](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.0...v7.0.1) (2026-06-10)
 
 
