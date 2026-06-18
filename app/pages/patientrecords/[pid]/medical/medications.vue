@@ -63,7 +63,6 @@ import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
 import { getSortableHeader } from "~/helpers/tableSortHeader";
 
-
 export default defineComponent({
   components: {
     CodeTitle,
