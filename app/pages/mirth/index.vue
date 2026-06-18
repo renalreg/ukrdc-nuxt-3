@@ -47,9 +47,11 @@
 </template>
 
 <script lang="ts">
+import type { TableColumn } from "@nuxt/ui";
 import type { ChannelGroupModel } from "@ukkidney/ukrdc-axios-ts";
 
 import useApi from "~/composables/useApi";
+import { getSortableHeader } from "~/helpers/tableSortHeader";
 
 interface ChannelRow {
   id: string;
@@ -115,54 +117,53 @@ export default defineComponent({
         });
     });
 
-    // Table data
-    const columns = [
+    const columns: TableColumn<ChannelRow>[] = [
       {
         id: "group",
         accessorKey: "group",
-        header: "Group",
+        header: ({ column }) => getSortableHeader(column, "Group"),
         enableSorting: true,
       },
       {
         id: "name",
         accessorKey: "name",
-        header: "Name",
+        header: ({ column }) => getSortableHeader(column, "Name"),
         enableSorting: true,
       },
       {
         id: "revision",
         accessorKey: "revision",
-        header: "Revision",
+        header: ({ column }) => getSortableHeader(column, "Revision"),
         enableSorting: true,
       },
       {
         id: "received",
         accessorKey: "received",
-        header: "Received",
+        header: ({ column }) => getSortableHeader(column, "Received"),
         enableSorting: true,
       },
       {
         id: "sent",
         accessorKey: "sent",
-        header: "Sent",
+        header: ({ column }) => getSortableHeader(column, "Sent"),
         enableSorting: true,
       },
       {
         id: "error",
         accessorKey: "error",
-        header: "Error",
+        header: ({ column }) => getSortableHeader(column, "Error"),
         enableSorting: true,
       },
       {
         id: "filtered",
         accessorKey: "filtered",
-        header: "Filtered",
+        header: ({ column }) => getSortableHeader(column, "Filtered"),
         enableSorting: true,
       },
       {
         id: "queued",
         accessorKey: "queued",
-        header: "Queued",
+        header: ({ column }) => getSortableHeader(column, "Queued"),
         enableSorting: true,
       },
     ];

@@ -58,6 +58,7 @@ Table of facilities and their basic statistics
 </template>
 
 <script lang="ts">
+import type { TableColumn } from "@nuxt/ui";
 import type { FacilityDetailsSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import IconCircle from "~/components/icons/IconCircle.vue";
@@ -65,6 +66,7 @@ import SearchBar from "~/components/SearchBar.vue";
 import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
 import { facilityLastMessageOver48 } from "~/helpers/facilityUtils";
+import { getSortableHeader } from "~/helpers/tableSortHeader";
 
 export default defineComponent({
   components: {
@@ -156,7 +158,7 @@ export default defineComponent({
       },
     };
 
-    const columns = [
+    const columns: TableColumn<FacilityDetailsSchema>[] = [
       {
         id: "id",
         accessorKey: "id",
@@ -165,31 +167,31 @@ export default defineComponent({
       {
         id: "description",
         accessorKey: "description",
-        header: "Name",
+        header: ({ column }) => getSortableHeader(column, "Name"),
         enableSorting: true,
       },
       {
         id: "statistics.totalPatients",
         accessorKey: "statistics.totalPatients",
-        header: "Total records",
+        header: ({ column }) => getSortableHeader(column, "Total records"),
         enableSorting: true,
       },
       {
         id: "statistics.patientsReceivingMessageError",
         accessorKey: "statistics.patientsReceivingMessageError",
-        header: "Failing records",
+        header: ({ column }) => getSortableHeader(column, "Failing records"),
         enableSorting: true,
       },
       {
         id: "dataFlow.pkbOut",
         accessorKey: "dataFlow.pkbOut",
-        header: "Sending to PKB",
+        header: ({ column }) => getSortableHeader(column, "Sending to PKB"),
         enableSorting: true,
       },
       {
         id: "lastMessageReceivedAt",
         accessorKey: "lastMessageReceivedAt",
-        header: "Last received",
+        header: ({ column }) => getSortableHeader(column, "Last received"),
         enableSorting: true,
       },
     ];

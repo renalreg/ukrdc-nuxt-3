@@ -55,11 +55,14 @@
 </template>
 
 <script lang="ts">
+import type { TableColumn } from "@nuxt/ui";
 import type { MedicationSchema, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import CodeTitle from "~/components/CodeTitle.vue";
 import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
+import { getSortableHeader } from "~/helpers/tableSortHeader";
+
 
 export default defineComponent({
   components: {
@@ -99,7 +102,7 @@ export default defineComponent({
         });
     });
 
-    const columns = [
+    const columns: TableColumn<MedicationSchema>[] = [
       {
         id: "drugProductGeneric",
         accessorKey: "drugProductGeneric",
@@ -123,13 +126,13 @@ export default defineComponent({
       {
         id: "fromTime",
         accessorKey: "fromTime",
-        header: "Start Date",
+        header: ({ column }) => getSortableHeader(column, "Start Date"),
         enableSorting: true,
       },
       {
         id: "toTime",
         accessorKey: "toTime",
-        header: "End Date",
+        header: ({ column }) => getSortableHeader(column, "End Date"),
         enableSorting: true,
       },
       {

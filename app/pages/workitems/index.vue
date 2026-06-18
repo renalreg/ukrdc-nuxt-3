@@ -13,9 +13,9 @@
           class="flex-1"
           size="lg"
           :items="facilities"
-          value-attribute="id"
-          label-attribute="description"
-          :search-attributes="['description', 'id']"
+          value-key="id"
+          label-key="description"
+          :filter-fields="['description', 'id']"
           placeholder="Select a sending facility"
         />
         <UButton class="ml-2" size="lg" label="Clear" @click="selectedFacility = undefined" />
@@ -27,8 +27,8 @@
             :items="workItemStatusTabs"
             multiple
             placeholder="Select status"
-            label-attribute="name"
-            value-attribute="value"
+            label-key="name"
+            value-key="value"
             class="w-48"
           >
             <template #label>

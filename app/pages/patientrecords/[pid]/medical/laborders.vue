@@ -7,7 +7,11 @@
         :columns="columns"
         class="sensitive"
         @select="
-          $router.push({ path: `/patientrecords/${$event.pid}/medical/results`, query: { order_id: $event.id } })
+          (_, row) =>
+            $router.push({
+              path: `/patientrecords/${record.pid}/medical/results`,
+              query: { order_id: row.original.id },
+            })
         "
       >
         <!-- specimenCollectedTime -->
@@ -99,7 +103,7 @@ export default defineComponent({
       },
     ];
 
-    return { page, size, total, loading, orders, columns, formatDate };
+    return { record: props.record, page, size, total, loading, orders, columns, formatDate };
   },
 });
 </script>

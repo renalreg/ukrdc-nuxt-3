@@ -17,8 +17,8 @@
             class="flex-1"
             size="lg"
             :items="channels"
-            value-attribute="id"
-            label-attribute="name"
+            value-key="id"
+            label-key="name"
             placeholder="Select a message channel"
           />
           <UButton class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>

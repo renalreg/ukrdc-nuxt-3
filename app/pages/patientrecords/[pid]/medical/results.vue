@@ -28,10 +28,10 @@
           v-model="selectedService"
           class="flex-1"
           size="lg"
-          :items="availableServices"
-          value-attribute="id"
-          label-attribute="description"
-          :search-attributes="['description', 'id']"
+          :items="serviceOptions"
+          value-key="value"
+          label-key="label"
+          :filter-fields="['description', 'id']"
           placeholder="Select a result type"
         />
         <UButton class="ml-2" size="lg" label="Clear" @click="selectedService = undefined" />
@@ -133,6 +133,12 @@ const itemToDelete = ref<ResultItemSchema | null>(null);
 
 // Result item services
 const availableServices = ref<ResultItemServiceSchema[]>([]);
+const serviceOptions = computed(() =>
+  availableServices.value.map((service) => ({
+    label: service.description,
+    value: service.id,
+  })),
+);
 const selectedService = stringQuery("service_id", undefined, true, true);
 
 // Lab order filter
