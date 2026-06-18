@@ -103,7 +103,7 @@ export default defineComponent({
       },
     ];
 
-    return { record: props.record, page, size, total, loading, orders, columns, formatDate };
+    return { page, size, total, loading, orders, columns, formatDate };
   },
 });
 </script>
