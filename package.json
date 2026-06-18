@@ -44,7 +44,7 @@
     "@sentry/vite-plugin": "^5.2.1",
     "@tailwindcss/postcss": "^4.2.4",
     "@ukkidney/ukrdc-axios-ts": "^6.5.1",
-    "dompurify": "^3.4.2",
+    "dompurify": "^3.4.11",
     "luxon": "^3.7.2",
     "marked": "^18.0.3",
     "plotly.js-dist-min": "^3.5.1",
