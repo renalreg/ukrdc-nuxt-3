@@ -25,16 +25,13 @@
       <!-- Code select -->
       <div class="mb-4 flex">
         <USelectMenu
-          v-model="selectedService"
+          v-model="selectedServiceOption"
           class="flex-1"
           size="lg"
           :items="serviceOptions"
-          value-key="value"
-          label-key="label"
-          :filter-fields="['description', 'id']"
           placeholder="Select a result type"
         />
-        <UButton class="ml-2" size="lg" label="Clear" @click="selectedService = undefined" />
+        <UButton class="ml-2" size="lg" label="Clear" @click="selectedServiceOption = undefined" />
       </div>
 
       <div>
@@ -134,12 +131,24 @@ const itemToDelete = ref<ResultItemSchema | null>(null);
 // Result item services
 const availableServices = ref<ResultItemServiceSchema[]>([]);
 const serviceOptions = computed(() =>
-  availableServices.value.map((service) => ({
-    label: service.description,
-    value: service.id,
-  })),
+  availableServices.value
+    .filter((service) => service.id != null)
+    .map((service) => ({
+      label: service.id,
+      value: service.id,
+    })),
 );
+
+// selectedService holds the raw string id in the URL query param
 const selectedService = stringQuery("service_id", undefined, true, true);
+
+// selectedServiceOption is the full object bound to USelectMenu (Nuxt UI v3 requires the full item)
+const selectedServiceOption = computed({
+  get: () => serviceOptions.value.find((o) => o.value === selectedService.value) ?? undefined,
+  set: (option) => {
+    selectedService.value = option?.value;
+  },
+});
 
 // Lab order filter
 const selectedOrderId = stringQuery("order_id", undefined, true, true);
