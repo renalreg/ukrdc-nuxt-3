@@ -18,8 +18,8 @@
           <span v-if="pageLink === '...'" class="hidden px-2 font-medium lg:block"> ... </span>
           <UButton
             v-else
-            :variant="pageLink === page ? 'outline' : 'solid'"
-            :color="pageLink === page ? 'indigo' : 'white'"
+            :variant="pageLink === page ? 'solid' : 'ghost'"
+            :color="pageLink === page ? 'primary' : 'neutral'"
             class="hidden lg:block"
             @click="jump(pageLink)"
           >
