@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.0.3](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.2...v7.0.3) (2026-06-19)
+
+
+### Bug Fixes
+
+* **pagination:** fix(pagination):  ([4a962e8](https://github.com/renalreg/ukrdc-nuxt-3/commit/4a962e8b108e3e1298233dff0132d8913909851e))
+* **results:** fix(results):  ([47e143c](https://github.com/renalreg/ukrdc-nuxt-3/commit/47e143c665d65752e0a6a24deb2e754db4d59a26))
+
 ## [7.0.2](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.1...v7.0.2) (2026-06-18)
 
 
