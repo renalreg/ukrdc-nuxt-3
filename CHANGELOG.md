@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.4](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.3...v7.0.4) (2026-06-22)
+
+
+### Bug Fixes
+
+* **UK-234:** FastAPI version ([#492](https://github.com/renalreg/ukrdc-nuxt-3/issues/492)) ([366333b](https://github.com/renalreg/ukrdc-nuxt-3/commit/366333ba31ca3265df0172fb88144be36a67eac8))
+
 ## [7.0.3](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.2...v7.0.3) (2026-06-19)
 
 
