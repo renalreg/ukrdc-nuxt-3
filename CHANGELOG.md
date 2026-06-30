@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.5](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.4...v7.0.5) (2026-06-30)
+
+
+### Bug Fixes
+
+* **UK-253:** UKRDC UI - AuditOperation Not Defined Error ([88009fa](https://github.com/renalreg/ukrdc-nuxt-3/commit/88009fa59b66faf23a94244a88214573f3d3b7d2))
+
 ## [7.0.4](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.3...v7.0.4) (2026-06-22)
 
 
