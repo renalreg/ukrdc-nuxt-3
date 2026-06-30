@@ -19,7 +19,7 @@ export default defineComponent({
       if (props.message.msgStatus === "ERROR") {
         return "error";
       } else if (props.message.msgStatus === "RECEIVED") {
-        return "amber";
+        return "warning";
       }
       return "success";
     });

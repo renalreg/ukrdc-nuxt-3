@@ -2,8 +2,10 @@
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="flex h-screen overflow-hidden bg-white">
     <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-    <USlideover v-model="sbOpen" class="w-64 flex-0 md:hidden" side="left">
-      <Sidebar :show-close-button="true" :show-profile="false" class="relative" @toggle="toggle()" />
+    <USlideover v-model:open="sbOpen" class="w-64 flex-0 md:hidden" side="left">
+      <template #content>
+        <Sidebar :show-profile="false" class="relative" @toggle="toggle()" />
+      </template>
     </USlideover>
 
     <!-- Static sidebar for desktop -->

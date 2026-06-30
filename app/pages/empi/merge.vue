@@ -66,7 +66,7 @@
 
     <UAlert
       v-if="mergeBlockDescription"
-      color="orange"
+      color="warning"
       icon="i-heroicons-exclamation-triangle-20-solid"
       class="mb-4"
       :title="mergeBlockDescription"
@@ -74,7 +74,7 @@
 
     <UAlert
       v-if="highlightSections.length > 0"
-      color="red"
+      color="error"
       icon="i-heroicons-exclamation-triangle-20-solid"
       class="mb-4"
       :title="`You are about to merge records with mismatching demographics for: ${highlightSections.join(', ')}`"
@@ -96,7 +96,7 @@
       </div>
 
       <div class="flex gap-2">
-        <UButton colour="red" @click="beginMergeAlert?.show()">Begin Record Merge</UButton>
+        <UButton colour="error" @click="beginMergeAlert?.show()">Begin Record Merge</UButton>
         <UButton v-if="callbackPath" :to="callbackPath">Cancel</UButton>
       </div>
     </div>

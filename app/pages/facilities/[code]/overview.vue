@@ -4,7 +4,7 @@
       <UAlert
         v-if="(facility.statistics.patientsReceivingMessageError || 0) > 0"
         :title="`${facility.statistics.patientsReceivingMessageError} patients are not receiving data due to errors in their incoming files. Click for details.`"
-        color="red"
+        color="error"
         icon="i-heroicons-exclamation-triangle-20-solid"
         class="mb-4"
       />

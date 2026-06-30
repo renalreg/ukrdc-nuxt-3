@@ -16,13 +16,13 @@ export default defineComponent({
   setup(props) {
     const color = computed(() => {
       if (props.prePost === "PRE") {
-        return "red";
+        return "error";
       } else if (props.prePost === "POST") {
-        return "blue";
+        return "info";
       } else if (props.prePost === "NA") {
-        return "white";
+        return "neutral";
       } else {
-        return "gray";
+        return "neutral";
       }
     });
 

@@ -12,7 +12,7 @@
 
       <div class="flex justify-end">
         <UButton @click="updateWorkItemModal?.hide()">Cancel</UButton>
-        <UButton color="indigo" class="ml-2" type="submit" @click="updateWorkItem()"> Save </UButton>
+        <UButton color="primary" class="ml-2" type="submit" @click="updateWorkItem()"> Save </UButton>
       </div>
     </BaseModal>
 
@@ -65,7 +65,7 @@
     >
       <UButton
         v-if="availableActions.comment"
-        color="indigo"
+        color="primary"
         label="Update"
         icon="i-heroicons-pencil-20-solid"
         @click="updateWorkItemModal?.show()"
@@ -73,7 +73,7 @@
 
       <UButton
         v-if="availableActions.close && record.status !== 3"
-        color="green"
+        color="success"
         label="Close"
         icon="i-heroicons-check-circle-20-solid"
         @click="closeModal?.show()"
@@ -476,7 +476,7 @@ export default defineComponent({
           toast.add({
             title: "Error",
             description: error.response.data.detail,
-            color: "red",
+            color: "error",
           });
           throw error;
         })
@@ -509,7 +509,7 @@ export default defineComponent({
           toast.add({
             title: "Error",
             description: error.response.data.detail,
-            color: "red",
+            color: "error",
           });
           throw error;
         })

@@ -11,8 +11,8 @@
         </UTooltip>
         <p v-if="item.fromTime">Since {{ formatDate(item.fromTime, false) }}</p>
         <div class="mt-2">
-          <UBadge v-if="!item.toTime" color="green">Active</UBadge>
-          <UBadge v-else color="red">Closed on {{ formatDate(item.toTime, false) }}</UBadge>
+          <UBadge v-if="!item.toTime" color="success">Active</UBadge>
+          <UBadge v-else color="error">Closed on {{ formatDate(item.toTime, false) }}</UBadge>
         </div>
       </UCard>
     </li>

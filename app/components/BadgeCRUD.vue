@@ -18,9 +18,9 @@ export default defineComponent({
       if (props.operation.includes("DELETE")) {
         return "error";
       } else if (props.operation.includes("READ")) {
-        return "blue";
+        return "info";
       } else if (props.operation.includes("UPDATE")) {
-        return "purple";
+        return "primary";
       } else if (props.operation.includes("CREATE")) {
         return "success";
       } else {

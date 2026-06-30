@@ -6,7 +6,6 @@
     <div v-else-if="message" class="group">
       <UAlert
         v-if="message.msgStatus === 'ERROR' && latestMessageInfo"
-        color="red"
         icon="i-heroicons-exclamation-triangle-20-solid"
         :title="latestMessageInfo"
         class="mb-4"
@@ -18,7 +17,7 @@
       />
     </div>
     <div v-else>
-      <UAlert color="orange" icon="i-heroicons-exclamation-triangle-20-solid" :title="fallbackMessage" />
+      <UAlert color="warning" icon="i-heroicons-exclamation-triangle-20-solid" :title="fallbackMessage" />
     </div>
   </div>
 </template>

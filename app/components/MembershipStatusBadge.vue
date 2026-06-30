@@ -1,8 +1,8 @@
 <template>
   <div v-if="badgeStatus !== 0">
-    <UBadge v-if="badgeStatus === 1" color="green">Active</UBadge>
-    <UBadge v-if="badgeStatus === 2" color="red">Closed</UBadge>
-    <UBadge v-if="badgeStatus === 3" color="amber">Mixed</UBadge>
+    <UBadge v-if="badgeStatus === 1" color="success">Active</UBadge>
+    <UBadge v-if="badgeStatus === 2" color="error">Closed</UBadge>
+    <UBadge v-if="badgeStatus === 3" color="warning">Mixed</UBadge>
   </div>
 </template>
 

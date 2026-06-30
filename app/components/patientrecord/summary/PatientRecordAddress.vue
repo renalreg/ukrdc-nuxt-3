@@ -13,8 +13,8 @@
       {{ address.countryDescription }}
     </p>
     <p v-if="address.fromTime">Since {{ formatDate(address.fromTime, false) }}</p>
-    <UBadge v-if="!address.toTime" color="green">Active</UBadge>
-    <UBadge v-else color="red">Inactive since {{ formatDate(address.toTime, false) }}</UBadge>
+    <UBadge v-if="!address.toTime" color="success">Active</UBadge>
+    <UBadge v-else color="error">Inactive since {{ formatDate(address.toTime, false) }}</UBadge>
   </div>
   <p v-else>No address on record</p>
 </template>
