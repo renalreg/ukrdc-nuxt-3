@@ -11,7 +11,7 @@ export default defineComponent({
   props: {
     colour: {
       type: String,
-      default: "indigo",
+      default: "primary",
     },
   },
   setup() {},

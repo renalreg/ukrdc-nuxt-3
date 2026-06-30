@@ -16,9 +16,9 @@ export default defineComponent({
   setup(props) {
     const color = computed(() => {
       if (props.visibility === "public") {
-        return "green";
+        return "success";
       } else if (props.visibility === "private") {
-        return "blue";
+        return "info";
       } else {
         return "neutral";
       }

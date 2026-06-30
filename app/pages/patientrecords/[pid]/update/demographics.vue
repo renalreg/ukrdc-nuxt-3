@@ -402,6 +402,7 @@ export default defineComponent({
           toast.add({
             title: "Success",
             description: "Record demographics updated successfully",
+            color: "success",
           });
           router.push(`/patientrecords/${props.record.pid}`);
         })
@@ -409,7 +410,7 @@ export default defineComponent({
           toast.add({
             title: "Error",
             description: "Failed to update record demographics",
-            color: "red",
+            color: "error",
           });
           throw error;
         });

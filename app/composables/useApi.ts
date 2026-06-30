@@ -124,7 +124,7 @@ export default function () {
           toast.add({
             title: "Error Fetching Data",
             description: msgToShow,
-            color: "red",
+            color: "error",
             duration: 5000,
           });
         }

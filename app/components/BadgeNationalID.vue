@@ -16,13 +16,13 @@ export default defineComponent({
   setup(props) {
     const color = computed(() => {
       if (props.nationalidType.includes("UKRDC")) {
-        return "red";
+        return "error";
       } else if (props.nationalidType.includes("NHS")) {
-        return "blue";
+        return "info";
       } else if (props.nationalidType.includes("CHI")) {
-        return "purple";
+        return "secondary";
       } else if (props.nationalidType.includes("HSC")) {
-        return "green";
+        return "success";
       } else {
         return "neutral";
       }

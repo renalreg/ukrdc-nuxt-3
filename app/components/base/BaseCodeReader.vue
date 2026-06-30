@@ -2,7 +2,7 @@
   <div>
     <div v-if="contentType === 'XML'" class="border-b border-gray-200 pt-3 pb-3 pl-8">
       <div class="flex gap-2">
-        <USwitch v-model="formatMessage" name="Format XML" size="lg" color="green" />
+        <USwitch v-model="formatMessage" name="Format XML" size="lg" color="success" />
         <span class="font-medium text-gray-900">Format XML </span>
       </div>
     </div>

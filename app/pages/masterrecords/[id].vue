@@ -4,7 +4,7 @@
     <div v-if="record && stats && stats.ukrdcids > 1">
       <NuxtLink :to="`/masterrecords/${record.id}/issues`">
         <UAlert
-          color="red"
+          color="error"
           icon="i-heroicons-exclamation-triangle-20-solid"
           class="mb-4"
           :title="`${stats.ukrdcids} UKRDC IDs found for this patient. Click for details.`"
@@ -14,7 +14,7 @@
 
     <div v-if="record && issueMessage">
       <NuxtLink :to="`/masterrecords/${record.id}/issues`">
-        <UAlert color="orange" icon="i-heroicons-exclamation-triangle-20-solid" class="mb-4" :title="issueMessage" />
+        <UAlert color="warning" icon="i-heroicons-exclamation-triangle-20-solid" class="mb-4" :title="issueMessage" />
       </NuxtLink>
     </div>
 

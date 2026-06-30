@@ -75,7 +75,7 @@ export default defineComponent({
       // Notify of task error
       toast.add({
         title: "Sync Failed",
-        color: "red",
+        color: "error",
         description: e.message,
       });
     }

@@ -16,9 +16,9 @@ export default defineComponent({
   setup(props) {
     const color = computed(() => {
       if (props.status === "pending") {
-        return "blue";
+        return "info";
       } else if (props.status === "running") {
-        return "amber";
+        return "warning";
       } else if (props.status === "finished") {
         return "success";
       } else if (props.status === "failed") {

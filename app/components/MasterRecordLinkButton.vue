@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UChip :show="issueCount > 0" :text="issueCount" color="red" size="2xl">
+    <UChip :show="issueCount > 0" :text="issueCount" color="error" size="2xl">
       <UTooltip :prevent="issueCount <= 0" text="Errors exist on this master record">
         <UButton size="lg" :to="`/masterrecords/${masterId}`"> View Master Record </UButton>
       </UTooltip>
