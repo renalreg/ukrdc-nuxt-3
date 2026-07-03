@@ -32,7 +32,7 @@ export default defineAppConfig({
       },
       defaultVariants: {
         variant: "subtle",
-        color: "error",
+        color: "warning",
       },
     },
 

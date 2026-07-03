@@ -113,7 +113,7 @@ export default defineComponent({
     // Set initial date dateRange
     const dateRange = makeDateRange(null, null, true, true);
 
-    // Work tiem status tab
+    // Work item status tab
     const currentTab = ref<number>(1);
 
     // Data fetching

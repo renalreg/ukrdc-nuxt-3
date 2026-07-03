@@ -17,7 +17,7 @@ export default function () {
   const selectedFacility = stringQuery("facility", undefined, true);
 
   function setFacilities() {
-    // If we don't already have a list of available facilties, fetch one
+    // If we don't already have a list of available facilities, fetch one
     if (facilities.value.length === 0) {
       facilitiesApi
         .getFacilityList()

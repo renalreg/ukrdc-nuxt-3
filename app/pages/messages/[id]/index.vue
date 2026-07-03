@@ -161,7 +161,7 @@ export default defineComponent({
     // Data fetching
 
     function getMessageData() {
-      // Get auxilalry record data
+      // Get auxiliary record data
       if (hasPermission("ukrdc:records:read")) {
         messagesApi
           .getMessagePatientrecords({

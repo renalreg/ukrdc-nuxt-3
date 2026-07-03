@@ -208,7 +208,7 @@ export default defineComponent({
       if (!props.facility.lastMessageReceivedAt) {
         return "No data files received from this facility in over a year";
       } else {
-        return `Latest data file recieved on ${formatDate(props.facility.lastMessageReceivedAt, true)}`;
+        return `Latest data file received on ${formatDate(props.facility.lastMessageReceivedAt, true)}`;
       }
     });
 

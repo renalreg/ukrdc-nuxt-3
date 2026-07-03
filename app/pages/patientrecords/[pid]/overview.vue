@@ -55,7 +55,7 @@
     <!-- Main content container-->
     <div class="grid grid-cols-3 gap-4">
       <!-- Record summary -->
-      <div class="col-span-3 md:col-span-1">
+      <div class="col-span-3 min-w-0 md:col-span-1">
         <!-- Record history -->
         <div class="mb-4">
           <PatientRecordSummaryHistory :record="record" />

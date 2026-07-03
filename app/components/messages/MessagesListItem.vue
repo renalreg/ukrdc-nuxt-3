@@ -25,7 +25,7 @@
         </p>
       </div>
     </div>
-    <!-- Recieved  -->
+    <!-- Received  -->
     <div class="col-span-2 lg:col-span-1">
       <p>From <SendingFacilityLink class="inline" :code="item.facility" /></p>
       <p class="mt-2">
