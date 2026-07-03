@@ -31,21 +31,16 @@
 
           <div class="flex items-center gap-2">
             <UTooltip text="Include migrated sending extracts">
-              <BaseCheckpill v-model="extraRecordTypes" label="MIGRATED" value="MIGRATED" colour="info" />
+              <BaseCheckpill v-model="extraRecordTypes" label="MIGRATED" value="MIGRATED" color="info" />
             </UTooltip>
             <UTooltip text="Include informational sending facilities">
-              <BaseCheckpill
-                v-model="extraRecordTypes"
-                label="INFORMATIONAL"
-                value="INFORMATIONAL"
-                colour="secondary"
-              />
+              <BaseCheckpill v-model="extraRecordTypes" label="INFORMATIONAL" value="INFORMATIONAL" color="secondary" />
             </UTooltip>
             <UTooltip text="Include programme membership sending facilities">
-              <BaseCheckpill v-model="extraRecordTypes" label="MEMBERSHIPS" value="MEMBERSHIPS" colour="success" />
+              <BaseCheckpill v-model="extraRecordTypes" label="MEMBERSHIPS" value="MEMBERSHIPS" color="success" />
             </UTooltip>
             <UTooltip text="Include survey sending extracts">
-              <BaseCheckpill v-model="extraRecordTypes" label="SURVEY" value="SURVEY" colour="error" />
+              <BaseCheckpill v-model="extraRecordTypes" label="SURVEY" value="SURVEY" color="error" />
             </UTooltip>
           </div>
         </div>

@@ -18,7 +18,7 @@ export default function () {
   const selectedChannel = stringQuery("channel", undefined, true);
 
   function setChannels() {
-    // If we don't already have a list of available facilties, fetch one
+    // If we don't already have a list of available facilities, fetch one
     if (channels.value.length === 0) {
       mirthApi
         .getMirthChannelMap()

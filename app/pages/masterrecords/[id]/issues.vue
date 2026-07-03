@@ -15,8 +15,8 @@
             :items="workItemStatusTabs"
             multiple
             placeholder="Select status"
-            label-attribute="name"
-            value-attribute="value"
+            label-key="name"
+            value-key="value"
             class="w-48"
           >
             <template #label>

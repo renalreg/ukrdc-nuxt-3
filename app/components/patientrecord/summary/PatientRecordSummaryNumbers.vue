@@ -1,9 +1,9 @@
 <template>
-  <ul v-if="record.patient">
+  <ul v-if="record.patient" class="grid grid-cols-1 gap-3 sm:grid-cols-2">
     <li
       v-for="item in record.patient.numbers"
       :key="item.numbertype + item.organization + item.patientid"
-      class="col-span-1"
+      class="col-span-1 min-w-0"
     >
       <PatientRecordNumberCard
         class="w-full"
@@ -13,10 +13,10 @@
       />
     </li>
     <!-- Internal patient numbers -->
-    <li class="col-span-1">
+    <li class="col-span-1 min-w-0">
       <PatientRecordNumberCard class="w-full" :number="record.ukrdcid" numbertype="UKRDC" organization="UKKA" />
     </li>
-    <li class="col-span-1">
+    <li class="col-span-1 min-w-0">
       <PatientRecordNumberCard class="w-full" :number="record.pid" numbertype="PID" organization="UKKA" />
     </li>
   </ul>

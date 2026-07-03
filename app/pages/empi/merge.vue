@@ -96,7 +96,7 @@
       </div>
 
       <div class="flex gap-2">
-        <UButton colour="error" @click="beginMergeAlert?.show()">Begin Record Merge</UButton>
+        <UButton color="error" @click="beginMergeAlert?.show()">Begin Record Merge</UButton>
         <UButton v-if="callbackPath" :to="callbackPath">Cancel</UButton>
       </div>
     </div>

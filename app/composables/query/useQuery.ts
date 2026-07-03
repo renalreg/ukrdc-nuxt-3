@@ -4,7 +4,7 @@ Get will read from the current router query, and
 set will change the current router query.
 
 Type conversion is handled via the various included
-methods. E.g. boolearQuery will parse the query string
+methods. E.g. booleanQuery will parse the query string
 and return a boolean.
 */
 

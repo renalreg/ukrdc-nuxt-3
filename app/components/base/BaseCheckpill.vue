@@ -4,7 +4,7 @@ or an array of values when multiple instances are v-model'd onto the same array.
 -->
 
 <template>
-  <label class="wrapper flex items-center font-medium text-gray-500">
+  <label class="wrapper inline-flex cursor-pointer items-center font-medium">
     <input
       v-model="model"
       class="peer sr-only"
@@ -13,9 +13,9 @@ or an array of values when multiple instances are v-model'd onto the same array.
       :disabled="disabled"
       :value="value"
     />
-    <div :class="['peer', `checkpill-${colour}`]">
+    <UBadge :color="color" :variant="isChecked ? 'solid' : 'subtle'" :class="{ 'opacity-50': disabled }">
       {{ label }}
-    </div>
+    </UBadge>
   </label>
 </template>
 
@@ -41,10 +41,10 @@ export default defineComponent({
       required: false,
       default: false,
     },
-    colour: {
+    color: {
       type: String,
       required: false,
-      default: "white",
+      default: "neutral",
     },
   },
   emits: ["update:modelValue"],
@@ -56,7 +56,15 @@ export default defineComponent({
       },
     });
 
-    return { model };
+    // Works whether modelValue is a plain boolean, or an array (multi-checkpill v-model)
+    const isChecked = computed(() => {
+      if (Array.isArray(props.modelValue)) {
+        return props.modelValue.includes(props.value);
+      }
+      return !!props.modelValue;
+    });
+
+    return { model, isChecked };
   },
 });
 </script>

@@ -66,7 +66,7 @@ export default defineComponent({
       if (props.message.received) {
         return `Latest file from ${props.message.facility} was ${sensitive(
           props.message.filename,
-        )}, recieved on ${formatDate(props.message.received, false)}`;
+        )}, received on ${formatDate(props.message.received, false)}`;
       } else {
         return `Latest file from ${props.message.facility} was ${sensitive(props.message.filename)}`;
       }
