@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.6](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.5...v7.0.6) (2026-07-03)
+
+
+### Bug Fixes
+
+* **ui:** bunch of ui fixes ([#503](https://github.com/renalreg/ukrdc-nuxt-3/issues/503)) ([0aa8cb4](https://github.com/renalreg/ukrdc-nuxt-3/commit/0aa8cb4ddebec768c0d589e29f340b7cb14345d9))
+
 ## [7.0.5](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.4...v7.0.5) (2026-06-30)
 
 
