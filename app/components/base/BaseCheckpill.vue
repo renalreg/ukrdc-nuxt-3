@@ -13,11 +13,7 @@ or an array of values when multiple instances are v-model'd onto the same array.
       :disabled="disabled"
       :value="value"
     />
-    <UBadge
-      :color="color"
-      :variant="isChecked ? 'solid' : 'subtle'"
-      :class="{ 'opacity-50': disabled }"
-    >
+    <UBadge :color="color" :variant="isChecked ? 'solid' : 'subtle'" :class="{ 'opacity-50': disabled }">
       {{ label }}
     </UBadge>
   </label>

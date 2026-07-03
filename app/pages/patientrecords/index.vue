@@ -34,12 +34,7 @@
               <BaseCheckpill v-model="extraRecordTypes" label="MIGRATED" value="MIGRATED" color="info" />
             </UTooltip>
             <UTooltip text="Include informational sending facilities">
-              <BaseCheckpill
-                v-model="extraRecordTypes"
-                label="INFORMATIONAL"
-                value="INFORMATIONAL"
-                color="secondary"
-              />
+              <BaseCheckpill v-model="extraRecordTypes" label="INFORMATIONAL" value="INFORMATIONAL" color="secondary" />
             </UTooltip>
             <UTooltip text="Include programme membership sending facilities">
               <BaseCheckpill v-model="extraRecordTypes" label="MEMBERSHIPS" value="MEMBERSHIPS" color="success" />
