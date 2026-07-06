@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.7](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.6...v7.0.7) (2026-07-06)
+
+
+### Bug Fixes
+
+* **ui:** fixed facility/tba causing errors ([3d1548e](https://github.com/renalreg/ukrdc-nuxt-3/commit/3d1548e9a79d071b71ebb94f40e58a1490bf0fee))
+
 ## [7.0.6](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.5...v7.0.6) (2026-07-03)
 
 
