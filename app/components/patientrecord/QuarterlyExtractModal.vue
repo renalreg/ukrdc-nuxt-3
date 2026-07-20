@@ -101,6 +101,7 @@
 
 <script lang="ts">
 import type { PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { AxiosError } from "axios";
 import type { PropType } from "vue";
 
 import useApi from "~/composables/useApi";
@@ -252,14 +253,16 @@ export default defineComponent({
     // The request uses responseType: "blob", so on error the response body
     // (including our JSON { detail } payload) arrives as a Blob rather than
     // parsed JSON. This reads it back out so we can show the real message.
-    async function extractErrorDetail(error: any): Promise<string | undefined> {
+    async function extractErrorDetail(
+      error: AxiosError,
+    ): Promise<string | undefined> {
       const data = error?.response?.data;
       if (!data) return undefined;
 
       try {
         const text = data instanceof Blob ? await data.text() : data;
         const parsed = typeof text === "string" ? JSON.parse(text) : text;
-        return parsed?.detail;
+        return (parsed as { detail?: string })?.detail;
       } catch {
         return undefined;
       }
