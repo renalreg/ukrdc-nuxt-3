@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.1.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.7...v7.1.0) (2026-07-20)
+
+
+### Features
+
+* **UK-108:** UI - Add Button to Export Patient as UKRR File ([8355a5f](https://github.com/renalreg/ukrdc-nuxt-3/commit/8355a5fb8ff56fd3b23b699fbc3bf6c40798aa4c))
+* **UK-108:** UI - Add Button to Export Patient as UKRR File ([8355a5f](https://github.com/renalreg/ukrdc-nuxt-3/commit/8355a5fb8ff56fd3b23b699fbc3bf6c40798aa4c))
+
 ## [7.0.7](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.6...v7.0.7) (2026-07-06)
 
 
