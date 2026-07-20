@@ -65,8 +65,7 @@
 
 <script lang="ts">
 import type { AuditEventSchema, OrderBy, PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
-import { AuditOperation } from "@ukkidney/ukrdc-axios-ts";
-import { Resource } from "@ukkidney/ukrdc-axios-ts/api";
+import { AuditOperation, Resource } from "@ukkidney/ukrdc-axios-ts";
 
 import AuditListItem from "~/components/AuditListItem.vue";
 import BaseDateRange from "~/components/base/BaseDateRange.vue";

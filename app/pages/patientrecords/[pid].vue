@@ -15,8 +15,10 @@
       </div>
     </div>
 
-    <div class="mb-6">
+    <div class="mb-6 items-center sm:flex sm:justify-between">
       <UNavigationMenu orientation="horizontal" :items="links" />
+
+      <QuarterlyExtractModal :pid="currentPid" :record="record" />
     </div>
 
     <NuxtPage v-if="record" :record="record" />
@@ -28,6 +30,7 @@ import type { PatientRecordSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import MasterRecordLinkButton from "~/components/MasterRecordLinkButton.vue";
 import PatientRecordExtractSummary from "~/components/patientrecord/PatientRecordExtractSummary.vue";
+import QuarterlyExtractModal from "~/components/patientrecord/QuarterlyExtractModal.vue";
 import useApi from "~/composables/useApi";
 import usePermissions from "~/composables/usePermissions";
 import { insertIf } from "~/helpers/arrayUtils";
@@ -38,6 +41,7 @@ export default defineComponent({
   components: {
     PatientRecordExtractSummary,
     MasterRecordLinkButton,
+    QuarterlyExtractModal,
   },
   setup() {
     const route = useRoute();
@@ -54,14 +58,22 @@ export default defineComponent({
 
     const record = ref<PatientRecordSchema>();
 
+    // route.params.pid can technically be undefined/string[]; normalize to a
+    // single guaranteed string here so downstream call sites (API calls,
+    // router.push, filenames) don't hit "string | undefined" type errors.
+    const currentPid = computed(() => getFirstOrValue(route.params.pid) ?? "");
+
     // Data fetching
 
     function getRecord() {
       // Fetch patient record
       patientRecordsApi
-        .getPatient({
-          pid: getFirstOrValue(route.params.pid),
-        })
+        .getPatient(
+          {
+            pid: currentPid.value,
+          },
+          { skipErrorToast: true },
+        )
         .then((response) => {
           record.value = response.data;
         })
@@ -120,6 +132,7 @@ export default defineComponent({
 
     return {
       record,
+      currentPid,
       selectedPid,
       forename,
       surname,
