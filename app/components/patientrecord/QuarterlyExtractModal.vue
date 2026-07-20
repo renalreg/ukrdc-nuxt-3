@@ -48,10 +48,7 @@
                     v-if="sendingFacilityOptions.length === 0"
                     text="This can be changed only when the facility is that of a feedshare"
                   >
-                    <UIcon
-                      name="i-heroicons-information-circle"
-                      class="h-4 w-4 cursor-help text-gray-400"
-                    />
+                    <UIcon name="i-heroicons-information-circle" class="h-4 w-4 cursor-help text-gray-400" />
                   </UTooltip>
                 </span>
               </template>
@@ -62,12 +59,7 @@
                 :items="sendingFacilityDropdownOptions"
                 :loading="isLoadingFacilityOptions"
               />
-              <UInput
-                v-else
-                v-model="extractForm.sendingFacility"
-                disabled
-                :loading="isLoadingFacilityOptions"
-              />
+              <UInput v-else v-model="extractForm.sendingFacility" disabled :loading="isLoadingFacilityOptions" />
             </UFormField>
 
             <UFormField v-if="isCentreEditable" label="Centre" name="centre" required>
@@ -253,9 +245,7 @@ export default defineComponent({
     // The request uses responseType: "blob", so on error the response body
     // (including our JSON { detail } payload) arrives as a Blob rather than
     // parsed JSON. This reads it back out so we can show the real message.
-    async function extractErrorDetail(
-      error: AxiosError,
-    ): Promise<string | undefined> {
+    async function extractErrorDetail(error: AxiosError): Promise<string | undefined> {
       const data = error?.response?.data;
       if (!data) return undefined;
 
@@ -288,9 +278,7 @@ export default defineComponent({
         .then((response) => {
           // Prefer the server-provided filename if it sends one via
           // Content-Disposition; otherwise fall back to a constructed name.
-          const contentDisposition = response.headers?.["content-disposition"] as
-            | string
-            | undefined;
+          const contentDisposition = response.headers?.["content-disposition"] as string | undefined;
           const filenameMatch = contentDisposition?.match(/filename="?([^";]+)"?/);
           const filename =
             filenameMatch?.[1] ?? `${props.pid}_${extractForm.sendingFacility}_Q${extractForm.quarter}.rr`;
