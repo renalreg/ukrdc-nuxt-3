@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@nuxt/devtools": "^3.2.4",
+    "@nuxt/devtools": "^3.3.1",
     "@nuxt/eslint": "^1.16.0",
     "@sentry/vue": "^10.66.0",
     "@types/dompurify": "^3.2.0",
