@@ -16,12 +16,12 @@
       <UNavigationMenu orientation="horizontal" :items="links" />
     </div>
 
-    <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" />
+    <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" :satellites="satellites" />
   </div>
 </template>
 
 <script lang="ts">
-import type { FacilityDetailsSchema, FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { FacilityDetailsSchema, FacilityExtractsSchema, CodeMapSchema } from "@ukkidney/ukrdc-axios-ts";
 
 import DashboardAlerts from "~/components/DashboardAlerts.vue";
 import useApi from "~/composables/useApi";
@@ -37,7 +37,7 @@ export default defineComponent({
     const route = useRoute();
     const { hasMultipleFacilities, hasPermission } = usePermissions();
 
-    const { facilitiesApi } = useApi();
+    const { facilitiesApi, codesApi } = useApi();
 
     // Head
     useHead({
@@ -50,6 +50,7 @@ export default defineComponent({
     // Data refs
     const facility = ref<FacilityDetailsSchema>();
     const extracts = ref<FacilityExtractsSchema>();
+    const satellites = ref([] as CodeMapSchema[]);
 
     const showStats = computed<boolean>(() => {
       if (extracts.value) {
@@ -57,6 +58,8 @@ export default defineComponent({
       }
       return false;
     });
+
+    const hasSatellites = computed<boolean>(() => satellites.value.length > 0);
 
     // Data fetching
 
@@ -83,6 +86,24 @@ export default defineComponent({
           // Error handling is centralized in the Axios interceptor
           // Handle UI state reset or fallback values here if needed
         });
+        codesApi
+        .getCodeMaps({
+          destinationCode: getFirstOrValue(code.value),
+          destinationCodingStandard: ["RR1+_MAIN"],
+          sourceCodingStandard: ["RR1+_SATELLITE"],
+        })
+        .then((response) => {
+          satellites.value = response.data.items;
+          satellites.value.forEach(element => { 
+            console.log('sourceCode:', element.sourceCode);
+          
+          });
+          console.log("amount of satellites:", satellites.value.length);
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+        });
+
     });
 
     // Navigation
@@ -109,6 +130,12 @@ export default defineComponent({
           to: `/facilities/${route.params.code}/reports`,
           icon: "i-heroicons-document-chart-bar",
         }),
+        ...insertIf(hasSatellites.value, {
+          label: "Satellites",
+          to: `/facilities/${route.params.code}/satellites`,
+          // Use same one as report for now but change it
+          icon: "i-heroicons-document-chart-bar",
+        })
       ];
     });
 
@@ -118,6 +145,7 @@ export default defineComponent({
       code,
       facility,
       extracts,
+      satellites
     };
   },
 
