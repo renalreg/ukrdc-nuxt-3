@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import type { FacilityDetailsSchema, FacilityExtractsSchema, CodeMapSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { FacilityDetailsSchema, FacilityExtractsSchema, FacilitySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import DashboardAlerts from "~/components/DashboardAlerts.vue";
 import useApi from "~/composables/useApi";
@@ -37,7 +37,7 @@ export default defineComponent({
     const route = useRoute();
     const { hasMultipleFacilities, hasPermission } = usePermissions();
 
-    const { facilitiesApi, codesApi } = useApi();
+    const { facilitiesApi } = useApi();
 
     // Head
     useHead({
@@ -50,7 +50,7 @@ export default defineComponent({
     // Data refs
     const facility = ref<FacilityDetailsSchema>();
     const extracts = ref<FacilityExtractsSchema>();
-    const satellites = ref([] as CodeMapSchema[]);
+    const satellites = ref<FacilitySchema[]>();
 
     const showStats = computed<boolean>(() => {
       if (extracts.value) {
@@ -59,7 +59,7 @@ export default defineComponent({
       return false;
     });
 
-    const hasSatellites = computed<boolean>(() => satellites.value.length > 0);
+    const hasSatellites = computed<boolean>(() => !!satellites.value);
 
     // Data fetching
 
@@ -86,24 +86,19 @@ export default defineComponent({
           // Error handling is centralized in the Axios interceptor
           // Handle UI state reset or fallback values here if needed
         });
-        codesApi
-        .getCodeMaps({
-          destinationCode: getFirstOrValue(code.value),
-          destinationCodingStandard: ["RR1+_MAIN"],
-          sourceCodingStandard: ["RR1+_SATELLITE"],
+      // Need backend PR#1281 to be released to get the exact method name &
+      // test that it all works as expected once available. 
+      facilitiesApi
+        .getFacilitySatellites({
+          facilityCode: getFirstOrValue(code.value),
         })
         .then((response) => {
-          satellites.value = response.data.items;
-          satellites.value.forEach(element => { 
-            console.log('sourceCode:', element.sourceCode);
-          
-          });
-          console.log("amount of satellites:", satellites.value.length);
+          satellites.value = response.data;
         })
         .catch(() => {
           // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
         });
-
     });
 
     // Navigation
@@ -133,8 +128,7 @@ export default defineComponent({
         ...insertIf(hasSatellites.value, {
           label: "Satellites",
           to: `/facilities/${route.params.code}/satellites`,
-          // Use same one as report for now but change it
-          icon: "i-heroicons-document-chart-bar",
+          icon: "i-heroicons-building-office",
         })
       ];
     });
