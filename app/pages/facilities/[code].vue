@@ -87,10 +87,7 @@ export default defineComponent({
           // Handle UI state reset or fallback values here if needed
         });
       facilitiesApi
-        .getFacilitySatellites(
-          { facilityCode: getFirstOrValue(code.value) },
-          { skipErrorToast: true }
-        )
+        .getFacilitySatellites({ facilityCode: getFirstOrValue(code.value) }, { skipErrorToast: true })
         .then((response) => {
           satellites.value = response.data;
         })
@@ -128,7 +125,7 @@ export default defineComponent({
           label: "Satellites",
           to: `/facilities/${route.params.code}/satellites`,
           icon: "i-heroicons-building-office",
-        })
+        }),
       ];
     });
 
@@ -138,7 +135,7 @@ export default defineComponent({
       code,
       facility,
       extracts,
-      satellites
+      satellites,
     };
   },
 
