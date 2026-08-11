@@ -87,9 +87,10 @@ export default defineComponent({
           // Handle UI state reset or fallback values here if needed
         });
       facilitiesApi
-        .getFacilitySatellites({
-          facilityCode: getFirstOrValue(code.value),
-        })
+        .getFacilitySatellites(
+          { facilityCode: getFirstOrValue(code.value) },
+          { skipErrorToast: true }
+        )
         .then((response) => {
           satellites.value = response.data;
         })
