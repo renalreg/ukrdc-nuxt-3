@@ -1,7 +1,7 @@
 <template>
   <!-- List of satellites for the main unit -->
   <UCard :ui="{ body: { padding: '' } }">
-    <UTable :data="satellites" :columns="satelliteTableColumns" :ui="ui" />
+    <UTable :data="satellites" :columns="satelliteTableColumns" />
   </UCard>
 </template>
 
@@ -21,14 +21,8 @@ export default defineComponent({
       { accessorKey: "description", header: "Name" },
     ];
 
-    const ui = {
-      th: { base: "px-6 py-3" },
-      td: { base: "px-6 py-4 whitespace-nowrap" },
-    };
-
     return {
-      satelliteTableColumns,
-      ui,
+      satelliteTableColumns
     };
   }
 });
