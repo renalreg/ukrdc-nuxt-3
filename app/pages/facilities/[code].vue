@@ -86,8 +86,6 @@ export default defineComponent({
           // Error handling is centralized in the Axios interceptor
           // Handle UI state reset or fallback values here if needed
         });
-      // Need backend PR#1281 to be released to get the exact method name &
-      // test that it all works as expected once available. 
       facilitiesApi
         .getFacilitySatellites({
           facilityCode: getFirstOrValue(code.value),
