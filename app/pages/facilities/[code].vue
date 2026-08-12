@@ -16,12 +16,12 @@
       <UNavigationMenu orientation="horizontal" :items="links" />
     </div>
 
-    <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" />
+    <NuxtPage v-if="facility && extracts" :facility="facility" :extracts="extracts" :satellites="satellites" />
   </div>
 </template>
 
 <script lang="ts">
-import type { FacilityDetailsSchema, FacilityExtractsSchema } from "@ukkidney/ukrdc-axios-ts";
+import type { FacilityDetailsSchema, FacilityExtractsSchema, FacilitySchema } from "@ukkidney/ukrdc-axios-ts";
 
 import DashboardAlerts from "~/components/DashboardAlerts.vue";
 import useApi from "~/composables/useApi";
@@ -50,6 +50,7 @@ export default defineComponent({
     // Data refs
     const facility = ref<FacilityDetailsSchema>();
     const extracts = ref<FacilityExtractsSchema>();
+    const satellites = ref<FacilitySchema[]>();
 
     const showStats = computed<boolean>(() => {
       if (extracts.value) {
@@ -57,6 +58,8 @@ export default defineComponent({
       }
       return false;
     });
+
+    const hasSatellites = computed<boolean>(() => !!satellites.value);
 
     // Data fetching
 
@@ -78,6 +81,15 @@ export default defineComponent({
         })
         .then((response) => {
           extracts.value = response.data;
+        })
+        .catch(() => {
+          // Error handling is centralized in the Axios interceptor
+          // Handle UI state reset or fallback values here if needed
+        });
+      facilitiesApi
+        .getFacilitySatellites({ facilityCode: getFirstOrValue(code.value) }, { skipErrorToast: true })
+        .then((response) => {
+          satellites.value = response.data;
         })
         .catch(() => {
           // Error handling is centralized in the Axios interceptor
@@ -109,6 +121,11 @@ export default defineComponent({
           to: `/facilities/${route.params.code}/reports`,
           icon: "i-heroicons-document-chart-bar",
         }),
+        ...insertIf(hasSatellites.value, {
+          label: "Satellites",
+          to: `/facilities/${route.params.code}/satellites`,
+          icon: "i-heroicons-building-office",
+        }),
       ];
     });
 
@@ -118,6 +135,7 @@ export default defineComponent({
       code,
       facility,
       extracts,
+      satellites,
     };
   },
 
