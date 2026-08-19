@@ -54,7 +54,10 @@
         <UCard :ui="{ body: { padding: '' } }" class="mb-4">
           <UTable :loading="loading" :data="results" :columns="columns" class="sensitive" :ui="ui">
             <!-- Value -->
-            <template #value-cell="{ row }"> {{ row.original.value }} {{ row.original.valueUnits }} </template>
+            <template #value-cell="{ row }">
+              <span class="font-medium">{{ row.original.value }}</span>
+              <span class="opacity-80">{{ row.original.valueUnits }}</span>
+            </template>
             <!-- observationTime -->
             <template #observationTime-cell="{ row }">
               {{ row.original.observationTime ? formatDate(row.original.observationTime) : "No observation time" }}
