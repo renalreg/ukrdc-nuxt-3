@@ -1,5 +1,21 @@
 # Changelog
 
+## [7.2.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.1.0...v7.2.0) (2026-08-20)
+
+
+### Features
+
+* **UK-157:** Show Satellites ([f7993e5](https://github.com/renalreg/ukrdc-nuxt-3/commit/f7993e568767f238ff364426c113e863b908771f))
+* **UK-157:** UKRDC UI - Show Satellites ([571bd8d](https://github.com/renalreg/ukrdc-nuxt-3/commit/571bd8db89b9f9e475f4ec4ad1168fe985e540e8))
+
+
+### Bug Fixes
+
+* do not show error toast for expected 404 from satllites endpoint ([a432ff3](https://github.com/renalreg/ukrdc-nuxt-3/commit/a432ff3bfe944039f35274a3dc76c32dbcfc6f18))
+* sync package-lock.json with package.json axios-ts version ([2aa70f5](https://github.com/renalreg/ukrdc-nuxt-3/commit/2aa70f564d94ba76c15323441518e7108b8d5a46))
+* **UK-336:** search by date range ([ac8e32c](https://github.com/renalreg/ukrdc-nuxt-3/commit/ac8e32cbe52ef26740a9c62968bc26b78e3f4f3d))
+* **UK-336:** Search By Date Range Fix ([dcd28d7](https://github.com/renalreg/ukrdc-nuxt-3/commit/dcd28d7270d7ee15ab9bf8b2e00239e07f79dec6))
+
 ## [7.1.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.0.7...v7.1.0) (2026-07-20)
 
 
