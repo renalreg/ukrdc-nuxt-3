@@ -58,6 +58,10 @@
               <span class="font-medium">{{ row.original.value }}</span>
               <span class="opacity-80">{{ row.original.valueUnits }}</span>
             </template>
+            <!-- interpretationCode -->
+            <template #interpretationCode-cell="{ row }">
+              {{ row.original.interpretationCodes }}
+            </template>
             <!-- observationTime -->
             <template #observationTime-cell="{ row }">
               {{ row.original.observationTime ? formatDate(row.original.observationTime) : "No observation time" }}
@@ -279,6 +283,7 @@ watch(selectedOrderId, () => {
 const columns: TableColumn<ResultItemSchema>[] = [
   { id: "serviceId", accessorKey: "serviceId", header: "Type" },
   { id: "value", accessorKey: "value", header: "Value" },
+  { id: "interpretationCode", accessorKey: "interpretationCodes", header: "Interpretation Code" },
   { id: "orderId", accessorKey: "orderId", header: "Order ID" },
   { id: "observationTime", accessorKey: "observationTime", header: "Observation time" },
   { id: "prePost", accessorKey: "prePost", header: "Pre/Post-Dialysis" },
@@ -301,6 +306,6 @@ const menuItems = (row: ResultItemSchema) => [
 ];
 
 const ui = {
-  th: { base: "px-6 py-3" },
+  th: "align-top",
 };
 </script>
