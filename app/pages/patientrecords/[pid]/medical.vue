@@ -13,7 +13,7 @@
 
     <div class="flex gap-8">
       <UNavigationMenu orientation="vertical" :items="links" />
-      <NuxtPage v-if="record" class="flex-1" :record="record" />
+      <NuxtPage v-if="record" class="flex-1 pr-2" :record="record" />
     </div>
   </div>
 </template>
