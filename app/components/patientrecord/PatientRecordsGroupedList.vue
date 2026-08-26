@@ -45,8 +45,6 @@
       v-for="item in groupedRecords.migrated"
       :key="item.pid + '_mig'"
       :item="item"
-      :show-radar-sync="hasRADARMembership"
-      :show-pkb-sync="hasPKBMembership"
       @deleted="$emit('refresh')"
     />
 
