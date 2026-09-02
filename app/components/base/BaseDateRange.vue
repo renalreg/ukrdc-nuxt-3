@@ -35,14 +35,14 @@
           <div class="flex h-full flex-row items-center justify-start" @click="showPopover">
             <UInput
               icon="i-heroicons-calendar-20-solid"
-              class="relative h-full w-full flex-grow"
+              class="relative h-full w-full grow"
               :value="inputValue.start"
               v-on="inputEvents.start"
             />
-            <UIcon name="i-heroicons-arrow-right-20-solid" class="mx-2 h-4 w-4 flex-shrink-0 text-gray-600" />
+            <UIcon name="i-heroicons-arrow-right-20-solid" class="mx-2 h-4 w-4 shrink-0 text-gray-600" />
             <UInput
               icon="i-heroicons-calendar-20-solid"
-              class="relative h-full w-full flex-grow"
+              class="relative h-full w-full grow"
               :value="inputValue.end"
               v-on="inputEvents.end"
             />

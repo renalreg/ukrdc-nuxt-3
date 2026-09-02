@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="record && record.patient" class="mb-8 items-center sm:mb-2 sm:flex">
-      <div class="mb-4 flex-grow text-center sm:text-left md:mb-0">
+      <div class="mb-4 grow text-center sm:text-left md:mb-0">
         <h1>
           <span class="sensitive capitalize">{{ forename.toLowerCase() }}</span>
           <span class="sensitive capitalize italic">

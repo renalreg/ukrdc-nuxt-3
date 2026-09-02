@@ -24,7 +24,7 @@
       </div>
 
       <div class="flex flex-col gap-2 lg:flex-row">
-        <BaseCollapseHeader v-model="advancedOpen" class="flex-grow" label="More Options" />
+        <BaseCollapseHeader v-model="advancedOpen" class="grow" label="More Options" />
 
         <USelectMenu v-model="statuses" :items="['STORED', 'RECEIVED', 'ERROR', 'RESOLVED']" multiple>
           <template #label>
@@ -45,7 +45,7 @@
         <UButton v-show="nationalId" size="sm" @click="nationalId = undefined">Show Results From All Patients</UButton>
 
         <UButton
-          class="flex-shrink"
+          class="shrink"
           size="sm"
           :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
           :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"

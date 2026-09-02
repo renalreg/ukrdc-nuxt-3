@@ -1,15 +1,15 @@
 <template>
   <div class="divide-y divide-gray-300">
     <div v-if="groupedRecords.data.length > 0" class="patientrecords-list-header">
-      <h4 class="flex-grow">Data feeds</h4>
-      <div class="mr-2 flex-grow-0">
+      <h4 class="grow">Data feeds</h4>
+      <div class="mr-2 grow-0">
         <PatientRecordSyncAllMenu
           :records="groupedRecords.data"
           :has-pkb-membership="hasPKBMembership"
           @refresh="$emit('refresh')"
         />
       </div>
-      <div class="mr-2 flex-grow-0">
+      <div class="mr-2 grow-0">
         <PatientRecordSyncAllMenuMRC
           :records="groupedRecords.data"
           :has-mrc-membership="hasMRCMembership"
@@ -51,8 +51,8 @@
     />
 
     <div class="patientrecords-list-header">
-      <h4 class="flex-grow">Membership Records</h4>
-      <div class="mr-2 flex-grow-0">
+      <h4 class="grow">Membership Records</h4>
+      <div class="mr-2 grow-0">
         <PatientRecordMembershipsMenu
           :records="records"
           :show-create-pkb-membership="!hasPKBMembership"

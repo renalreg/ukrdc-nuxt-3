@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-6 flex items-end gap-4">
-      <div class="flex-grow">
+      <div class="grow">
         <h1 v-if="message">
           {{ message.msgStatus === "ERROR" ? "Error" : "Message" }} {{ message.id }} from {{ message.facility }}
         </h1>

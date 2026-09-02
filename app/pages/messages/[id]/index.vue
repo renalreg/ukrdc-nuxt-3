@@ -6,7 +6,7 @@
         <BaseDescriptionListGridItem>
           <dt>Status</dt>
           <dd v-if="message">
-            <BadgeMessageStatus class="mr-2 flex-shrink" :message="message" />
+            <BadgeMessageStatus class="mr-2 shrink" :message="message" />
           </dd>
           <USkeleton v-else class="h-6 w-full" />
         </BaseDescriptionListGridItem>

@@ -2,7 +2,7 @@
   <BaseModal ref="modal">
     <div class="p-4">
       <div class="sm:flex sm:items-start">
-        <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0">
+        <div class="mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0">
           <UIcon name="i-heroicons-exclamation-circle" class="h-6 w-6 text-red-600" />
         </div>
         <div class="mt-3 ml-8 text-left sm:mt-0 sm:ml-4">

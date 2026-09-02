@@ -9,7 +9,7 @@
     <UCard :ui="{ body: { padding: '' } }" class="mt-4">
       <template #header>
         <div class="flex items-center">
-          <h2 class="flex-grow">Work Items</h2>
+          <h2 class="grow">Work Items</h2>
           <USelectMenu
             v-model="workItemStatuses"
             :items="workItemStatusTabs"
