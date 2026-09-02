@@ -6,7 +6,7 @@
         class="max-w-3xl lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:space-x-5"
       >
         <div class="mb-4 flex items-center space-x-5">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <div class="relative">
               <span
                 class="inline-block h-16 w-16 overflow-hidden rounded-full"

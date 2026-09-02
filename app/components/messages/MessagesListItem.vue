@@ -19,8 +19,8 @@
       </div>
 
       <div class="mt-2 flex">
-        <BadgeMessageStatus class="mr-2 flex-shrink" :message="item" />
-        <p class="line-clamp-1 flex-grow">
+        <BadgeMessageStatus class="mr-2 shrink" :message="item" />
+        <p class="line-clamp-1 grow">
           {{ itemDescription }}
         </p>
       </div>
@@ -44,7 +44,7 @@
         />
       </UTooltip>
 
-      <div class="flex-grow">
+      <div class="grow">
         <h5>Patient Number</h5>
         <p class="sensitive mt-2">
           {{ item.ni ?? "None Found" }}

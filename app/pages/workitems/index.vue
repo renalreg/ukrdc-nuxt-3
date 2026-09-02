@@ -21,7 +21,7 @@
         <UButton class="ml-2" size="lg" label="Clear" @click="selectedFacility = undefined" />
       </div>
       <div class="flex items-center">
-        <div class="flex-grow">
+        <div class="grow">
           <USelectMenu
             v-model="statuses"
             :items="workItemStatusTabs"
@@ -40,7 +40,7 @@
           </USelectMenu>
         </div>
         <UButton
-          class="flex-shrink"
+          class="shrink"
           size="sm"
           :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
           :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"

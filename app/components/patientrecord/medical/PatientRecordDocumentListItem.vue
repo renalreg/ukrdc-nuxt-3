@@ -9,10 +9,10 @@
           </h5>
         </div>
         <div class="mt-2 flex">
-          <span class="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+          <span class="inline-flex items-center rounded-sm bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
             {{ item.filetype ?? "text" }}
           </span>
-          <p class="ml-2 line-clamp-1 flex-grow">
+          <p class="ml-2 line-clamp-1 grow">
             {{ item.filename ?? `${item.documentname}.txt` }}
           </p>
         </div>

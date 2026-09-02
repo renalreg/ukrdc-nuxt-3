@@ -19,7 +19,7 @@
 
               <div class="mt-2">
                 <span
-                  class="inline-block flex-shrink-0 rounded-sm bg-indigo-100 px-2 py-0.5 text-sm font-medium text-indigo-800"
+                  class="inline-block shrink-0 rounded-sm bg-indigo-100 px-2 py-0.5 text-sm font-medium text-indigo-800"
                   >{{ item.questions.length }} questions</span
                 >
                 <UButton class="float-right" :to="`./surveys/${item.id}`"> View survey </UButton>

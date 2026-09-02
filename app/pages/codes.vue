@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mx-auto mb-4 flex">
-      <div class="flex-grow">
+      <div class="grow">
         <h1>Codes List</h1>
       </div>
       <div>

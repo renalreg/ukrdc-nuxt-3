@@ -21,12 +21,12 @@
           <dd v-if="connectorMessage">
             <span
               v-if="errorMessage"
-              class="inline-block flex-shrink-0 rounded-sm bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800"
+              class="inline-block shrink-0 rounded-sm bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800"
               >Error</span
             >
             <span
               v-else
-              class="inline-block flex-shrink-0 rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
+              class="inline-block shrink-0 rounded-sm bg-green-100 px-2 py-0.5 text-sm font-medium text-green-800"
               >Success</span
             >
           </dd>

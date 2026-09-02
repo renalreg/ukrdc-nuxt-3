@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import eslintPluginBetterTailwindcss from "eslint-plugin-better-tailwindcss";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import vue from "eslint-plugin-vue";
 import vueParser from "vue-eslint-parser";
@@ -9,6 +10,16 @@ import withNuxt from "./.nuxt/eslint.config.mjs";
 
 export default withNuxt([
   js.configs.recommended,
+
+  // Tailwind CSS v4 settings (applies to every config block below that uses the plugin)
+  {
+    settings: {
+      "better-tailwindcss": {
+        // ⚠️ point this at your actual CSS entry file — the one with `@import "tailwindcss";`
+        entryPoint: "app/assets/css/main.css",
+      },
+    },
+  },
 
   // Vue files
   {
@@ -25,6 +36,7 @@ export default withNuxt([
       vue,
       "simple-import-sort": simpleImportSort,
       "@typescript-eslint": tseslint,
+      "better-tailwindcss": eslintPluginBetterTailwindcss,
     },
     rules: {
       // ✅ IMPORTANT: disable base rule
@@ -33,6 +45,9 @@ export default withNuxt([
       // Import sorting
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
+
+      // Flag (and auto-fix) deprecated Tailwind utility classes, e.g. flex-grow-0 → grow-0
+      "better-tailwindcss/no-deprecated-classes": "error",
 
       // General rules
       "no-console": "off",
@@ -77,6 +92,7 @@ export default withNuxt([
     plugins: {
       "@typescript-eslint": tseslint,
       "simple-import-sort": simpleImportSort,
+      "better-tailwindcss": eslintPluginBetterTailwindcss,
     },
     rules: {
       // ✅ IMPORTANT: disable base rule here too
@@ -85,6 +101,9 @@ export default withNuxt([
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "no-console": "off",
+
+      // Flag (and auto-fix) deprecated Tailwind utility classes, e.g. flex-grow-0 → grow-0
+      "better-tailwindcss/no-deprecated-classes": "error",
 
       "@typescript-eslint/no-unused-vars": [
         "error",

@@ -20,7 +20,7 @@
           <UButton class="ml-2" size="lg" label="Clear" @click="selectedFacility = undefined" />
         </div>
         <div class="flex items-center">
-          <div class="flex flex-grow">
+          <div class="flex grow">
             <USelectMenu
               v-model="sendingExtracts"
               :items="['UKRDC', 'PV', 'UKRR', 'RADAR']"
@@ -86,12 +86,12 @@
         <p><b>Tip: </b>Refine your search by joining terms,</p>
         <p class="mb-4">
           For example,
-          <span class="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 text-gray-800"> john & 1/12/1980 </span>
+          <span class="inline-flex items-center rounded-sm bg-gray-100 px-2 py-0.5 text-gray-800"> john & 1/12/1980 </span>
         </p>
         <p>Search for an exact name using quote marks,</p>
         <p>
           For example,
-          <span class="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 text-gray-800"> "jon" </span>
+          <span class="inline-flex items-center rounded-sm bg-gray-100 px-2 py-0.5 text-gray-800"> "jon" </span>
         </p>
       </div>
     </div>
