@@ -8,6 +8,9 @@
             <SendingFacilityLink class="inline font-medium" :code="row.original.healthcarefacilitycode" />
             <span v-if="row.original.qbl05" class="inline">/ {{ row.original.qbl05 }}</span>
           </span>
+          <UBadge v-if="row.original.isexternallocation" color="info" class="block mt-1 w-fit">
+            External
+          </UBadge>
         </template>
         <!-- Admit Date -->
         <template #fromtime-cell="{ row }">
@@ -69,6 +72,9 @@
                 <p>
                   <b>Discharge location code: </b>{{ row.original.dischargelocationcodestd ?? "None" }} /
                   {{ row.original.dischargelocationcode ?? "None" }}
+                </p>
+                <p v-if="row.original.isexternallocation">
+                  <b>External Location</b>
                 </p>
               </div>
             </BaseInfoTooltip>
