@@ -86,7 +86,9 @@
         <p><b>Tip: </b>Refine your search by joining terms,</p>
         <p class="mb-4">
           For example,
-          <span class="inline-flex items-center rounded-sm bg-gray-100 px-2 py-0.5 text-gray-800"> john & 1/12/1980 </span>
+          <span class="inline-flex items-center rounded-sm bg-gray-100 px-2 py-0.5 text-gray-800">
+            john & 1/12/1980
+          </span>
         </p>
         <p>Search for an exact name using quote marks,</p>
         <p>
