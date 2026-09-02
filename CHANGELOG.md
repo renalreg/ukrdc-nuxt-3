@@ -1,5 +1,18 @@
 # Changelog
 
+## [7.3.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.2.0...v7.3.0) (2026-09-02)
+
+
+### Features
+
+* **UK-334:** add interpretation code column to results table ([38b3a00](https://github.com/renalreg/ukrdc-nuxt-3/commit/38b3a009e63d01703120676e3e73c78767e426dd))
+* **UK-334:** Show interpretationcodes ([d7da5da](https://github.com/renalreg/ukrdc-nuxt-3/commit/d7da5da274c644acd8662b95b8e0964177c77ce9))
+
+
+### Bug Fixes
+
+* add right padding to fix container being cut off by viewport ([2076e7f](https://github.com/renalreg/ukrdc-nuxt-3/commit/2076e7f46a02cc049a5f193430f20abbca556903))
+
 ## [7.2.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.1.0...v7.2.0) (2026-08-20)
 
 
