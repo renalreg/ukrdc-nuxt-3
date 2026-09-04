@@ -166,12 +166,7 @@ export default defineComponent({
     ];
 
     const ui = {
-      th: {
-        base: "px-6 py-3",
-      },
-      td: {
-        base: "px-6 py-4 whitespace-nowrap",
-      },
+      td: "align-top"
     };
 
     return {
