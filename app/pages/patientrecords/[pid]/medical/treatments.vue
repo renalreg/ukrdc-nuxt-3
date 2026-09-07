@@ -100,6 +100,7 @@ import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
 import useApi from "~/composables/useApi";
+import useQuery from "~/composables/query/useQuery";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
@@ -117,33 +118,33 @@ export default defineComponent({
 
   setup(props) {
     const { patientRecordsApi } = useApi();
+    const { stringQuery } = useQuery();
 
     // Data refs
     const treatments = ref<TreatmentSchema[]>();
 
     // Client side external location filter
     const locationOptions = [
-      { label: "External", value: true },
-      { label: "Not external", value: false },
+      { label: "External", value: "external" },
+      { label: "Not external", value: "not-external" },
     ];
 
-    const selectedIsExternal = ref<boolean | undefined>(undefined);
+    const selectedLocation = stringQuery("location", undefined, true, false);
     
-    // Converts between the raw boolean (selectedIsExternal) and the
-    // full option object USelectMenu needs to display a selection
+    // selectedLocationOption is the full object bound to USelectMenu (Nuxt UI v3 requires the full item)
     const selectedLocationOption = computed({
-      get: () => locationOptions.find((option) => option.value === selectedIsExternal.value) ?? undefined,
-      set: (option: { label: string; value: boolean } | undefined) => {
-        selectedIsExternal.value = option?.value;
+      get: () => locationOptions.find((option) => option.value === selectedLocation.value) ?? undefined,
+      set: (option: { label: string; value: string } | undefined) => {
+        selectedLocation.value = option?.value;
       },
     });
 
     // Undefined shows all treatments, otherwise filters by isexternallocation
-    const filteredTreatments = computed(() =>
-      selectedIsExternal.value === undefined
-        ? treatments.value
-        : treatments.value?.filter((treatment: TreatmentSchema) => treatment.isexternallocation === selectedIsExternal.value)
-    );
+    const filteredTreatments = computed(() => {
+      if (selectedLocation.value === undefined) return treatments.value;
+      const isExternalFilter = selectedLocation.value === "external";
+      return treatments.value?.filter((treatment: TreatmentSchema) => treatment.isexternallocation === isExternalFilter);
+    });
 
     // Data fetching
     const loading = ref(false);
