@@ -1,7 +1,18 @@
 <template>
   <div>
+    <!-- External location select -->
+    <div class="mb-4 flex">
+      <USelectMenu
+        v-model="selectedLocationOption"
+        class="flex-1"
+        size="lg"
+        :items="locationOptions"
+        placeholder="Select location type"
+      />
+      <UButton class="ml-2" size="lg" label="Clear" @click="selectedLocationOption = undefined" />
+    </div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :loading="loading" :data="treatments" :columns="columns" class="sensitive" :ui="ui">
+      <UTable :loading="loading" :data="filteredTreatments" :columns="columns" class="sensitive" :ui="ui">
         <!-- Facility / QBL05 -->
         <template #healthcarefacilitycode-cell="{ row }">
           <span>
@@ -73,9 +84,6 @@
                   <b>Discharge location code: </b>{{ row.original.dischargelocationcodestd ?? "None" }} /
                   {{ row.original.dischargelocationcode ?? "None" }}
                 </p>
-                <p v-if="row.original.isexternallocation">
-                  <b>External Location</b>
-                </p>
               </div>
             </BaseInfoTooltip>
           </span>
@@ -112,6 +120,30 @@ export default defineComponent({
 
     // Data refs
     const treatments = ref<TreatmentSchema[]>();
+
+    // Client side external location filter
+    const locationOptions = [
+      { label: "External", value: true },
+      { label: "Not external", value: false },
+    ];
+
+    const selectedIsExternal = ref<boolean | undefined>(undefined);
+    
+    // Converts between the raw boolean (selectedIsExternal) and the
+    // full option object USelectMenu needs to display a selection
+    const selectedLocationOption = computed({
+      get: () => locationOptions.find((option) => option.value === selectedIsExternal.value) ?? undefined,
+      set: (option: { label: string; value: boolean } | undefined) => {
+        selectedIsExternal.value = option?.value;
+      },
+    });
+
+    // Undefined shows all treatments, otherwise filters by isexternallocation
+    const filteredTreatments = computed(() =>
+      selectedIsExternal.value === undefined
+        ? treatments.value
+        : treatments.value?.filter((treatment: TreatmentSchema) => treatment.isexternallocation === selectedIsExternal.value)
+    );
 
     // Data fetching
     const loading = ref(false);
@@ -172,7 +204,9 @@ export default defineComponent({
     return {
       formatDate,
       loading,
-      treatments,
+      filteredTreatments,
+      selectedLocationOption,
+      locationOptions,
       columns,
       ui,
     };
