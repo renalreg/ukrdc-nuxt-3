@@ -19,9 +19,7 @@
             <SendingFacilityLink class="inline font-medium" :code="row.original.healthcarefacilitycode" />
             <span v-if="row.original.qbl05" class="inline">/ {{ row.original.qbl05 }}</span>
           </span>
-          <UBadge v-if="row.original.isexternallocation" color="info" class="block mt-1 w-fit">
-            External
-          </UBadge>
+          <UBadge v-if="row.original.isexternallocation" color="info" class="mt-1 block w-fit"> External </UBadge>
         </template>
         <!-- Admit Date -->
         <template #fromtime-cell="{ row }">
@@ -99,8 +97,8 @@ import type { PatientRecordSchema, TreatmentSchema } from "@ukkidney/ukrdc-axios
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
-import useApi from "~/composables/useApi";
 import useQuery from "~/composables/query/useQuery";
+import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
 
 export default defineComponent({
@@ -130,7 +128,7 @@ export default defineComponent({
     ];
 
     const selectedLocation = stringQuery("location", undefined, true, false);
-    
+
     // selectedLocationOption is the full object bound to USelectMenu (Nuxt UI v3 requires the full item)
     const selectedLocationOption = computed({
       get: () => locationOptions.find((option) => option.value === selectedLocation.value) ?? undefined,
@@ -143,7 +141,9 @@ export default defineComponent({
     const filteredTreatments = computed(() => {
       if (selectedLocation.value === undefined) return treatments.value;
       const isExternalFilter = selectedLocation.value === "external";
-      return treatments.value?.filter((treatment: TreatmentSchema) => treatment.isexternallocation === isExternalFilter);
+      return treatments.value?.filter(
+        (treatment: TreatmentSchema) => treatment.isexternallocation === isExternalFilter,
+      );
     });
 
     // Data fetching
@@ -199,7 +199,7 @@ export default defineComponent({
     ];
 
     const ui = {
-      td: "align-top"
+      td: "align-top",
     };
 
     return {
