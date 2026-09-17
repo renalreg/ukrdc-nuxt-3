@@ -8,7 +8,7 @@
     </USlideover>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden md:flex md:flex-shrink-0">
+    <div class="hidden md:flex md:shrink-0">
       <div class="flex flex-col">
         <Sidebar class="h-0 border-r border-gray-200" />
       </div>
@@ -17,9 +17,9 @@
     <!-- Main page -->
     <div class="flex w-0 flex-1 flex-col overflow-hidden">
       <!-- Mobile menu bar -->
-      <div class="z-10 flex h-16 flex-shrink-0 items-center border-b border-gray-200 bg-white md:hidden">
+      <div class="z-10 flex h-16 shrink-0 items-center border-b border-gray-200 bg-white md:hidden">
         <!-- Sidebar menu button -->
-        <div class="justify-left inline-flex flex-grow items-center">
+        <div class="justify-left inline-flex grow items-center">
           <button
             class="-mt-0.5 -ml-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-inset"
             @click="toggle()"
@@ -29,7 +29,7 @@
           </button>
         </div>
 
-        <div class="mr-1 flex flex-shrink-0">
+        <div class="mr-1 flex shrink-0">
           <ProfileBadge :right-to-left="true" :top-to-bottom="true" />
         </div>
       </div>

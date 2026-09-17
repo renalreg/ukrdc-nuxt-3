@@ -33,12 +33,12 @@
       </div>
 
       <div class="my-4 flex flex-none flex-row justify-center lg:my-0 lg:flex-col lg:justify-start">
-        <div class="flex-shrink">
+        <div class="shrink">
           <UTooltip text="Switch Records">
             <UButton square size="lg" icon="i-heroicons-arrows-right-left-20-solid" @click="switchRecords" />
           </UTooltip>
         </div>
-        <div class="hidden flex-grow flex-col items-center justify-center lg:flex">
+        <div class="hidden grow flex-col items-center justify-center lg:flex">
           <div v-show="superseded && superseding" class="h-8">
             <UIcon name="i-heroicons-arrow-right" class="mx-auto my-2 h-6 w-6 text-gray-400" />
           </div>

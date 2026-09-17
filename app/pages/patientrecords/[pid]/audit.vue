@@ -4,7 +4,7 @@
       <div class="mb-4 flex flex-row gap-2">
         <BaseDateRange v-model="dateRange" class="flex-1" />
         <UButton
-          class="flex-shrink"
+          class="shrink"
           :icon="orderAscending ? 'i-heroicons-bars-arrow-up-20-solid' : 'i-heroicons-bars-arrow-down-20-solid'"
           :label="orderAscending ? 'Oldest - Newest' : 'Newest - Oldest'"
           size="sm"
@@ -24,7 +24,7 @@
           placeholder="Select an operation"
           class="w-64"
         />
-        <UButton class="flex-shrink" label="Clear" size="sm" @click="clearSelection" />
+        <UButton class="shrink" label="Clear" size="sm" @click="clearSelection" />
       </div>
     </div>
 

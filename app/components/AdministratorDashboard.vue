@@ -7,7 +7,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
     <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-3">
       <UCard>
         <div class="flex items-center">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <UIcon name="i-heroicons-users" class="h-6 w-6 text-gray-600" />
           </div>
           <div class="ml-5 w-0 flex-1">
@@ -25,7 +25,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
 
       <UCard>
         <div class="flex items-center">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <UIcon name="i-heroicons-link" class="h-6 w-6 text-gray-600" />
           </div>
           <div class="ml-5 w-0 flex-1">
@@ -43,7 +43,7 @@ Admin (permission ukrdc:facilities:*) dashboard with overview of all facilities.
 
       <UCard>
         <div class="flex items-center">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <UIcon name="i-heroicons-exclamation-triangle" class="h-6 w-6 text-gray-600" />
           </div>
           <div class="ml-5 w-0 flex-1">

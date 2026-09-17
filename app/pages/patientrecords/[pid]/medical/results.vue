@@ -35,7 +35,7 @@
       </div>
 
       <div>
-        <div class="mb-4 flex flex-grow items-center gap-2">
+        <div class="mb-4 flex grow items-center gap-2">
           <NuxtLink :to="'./laborders'">
             <UButton>View Lab Orders</UButton>
           </NuxtLink>

@@ -13,7 +13,7 @@
           </div>
         </div>
 
-        <div class="grid flex-grow grid-cols-6 items-center gap-2 py-2 pr-2 lg:grid-cols-12">
+        <div class="grid grow grid-cols-6 items-center gap-2 py-2 pr-2 lg:grid-cols-12">
           <p class="col-span-2 truncate lg:col-span-3">{{ formatDate(item.accessEvent.time, true, true) }}</p>
           <p class="sensitive col-span-4 lg:col-span-4">{{ item.accessEvent.userEmail }}</p>
           <p class="col-span-2 lg:col-span-1"><BadgeCRUD :operation="item.operation" /></p>

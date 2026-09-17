@@ -5,7 +5,7 @@
       <template #header>
         <h2>Records Currently Failing</h2>
         <div class="flex w-full">
-          <div class="flex-grow">
+          <div class="grow">
             <h5>Records where the most recent message received failed to process due to errors.</h5>
           </div>
           <BaseCollapseHeader v-model="advancedOpen" label="More Options" />

@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-64 flex-1 flex-col bg-neutral-50">
     <div class="h-0 flex-1 overflow-y-auto pt-6 pb-4">
-      <div class="mb-2 flex flex-shrink-0 items-center px-4">
+      <div class="mb-2 flex shrink-0 items-center px-4">
         <img class="h-auto w-full" src="~/assets/UKKA_UKRDC.svg" alt="Workflow" />
       </div>
       <div v-if="deploymentEnv !== 'production'" class="bg-yellow-700 py-2 text-center text-white capitalize">
@@ -36,7 +36,7 @@
       </nav>
     </div>
 
-    <div v-if="showProfile" class="flex flex-shrink-0 border-t border-gray-200 p-1">
+    <div v-if="showProfile" class="flex shrink-0 border-t border-gray-200 p-1">
       <ProfileBadge />
     </div>
   </div>

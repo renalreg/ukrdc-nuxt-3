@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="flex items-center gap-2 border-b p-4">
-      <div class="flex-grow pl-2">
+      <div class="grow pl-2">
         <div>
           <h2 v-if="heading">{{ heading }}</h2>
           <h5 v-if="group && group.groupId">Record Group {{ group.groupId }}</h5>
         </div>
       </div>
-      <div class="flex-shrink">
+      <div class="shrink">
         <div v-if="!fetchInProgress">
           <UButton
             v-if="group.records.length == 2"

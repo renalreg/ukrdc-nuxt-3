@@ -16,13 +16,13 @@
         <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <UCard>
             <div class="flex items-center">
-              <div class="flex-shrink-0">
+              <div class="shrink-0">
                 <UIcon name="i-heroicons-users" class="h-6 w-6 text-gray-600" />
               </div>
               <div class="ml-5 w-0 flex-1">
                 <h5>Total Records</h5>
                 <div class="flex items-baseline">
-                  <h1 class="flex-grow text-indigo-600">
+                  <h1 class="grow text-indigo-600">
                     {{ facility.statistics.totalPatients }}
                   </h1>
                   <NuxtLink
@@ -44,14 +44,14 @@
 
           <UCard>
             <div class="flex items-center">
-              <div class="flex-shrink-0">
+              <div class="shrink-0">
                 <UIcon name="i-heroicons-exclamation-triangle" class="h-6 w-6 text-gray-600" />
               </div>
               <div class="ml-5 w-0 flex-1">
                 <h5>Active Failing Records</h5>
                 <div class="flex items-baseline">
                   <h1
-                    class="flex-grow"
+                    class="grow"
                     :class="
                       (facility.statistics.patientsReceivingMessageError ?? 0) > 0 ? 'text-red-600' : 'text-green-700'
                     "

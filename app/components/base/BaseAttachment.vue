@@ -6,7 +6,7 @@
         {{ filename }}
       </p>
     </div>
-    <div class="ml-4 flex flex-shrink-0 gap-4">
+    <div class="ml-4 flex shrink-0 gap-4">
       <slot />
     </div>
   </div>
