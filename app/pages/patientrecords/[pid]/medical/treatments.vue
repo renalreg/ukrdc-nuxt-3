@@ -1,13 +1,25 @@
 <template>
   <div>
+    <!-- External location select -->
+    <div class="mb-4 flex">
+      <USelectMenu
+        v-model="selectedLocationOption"
+        class="flex-1"
+        size="lg"
+        :items="locationOptions"
+        placeholder="Select location type"
+      />
+      <UButton class="ml-2" size="lg" label="Clear" @click="selectedLocationOption = undefined" />
+    </div>
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
-      <UTable :loading="loading" :data="treatments" :columns="columns" class="sensitive" :ui="ui">
+      <UTable :loading="loading" :data="filteredTreatments" :columns="columns" class="sensitive" :ui="ui">
         <!-- Facility / QBL05 -->
         <template #healthcarefacilitycode-cell="{ row }">
           <span>
             <SendingFacilityLink class="inline font-medium" :code="row.original.healthcarefacilitycode" />
             <span v-if="row.original.qbl05" class="inline">/ {{ row.original.qbl05 }}</span>
           </span>
+          <UBadge v-if="row.original.isexternallocation" color="info" class="mt-1 block w-fit"> External </UBadge>
         </template>
         <!-- Admit Date -->
         <template #fromtime-cell="{ row }">
@@ -85,6 +97,7 @@ import type { PatientRecordSchema, TreatmentSchema } from "@ukkidney/ukrdc-axios
 import BaseInfoTooltip from "~/components/base/BaseInfoTooltip.vue";
 import CodeTitle from "~/components/CodeTitle.vue";
 import SendingFacilityLink from "~/components/SendingFacilityLink.vue";
+import useQuery from "~/composables/query/useQuery";
 import useApi from "~/composables/useApi";
 import { formatDate } from "~/helpers/dateUtils";
 
@@ -103,9 +116,35 @@ export default defineComponent({
 
   setup(props) {
     const { patientRecordsApi } = useApi();
+    const { stringQuery } = useQuery();
 
     // Data refs
     const treatments = ref<TreatmentSchema[]>();
+
+    // Client side external location filter
+    const locationOptions = [
+      { label: "External", value: "external" },
+      { label: "Not external", value: "not-external" },
+    ];
+
+    const selectedLocation = stringQuery("location", undefined, true, false);
+
+    // selectedLocationOption is the full object bound to USelectMenu (Nuxt UI v3 requires the full item)
+    const selectedLocationOption = computed({
+      get: () => locationOptions.find((option) => option.value === selectedLocation.value) ?? undefined,
+      set: (option: { label: string; value: string } | undefined) => {
+        selectedLocation.value = option?.value;
+      },
+    });
+
+    // Undefined shows all treatments, otherwise filters by isexternallocation
+    const filteredTreatments = computed(() => {
+      if (selectedLocation.value === undefined) return treatments.value;
+      const isExternalFilter = selectedLocation.value === "external";
+      return treatments.value?.filter(
+        (treatment: TreatmentSchema) => treatment.isexternallocation === isExternalFilter,
+      );
+    });
 
     // Data fetching
     const loading = ref(false);
@@ -160,18 +199,15 @@ export default defineComponent({
     ];
 
     const ui = {
-      th: {
-        base: "px-6 py-3",
-      },
-      td: {
-        base: "px-6 py-4 whitespace-nowrap",
-      },
+      td: "align-top",
     };
 
     return {
       formatDate,
       loading,
-      treatments,
+      filteredTreatments,
+      selectedLocationOption,
+      locationOptions,
       columns,
       ui,
     };
