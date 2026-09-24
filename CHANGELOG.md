@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.4.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.3.0...v7.4.0) (2026-09-24)
+
+
+### Features
+
+* **UK-355:** Show External Treatment Locations ([#552](https://github.com/renalreg/ukrdc-nuxt-3/issues/552)) ([69847c2](https://github.com/renalreg/ukrdc-nuxt-3/commit/69847c2abda2aa3b4fdf89075ca35275345a34cb))
+
 ## [7.3.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.2.0...v7.3.0) (2026-09-17)
 
 
