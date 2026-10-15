@@ -47,6 +47,20 @@ export default defineNuxtPlugin((nuxtApp) => {
        */
       "TypeError: Failed to execute 'removeChild' on 'Node': parameter 1 is not of type 'Node'.",
     ],
+    // Keeps the data collection behaviour from @sentry/vue v10.
+    dataCollection: {
+      userInfo: false,
+      cookies: false,
+      httpHeaders: {
+        request: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+        response: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+      },
+      httpBodies: [],
+      urlQueryParams: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+      genAI: { inputs: false, outputs: false },
+      databaseQueryData: false,
+      graphQL: { document: false, variables: false },
+    },
   });
 
   return {
