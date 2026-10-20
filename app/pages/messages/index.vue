@@ -65,7 +65,15 @@
         label-key="name"
         placeholder="Select a message channel"
       />
-      <UButton class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>
+      <!-- Filters messages to those belonging to a patient with a PKB or RADAR record -->
+      <USelectMenu
+        v-model="selectedProgram"
+        class="ml-2 flex-1"
+        size="lg"
+        :items="programs"
+        placeholder="Select a program membership"
+      />
+      <UButton class="ml-2" size="lg" @click="clearFilters">Clear</UButton>
     </div>
 
     <UCard :ui="{ body: { padding: '' } }">
@@ -109,6 +117,7 @@ import useApi from "~/composables/useApi";
 import useChannels from "~/composables/useChannels";
 import useFacilities from "~/composables/useFacilities";
 import usePermissions from "~/composables/usePermissions";
+import usePrograms from "~/composables/usePrograms";
 import { nowString } from "~/helpers/dateUtils";
 
 export default defineComponent({
@@ -120,12 +129,15 @@ export default defineComponent({
     MessagesListItem,
   },
   setup() {
+    const router = useRouter();
+    const route = useRoute();
     const { page, total, size } = usePagination();
     const { makeDateRange } = useDateRange();
     const { stringQuery, arrayQuery } = useQuery();
 
     const { facilities, selectedFacility } = useFacilities();
     const { channels, channelIds, channelLabels, selectedChannel } = useChannels();
+    const { programs, selectedProgram } = usePrograms();
 
     const { orderAscending, orderBy, toggleOrder } = useSortBy();
     const { messagesApi } = useApi();
@@ -146,6 +158,16 @@ export default defineComponent({
 
     const fetchInProgress = ref(false);
 
+    function clearFilters() {
+      router.replace({
+        query: {
+          ...route.query,
+          channel: undefined,
+          program: undefined,
+        },
+      });
+    }
+
     // Data fetching
     function getMessages() {
       fetchInProgress.value = true;
@@ -160,6 +182,7 @@ export default defineComponent({
           until: dateRange.value.end,
           facility: selectedFacility.value,
           channel: [selectedChannel.value].filter((n) => n) as string[],
+          program: [selectedProgram.value].filter((n) => n) as string[],
           ni: [nationalId.value].filter((n) => n) as string[],
         })
         .then((response) => {
@@ -179,13 +202,13 @@ export default defineComponent({
 
     onMounted(() => {
       // Auto-open advanced options if any are active
-      if (selectedChannel.value) {
+      if (selectedChannel.value || selectedProgram.value) {
         advancedOpen.value = true;
       }
       getMessages();
     });
 
-    watch([page, orderBy, selectedFacility, selectedChannel, nationalId, dateRange, statuses], () => {
+    watch([page, orderBy, selectedFacility, selectedChannel, selectedProgram, nationalId, dateRange, statuses], () => {
       getMessages();
     });
 
@@ -204,11 +227,14 @@ export default defineComponent({
       channelIds,
       channelLabels,
       selectedChannel,
+      programs,
+      selectedProgram,
       nationalId,
       nationalIdSearchString,
       orderAscending,
       orderBy,
       toggleOrder,
+      clearFilters,
     };
   },
 

@@ -21,7 +21,7 @@
             label-key="name"
             placeholder="Select a message channel"
           />
-          <!-- Filters errors to those belonging to a patient enrolled in the selected program -->
+          <!-- Filters messages to those belonging to a patient with a PKB or RADAR record -->
           <USelectMenu
             v-model="selectedProgram"
             class="flex-1 ml-2"
