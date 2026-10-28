@@ -21,7 +21,15 @@
             label-key="name"
             placeholder="Select a message channel"
           />
-          <UButton class="ml-2" size="lg" @click="selectedChannel = undefined">Clear</UButton>
+          <!-- Filters messages to those belonging to a patient with a PKB or RADAR record -->
+          <USelectMenu
+            v-model="selectedProgram"
+            class="ml-2 flex-1"
+            size="lg"
+            :items="programs"
+            placeholder="Select a program membership"
+          />
+          <UButton class="ml-2" size="lg" @click="clearFilters">Clear</UButton>
         </div>
       </template>
       <div v-if="errorMessages && errorMessagesTotal == 0" class="p-8 text-center">
@@ -66,6 +74,7 @@ import BaseSkeleListItem from "~/components/base/BaseSkeleListItem.vue";
 import MessagesListItem from "~/components/messages/MessagesListItem.vue";
 import useApi from "~/composables/useApi";
 import useChannels from "~/composables/useChannels";
+import usePrograms from "~/composables/usePrograms";
 import { getPointDateRange } from "~/helpers/chartUtils";
 
 export default defineComponent({
@@ -84,6 +93,7 @@ export default defineComponent({
   setup(props) {
     const router = useRouter();
     const { channels, selectedChannel } = useChannels();
+    const { programs, selectedProgram } = usePrograms();
     const { facilitiesApi } = useApi();
 
     // Data refs
@@ -111,6 +121,15 @@ export default defineComponent({
       }
     }
 
+    function clearFilters() {
+      router.replace({
+        query: {
+          channel: undefined,
+          program: undefined,
+        },
+      });
+    }
+
     // Data fetching
     function updateErrorMessages() {
       facilitiesApi
@@ -119,6 +138,7 @@ export default defineComponent({
           page: errorMessagesPage.value,
           size: errorMessagesSize.value,
           channel: [selectedChannel.value].filter((n) => n) as string[],
+          program: [selectedProgram.value].filter((n) => n) as string[],
         })
         .then((response) => {
           errorMessages.value = response.data.items;
@@ -134,13 +154,13 @@ export default defineComponent({
 
     onMounted(() => {
       // Auto-open advanced options if any are active
-      if (selectedChannel.value) {
+      if (selectedChannel.value || selectedProgram.value) {
         advancedOpen.value = true;
       }
       updateErrorMessages();
     });
 
-    watch([errorMessagesPage, selectedChannel], () => {
+    watch([errorMessagesPage, selectedChannel, selectedProgram], () => {
       updateErrorMessages();
     });
 
@@ -150,9 +170,12 @@ export default defineComponent({
       errorMessagesPage,
       errorMessagesSize,
       errorMessagesTotal,
-      historyPointClickHandler,
       channels,
       selectedChannel,
+      programs,
+      selectedProgram,
+      clearFilters,
+      historyPointClickHandler,
     };
   },
 });
