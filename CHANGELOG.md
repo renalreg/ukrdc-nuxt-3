@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.5.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.4.0...v7.5.0) (2026-10-28)
+
+
+### Features
+
+* **UK-356:** Filter errors by program membership  ([#588](https://github.com/renalreg/ukrdc-nuxt-3/issues/588)) ([4a18819](https://github.com/renalreg/ukrdc-nuxt-3/commit/4a188193ae1607d52b409b4656b18d2db795bffa))
+
 ## [7.4.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.3.0...v7.4.0) (2026-10-01)
 
 
