@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.5.1](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.5.0...v7.5.1) (2026-10-30)
+
+
+### Bug Fixes
+
+* **UK-356:** show loading skeleton while facility errors are fetching ([#601](https://github.com/renalreg/ukrdc-nuxt-3/issues/601)) ([af0068d](https://github.com/renalreg/ukrdc-nuxt-3/commit/af0068d2b3b985da47fb51f04fff3d20bcdc2ae5))
+
 ## [7.5.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.4.0...v7.5.0) (2026-10-28)
 
 
