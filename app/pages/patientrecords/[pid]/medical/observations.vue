@@ -8,7 +8,7 @@
           class="flex-1"
           size="lg"
           :items="availableCodes"
-          placeholder="Select a specific observation type to see its values and chart"
+          placeholder="Select a coding standard type to see its values and chart"
         />
         <UButton class="ml-2" size="lg" label="Clear" @click="selectedCode = undefined" />
       </div>

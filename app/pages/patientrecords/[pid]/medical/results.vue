@@ -29,7 +29,7 @@
           class="flex-1"
           size="lg"
           :items="serviceOptions"
-          placeholder="Select a specific result type to see its values and chart"
+          placeholder="Select a result type to see its values and chart"
         />
         <UButton class="ml-2" size="lg" label="Clear" @click="selectedServiceOption = undefined" />
       </div>
