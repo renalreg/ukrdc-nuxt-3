@@ -29,7 +29,7 @@
           class="flex-1"
           size="lg"
           :items="serviceOptions"
-          placeholder="Select a result type to see its values and chart"
+          :placeholder="selectedOrderId ? 'Select a result type to see its values' : 'Select a result type to see its values and chart'"
         />
         <UButton class="ml-2" size="lg" label="Clear" @click="selectedServiceOption = undefined" />
       </div>
@@ -52,7 +52,7 @@
         </div>
 
         <!-- Trend chart for the selected result type -->
-        <UCard v-if="selectedService" class="mb-4">
+        <UCard v-if="chartAvailable" class="mb-4">
           <template #header>
             <div class="flex items-center justify-between">
               <h2 class="text-sm font-semibold text-highlighted uppercase tracking-wide">
@@ -73,7 +73,7 @@
           <template v-if="chartVisible" #default>
             <USkeleton v-if="trendLoading" class="h-72 w-full" />
             <p v-else-if="trendPoints.length === 0" class="py-8 text-center text-sm text-muted">
-              No numeric results to chart in the selected date range.
+              No numeric results to chart
             </p>
             <div v-else>
               <PatientRecordTrendPlot class="h-72" :points="trendPoints" :title="chartTitle" />
@@ -193,20 +193,22 @@ const selectedServiceOption = computed({
   },
 });
 
+// Lab order filter
+const selectedOrderId = stringQuery("order_id", undefined, true, true);
+const selectedOrder = ref<LabOrderSchema>();
+
 // Trend chart
+// Hidden when filtering by lab order
+const chartAvailable = computed(() => !!selectedService.value && !selectedOrderId.value);
 const chartVisible = ref(true);
 const trendPoints = ref<TrendPoint[]>([]);
 const trendLoading = ref(false);
-// How many results were left off the chart (no numeric value), so this can be stated under the chart
+// Total amount of results left off the chart (no numeric value) used to inform user
 const trendSkipped = ref(0);
 
 const chartTitle = computed(
   () => availableServices.value.find((service) => service.id === selectedService.value)?.description ?? null,
 );
-
-// Lab order filter
-const selectedOrderId = stringQuery("order_id", undefined, true, true);
-const selectedOrder = ref<LabOrderSchema>();
 
 // Data fetching
 function fetchResults() {
@@ -246,9 +248,9 @@ function fetchResults() {
   }
 }
 
-// Fetch every result of the selected type for the chart (follows the date filter)
 function fetchTrend() {
-  if (!selectedService.value || !chartVisible.value) {
+  // Only fetch when a type is selected, the chart is visible, and no lab order filter is applied
+  if (!chartAvailable.value || !chartVisible.value) {
     trendPoints.value = [];
     trendSkipped.value = 0;
     return;
@@ -344,7 +346,6 @@ function deleteLabOrder() {
         selectedOrderId.value = undefined;
         fetchResults();
         fetchLabOrder();
-        fetchTrend();
         deleteOrderAlert.value?.hide();
       })
       .catch(() => {
@@ -372,7 +373,7 @@ watch(selectedService, () => {
   chartVisible.value = true;
 });
 
-watch([selectedService, dateRange, chartVisible], () => {
+watch([selectedService, dateRange, chartVisible, selectedOrderId], () => {
   fetchTrend();
 });
 

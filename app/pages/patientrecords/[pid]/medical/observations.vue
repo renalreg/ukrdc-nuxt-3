@@ -35,7 +35,7 @@
         <template v-if="chartVisible" #default>
           <USkeleton v-if="trendLoading" class="h-72 w-full" />
           <p v-else-if="trendPoints.length === 0" class="py-8 text-center text-sm text-muted">
-            No numeric values to chart.
+            No numeric values to chart
           </p>
           <div v-else>
             <PatientRecordTrendPlot class="h-72" :points="trendPoints" :title="chartTitle ?? selectedCode" />
