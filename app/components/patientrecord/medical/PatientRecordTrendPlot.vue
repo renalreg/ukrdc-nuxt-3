@@ -1,7 +1,7 @@
 <template>
   <div ref="chartContainer" role="img" :aria-label="ariaLabel" />
 </template>
- 
+
 <script setup lang="ts">
 import Plotly from "plotly.js-dist-min";
 
@@ -12,7 +12,7 @@ const props = defineProps<{
   points: TrendPoint[];
   title?: string | null;
 }>();
- 
+
 const chartContainer = ref<HTMLElement>();
 
 interface SeriesGroup {
@@ -51,19 +51,17 @@ const groups: SeriesGroup[] = [
     symbol: "square",
   },
 ];
- 
+
 const units = computed(() => props.points.find((point) => point.units)?.units ?? "");
- 
-const ariaLabel = computed(
-  () => `Line chart of ${props.title ?? "values"} over time, ${props.points.length} values`,
-);
+
+const ariaLabel = computed(() => `Line chart of ${props.title ?? "values"} over time, ${props.points.length} values`);
 
 function buildTraces(): Plotly.Data[] {
   const traces: Plotly.Data[] = [];
   for (const group of groups) {
     const groupPoints = props.points.filter((point) => group.match(point.prePost));
     if (groupPoints.length === 0) continue;
- 
+
     traces.push({
       name: group.name,
       x: groupPoints.map((point) => point.time),
@@ -77,7 +75,7 @@ function buildTraces(): Plotly.Data[] {
   }
   return traces;
 }
- 
+
 function buildLayout(): Partial<Plotly.Layout> {
   return {
     autosize: true,
@@ -102,7 +100,7 @@ function buildLayout(): Partial<Plotly.Layout> {
     },
   };
 }
- 
+
 function draw() {
   if (!chartContainer.value) return;
   Plotly.react(chartContainer.value, buildTraces(), buildLayout(), { responsive: true });
@@ -111,7 +109,7 @@ function draw() {
 onMounted(draw);
 
 watch(() => props.points, draw);
- 
+
 onBeforeUnmount(() => {
   if (chartContainer.value) Plotly.purge(chartContainer.value);
 });

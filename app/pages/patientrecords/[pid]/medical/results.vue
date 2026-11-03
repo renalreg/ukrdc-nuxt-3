@@ -29,7 +29,11 @@
           class="flex-1"
           size="lg"
           :items="serviceOptions"
-          :placeholder="selectedOrderId ? 'Select a result type to see its values' : 'Select a result type to see its values and chart'"
+          :placeholder="
+            selectedOrderId
+              ? 'Select a result type to see its values'
+              : 'Select a result type to see its values and chart'
+          "
         />
         <UButton class="ml-2" size="lg" label="Clear" @click="selectedServiceOption = undefined" />
       </div>
@@ -55,7 +59,7 @@
         <UCard v-if="chartAvailable" class="mb-4">
           <template #header>
             <div class="flex items-center justify-between">
-              <h2 class="text-sm font-semibold text-highlighted uppercase tracking-wide">
+              <h2 class="text-highlighted text-sm font-semibold tracking-wide uppercase">
                 {{ chartTitle }}
               </h2>
               <UButton
@@ -72,13 +76,14 @@
 
           <template v-if="chartVisible" #default>
             <USkeleton v-if="trendLoading" class="h-72 w-full" />
-            <p v-else-if="trendPoints.length === 0" class="py-8 text-center text-sm text-muted">
+            <p v-else-if="trendPoints.length === 0" class="text-muted py-8 text-center text-sm">
               No numeric results to chart
             </p>
             <div v-else>
               <PatientRecordTrendPlot class="h-72" :points="trendPoints" :title="chartTitle" />
-              <p v-if="trendSkipped > 0" class="mt-2 text-sm text-muted">
-                {{ trendSkipped }} {{ trendSkipped === 1 ? "result" : "results" }} without a numeric value not shown (see table)
+              <p v-if="trendSkipped > 0" class="text-muted mt-2 text-sm">
+                {{ trendSkipped }} {{ trendSkipped === 1 ? "result" : "results" }} without a numeric value not shown
+                (see table)
               </p>
             </div>
           </template>

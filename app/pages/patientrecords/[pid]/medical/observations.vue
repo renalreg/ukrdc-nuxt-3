@@ -17,7 +17,7 @@
       <UCard v-if="selectedCode" class="mb-4">
         <template #header>
           <div class="flex items-center justify-between">
-            <h2 class="text-sm font-semibold text-highlighted uppercase tracking-wide">
+            <h2 class="text-highlighted text-sm font-semibold tracking-wide uppercase">
               {{ chartTitle }}
             </h2>
             <UButton
@@ -34,12 +34,12 @@
 
         <template v-if="chartVisible" #default>
           <USkeleton v-if="trendLoading" class="h-72 w-full" />
-          <p v-else-if="trendPoints.length === 0" class="py-8 text-center text-sm text-muted">
+          <p v-else-if="trendPoints.length === 0" class="text-muted py-8 text-center text-sm">
             No numeric values to chart
           </p>
           <div v-else>
             <PatientRecordTrendPlot class="h-72" :points="trendPoints" :title="chartTitle" />
-            <p v-if="trendSkipped > 0" class="mt-2 text-sm text-muted">
+            <p v-if="trendSkipped > 0" class="text-muted mt-2 text-sm">
               {{ trendSkipped }} {{ trendSkipped === 1 ? "observation" : "observations" }} without a numeric value not
               shown (see table)
             </p>
