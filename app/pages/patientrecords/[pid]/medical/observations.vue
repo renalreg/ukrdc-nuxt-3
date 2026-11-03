@@ -18,7 +18,7 @@
         <template #header>
           <div class="flex items-center justify-between">
             <h2 class="text-sm font-semibold text-highlighted uppercase tracking-wide">
-              {{ selectedCode }}{{ chartTitle ? ` / ${chartTitle}` : "" }}
+              {{ chartTitle }}
             </h2>
             <UButton
               class="w-[103px] justify-center"
@@ -38,7 +38,7 @@
             No numeric values to chart
           </p>
           <div v-else>
-            <PatientRecordTrendPlot class="h-72" :points="trendPoints" :title="chartTitle ?? selectedCode" />
+            <PatientRecordTrendPlot class="h-72" :points="trendPoints" :title="chartTitle" />
             <p v-if="trendSkipped > 0" class="mt-2 text-sm text-muted">
               {{ trendSkipped }} {{ trendSkipped === 1 ? "observation" : "observations" }} without a numeric value not
               shown (see table)
@@ -117,7 +117,10 @@ export default defineComponent({
     const trendSkipped = ref(0);
 
     const chartTitle = computed(
-      () => observations.value?.find((o) => o.observationCode === selectedCode.value)?.observationDesc ?? null,
+      () =>
+        observations.value?.find((o) => o.observationCode === selectedCode.value)?.observationDesc?.trim() ||
+        selectedCode.value ||
+        null,
     );
 
     // Data fetching

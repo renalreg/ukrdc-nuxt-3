@@ -56,7 +56,7 @@
           <template #header>
             <div class="flex items-center justify-between">
               <h2 class="text-sm font-semibold text-highlighted uppercase tracking-wide">
-                {{ selectedService }}{{ chartTitle ? ` / ${chartTitle}` : "" }}
+                {{ chartTitle }}
               </h2>
               <UButton
                 class="w-[103px] justify-center"
@@ -207,7 +207,10 @@ const trendLoading = ref(false);
 const trendSkipped = ref(0);
 
 const chartTitle = computed(
-  () => availableServices.value.find((service) => service.id === selectedService.value)?.description ?? null,
+  () =>
+    availableServices.value.find((service) => service.id === selectedService.value)?.description?.trim() ||
+    selectedService.value ||
+    null,
 );
 
 // Data fetching
