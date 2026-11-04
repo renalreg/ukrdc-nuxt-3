@@ -58,23 +58,10 @@
         <!-- Trend chart for the selected result type -->
         <UCard v-if="chartAvailable" class="mb-4">
           <template #header>
-            <div class="flex items-center justify-between">
-              <h2 class="text-highlighted text-sm font-semibold tracking-wide uppercase">
-                {{ chartTitle }}
-              </h2>
-              <UButton
-                class="w-[103px] justify-center"
-                color="neutral"
-                variant="ghost"
-                :icon="chartVisible ? 'i-heroicons-chevron-up-20-solid' : 'i-heroicons-chevron-down-20-solid'"
-                :label="chartVisible ? 'Hide chart' : 'Show chart'"
-                :aria-expanded="chartVisible"
-                @click="chartVisible = !chartVisible"
-              />
-            </div>
+            <h2 class="text-highlighted text-sm font-semibold tracking-wide uppercase">{{ chartTitle }} chart</h2>
           </template>
 
-          <template v-if="chartVisible" #default>
+          <template #default>
             <USkeleton v-if="trendLoading" class="h-72 w-full" />
             <p v-else-if="trendPoints.length === 0" class="text-muted py-8 text-center text-sm">
               No numeric results to chart
@@ -205,10 +192,9 @@ const selectedOrder = ref<LabOrderSchema>();
 // Trend chart
 // Hidden when filtering by lab order
 const chartAvailable = computed(() => !!selectedService.value && !selectedOrderId.value);
-const chartVisible = ref(true);
 const trendPoints = ref<TrendPoint[]>([]);
 const trendLoading = ref(false);
-// Total amount of results left off the chart (no numeric value) used to inform user
+// Number of results left off the chart (no numeric value) to inform user
 const trendSkipped = ref(0);
 
 const chartTitle = computed(
@@ -257,8 +243,7 @@ function fetchResults() {
 }
 
 function fetchTrend() {
-  // Only fetch when a type is selected, the chart is visible, and no lab order filter is applied
-  if (!chartAvailable.value || !chartVisible.value) {
+  if (!chartAvailable.value) {
     trendPoints.value = [];
     trendSkipped.value = 0;
     return;
@@ -269,8 +254,8 @@ function fetchTrend() {
     .getPatientResultTrend({
       pid: props.record.pid,
       serviceId: selectedService.value,
-      since: dateRange.value.start ?? undefined,
-      until: dateRange.value.end ?? undefined,
+      since: dateRange.value.start,
+      until: dateRange.value.end,
     })
     .then((response) => {
       trendPoints.value = toTrendPoints(
@@ -377,11 +362,7 @@ watch(selectedOrderId, () => {
   fetchLabOrder();
 });
 
-watch(selectedService, () => {
-  chartVisible.value = true;
-});
-
-watch([selectedService, dateRange, chartVisible, selectedOrderId], () => {
+watch([selectedService, dateRange, selectedOrderId], () => {
   fetchTrend();
 });
 

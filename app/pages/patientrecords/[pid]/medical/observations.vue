@@ -16,23 +16,10 @@
       <!-- Trend chart for the selected observation code -->
       <UCard v-if="selectedCode" class="mb-4">
         <template #header>
-          <div class="flex items-center justify-between">
-            <h2 class="text-highlighted text-sm font-semibold tracking-wide uppercase">
-              {{ chartTitle }}
-            </h2>
-            <UButton
-              class="w-[103px] justify-center"
-              color="neutral"
-              variant="ghost"
-              :icon="chartVisible ? 'i-heroicons-chevron-up-20-solid' : 'i-heroicons-chevron-down-20-solid'"
-              :label="chartVisible ? 'Hide chart' : 'Show chart'"
-              :aria-expanded="chartVisible"
-              @click="chartVisible = !chartVisible"
-            />
-          </div>
+          <h2 class="text-highlighted text-sm font-semibold tracking-wide uppercase">{{ chartTitle }} chart</h2>
         </template>
 
-        <template v-if="chartVisible" #default>
+        <template #default>
           <USkeleton v-if="trendLoading" class="h-72 w-full" />
           <p v-else-if="trendPoints.length === 0" class="text-muted py-8 text-center text-sm">
             No numeric values to chart
@@ -110,10 +97,9 @@ export default defineComponent({
     const selectedCode = stringQuery("code", undefined, true, true);
 
     // Trend chart
-    const chartVisible = ref(true);
     const trendPoints = ref<TrendPoint[]>([]);
     const trendLoading = ref(false);
-    // How many observations were left off the chart (no numeric value), so this can be stated under the chart
+    // Number of observations left off the chart (no numeric value) to inform user
     const trendSkipped = ref(0);
 
     const chartTitle = computed(
@@ -167,7 +153,7 @@ export default defineComponent({
     }
 
     function fetchTrend() {
-      if (!selectedCode.value || !chartVisible.value) {
+      if (!selectedCode.value) {
         trendPoints.value = [];
         trendSkipped.value = 0;
         return;
@@ -212,10 +198,6 @@ export default defineComponent({
     });
 
     watch(selectedCode, () => {
-      chartVisible.value = true;
-    });
-
-    watch([selectedCode, chartVisible], () => {
       fetchTrend();
     });
 
@@ -264,7 +246,6 @@ export default defineComponent({
       selectedCode,
       formatDate,
       ui,
-      chartVisible,
       chartTitle,
       trendPoints,
       trendLoading,
