@@ -77,6 +77,7 @@
     </div>
 
     <UCard :ui="{ body: { padding: '' } }">
+      <UProgress v-if="fetchInProgress" size="xs" />
       <!-- Skeleton results -->
       <div v-if="fetchInProgress">
         <ul v-if="fetchInProgress" class="divide-y divide-gray-300">

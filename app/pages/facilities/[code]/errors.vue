@@ -36,6 +36,7 @@
         <p>No active failing records</p>
       </div>
       <div v-else>
+        <UProgress v-if="fetchInProgress" size="xs" />
         <!-- Skeleton results -->
         <ul v-if="fetchInProgress || !errorMessages" class="divide-y divide-gray-300">
           <BaseSkeleListItem v-for="n in 10" :key="n" />
