@@ -32,16 +32,16 @@
           <UButton class="ml-2" size="lg" @click="clearFilters">Clear</UButton>
         </div>
       </template>
-      <div v-if="errorMessages && errorMessagesTotal == 0" class="p-8 text-center">
+      <div v-if="!fetchInProgress && errorMessages && errorMessagesTotal == 0" class="p-8 text-center">
         <p>No active failing records</p>
       </div>
       <div v-else>
         <!-- Skeleton results -->
-        <ul v-if="!errorMessages" class="divide-y divide-gray-300">
+        <ul v-if="fetchInProgress || !errorMessages" class="divide-y divide-gray-300">
           <BaseSkeleListItem v-for="n in 10" :key="n" />
         </ul>
         <!-- Real results -->
-        <ul class="divide-y divide-gray-300">
+        <ul v-else class="divide-y divide-gray-300">
           <li v-for="item in errorMessages" :key="item.id" :item="item" class="hover:bg-gray-50">
             <NuxtLink :to="`/messages/${item.id}`">
               <MessagesListItem :item="item" />
@@ -105,6 +105,8 @@ export default defineComponent({
     const errorMessagesSize = ref(10);
     const errorMessagesTotal = ref(0);
 
+    const fetchInProgress = ref(false);
+
     // History plot click handler
     function historyPointClickHandler(point: PlotDatum) {
       if (point.x) {
@@ -132,6 +134,8 @@ export default defineComponent({
 
     // Data fetching
     function updateErrorMessages() {
+      fetchInProgress.value = true;
+
       facilitiesApi
         .getFacilityPatientsLatestErrors({
           code: props.facility.id,
@@ -149,6 +153,9 @@ export default defineComponent({
         .catch(() => {
           // Error handling is centralized in the Axios interceptor
           // Handle UI state reset or fallback values here if needed
+        })
+        .finally(() => {
+          fetchInProgress.value = false;
         });
     }
 
@@ -174,6 +181,7 @@ export default defineComponent({
       selectedChannel,
       programs,
       selectedProgram,
+      fetchInProgress,
       clearFilters,
       historyPointClickHandler,
     };
