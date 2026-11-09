@@ -29,7 +29,11 @@
           class="flex-1"
           size="lg"
           :items="serviceOptions"
-          placeholder="Select a result type"
+          :placeholder="
+            selectedOrderId
+              ? 'Select a result type to see its values'
+              : 'Select a result type to see its values and chart'
+          "
         />
         <UButton class="ml-2" size="lg" label="Clear" @click="selectedServiceOption = undefined" />
       </div>
@@ -50,6 +54,27 @@
             >Delete Lab Order
           </UButton>
         </div>
+
+        <!-- Trend chart for the selected result type -->
+        <UCard v-if="chartAvailable" class="mb-4">
+          <template #header>
+            <h2 class="text-highlighted text-sm font-semibold tracking-wide uppercase">{{ chartTitle }} chart</h2>
+          </template>
+
+          <template #default>
+            <USkeleton v-if="trendLoading" class="h-72 w-full" />
+            <p v-else-if="trendPoints.length === 0" class="text-muted py-8 text-center text-sm">
+              No numeric results to chart
+            </p>
+            <div v-else>
+              <PatientRecordTrendPlot class="h-72" :points="trendPoints" :title="chartTitle" />
+              <p v-if="trendSkipped > 0" class="text-muted mt-2 text-sm">
+                {{ trendSkipped }} {{ trendSkipped === 1 ? "result" : "results" }} without a numeric value not shown
+                (see table)
+              </p>
+            </div>
+          </template>
+        </UCard>
 
         <UCard :ui="{ body: { padding: '' } }" class="mb-4">
           <UTable :loading="loading" :data="results" :columns="columns" class="sensitive" :ui="ui">
@@ -106,11 +131,14 @@ import BaseDateRange from "~/components/base/BaseDateRange.vue";
 import BaseLoadingContainer from "~/components/base/BaseLoadingContainer.vue";
 import BaseModalConfirm from "~/components/base/BaseModalConfirm.vue";
 import BasePaginator from "~/components/base/BasePaginator.vue";
+import PatientRecordTrendPlot from "~/components/patientrecord/medical/PatientRecordTrendPlot.vue";
 import useDateRange from "~/composables/query/useDateRange";
 import usePagination from "~/composables/query/usePagination";
 import useQuery from "~/composables/query/useQuery";
 import useApi from "~/composables/useApi";
+import { toTrendPoints } from "~/helpers/chartUtils";
 import { formatDate } from "~/helpers/dateUtils";
+import type { TrendPoint } from "~/interfaces/charts";
 import type { ModalInterface } from "~/interfaces/modal";
 
 const props = defineProps<{
@@ -161,6 +189,21 @@ const selectedServiceOption = computed({
 const selectedOrderId = stringQuery("order_id", undefined, true, true);
 const selectedOrder = ref<LabOrderSchema>();
 
+// Trend chart
+// Hidden when filtering by lab order
+const chartAvailable = computed(() => !!selectedService.value && !selectedOrderId.value);
+const trendPoints = ref<TrendPoint[]>([]);
+const trendLoading = ref(false);
+// Number of results left off the chart (no numeric value) to inform user
+const trendSkipped = ref(0);
+
+const chartTitle = computed(
+  () =>
+    availableServices.value.find((service) => service.id === selectedService.value)?.description?.trim() ||
+    selectedService.value ||
+    null,
+);
+
 // Data fetching
 function fetchResults() {
   loading.value = true;
@@ -197,6 +240,44 @@ function fetchResults() {
         // Error handling is centralized in the Axios interceptor
       });
   }
+}
+
+function fetchTrend() {
+  if (!chartAvailable.value) {
+    trendPoints.value = [];
+    trendSkipped.value = 0;
+    return;
+  }
+
+  trendLoading.value = true;
+  patientRecordsApi
+    .getPatientResultTrend({
+      pid: props.record.pid,
+      serviceId: selectedService.value,
+      since: dateRange.value.start,
+      until: dateRange.value.end,
+    })
+    .then((response) => {
+      trendPoints.value = toTrendPoints(
+        response.data.map((item) => ({
+          time: item.observationTime,
+          value: item.value,
+          units: item.valueUnits,
+          prePost: item.prePost,
+        })),
+      );
+      // Everything the API returned, minus what could be plotted, is how many were left off the chart
+      trendSkipped.value = response.data.length - trendPoints.value.length;
+    })
+    .catch(() => {
+      // Error handling is centralized in the Axios interceptor
+      // Clear the chart so that a previous result type's data isn't left showing under the new title.
+      trendPoints.value = [];
+      trendSkipped.value = 0;
+    })
+    .finally(() => {
+      trendLoading.value = false;
+    });
 }
 
 function fetchLabOrder() {
@@ -236,6 +317,7 @@ function deleteResultItem() {
       .then(() => {
         toast.add({ title: "Success", description: "Result Item deleted" });
         fetchResults();
+        fetchTrend();
         itemToDelete.value = null;
         deleteResultAlert.value?.hide();
       })
@@ -269,6 +351,7 @@ function deleteLabOrder() {
 onMounted(() => {
   fetchResults();
   fetchLabOrder();
+  fetchTrend();
 });
 
 watch([page, selectedService, selectedOrderId, dateRange], () => {
@@ -277,6 +360,10 @@ watch([page, selectedService, selectedOrderId, dateRange], () => {
 
 watch(selectedOrderId, () => {
   fetchLabOrder();
+});
+
+watch([selectedService, dateRange, selectedOrderId], () => {
+  fetchTrend();
 });
 
 // Table
