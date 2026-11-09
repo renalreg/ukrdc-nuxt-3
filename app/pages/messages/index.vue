@@ -79,7 +79,8 @@
     <UCard class="relative" :ui="{ body: { padding: '' } }">
       <UProgress
         v-if="fetchInProgress"
-        size="xs" class="absolute inset-x-0 top-0"
+        size="xs"
+        class="absolute inset-x-0 top-0"
         :ui="{ base: 'bg-transparent' }"
         aria-label="Loading messages"
       />
