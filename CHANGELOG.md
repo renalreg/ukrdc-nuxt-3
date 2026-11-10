@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.6.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.5.1...v7.6.0) (2026-11-10)
+
+
+### Features
+
+* **UK-247:** Add charts for results and observations in medical record ([#609](https://github.com/renalreg/ukrdc-nuxt-3/issues/609)) ([d98cf64](https://github.com/renalreg/ukrdc-nuxt-3/commit/d98cf64ccc04c2d8800f3de50090a5a601dda869))
+* **UK-452:** Add indication that a request is processing ([#617](https://github.com/renalreg/ukrdc-nuxt-3/issues/617)) ([cd53f2c](https://github.com/renalreg/ukrdc-nuxt-3/commit/cd53f2c429f4a7ab98b1b61872ccbe2e0e8331b5))
+
 ## [7.5.1](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.5.0...v7.5.1) (2026-10-30)
 
 
