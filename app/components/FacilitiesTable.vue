@@ -5,20 +5,19 @@ Table of facilities and their basic statistics
 
 <template>
   <div>
-    <div class="mb-4">
-      <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
-      <template v-if="isAdmin">
-        <BaseCollapseHeader v-model="advancedOpen" label="More Options" />
-        <div v-if="advancedOpen" class="mt-4 flex items-end gap-2">
-          <UFormField label="Facility type" class="flex-1">
-            <USelect v-model="facilityTypeFilter" :items="facilityTypeOptions" class="w-full" />
-          </UFormField>
-          <UFormField label="Sending to PKB" class="flex-1">
-            <USelect v-model="pkbOutFilter" :items="pkbOutOptions" class="w-full" />
-          </UFormField>
-          <UButton label="Clear" @click="clearFilters" />
-        </div>
-      </template>
+    <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
+
+    <div v-if="isAdmin" class="mb-4">
+      <BaseCollapseHeader v-model="advancedOpen" label="More Options" />
+      <div v-if="advancedOpen" class="mt-4 flex items-end gap-2">
+        <UFormField label="Facility type" class="flex-1">
+          <USelect v-model="facilityTypeFilter" :items="facilityTypeOptions" class="w-full" />
+        </UFormField>
+        <UFormField label="Sending to PKB" class="flex-1">
+          <USelect v-model="pkbOutFilter" :items="pkbOutOptions" class="w-full" />
+        </UFormField>
+        <UButton label="Clear" @click="clearFilters" />
+      </div>
     </div>
 
     <UCard :ui="{ body: { padding: '' } }">
@@ -30,7 +29,8 @@ Table of facilities and their basic statistics
         @select="(_, row) => navigateTo(`/facilities/${row.original.id}`)"
       >
         <!-- Failing records -->
-        <template #patientsReceivingMessageError-data="{ row }">
+        <!-- eslint-disable-next-line vue/valid-v-slot -->
+        <template #statistics.patientsReceivingMessageError-cell="{ row }">
           <span class="flex items-center">
             <IconCircle
               class="inline"
@@ -46,14 +46,14 @@ Table of facilities and their basic statistics
         </template>
         <!-- Sending to PKB -->
         <!-- eslint-disable-next-line vue/valid-v-slot -->
-        <template #dataFlow.pkbOut-data="{ row }">
+        <template #dataFlow.pkbOut-cell="{ row }">
           <span class="flex items-center">
             <IconCircle class="inline" :class="row.original.dataFlow.pkbOut ? 'text-green-600' : 'text-red-700'" />
             <p>{{ row.original.dataFlow.pkbOut ? "Yes" : "No" }}</p>
           </span>
         </template>
         <!-- Last received -->
-        <template #lastMessageReceivedAt-data="{ row }">
+        <template #lastMessageReceivedAt-cell="{ row }">
           <span class="flex items-center gap-2">
             <div>
               {{
