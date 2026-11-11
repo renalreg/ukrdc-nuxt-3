@@ -8,7 +8,7 @@ Table of facilities and their basic statistics
     <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
 
     <div v-if="isAdmin" class="mb-4">
-      <BaseCollapseHeader v-model="advancedOpen" label="More Options" />
+      <BaseCollapseHeader v-model="advancedOpen" :label="moreOptionsLabel" />
       <div v-if="advancedOpen" class="mt-4 flex items-end gap-2">
         <UFormField label="Facility type" class="flex-1">
           <USelect v-model="facilityTypeFilter" :items="facilityTypeOptions" class="w-full" />
@@ -139,6 +139,12 @@ export default defineComponent({
       pkbOutFilter.value = allFilterOption;
     }
 
+    const moreOptionsLabel = computed(() => {
+      const count = [facilityTypeFilter.value, pkbOutFilter.value].filter((value) => value !== allFilterOption).length;
+      if (advancedOpen.value || count === 0) return "More Options";
+      return `More Options (${count} ${count === 1 ? "filter" : "filters"} applied)`;
+    });
+
     const filteredFacilities = computed(() => {
       if (!facilities.value) return [];
       return (
@@ -263,6 +269,7 @@ export default defineComponent({
       facilityTypeOptions,
       pkbOutFilter,
       pkbOutOptions,
+      moreOptionsLabel,
       clearFilters,
     };
   },
