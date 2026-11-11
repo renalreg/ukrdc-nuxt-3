@@ -1,10 +1,25 @@
+
 <!--
 Table of facilities and their basic statistics
 -->
 
 <template>
   <div>
-    <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
+    <div class="mb-4">
+      <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
+      <template v-if="isAdmin">
+        <BaseCollapseHeader v-model="advancedOpen" label="More Options" />
+        <div v-if="advancedOpen" class="mt-4 flex items-end gap-2">
+          <UFormField label="Facility type" class="flex-1">
+            <USelect v-model="facilityTypeFilter" :items="facilityTypeOptions" class="w-full" />
+          </UFormField>
+          <UFormField label="Sending to PKB" class="flex-1">
+            <USelect v-model="pkbOutFilter" :items="pkbOutOptions" class="w-full" />
+          </UFormField>
+          <UButton label="Clear" @click="clearFilters" />
+        </div>
+      </template>
+    </div>
 
     <UCard :ui="{ body: { padding: '' } }">
       <UTable
@@ -61,15 +76,18 @@ Table of facilities and their basic statistics
 import type { TableColumn } from "@nuxt/ui";
 import type { FacilityDetailsSchema } from "@ukkidney/ukrdc-axios-ts";
 
+import BaseCollapseHeader from "~/components/base/BaseCollapseHeader.vue";
 import IconCircle from "~/components/icons/IconCircle.vue";
 import SearchBar from "~/components/SearchBar.vue";
 import useApi from "~/composables/useApi";
+import usePermissions from "~/composables/usePermissions";
 import { formatDate } from "~/helpers/dateUtils";
 import { facilityLastMessageOver48 } from "~/helpers/facilityUtils";
 import { getSortableHeader } from "~/helpers/tableSortHeader";
 
 export default defineComponent({
   components: {
+    BaseCollapseHeader,
     IconCircle,
     SearchBar,
   },
@@ -90,14 +108,36 @@ export default defineComponent({
   emits: ["select"],
   setup(props) {
     const { facilitiesApi } = useApi();
-
+    const { isAdmin } = usePermissions();
+    
     // Facility list and filters
 
     const facilities = ref<FacilityDetailsSchema[]>();
     const searchboxString = ref("");
 
-    const filterByPkbOut = ref(false);
     const filterByLastMessageOver48 = ref(false);
+
+    const allFilterOption = "All";
+    const advancedOpen = ref(false);
+    const facilityTypeFilter = ref(allFilterOption);
+    const pkbOutFilter = ref(allFilterOption);
+
+    const facilityTypeOptions = computed(() => {
+      const types = (facilities.value ?? [])
+        .map((facility) => facility.facilityMetadata?.facilityType)
+        .filter((type) => type != null);
+
+      const uniqueTypes = types.filter((type, index) => types.indexOf(type) === index).sort();
+
+      return [allFilterOption, ...uniqueTypes];
+    });
+
+    const pkbOutOptions = [allFilterOption, "Yes", "No"];
+
+    function clearFilters() {
+      facilityTypeFilter.value = allFilterOption;
+      pkbOutFilter.value = allFilterOption;
+    }
 
     const filteredFacilities = computed(() => {
       if (!facilities.value) return [];
@@ -109,9 +149,20 @@ export default defineComponent({
               option.id.toLowerCase().includes(searchboxString.value.toLowerCase()) ||
               option.description?.toLowerCase().includes(searchboxString.value.toLowerCase()),
           )
-          // Filter by additional filters, such as PkbOut
-          .filter((option) => (filterByPkbOut.value ? option.dataFlow.pkbOut : true))
-          // Filter by last message over 48 hours
+          // Filter by facility type
+          .filter(
+            (option) =>
+              facilityTypeFilter.value === allFilterOption ||
+              option.facilityMetadata?.facilityType === facilityTypeFilter.value,
+          )
+          // Filter by PKB out flag
+          .filter(
+            (option) => {
+              if (pkbOutFilter.value === "Yes") return option.dataFlow.pkbOut;
+              if (pkbOutFilter.value === "No") return !option.dataFlow.pkbOut;
+              return true;
+            })
+          // Filter by last message over 48 hours (not in use anywhere)
           .filter((option) => (filterByLastMessageOver48.value ? facilityLastMessageOver48(option) : true))
       );
     });
@@ -196,17 +247,23 @@ export default defineComponent({
       },
     ];
 
-    return {
+      return {
       facilities,
       columns,
       loading,
       searchboxString,
-      filterByPkbOut,
       filterByLastMessageOver48,
       filteredFacilities,
       facilityLastMessageOver48,
       formatDate,
       ui,
+      isAdmin,
+      advancedOpen,
+      facilityTypeFilter,
+      facilityTypeOptions,
+      pkbOutFilter,
+      pkbOutOptions,
+      clearFilters,
     };
   },
 });
