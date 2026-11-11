@@ -1,4 +1,3 @@
-
 <!--
 Table of facilities and their basic statistics
 -->
@@ -115,7 +114,7 @@ export default defineComponent({
   setup(props) {
     const { facilitiesApi } = useApi();
     const { isAdmin } = usePermissions();
-    
+
     // Facility list and filters
 
     const facilities = ref<FacilityDetailsSchema[]>();
@@ -168,12 +167,11 @@ export default defineComponent({
               option.facilityMetadata?.facilityType === facilityTypeFilter.value,
           )
           // Filter by PKB out flag
-          .filter(
-            (option) => {
-              if (pkbOutFilter.value === "Yes") return option.dataFlow.pkbOut;
-              if (pkbOutFilter.value === "No") return !option.dataFlow.pkbOut;
-              return true;
-            })
+          .filter((option) => {
+            if (pkbOutFilter.value === "Yes") return option.dataFlow.pkbOut;
+            if (pkbOutFilter.value === "No") return !option.dataFlow.pkbOut;
+            return true;
+          })
           // Filter by last message over 48 hours (not in use anywhere)
           .filter((option) => (filterByLastMessageOver48.value ? facilityLastMessageOver48(option) : true))
       );
@@ -259,7 +257,7 @@ export default defineComponent({
       },
     ];
 
-      return {
+    return {
       facilities,
       columns,
       loading,
