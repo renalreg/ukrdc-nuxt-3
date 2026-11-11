@@ -7,7 +7,7 @@ Table of facilities and their basic statistics
   <div>
     <SearchBar v-model="searchboxString" :focus="false" :show-button="false" />
 
-    <div v-if="isAdmin" class="mb-4">
+    <div v-if="isAdmin && showMoreOptions" class="mb-4">
       <BaseCollapseHeader v-model="advancedOpen" :label="moreOptionsLabel" />
       <div v-if="advancedOpen" class="mt-4 flex items-end gap-2">
         <UFormField label="Facility type" class="flex-1">
@@ -100,6 +100,12 @@ export default defineComponent({
     },
     includeInactive: {
       // Should facilities with no feed files in the last year be included in the list?
+      type: Boolean,
+      default: false,
+      required: false,
+    },
+    showMoreOptions: {
+      // Should admin users see the More Options filters?
       type: Boolean,
       default: false,
       required: false,
