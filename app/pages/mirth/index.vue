@@ -11,7 +11,7 @@
         </div>
         <UTable :data="filteredRows" :columns="columns" :loading="loading">
           <!-- Name -->
-          <template #name-data="{ row }">
+          <template #name-cell="{ row }">
             <UPopover v-if="row.original.channelDescription" mode="hover" class="h-5 w-5">
               {{ row.original.name }}
               <template #content>
@@ -23,7 +23,7 @@
             <span v-else>{{ row.original.name }}</span>
           </template>
           <!-- Group -->
-          <template #group-data="{ row }">
+          <template #group-cell="{ row }">
             <UPopover v-if="row.original.groupDescription" mode="hover" class="h-5 w-5">
               {{ row.original.group }}
               <template #content>
@@ -35,7 +35,7 @@
             <span v-else>{{ row.original.group }}</span>
           </template>
           <!-- Errors -->
-          <template #error-data="{ row }">
+          <template #error-cell="{ row }">
             <UBadge v-if="row.original.error !== null" :color="row.original.error > 0 ? 'red' : 'green'">{{
               row.original.error
             }}</UBadge>
