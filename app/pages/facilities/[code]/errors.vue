@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Real results -->
-    <UCard :ui="{ body: { padding: '' } }">
+    <UCard :ui="{ header: 'relative', body: { padding: '' } }">
       <template #header>
         <h2>Records Currently Failing</h2>
         <div class="flex w-full">
@@ -31,6 +31,12 @@
           />
           <UButton class="ml-2" size="lg" @click="clearFilters">Clear</UButton>
         </div>
+        <UProgress
+          v-if="fetchInProgress"
+          size="xs"
+          class="absolute inset-x-0 -bottom-px"
+          aria-label="Loading failing records"
+        />
       </template>
       <div v-if="!fetchInProgress && errorMessages && errorMessagesTotal == 0" class="p-8 text-center">
         <p>No active failing records</p>

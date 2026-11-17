@@ -76,7 +76,14 @@
       <UButton class="ml-2" size="lg" @click="clearFilters">Clear</UButton>
     </div>
 
-    <UCard :ui="{ body: { padding: '' } }">
+    <UCard class="relative" :ui="{ body: { padding: '' } }">
+      <UProgress
+        v-if="fetchInProgress"
+        size="xs"
+        class="absolute inset-x-0 top-0"
+        :ui="{ base: 'bg-transparent' }"
+        aria-label="Loading messages"
+      />
       <!-- Skeleton results -->
       <div v-if="fetchInProgress">
         <ul v-if="fetchInProgress" class="divide-y divide-gray-300">
