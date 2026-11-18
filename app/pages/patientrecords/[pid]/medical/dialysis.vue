@@ -3,11 +3,11 @@
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
       <UTable :loading="loading" :data="sessions" :columns="columns" class="sensitive" :ui="ui">
         <!-- Procedure time-->
-        <template #proceduretime-data="{ row }">
+        <template #proceduretime-cell="{ row }">
           {{ row.original.proceduretime ? formatDate(row.original.proceduretime) : "None" }}
         </template>
         <!-- Procedure type-->
-        <template #proceduretypecode-data="{ row }">
+        <template #proceduretypecode-cell="{ row }">
           <span class="truncate">
             <CodeTitle
               v-if="row.original.proceduretypecodestd && row.original.proceduretypecode"
@@ -18,13 +18,13 @@
           </span>
         </template>
         <!-- Procedure type-->
-        <template #enteredatcode-data="{ row }">
+        <template #enteredatcode-cell="{ row }">
           <span>
             <SendingFacilityLink class="font-medium" :code="row.original.enteredatcode" />
           </span>
         </template>
         <!-- Extra info -->
-        <template #info-data="{ row }">
+        <template #info-cell="{ row }">
           <span>
             <BaseInfoTooltip>
               <div class="sensitive">

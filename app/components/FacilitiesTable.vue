@@ -15,7 +15,7 @@ Table of facilities and their basic statistics
         @select="(_, row) => navigateTo(`/facilities/${row.original.id}`)"
       >
         <!-- Failing records -->
-        <template #patientsReceivingMessageError-data="{ row }">
+        <template #patientsReceivingMessageError-cell="{ row }">
           <span class="flex items-center">
             <IconCircle
               class="inline"
@@ -31,14 +31,14 @@ Table of facilities and their basic statistics
         </template>
         <!-- Sending to PKB -->
         <!-- eslint-disable-next-line vue/valid-v-slot -->
-        <template #dataFlow.pkbOut-data="{ row }">
+        <template #dataFlow.pkbOut-cell="{ row }">
           <span class="flex items-center">
             <IconCircle class="inline" :class="row.original.dataFlow.pkbOut ? 'text-green-600' : 'text-red-700'" />
             <p>{{ row.original.dataFlow.pkbOut ? "Yes" : "No" }}</p>
           </span>
         </template>
         <!-- Last received -->
-        <template #lastMessageReceivedAt-data="{ row }">
+        <template #lastMessageReceivedAt-cell="{ row }">
           <span class="flex items-center gap-2">
             <div>
               {{
