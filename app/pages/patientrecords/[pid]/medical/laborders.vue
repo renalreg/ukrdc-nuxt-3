@@ -15,7 +15,7 @@
         "
       >
         <!-- specimenCollectedTime -->
-        <template #specimenCollectedTime-data="{ row }">
+        <template #specimenCollectedTime-cell="{ row }">
           {{
             row.original.specimenCollectedTime
               ? `Collected ${formatDate(row.original.specimenCollectedTime, true)}`

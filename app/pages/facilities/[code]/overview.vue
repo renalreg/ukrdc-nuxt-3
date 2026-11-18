@@ -79,7 +79,7 @@
         <!-- Record types -->
         <UCard :ui="{ body: { padding: '' } }">
           <UTable :data="feedTableItems" :columns="feedTableColumns" :ui="ui">
-            <template #historic-data="{ row }">
+            <template #historic-cell="{ row }">
               <div v-if="row.original.historic" class="flex items-center">
                 <IconCircle v-if="row.original.historic" class="inline text-orange-400" />
                 <p>Historic</p>

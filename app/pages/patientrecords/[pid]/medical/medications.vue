@@ -3,17 +3,17 @@
     <UCard :ui="{ body: { padding: '' } }" class="mb-4">
       <UTable :loading="loading" :data="medications" :columns="columns" class="sensitive">
         <!-- Dose -->
-        <template #dosequantity-data="{ row }">
+        <template #dosequantity-cell="{ row }">
           <span> {{ row.original.dosequantity }} {{ row.original.doseuomcode ?? row.original.doseuomdesc }} </span>
         </template>
 
         <!-- Frequency -->
-        <template #frequency-data="{ row }">
+        <template #frequency-cell="{ row }">
           {{ row.original.frequency ? row.original.frequency.replace(/_/g, " ") : "Unknown" }}
         </template>
 
         <!-- Route -->
-        <template #routecode-data="{ row }">
+        <template #routecode-cell="{ row }">
           <CodeTitle
             v-if="row.original.routecode || row.original.routecodestd"
             :code="row.original.routecode || 'Unknown'"
@@ -22,12 +22,12 @@
         </template>
 
         <!-- Start Date -->
-        <template #fromTime-data="{ row }">
+        <template #fromTime-cell="{ row }">
           {{ row.original.fromTime ? formatDate(row.original.fromTime, false) : "None" }}
         </template>
 
         <!-- End Date -->
-        <template #toTime-data="{ row }">
+        <template #toTime-cell="{ row }">
           <span v-if="row.original.toTime">
             {{ formatDate(row.original.toTime, false) }}
           </span>
@@ -37,7 +37,7 @@
         </template>
 
         <!-- Comment -->
-        <template #comment-data="{ row }">
+        <template #comment-cell="{ row }">
           <div v-if="row.original.comment">
             <UPopover>
               <UButton color="white" label="Show" size="xs" />

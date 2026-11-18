@@ -7,7 +7,7 @@
 
       <UTable :loading="loadingTransplants" :data="transplants" :columns="transplantColumns" class="sensitive" :ui="ui">
         <!-- Admit Reason -->
-        <template #proceduretypecode-data="{ row }">
+        <template #proceduretypecode-cell="{ row }">
           <span class="truncate">
             <CodeTitle
               v-if="row.original.proceduretypecodestd && row.original.proceduretypecode"
@@ -19,12 +19,12 @@
         </template>
 
         <!-- Procedure Time -->
-        <template #proceduretime-data="{ row }">
+        <template #proceduretime-cell="{ row }">
           {{ row.original.proceduretime ? formatDate(row.original.proceduretime, true) : "None" }}
         </template>
 
         <!-- Entered At -->
-        <template #enteredatcode-data="{ row }">
+        <template #enteredatcode-cell="{ row }">
           <span>
             <SendingFacilityLink class="inline font-medium" :code="row.original.enteredatcode" />
             <p v-if="row.original.enteredatdesc">{{ row.original.enteredatdesc }}</p>
@@ -32,12 +32,12 @@
         </template>
 
         <!-- TRA77 -->
-        <template #tra77-data="{ row }">
+        <template #tra77-cell="{ row }">
           {{ row.original.tra77 ?? "Unknown" }}
         </template>
 
         <!-- Extra info -->
-        <template #info-data="{ row }">
+        <template #info-cell="{ row }">
           <span>
             <BaseInfoTooltip>
               <div class="sensitive">

@@ -37,14 +37,15 @@
       <UCard :ui="{ body: { padding: '' } }" class="mb-4">
         <UTable :loading="loading" :data="observations" :columns="columns" class="sensitive" :ui="ui">
           <!-- Value -->
-          <template #value-data="{ row }"> {{ row.original.value }} {{ row.original.valueUnits }} </template>
+          <template #value-cell="{ row }"> {{ row.original.value }} {{ row.original.valueUnits }} </template>
           <!-- observationTime -->
-          <template #observationTime-data="{ row }">
+          <template #observationTime-cell="{ row }">
             {{ row.original.observationTime ? formatDate(row.original.observationTime) : "No observation time" }}
           </template>
           <!-- prePost -->
-          <template #prePost-data="{ row }">
-            <BadgePrePost :pre-post="row.original.prePost" />
+          <template #prePost-cell="{ row }">
+            <!-- prePost is null for observations that aren't tied to a dialysis session -->
+            <BadgePrePost v-if="row.original.prePost" :pre-post="row.original.prePost" />
           </template>
         </UTable>
 
