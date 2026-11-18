@@ -12,6 +12,7 @@
     <FacilitiesTable
       :include-empty="includeEmpty"
       :include-inactive="includeInactive"
+      show-more-options
       @select="$router.push({ path: `/facilities/${$event}` })"
     />
   </div>

@@ -169,6 +169,19 @@
             </li>
           </ul>
         </UCard>
+
+        <UCard v-if="isAdmin">
+          <template #header>
+            <h2>Facility Details</h2>
+          </template>
+
+          <ul role="list" class="-my-5 divide-y divide-gray-300">
+            <li class="py-5">
+              <h3>Facility type</h3>
+              <p class="mt-1">{{ facility.facilityMetadata?.facilityType || "Not available" }}</p>
+            </li>
+          </ul>
+        </UCard>
       </div>
     </div>
   </div>
@@ -201,7 +214,7 @@ export default defineComponent({
   },
 
   setup(props) {
-    const { hasPermission } = usePermissions();
+    const { hasPermission, isAdmin } = usePermissions();
 
     // Computed string for the latest data received
     const latestDataInfo = computed(() => {
@@ -290,6 +303,7 @@ export default defineComponent({
 
     return {
       hasPermission,
+      isAdmin,
       facilityLastMessageOver48,
       allStatuses,
       latestDataInfo,
