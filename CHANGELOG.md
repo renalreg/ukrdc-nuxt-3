@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.7.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.6.0...v7.7.0) (2026-11-24)
+
+
+### Features
+
+* **UK-410:** Add admin facility filters and facility details card ([#619](https://github.com/renalreg/ukrdc-nuxt-3/issues/619)) ([a8940d3](https://github.com/renalreg/ukrdc-nuxt-3/commit/a8940d32888e0a554dd36973ae1220a35af43b85))
+
 ## [7.6.0](https://github.com/renalreg/ukrdc-nuxt-3/compare/v7.5.1...v7.6.0) (2026-11-10)
 
 
